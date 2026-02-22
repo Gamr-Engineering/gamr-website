@@ -1,25 +1,26 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const InsightsSection = () => {
     const insights = [
         {
+            id: "redefining-mobile-esports",
             category: "Case Study",
             title: "REDEFINING MOBILE ESPORTS IN NIGERIA",
             desc: "How Gamr partnered with top brands to create the largest mobile gaming circuit in West Africa.",
-            link: "#"
         },
         {
+            id: "future-of-play-2026",
             category: "Blog",
             title: "THE FUTURE OF PLAY: 2026 OUTLOOK",
             desc: "An exploration of emerging trends in the African gaming ecosystem and the role of infrastructure.",
-            link: "#"
         },
         {
+            id: "gamrx-vision-to-stadium",
             category: "Case Study",
             title: "GAMR X: FROM VISION TO STADIUM",
             desc: "A deep dive into the logistics and impact of Africa's premier gaming festival.",
-            link: "#"
         }
     ];
 
@@ -39,8 +40,9 @@ const InsightsSection = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 border-t border-white/10">
                     {insights.map((item, index) => (
-                        <div
-                            key={index}
+                        <Link
+                            key={item.id || index}
+                            to={`/blog/${item.id}`}
                             className="group flex flex-col justify-between p-12 border-b md:border-b-0 md:border-r border-white/10 hover:bg-blue-600 transition-all duration-500 cursor-pointer"
                         >
                             <div className="space-y-6">
@@ -57,7 +59,7 @@ const InsightsSection = () => {
                             <div className="pt-12">
                                 <ArrowRight className="h-6 w-6 text-white transform translate-x-[-10px] opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300" />
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
 
@@ -66,9 +68,9 @@ const InsightsSection = () => {
                         className="bg-transparent border border-white text-white hover:bg-white hover:text-black rounded-none px-12 py-8 text-sm font-bold uppercase tracking-widest transition-all"
                         asChild
                     >
-                        <a href="#">
+                        <Link to="/blog">
                             View All Insights
-                        </a>
+                        </Link>
                     </Button>
                 </div>
             </div>

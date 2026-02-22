@@ -12,36 +12,36 @@ const StatisticsInfographic = () => {
   const stats = [
     {
       icon: Trophy,
-      value: 250,
+      value: 4500,
       suffix: "+",
       label: "Tournaments",
       sublabel: "Organized",
-      progress: 85,
+      progress: 90,
     },
     {
       icon: DollarSign,
-      value: 5000,
+      value: 550,
       prefix: "$",
-      suffix: "+",
+      suffix: "K",
       label: "Prize Money",
-      sublabel: "Awarded",
-      progress: 60,
+      sublabel: "Payout",
+      progress: 75,
     },
     {
       icon: Users,
-      value: 500000,
-      suffix: "+",
-      label: "Players",
+      value: 480,
+      suffix: "K+",
+      label: "Gamers",
       sublabel: "Connected",
       progress: 95,
     },
     {
       icon: Globe,
-      value: 20,
+      value: 27,
       suffix: "+",
       label: "Countries",
       sublabel: "Across Africa",
-      progress: 70,
+      progress: 80,
     }
   ];
 
