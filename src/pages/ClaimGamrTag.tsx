@@ -136,6 +136,8 @@ const ClaimGamrTag = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isCheckingTag, setIsCheckingTag] = useState(false);
     const [tagAvailable, setTagAvailable] = useState<boolean | null>(null);
+    const [isOtherSelected, setIsOtherSelected] = useState(false);
+    const [customGameInput, setCustomGameInput] = useState("");
     const [formData, setFormData] = useState<FormData>({
         gamrTag: "",
         firstName: "",
@@ -194,15 +196,48 @@ const ClaimGamrTag = () => {
         return () => clearTimeout(timer);
     }, [formData.gamrTag, checkTagAvailability]);
 
-    const toggleGame = (game: string) => {
-        setFormData((prev) => ({
+    const handleAddCustomGame = () => {
+        const trimmed = customGameInput.trim();
+        if (!trimmed) return;
+
+        const existingGame = POPULAR_GAMES.find(g => g.toLowerCase() === trimmed.toLowerCase()) || trimmed;
+        
+        if (formData.favoriteGames.some(g => g.toLowerCase() === trimmed.toLowerCase())) {
+            setCustomGameInput("");
+            return;
+        }
+
+        if (formData.favoriteGames.length >= 5) {
+            toast({
+                title: "Limit Reached",
+                description: "You can only select up to 5 favorite games.",
+                variant: "destructive",
+            });
+            return;
+        }
+
+        setFormData(prev => ({
             ...prev,
-            favoriteGames: prev.favoriteGames.includes(game)
-                ? prev.favoriteGames.filter((g) => g !== game)
-                : prev.favoriteGames.length < 5
-                    ? [...prev.favoriteGames, game]
-                    : prev.favoriteGames,
+            favoriteGames: [...prev.favoriteGames, existingGame]
         }));
+        setCustomGameInput("");
+    };
+
+    const toggleGame = (game: string) => {
+        setFormData((prev) => {
+            if (prev.favoriteGames.includes(game)) {
+                return { ...prev, favoriteGames: prev.favoriteGames.filter((g) => g !== game) };
+            }
+            if (prev.favoriteGames.length >= 5) {
+                toast({
+                    title: "Limit Reached",
+                    description: "You can only select up to 5 favorite games.",
+                    variant: "destructive",
+                });
+                return prev;
+            }
+            return { ...prev, favoriteGames: [...prev.favoriteGames, game] };
+        });
     };
 
     const toggleTrait = (trait: string) => {
@@ -566,7 +601,7 @@ const ClaimGamrTag = () => {
                                     Favorite Games ({formData.favoriteGames.length}/5)
                                 </label>
                                 <div className="flex flex-wrap gap-2">
-                                    {POPULAR_GAMES.map((game) => {
+                                    {Array.from(new Set([...POPULAR_GAMES, ...formData.favoriteGames])).map((game) => {
                                         const selected = formData.favoriteGames.includes(game);
                                         return (
                                             <Badge
@@ -582,7 +617,37 @@ const ClaimGamrTag = () => {
                                             </Badge>
                                         );
                                     })}
+                                    
+                                    {/* "Other" Option */}
+                                    <Badge
+                                        variant={isOtherSelected ? "default" : "outline"}
+                                        className={`cursor-pointer rounded-none px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-200 ${isOtherSelected
+                                                ? "bg-white text-black border-white hover:bg-white/90"
+                                                : "bg-transparent text-white/50 border-white/20 hover:border-white/50 hover:text-white"
+                                            }`}
+                                        onClick={() => setIsOtherSelected(!isOtherSelected)}
+                                    >
+                                        Other
+                                    </Badge>
                                 </div>
+                                
+                                {/* Dynamic Input Field for Custom Game */}
+                                {isOtherSelected && (
+                                    <div className="pt-2 animate-fade-in">
+                                        <Input
+                                            value={customGameInput}
+                                            onChange={(e) => setCustomGameInput(e.target.value)}
+                                            onKeyDown={(e) => {
+                                                if (e.key === "Enter") {
+                                                    e.preventDefault();
+                                                    handleAddCustomGame();
+                                                }
+                                            }}
+                                            placeholder="Type your game name"
+                                            className={inputClasses}
+                                        />
+                                    </div>
+                                )}
                             </div>
 
                             {/* Platform */}
