@@ -26,9 +26,9 @@ const InsightsSection = () => {
             desc: "An exploration of emerging trends in the African gaming ecosystem and the role of infrastructure.",
         },
         {
-            category: "Case Study",
-            title: "GAMR X: FROM VISION TO STADIUM",
-            desc: "A deep dive into the logistics and impact of Africa's premier gaming festival.",
+            category: "Blog",
+            title: "INFRASTRUCTURE TRENDS",
+            desc: "Building the backbone of African esports with high-speed latency and decentralized servers.",
             link: "#"
         }
     ];
@@ -47,28 +47,60 @@ const InsightsSection = () => {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 border-t border-white/10">
-                    {insights.map((item, index) => (
-                        <div
-                            key={index}
-                            className="group flex flex-col justify-between p-12 border-b md:border-b-0 md:border-r border-white/10 hover:bg-blue-600 transition-all duration-500 cursor-pointer"
-                        >
-                            <div className="space-y-6">
-                                <span className="text-[10px] font-bold text-gray-500 group-hover:text-blue-200 uppercase tracking-widest transition-colors">
-                                    {item.category}
-                                </span>
-                                <h3 className="text-2xl font-bold uppercase tracking-tighter leading-tight">
-                                    {item.title}
-                                </h3>
-                                <p className="text-gray-400 group-hover:text-white transition-colors leading-relaxed">
-                                    {item.desc}
-                                </p>
-                            </div>
-                            <div className="pt-12">
-                                <ArrowRight className="h-6 w-6 text-white transform translate-x-[-10px] opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300" />
-                            </div>
+                <div className="space-y-20">
+                    <div>
+                        <span className="text-white font-bold uppercase tracking-widest text-sm mb-6 block">SUCCESS STORIES</span>
+                        <div className="grid grid-cols-1 md:grid-cols-2 border-t border-white/10">
+                            {successStories.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className="group flex flex-col justify-between p-12 border-b md:border-b-0 md:border-r border-white/10 hover:bg-blue-600 transition-all duration-500 cursor-pointer"
+                                >
+                                    <div className="space-y-6">
+                                        <span className="text-[10px] font-bold text-gray-500 group-hover:text-blue-200 uppercase tracking-widest transition-colors">
+                                            {item.category}
+                                        </span>
+                                        <h3 className="text-2xl font-bold uppercase tracking-tighter leading-tight">
+                                            {item.title}
+                                        </h3>
+                                        <p className="text-gray-400 group-hover:text-white transition-colors leading-relaxed">
+                                            {item.desc}
+                                        </p>
+                                    </div>
+                                    <div className="pt-12">
+                                        <ArrowRight className="h-6 w-6 text-white transform translate-x-[-10px] opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300" />
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
+
+                    <div>
+                        <span className="text-white font-bold uppercase tracking-widest text-sm mb-6 block">THE FUTURE OF PLAY</span>
+                        <div className="grid grid-cols-1 md:grid-cols-2 border-t border-white/10">
+                            {futureOfPlay.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className="group flex flex-col justify-between p-12 border-b md:border-b-0 md:border-r border-white/10 hover:bg-blue-600 transition-all duration-500 cursor-pointer"
+                                >
+                                    <div className="space-y-6">
+                                        <span className="text-[10px] font-bold text-gray-500 group-hover:text-blue-200 uppercase tracking-widest transition-colors">
+                                            {item.category}
+                                        </span>
+                                        <h3 className="text-2xl font-bold uppercase tracking-tighter leading-tight">
+                                            {item.title}
+                                        </h3>
+                                        <p className="text-gray-400 group-hover:text-white transition-colors leading-relaxed">
+                                            {item.desc}
+                                        </p>
+                                    </div>
+                                    <div className="pt-12">
+                                        <ArrowRight className="h-6 w-6 text-white transform translate-x-[-10px] opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300" />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
                 <div className="pt-20 flex justify-center">
