@@ -23,24 +23,13 @@ const EventsSection = () => {
               The biggest stage for African esports. Hosting thousands of attendees with world-class tournaments, live performances, and community experiences.
             </p>
 
-            <div className="grid grid-cols-2 gap-10 pt-8">
-              <div>
-                <h4 className="text-4xl font-bold tracking-tighter">5,000+</h4>
-                <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Attendees</p>
-              </div>
-              <div>
-                <h4 className="text-4xl font-bold tracking-tighter">10+</h4>
-                <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Tournaments</p>
-              </div>
-            </div>
-
             <div className="pt-8 flex flex-col sm:flex-row gap-4">
               <Button
                 className="bg-white text-black hover:bg-gray-200 rounded-none px-12 py-8 text-sm font-bold uppercase tracking-widest transition-all"
                 asChild
               >
                 <a href="#" className="pointer-events-none">
-                  Get Tickets <ArrowRight className="ml-2 w-4 h-4" />
+                  Coming Soon
                 </a>
               </Button>
               <Button

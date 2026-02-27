@@ -1,25 +1,89 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap">
-    <title>GAMR - Nigeria's Premier Gaming Ecosystem | Esports Training & Events</title>
-    <meta name="description" content="Leading Nigeria's gaming revolution with professional esports training, gaming hubs, tournaments, and Africa's largest gaming events. Join 3,000+ gamers at GAMR." />
-    <meta name="author" content="GAMR Nigeria" />
+    <title>gamr - Africa's Premier Gaming Ecosystem | Esports, Tournaments & Gaming Community</title>
+    <meta name="description"
+        content="GAMR is Africa's leading gaming ecosystem powering 4,500+ tournaments, $550K+ in prize payouts, and connecting 480K+ gamers across 27+ African countries. Join Africa's biggest esports community for competitive gaming, tournaments, and gaming culture." />
+    <meta name="author" content="GAMR Africa" />
+    <meta name="keywords"
+        content="GAMR, gamr.africa, African gaming, esports Africa, gaming tournaments Africa, Nigerian esports, competitive gaming, gaming community Africa, esports training, gaming hubs, bracketpro, game tournaments, African gamers, mobile gaming Africa, esports events, gaming ecosystem, African esports league" />
+    <link rel="canonical" href="https://gamr.africa" />
 
-    <meta property="og:title" content="GAMR - Nigeria's Premier Gaming Ecosystem" />
-    <meta property="og:description" content="Professional esports training, gaming hubs, tournaments, and Africa's largest gaming events. Join Nigeria's gaming revolution." />
+    <!-- Robots & Indexing -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="gamr - Africa's Premier Gaming & Esports Ecosystem" />
+    <meta property="og:description"
+        content="4,500+ tournaments. $550K+ prize payouts. 480K+ gamers. 27+ countries. Africa's largest gaming ecosystem powering esports, tournaments, and gaming culture." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:url" content="https://gamr.africa" />
+    <meta property="og:image" content="/gamr-og-image.png" />
+    <meta property="og:image:alt" content="GAMR - Africa's Premier Gaming Ecosystem" />
+    <meta property="og:site_name" content="GAMR" />
+    <meta property="og:locale" content="en_US" />
 
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@gamr_nigeria" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+    <meta name="twitter:site" content="@gamr_africa" />
+    <meta name="twitter:title" content="GAMR - Africa's Premier Gaming & Esports Ecosystem" />
+    <meta name="twitter:description"
+        content="4,500+ tournaments. $550K+ prize payouts. 480K+ gamers across 27+ African countries. Join Africa's biggest gaming community." />
+    <meta name="twitter:image" content="/gamr-og-image.png" />
 
-  <body>
+    <!-- Structured Data for AI/LLM Discoverability -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "GAMR",
+        "alternateName": ["GAMR Africa", "gamr.africa"],
+        "url": "https://gamr.africa",
+        "logo": "/gamr-og-image.png",
+        "description": "Africa's premier gaming ecosystem connecting 480,000+ gamers across 27+ countries with esports tournaments, gaming hubs, and competitive gaming events.",
+        "foundingLocation": {
+            "@type": "Place",
+            "name": "Nigeria"
+        },
+        "areaServed": {
+            "@type": "Continent",
+            "name": "Africa"
+        },
+        "sameAs": [
+            "https://twitter.com/gamr_africa",
+            "https://bracketpro.gg",
+            "https://app.gamr.africa"
+        ],
+        "knowsAbout": ["esports", "gaming tournaments", "competitive gaming", "African gaming", "mobile gaming", "gaming community"],
+        "numberOfEmployees": {
+            "@type": "QuantitativeValue",
+            "value": "50+"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "reviewCount": "4500"
+        }
+    }
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTDFNLK3BF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-FTDFNLK3BF');
+    </script>
+</head>
+
+<body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-  </body>
+</body>
+
 </html>
