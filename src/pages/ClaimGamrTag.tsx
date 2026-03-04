@@ -126,8 +126,8 @@ interface FormData {
     favoriteGames: string[];
     platform: string;
     gamingRegion: string;
-    gamerArchetype: string;
-    playStyle: string;
+    gamerArchetypes: string[];
+    playStyles: string[];
     personalityTraits: string[];
 }
 
@@ -150,8 +150,8 @@ const ClaimGamrTag = () => {
         favoriteGames: [],
         platform: "",
         gamingRegion: "",
-        gamerArchetype: "",
-        playStyle: "",
+        gamerArchetypes: [],
+        playStyles: [],
         personalityTraits: [],
     });
 
@@ -251,6 +251,40 @@ const ClaimGamrTag = () => {
         }));
     };
 
+    const toggleArchetype = (archetype: string) => {
+        setFormData((prev) => {
+            if (prev.gamerArchetypes.includes(archetype)) {
+                return { ...prev, gamerArchetypes: prev.gamerArchetypes.filter((a) => a !== archetype) };
+            }
+            if (prev.gamerArchetypes.length >= 2) {
+                toast({
+                    title: "Limit Reached",
+                    description: "You can only select up to 2 archetypes.",
+                    variant: "destructive",
+                });
+                return prev;
+            }
+            return { ...prev, gamerArchetypes: [...prev.gamerArchetypes, archetype] };
+        });
+    };
+
+    const togglePlayStyle = (playStyle: string) => {
+        setFormData((prev) => {
+            if (prev.playStyles.includes(playStyle)) {
+                return { ...prev, playStyles: prev.playStyles.filter((s) => s !== playStyle) };
+            }
+            if (prev.playStyles.length >= 2) {
+                toast({
+                    title: "Limit Reached",
+                    description: "You can only select up to 2 play styles.",
+                    variant: "destructive",
+                });
+                return prev;
+            }
+            return { ...prev, playStyles: [...prev.playStyles, playStyle] };
+        });
+    };
+
     const isStepValid = () => {
         switch (step) {
             case 1:
@@ -270,8 +304,8 @@ const ClaimGamrTag = () => {
                 );
             case 4:
                 return (
-                    formData.gamerArchetype !== "" &&
-                    formData.playStyle !== "" &&
+                    formData.gamerArchetypes.length > 0 &&
+                    formData.playStyles.length > 0 &&
                     formData.personalityTraits.length > 0
                 );
             default:
@@ -294,8 +328,10 @@ const ClaimGamrTag = () => {
                 favorite_games: formData.favoriteGames,
                 platform: formData.platform,
                 gaming_region: formData.gamingRegion,
-                gamer_archetype: formData.gamerArchetype,
-                play_style: formData.playStyle,
+                gamer_archetype: formData.gamerArchetypes[0] || null, // Keeping for backward compatibility
+                gamer_archetypes: formData.gamerArchetypes,
+                play_style: formData.playStyles[0] || null, // Keeping for backward compatibility
+                play_styles: formData.playStyles,
                 personality_traits: formData.personalityTraits,
             });
 
@@ -716,16 +752,27 @@ const ClaimGamrTag = () => {
 
                             {/* Gamer Archetype */}
                             <div className="space-y-4">
-                                <label className={labelClasses}>Gamer Archetype</label>
+                                <div>
+                                    <label className={labelClasses}>
+                                        Gamer Archetype ({formData.gamerArchetypes.length}/2)
+                                    </label>
+                                    <p className="text-white/30 text-xs mt-1">Select up to 2 archetypes</p>
+                                </div>
                                 <div className="grid grid-cols-2 gap-3">
                                     {GAMER_ARCHETYPES.map((arch) => {
-                                        const selected = formData.gamerArchetype === arch.id;
+                                        const selected = formData.gamerArchetypes.includes(arch.id);
                                         return (
                                             <button
                                                 key={arch.id}
-                                                onClick={() =>
-                                                    setFormData((prev) => ({ ...prev, gamerArchetype: arch.id }))
-                                                }
+                                                type="button"
+                                                onClick={() => toggleArchetype(arch.id)}
+                                                onKeyDown={(e) => {
+                                                    if (e.key === 'Enter' || e.key === ' ') {
+                                                        e.preventDefault();
+                                                        toggleArchetype(arch.id);
+                                                    }
+                                                }}
+                                                aria-pressed={selected}
                                                 className={`p-4 border text-left transition-all duration-200 ${selected
                                                         ? "bg-white text-black border-white"
                                                         : "bg-white/5 text-white border-white/10 hover:border-white/30"
@@ -748,16 +795,27 @@ const ClaimGamrTag = () => {
 
                             {/* Play Style */}
                             <div className="space-y-4">
-                                <label className={labelClasses}>Play Style</label>
+                                <div>
+                                    <label className={labelClasses}>
+                                        Play Style ({formData.playStyles.length}/2)
+                                    </label>
+                                    <p className="text-white/30 text-xs mt-1">Select up to 2 play styles</p>
+                                </div>
                                 <div className="grid grid-cols-2 gap-3">
                                     {PLAY_STYLES.map((style) => {
-                                        const selected = formData.playStyle === style.id;
+                                        const selected = formData.playStyles.includes(style.id);
                                         return (
                                             <button
                                                 key={style.id}
-                                                onClick={() =>
-                                                    setFormData((prev) => ({ ...prev, playStyle: style.id }))
-                                                }
+                                                type="button"
+                                                onClick={() => togglePlayStyle(style.id)}
+                                                onKeyDown={(e) => {
+                                                    if (e.key === 'Enter' || e.key === ' ') {
+                                                        e.preventDefault();
+                                                        togglePlayStyle(style.id);
+                                                    }
+                                                }}
+                                                aria-pressed={selected}
                                                 className={`p-4 border text-left transition-all duration-200 ${selected
                                                         ? "bg-white text-black border-white"
                                                         : "bg-white/5 text-white border-white/10 hover:border-white/30"
