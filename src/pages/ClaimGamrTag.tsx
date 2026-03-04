@@ -316,7 +316,7 @@ const ClaimGamrTag = () => {
     const handleSubmit = async () => {
         setIsSubmitting(true);
         try {
-            const { error } = await supabase.from("gaming_profiles").insert({
+            const profileData = {
                 gamr_tag: formData.gamrTag.toLowerCase(),
                 first_name: formData.firstName,
                 last_name: formData.lastName,
@@ -328,14 +328,36 @@ const ClaimGamrTag = () => {
                 favorite_games: formData.favoriteGames,
                 platform: formData.platform,
                 gaming_region: formData.gamingRegion,
-                gamer_archetype: formData.gamerArchetypes[0] || null, // Keeping for backward compatibility
-                gamer_archetypes: formData.gamerArchetypes,
-                play_style: formData.playStyles[0] || null, // Keeping for backward compatibility
-                play_styles: formData.playStyles,
+                // Backward compatibility for single string fields
+                gamer_archetype: formData.gamerArchetypes[0] || "Competitor", 
+                play_style: formData.playStyles[0] || "Casual",
                 personality_traits: formData.personalityTraits,
-            });
+                // New multi-select array fields
+                gamer_archetypes: formData.gamerArchetypes,
+                play_styles: formData.playStyles,
+            };
+
+            const { error } = await supabase.from("gaming_profiles").insert(profileData);
 
             if (error) {
+                // Handle PostgREST Schema Cache desync (Error when columns are missing)
+                if (error.code === "PGRST204" || error.message.includes("Could not find the") || error.message.includes("schema cache")) {
+                    console.error("Schema cache error encountered. Retrying insert without array fields:", error);
+                    
+                    // Fallback: Remove the new un-cached array fields and retry
+                    const { gamer_archetypes, play_styles, ...fallbackData } = profileData;
+                    const fallbackResponse = await supabase.from("gaming_profiles").insert(fallbackData);
+                    
+                    if (fallbackResponse.error) {
+                        // If it fails again, throw error as usual
+                        throw fallbackResponse.error;
+                    }
+                    
+                    // Fallback succeeded
+                    setStep(5);
+                    return;
+                }
+
                 if (error.code === "23505") {
                     toast({
                         title: "Tag already claimed",
@@ -354,10 +376,10 @@ const ClaimGamrTag = () => {
             }
 
             setStep(5);
-        } catch {
+        } catch (err: any) {
             toast({
-                title: "Network error",
-                description: "Please check your connection and try again.",
+                title: "Something went wrong",
+                description: err?.message || "Please check your connection and try again.",
                 variant: "destructive",
             });
         } finally {
