@@ -22,6 +22,7 @@ async function runTest() {
         last_name: "User",
         display_name: "Test User",
         email: `test_user_${Date.now()}@example.com`,
+        phone_number: "+2348000000000",
         bio: "Integration test bio",
         city: "Test City",
         country: "Nigeria",
@@ -37,7 +38,7 @@ async function runTest() {
 
     console.log(`Attempting to insert profile with GamrTag: ${testProfile.gamr_tag}...`);
     
-    // First attempt: with array columns
+    // First attempt: with array/new columns
     const { error } = await supabase.from("gaming_profiles").insert(testProfile);
 
     if (error) {
@@ -45,7 +46,7 @@ async function runTest() {
             console.log("Caught expected schema cache error:", error.message);
             console.log("Simulating frontend retry fallback logic...");
             
-            const { gamer_archetypes, play_styles, ...fallbackData } = testProfile;
+            const { gamer_archetypes, play_styles, phone_number, ...fallbackData } = testProfile;
             const fallbackResponse = await supabase.from("gaming_profiles").insert(fallbackData);
             
             if (fallbackResponse.error) {

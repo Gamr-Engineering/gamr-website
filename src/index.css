@@ -115,3 +115,31 @@
     text-wrap: balance;
   }
 }
+
+/* react-phone-input-2 custom dark theme for GamrTag claim form */
+.custom-phone-dropdown {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+.custom-phone-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-phone-dropdown::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-phone-dropdown::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+.custom-phone-dropdown .country:hover,
+.custom-phone-dropdown .country.highlight {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+.custom-phone-dropdown .search-box {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.custom-phone-dropdown .search {
+  background-color: black !important;
+}

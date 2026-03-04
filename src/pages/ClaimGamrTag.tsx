@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import { isValidPhoneNumber } from "libphonenumber-js";
 import {
     Select,
     SelectContent,
@@ -120,6 +123,7 @@ interface FormData {
     lastName: string;
     displayName: string;
     email: string;
+    phoneNumber: string;
     bio: string;
     city: string;
     country: string;
@@ -144,6 +148,7 @@ const ClaimGamrTag = () => {
         lastName: "",
         displayName: "",
         email: "",
+        phoneNumber: "",
         bio: "",
         city: "",
         country: "",
@@ -294,6 +299,8 @@ const ClaimGamrTag = () => {
                     formData.firstName.trim() !== "" &&
                     formData.lastName.trim() !== "" &&
                     formData.email.trim() !== "" &&
+                    formData.phoneNumber.trim() !== "" &&
+                    isValidPhoneNumber(formData.phoneNumber) &&
                     formData.country !== ""
                 );
             case 3:
@@ -322,6 +329,7 @@ const ClaimGamrTag = () => {
                 last_name: formData.lastName,
                 display_name: formData.displayName || `${formData.firstName} ${formData.lastName}`,
                 email: formData.email.toLowerCase(),
+                phone_number: formData.phoneNumber,
                 bio: formData.bio || null,
                 city: formData.city || null,
                 country: formData.country,
@@ -342,10 +350,10 @@ const ClaimGamrTag = () => {
             if (error) {
                 // Handle PostgREST Schema Cache desync (Error when columns are missing)
                 if (error.code === "PGRST204" || error.message.includes("Could not find the") || error.message.includes("schema cache")) {
-                    console.error("Schema cache error encountered. Retrying insert without array fields:", error);
+                    console.error("Schema cache error encountered. Retrying insert without array/new fields:", error);
                     
-                    // Fallback: Remove the new un-cached array fields and retry
-                    const { gamer_archetypes, play_styles, ...fallbackData } = profileData;
+                    // Fallback: Remove the new un-cached fields and retry
+                    const { gamer_archetypes, play_styles, phone_number, ...fallbackData } = profileData;
                     const fallbackResponse = await supabase.from("gaming_profiles").insert(fallbackData);
                     
                     if (fallbackResponse.error) {
@@ -573,6 +581,34 @@ const ClaimGamrTag = () => {
                                         placeholder="you@example.com"
                                         className={inputClasses}
                                     />
+                                </div>
+
+                                {/* Phone Number */}
+                                <div className="space-y-3">
+                                    <label className={labelClasses}>Phone Number</label>
+                                    <div className="relative">
+                                        <PhoneInput
+                                            country={"ng"}
+                                            value={formData.phoneNumber}
+                                            onChange={(phone) =>
+                                                setFormData((prev) => ({ 
+                                                    ...prev, 
+                                                    phoneNumber: phone ? (phone.startsWith("+") ? phone : `+${phone}`) : "" 
+                                                }))
+                                            }
+                                            enableSearch={true}
+                                            disableSearchIcon={true}
+                                            searchPlaceholder="Search country..."
+                                            containerClass="w-full"
+                                            inputClass="!w-full !bg-white/5 !border-white/10 !text-white !h-12 !rounded-none focus:!border-white/40 focus:!ring-0 placeholder:!text-white/20 !pl-[48px] !font-sans !text-[14px]"
+                                            buttonClass="!bg-transparent !border-white/10 !border-r-0 !rounded-none hover:!bg-white/5"
+                                            dropdownClass="!bg-black !border-white/10 !text-white !rounded-none custom-phone-dropdown"
+                                            searchClass="!bg-white/5 !text-white !border-white/10 !w-[calc(100%-20px)] !mx-auto !mt-2 !mb-2 !p-2 !h-10 focus:!border-white/40 !rounded-none"
+                                        />
+                                    </div>
+                                    {formData.phoneNumber && formData.phoneNumber !== "+" && !isValidPhoneNumber(formData.phoneNumber) && (
+                                        <p className="text-xs text-red-400">Please enter a valid phone number</p>
+                                    )}
                                 </div>
 
                                 {/* Location Row */}
