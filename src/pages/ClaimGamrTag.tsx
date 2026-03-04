@@ -944,7 +944,7 @@ const ClaimGamrTag = () => {
                                 <h3 className="text-xs font-bold uppercase tracking-widest text-white/40">
                                     Your Profile
                                 </h3>
-                                <div className="grid grid-cols-2 gap-6 text-sm">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
                                     <div>
                                         <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
                                             GamrTag
@@ -985,9 +985,23 @@ const ClaimGamrTag = () => {
                                         <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
                                             Archetype
                                         </p>
-                                        <p className="font-bold capitalize">{formData.gamerArchetype}</p>
+                                        <p className="font-bold">
+                                            {formData.gamerArchetypes.length > 0
+                                                ? formData.gamerArchetypes.map(id => GAMER_ARCHETYPES.find(a => a.id === id)?.label || id).join(", ")
+                                                : "None"}
+                                        </p>
                                     </div>
-                                    <div className="col-span-2">
+                                    <div>
+                                        <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
+                                            Play Style
+                                        </p>
+                                        <p className="font-bold">
+                                            {formData.playStyles.length > 0
+                                                ? formData.playStyles.map(id => PLAY_STYLES.find(s => s.id === id)?.label || id).join(", ")
+                                                : "None"}
+                                        </p>
+                                    </div>
+                                    <div className="col-span-1 md:col-span-2">
                                         <p className="text-white/40 text-xs uppercase tracking-wider mb-2">
                                             Games
                                         </p>
@@ -1002,7 +1016,7 @@ const ClaimGamrTag = () => {
                                             ))}
                                         </div>
                                     </div>
-                                    <div className="col-span-2">
+                                    <div className="col-span-1 md:col-span-2">
                                         <p className="text-white/40 text-xs uppercase tracking-wider mb-2">
                                             Traits
                                         </p>
