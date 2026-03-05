@@ -1,0 +1,128 @@
+
+Running 5 tests using 4 workers
+
+[BROWSER] DEBUG: [vite] connecting...
+[BROWSER] DEBUG: [vite] connecting...
+[BROWSER] DEBUG: [vite] connecting...
+[BROWSER] DEBUG: [vite] connecting...
+[BROWSER] DEBUG: [vite] connected.
+[BROWSER] DEBUG: [vite] connected.
+[BROWSER] DEBUG: [vite] connected.
+[BROWSER] DEBUG: [vite] connected.
+[BROWSER] INFO: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold
+[BROWSER] INFO: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold
+[BROWSER] INFO: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold
+[BROWSER] INFO: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking database schema... 
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking database schema... 
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking database schema... 
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking database schema... 
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking tag availability... {tag: testuser_17727144981}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking tag availability... {tag: testuser_17727144981}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking tag availability... {tag: testuser_17727144981}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking tag availability... {tag: testuser_17727144982}
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Tag availability result {tag: testuser_17727144981, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Tag availability result {tag: testuser_17727144981, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Tag availability result {tag: testuser_17727144981, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Validation PASSED for current step 
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Tag availability result {tag: testuser_17727144982, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Transitioning to next step {current: 1, next: 2}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Transitioning to next step {current: 1, next: 2}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Transitioning to next step {current: 1, next: 2}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking database schema... 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking database schema... 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking database schema... 
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking tag availability... {tag: testuser_17727144981}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking tag availability... {tag: testuser_17727144981}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking tag availability... {tag: testuser_17727144981}
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Transitioning to next step {current: 1, next: 2}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking database schema... 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking email availability... {email: seyi@gamr.africa, requestId: 2}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Tag availability result {tag: testuser_17727144981, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Tag availability result {tag: testuser_17727144981, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Tag availability result {tag: testuser_17727144981, isAvailable: true}
+  ✓  1 [chromium] › tests/e2e/onboarding.spec.ts:9:3 › Gamr Onboarding Flow › Step 1: Successfully enter GamrTag and continue (5.8s)
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking email availability... {email: test_1772714500849@example.com, requestId: 2}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking email availability... {email: test_1772714500756@example.com, requestId: 2}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Email availability result {email: seyi@gamr.africa, isAvailable: false}
+[BROWSER] DEBUG: [vite] connecting...
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Email availability result {email: test_1772714500849@example.com, isAvailable: true}
+[BROWSER] DEBUG: [vite] connected.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Email availability result {email: test_1772714500756@example.com, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Transitioning to next step {current: 2, next: 3}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Checking database schema... 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Transitioning to next step {current: 2, next: 3}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Checking database schema... 
+[BROWSER] INFO: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+  ✓  4 [chromium] › tests/e2e/onboarding.spec.ts:77:3 › Gamr Onboarding Flow › Step 2: Successfully validate unique randomized email (7.0s)
+  ✓  2 [chromium] › tests/e2e/onboarding.spec.ts:58:3 › Gamr Onboarding Flow › Step 2: Handle Duplicate Email validation (7.3s)
+  ✓  3 [chromium] › tests/e2e/onboarding.spec.ts:27:3 › Gamr Onboarding Flow › Step 2: Regression - Continue button enables when form is valid (7.3s)
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking database schema... 
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking tag availability... {tag: hero_1772714503145}
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Tag availability result {tag: hero_1772714503145, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Transitioning to next step {current: 1, next: 2}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking database schema... 
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking tag availability... {tag: hero_1772714503145}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking email availability... {email: hero_1772714503145@example.com, requestId: 2}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Tag availability result {tag: hero_1772714503145, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Email availability result {email: hero_1772714503145@example.com, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Transitioning to next step {current: 2, next: 3}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Checking database schema... 
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Checking tag availability... {tag: hero_1772714503145}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Checking email availability... {email: hero_1772714503145@example.com, requestId: 3}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Tag availability result {tag: hero_1772714503145, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Email availability result {email: hero_1772714503145@example.com, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Transitioning to next step {current: 3, next: 4}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Checking database schema... 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Transitioning to next step {current: 4, next: 5}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Submitting form data... 
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Checking tag availability... {tag: hero_1772714503145}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Checking email availability... {email: hero_1772714503145@example.com, requestId: 4}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Tag availability result {tag: hero_1772714503145, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Email availability result {email: hero_1772714503145@example.com, isAvailable: true}
+[BROWSER] ERROR: Failed to load resource: the server responded with a status of 400 ()
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Submission failed {error: Object}
+[BROWSER] ERROR: Schema cache error encountered. Retrying insert without array/new fields: {code: PGRST204, details: null, hint: null, message: Could not find the 'gamer_archetypes' column of 'gaming_profiles' in the schema cache}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Fallback submission succeeded {data: Object}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 5: Checking database schema... 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 5: Validation PASSED for current step 
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 5: Checking tag availability... {tag: hero_1772714503145}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 5: Checking email availability... {email: hero_1772714503145@example.com, requestId: 5}
+  ✓  5 [chromium] › tests/e2e/onboarding.spec.ts:106:3 › Gamr Onboarding Flow › Complete full onboarding flow to Success Page (9.2s)
+
+  5 passed (18.9s)

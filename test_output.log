@@ -1,0 +1,232 @@
+
+Running 5 tests using 4 workers
+
+[BROWSER] DEBUG: [vite] connecting...
+[BROWSER] DEBUG: [vite] connecting...
+[BROWSER] DEBUG: [vite] connecting...
+[BROWSER] DEBUG: [vite] connecting...
+[BROWSER] DEBUG: [vite] connected.
+[BROWSER] DEBUG: [vite] connected.
+[BROWSER] DEBUG: [vite] connected.
+[BROWSER] DEBUG: [vite] connected.
+[BROWSER] INFO: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold
+[BROWSER] INFO: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold
+[BROWSER] INFO: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold
+[BROWSER] INFO: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking database schema... 
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking database schema... 
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking database schema... 
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking database schema... 
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking tag availability... {tag: testuser_17727144164}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking tag availability... {tag: testuser_17727144164}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking tag availability... {tag: testuser_17727144165}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking tag availability... {tag: testuser_17727144166}
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Tag availability result {tag: testuser_17727144164, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Tag availability result {tag: testuser_17727144165, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Tag availability result {tag: testuser_17727144164, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Tag availability result {tag: testuser_17727144166, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Transitioning to next step {current: 1, next: 2}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Transitioning to next step {current: 1, next: 2}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Transitioning to next step {current: 1, next: 2}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking database schema... 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking database schema... 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking database schema... 
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking tag availability... {tag: testuser_17727144164}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking tag availability... {tag: testuser_17727144164}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Transitioning to next step {current: 1, next: 2}
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking tag availability... {tag: testuser_17727144165}
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking database schema... 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking email availability... {email: seyi@gamr.africa, requestId: 2}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Tag availability result {tag: testuser_17727144164, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Tag availability result {tag: testuser_17727144165, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Tag availability result {tag: testuser_17727144164, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking email availability... {email: test_1772714419112@example.com, requestId: 2}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking tag availability... {tag: testuser_17727144166}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking email availability... {email: test_1772714419211@example.com, requestId: 2}
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Email availability result {email: seyi@gamr.africa, isAvailable: false}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Email availability result {email: test_1772714419112@example.com, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Email availability result {email: test_1772714419211@example.com, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Tag availability result {tag: testuser_17727144166, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Transitioning to next step {current: 2, next: 3}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Checking database schema... 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Transitioning to next step {current: 2, next: 3}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Checking database schema... 
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+  ✓  2 [chromium] › tests/e2e/onboarding.spec.ts:27:3 › Gamr Onboarding Flow › Step 2: Regression - Continue button enables when form is valid (7.6s)
+  ✓  1 [chromium] › tests/e2e/onboarding.spec.ts:57:3 › Gamr Onboarding Flow › Step 2: Handle Duplicate Email validation (7.6s)
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Checking tag availability... {tag: testuser_17727144164}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Checking email availability... {email: test_1772714419112@example.com, requestId: 3}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Tag availability result {tag: testuser_17727144164, isAvailable: true}
+[BROWSER] DEBUG: [vite] connecting...
+[BROWSER] DEBUG: [vite] connected.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Email availability result {email: test_1772714419112@example.com, isAvailable: true}
+[BROWSER] INFO: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking database schema... 
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[BROWSER] WARNING: ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Checking tag availability... {tag: hero_1772714422808}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Tag availability result {tag: hero_1772714422808, isAvailable: true}
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Validation PASSED for current step 
+  ✘  4 [chromium] › tests/e2e/onboarding.spec.ts:9:3 › Gamr Onboarding Flow › Step 1: Successfully enter GamrTag and continue (11.0s)
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 1: Transitioning to next step {current: 1, next: 2}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking database schema... 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking tag availability... {tag: hero_1772714422808}
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Checking email availability... {email: hero_1772714422808@example.com, requestId: 2}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Tag availability result {tag: hero_1772714422808, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Email availability result {email: hero_1772714422808@example.com, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Validation PASSED for current step 
+  ✘  3 [chromium] › tests/e2e/onboarding.spec.ts:76:3 › Gamr Onboarding Flow › Step 2: Successfully validate unique randomized email (12.9s)
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 2: Transitioning to next step {current: 2, next: 3}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Checking database schema... 
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Checking tag availability... {tag: hero_1772714422808}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Checking email availability... {email: hero_1772714422808@example.com, requestId: 3}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Tag availability result {tag: hero_1772714422808, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Email availability result {email: hero_1772714422808@example.com, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Validation PASSED for current step 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 3: Transitioning to next step {current: 3, next: 4}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Checking database schema... 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Validation PASSED for current step 
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Transitioning to next step {current: 4, next: 5}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Submitting form data... 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Checking tag availability... {tag: hero_1772714422808}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Checking email availability... {email: hero_1772714422808@example.com, requestId: 4}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Tag availability result {tag: hero_1772714422808, isAvailable: true}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Email availability result {email: hero_1772714422808@example.com, isAvailable: true}
+[BROWSER] ERROR: Failed to load resource: the server responded with a status of 400 ()
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Submission failed {error: Object}
+[BROWSER] ERROR: Schema cache error encountered. Retrying insert without array/new fields: {code: PGRST204, details: null, hint: null, message: Could not find the 'gamer_archetypes' column of 'gaming_profiles' in the schema cache}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 4: Fallback submission succeeded {data: Object}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 5: Checking database schema... 
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 5: Validation PASSED for current step 
+[BROWSER] WARNING: [SCHEMA_SECURITY] MISSING COLUMNS: phone_number, gamer_archetypes, play_styles. Please run the consolidated migration.
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 5: Checking tag availability... {tag: hero_1772714422808}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 5: Checking email availability... {email: hero_1772714422808@example.com, requestId: 5}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 5: Tag availability result {tag: hero_1772714422808, isAvailable: false}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 5: Email availability result {email: hero_1772714422808@example.com, isAvailable: false}
+[BROWSER] LOG: [ONBOARDING_FLOW] Step 5: Validation PASSED for current step 
+  ✘  5 [chromium] › tests/e2e/onboarding.spec.ts:105:3 › Gamr Onboarding Flow › Complete full onboarding flow to Success Page (9.7s)
+
+
+  1) [chromium] › tests/e2e/onboarding.spec.ts:9:3 › Gamr Onboarding Flow › Step 1: Successfully enter GamrTag and continue 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('About You')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('About You')[22m
+
+
+      22 |     // Should be on Step 2
+      23 |     await expect(page.getByText("Step 2 of 4")).toBeVisible();
+    > 24 |     await expect(page.getByText("About You")).toBeVisible();
+         |                                               ^
+      25 |   });
+      26 |
+      27 |   test("Step 2: Regression - Continue button enables when form is valid", async ({ page }) => {
+        at /home/ebendttl/gamr-website/tests/e2e/onboarding.spec.ts:24:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/onboarding-Gamr-Onboarding-f7f7d--enter-GamrTag-and-continue-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/onboarding-Gamr-Onboarding-f7f7d--enter-GamrTag-and-continue-chromium/error-context.md
+
+  2) [chromium] › tests/e2e/onboarding.spec.ts:76:3 › Gamr Onboarding Flow › Step 2: Successfully validate unique randomized email 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Gaming Profile')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Gaming Profile')[22m
+
+
+      100 |     // Should be on Step 3
+      101 |     await expect(page.getByText("Step 3 of 4")).toBeVisible();
+    > 102 |     await expect(page.getByText("Gaming Profile")).toBeVisible();
+          |                                                    ^
+      103 |   });
+      104 |
+      105 |   test("Complete full onboarding flow to Success Page", async ({ page }) => {
+        at /home/ebendttl/gamr-website/tests/e2e/onboarding.spec.ts:102:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/onboarding-Gamr-Onboarding-0ebd4-ate-unique-randomized-email-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/onboarding-Gamr-Onboarding-0ebd4-ate-unique-randomized-email-chromium/error-context.md
+
+  3) [chromium] › tests/e2e/onboarding.spec.ts:105:3 › Gamr Onboarding Flow › Complete full onboarding flow to Success Page 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('@hero_1772714422808')
+    Expected: visible
+    Error: strict mode violation: getByText('@hero_1772714422808') resolved to 2 elements:
+        1) <span data-lov-name="span" class="text-white/60" data-component-line="1166" data-component-name="span" data-component-file="ClaimGamrTag.tsx" data-lov-id="src/pages/ClaimGamrTag.tsx:1166:40" data-component-path="src/pages/ClaimGamrTag.tsx" data-component-content="%7B%22text%22%3A%22%40%22%2C%22className%22%3A%22text-white%2F60%22%7D">@hero_1772714422808</span> aka getByRole('heading', { name: 'Welcome, @hero_1772714422808' }).locator('span')
+        2) <p data-lov-name="p" class="font-bold" data-component-name="p" data-component-line="1184" data-component-file="ClaimGamrTag.tsx" data-lov-id="src/pages/ClaimGamrTag.tsx:1184:44" data-component-path="src/pages/ClaimGamrTag.tsx" data-component-content="%7B%22text%22%3A%22%40%22%2C%22className%22%3A%22font-bold%22%7D">@hero_1772714422808</p> aka getByRole('paragraph').filter({ hasText: '@hero_1772714422808' })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('@hero_1772714422808')[22m
+
+
+      148 |     // Step 5: Success
+      149 |     await expect(page.getByText("Welcome,")).toBeVisible({ timeout: 20000 });
+    > 150 |     await expect(page.getByText(`@${uniqueTag}`)).toBeVisible();
+          |                                                   ^
+      151 |     await expect(page.getByText("Your Profile")).toBeVisible();
+      152 |     
+      153 |     // Check Summary Grid
+        at /home/ebendttl/gamr-website/tests/e2e/onboarding.spec.ts:150:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/onboarding-Gamr-Onboarding-327f1-arding-flow-to-Success-Page-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/onboarding-Gamr-Onboarding-327f1-arding-flow-to-Success-Page-chromium/error-context.md
+
+  3 failed
+    [chromium] › tests/e2e/onboarding.spec.ts:9:3 › Gamr Onboarding Flow › Step 1: Successfully enter GamrTag and continue 
+    [chromium] › tests/e2e/onboarding.spec.ts:76:3 › Gamr Onboarding Flow › Step 2: Successfully validate unique randomized email 
+    [chromium] › tests/e2e/onboarding.spec.ts:105:3 › Gamr Onboarding Flow › Complete full onboarding flow to Success Page 
+  2 passed (22.0s)

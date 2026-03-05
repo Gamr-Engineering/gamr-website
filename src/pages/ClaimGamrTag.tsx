@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef, Component, ErrorInfo, ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,6 +30,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 const TOTAL_STEPS = 5;
+const SESSION_STORAGE_KEY = "gamr_onboarding_form_data";
 
 const POPULAR_GAMES = [
     "FIFA / EA FC",
@@ -117,6 +118,37 @@ const PERSONALITY_TRAITS = [
     "Mentor",
 ];
 
+// ProfileErrorBoundary: Prevents WSoD by catching rendering errors in success steps
+class ProfileErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+    constructor(props: { children: ReactNode }) {
+        super(props);
+        this.state = { hasError: false };
+    }
+
+    static getDerivedStateFromError(_: Error) {
+        return { hasError: true };
+    }
+
+    componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+        console.error("[UI_CRASH_DEBUG]", error, errorInfo);
+    }
+
+    render() {
+        if (this.state.hasError) {
+            return (
+                <div className="p-8 text-center bg-white/5 border border-white/10 space-y-4">
+                    <h2 className="text-xl font-bold uppercase tracking-tighter">Something went wrong</h2>
+                    <p className="text-white/50 text-sm">We couldn't render your full profile summary, but your GamrTag has been saved!</p>
+                    <Button onClick={() => window.location.reload()} variant="outline" className="rounded-none">
+                        Reload Page
+                    </Button>
+                </div>
+            );
+        }
+        return this.props.children;
+    }
+}
+
 interface FormData {
     gamrTag: string;
     firstName: string;
@@ -140,6 +172,11 @@ const ClaimGamrTag = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isCheckingTag, setIsCheckingTag] = useState(false);
     const [tagAvailable, setTagAvailable] = useState<boolean | null>(null);
+    const [isCheckingEmail, setIsCheckingEmail] = useState(false);
+    const lastEmailCheckId = useRef(0);
+    const [emailAvailable, setEmailAvailable] = useState<boolean | null>(null);
+    const [successProfile, setSuccessProfile] = useState<any>(null);
+    const emailInputRef = useRef<HTMLInputElement>(null);
     const [isOtherSelected, setIsOtherSelected] = useState(false);
     const [customGameInput, setCustomGameInput] = useState("");
     const [formData, setFormData] = useState<FormData>({
@@ -163,6 +200,56 @@ const ClaimGamrTag = () => {
     const { toast } = useToast();
     const navigate = useNavigate();
 
+    // Phase 5: State Persistence - Initialize from sessionStorage
+    useEffect(() => {
+        const savedData = sessionStorage.getItem(SESSION_STORAGE_KEY);
+        if (savedData) {
+            try {
+                const parsed = JSON.parse(savedData);
+                setFormData(prev => ({ ...prev, ...parsed }));
+                logStepEvent("Restored form data from sessionStorage");
+            } catch (e) {
+                console.warn("Failed to parse saved onboarding data", e);
+            }
+        }
+    }, []);
+
+    // Sync state to sessionStorage
+    useEffect(() => {
+        sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(formData));
+    }, [formData]);
+
+    // Logger Utility
+    const logStepEvent = useCallback((event: string, details?: any) => {
+        console.log(`[ONBOARDING_FLOW] Step ${step}: ${event}`, details || "");
+    }, [step]);
+
+    // Schema Check on Mount
+    useEffect(() => {
+        const verifySchema = async () => {
+            logStepEvent("Checking database schema...");
+            try {
+                const { data, error } = await supabase.from("gaming_profiles").select("*").limit(1);
+                if (error) throw error;
+                
+                if (data && data.length >= 0) {
+                    const columns = Object.keys(data[0] || {});
+                    const required = ["phone_number", "gamer_archetypes", "play_styles", "email", "display_name"];
+                    const missing = required.filter(col => !columns.includes(col));
+                    
+                    if (missing.length > 0) {
+                        console.warn(`[SCHEMA_SECURITY] MISSING COLUMNS: ${missing.join(", ")}. Please run the consolidated migration.`);
+                    } else {
+                        console.log("[SCHEMA_SECURITY] Schema verification passed.");
+                    }
+                }
+            } catch (err) {
+                console.error("[SCHEMA_SECURITY] Failed to verify schema:", err);
+            }
+        };
+        verifySchema();
+    }, [logStepEvent]);
+
     // Debounced tag uniqueness check
     const checkTagAvailability = useCallback(async (tag: string) => {
         if (tag.length < 3) {
@@ -170,6 +257,7 @@ const ClaimGamrTag = () => {
             return;
         }
         setIsCheckingTag(true);
+        logStepEvent("Checking tag availability...", { tag });
         try {
             const { data, error } = await supabase
                 .from("gaming_profiles")
@@ -181,14 +269,80 @@ const ClaimGamrTag = () => {
                 console.error("Tag check error:", error);
                 setTagAvailable(null);
             } else {
-                setTagAvailable(data === null);
+                const isAvailable = data === null;
+                setTagAvailable(isAvailable);
+                logStepEvent("Tag availability result", { tag, isAvailable });
             }
-        } catch {
+        } catch (err) {
+            console.error("Tag availability async error:", err);
             setTagAvailable(null);
         } finally {
             setIsCheckingTag(false);
         }
-    }, []);
+    }, [logStepEvent]);
+
+    const checkEmailAvailability = useCallback(async (email: string) => {
+        // Basic format check before calling backend
+        if (!email.includes("@") || !email.includes(".")) {
+            setEmailAvailable(null);
+            return;
+        }
+
+        const requestId = ++lastEmailCheckId.current;
+        setIsCheckingEmail(true);
+        logStepEvent("Checking email availability...", { email, requestId });
+
+        try {
+            // Phase 3: Validation Logic Hardening - Input Guards
+            const trimmed = email?.trim();
+            if (!trimmed || typeof email !== "string") {
+                if (requestId === lastEmailCheckId.current) {
+                    setEmailAvailable(null);
+                    setIsCheckingEmail(false);
+                }
+                return;
+            }
+
+            logStepEvent("Checking email availability...", { email: trimmed, requestId });
+
+            let query = supabase
+                .from("gaming_profiles")
+                .select("id")
+                .ilike("email", trimmed.toLowerCase());
+
+            // Identity-Aware: Ignore current user's own record if they are re-validating
+            if (successProfile?.id) {
+                query = query.neq("id", successProfile.id);
+            }
+
+            const { data, error } = await query.maybeSingle();
+
+            // Ignore responses from outdated requests (Race condition protection)
+            if (requestId !== lastEmailCheckId.current) {
+                return;
+            }
+
+            if (error) {
+                console.error("Email check error:", error);
+                setEmailAvailable(null);
+            } else {
+                // Strict Boolean Parsing: exists is true if data is NOT null
+                const exists = data !== null;
+                const isAvailable = !exists;
+                setEmailAvailable(isAvailable);
+                logStepEvent("Email availability result", { email: trimmed, isAvailable });
+            }
+        } catch (err) {
+            if (requestId === lastEmailCheckId.current) {
+                console.warn("Email check failed (async error):", err);
+                setEmailAvailable(null); // Ensure we don't block permanently on error
+            }
+        } finally {
+            if (requestId === lastEmailCheckId.current) {
+                setIsCheckingEmail(false);
+            }
+        }
+    }, [logStepEvent]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -200,6 +354,17 @@ const ClaimGamrTag = () => {
         }, 500);
         return () => clearTimeout(timer);
     }, [formData.gamrTag, checkTagAvailability]);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (formData.email.trim() !== "") {
+                checkEmailAvailability(formData.email);
+            } else {
+                setEmailAvailable(null);
+            }
+        }, 500);
+        return () => clearTimeout(timer);
+    }, [formData.email, checkEmailAvailability]);
 
     const handleAddCustomGame = () => {
         const trimmed = customGameInput.trim();
@@ -295,12 +460,15 @@ const ClaimGamrTag = () => {
             case 1:
                 return formData.gamrTag.length >= 3 && tagAvailable === true;
             case 2:
+                // Allow continuation if email is not explicitly taken (null = checking or error)
+                const isEmailValid = formData.email.trim() !== "" && emailAvailable !== false;
+                const isPhoneValid = formData.phoneNumber.trim() === "" || formData.phoneNumber === "+" || isValidPhoneNumber(formData.phoneNumber);
+                
                 return (
                     formData.firstName.trim() !== "" &&
                     formData.lastName.trim() !== "" &&
-                    formData.email.trim() !== "" &&
-                    formData.phoneNumber.trim() !== "" &&
-                    isValidPhoneNumber(formData.phoneNumber) &&
+                    isEmailValid &&
+                    isPhoneValid &&
                     formData.country !== ""
                 );
             case 3:
@@ -320,9 +488,60 @@ const ClaimGamrTag = () => {
         }
     };
 
+    useEffect(() => {
+        const valid = isStepValid();
+        if (valid) {
+            logStepEvent("Validation PASSED for current step");
+        } else {
+            // Log specific reasons for invalidity in dev mode if needed
+            if (step === 2) {
+                const isEmailValid = formData.email.trim() !== "" && emailAvailable !== false;
+                const isPhoneValid = formData.phoneNumber.trim() === "" || formData.phoneNumber === "+" || isValidPhoneNumber(formData.phoneNumber);
+                if (!isEmailValid || !isPhoneValid || formData.firstName.trim() === "" || formData.lastName.trim() === "" || formData.country === "") {
+                     // Silent debug log
+                }
+            }
+        }
+    }, [step, formData, tagAvailable, emailAvailable, logStepEvent]);
+
     const handleSubmit = async () => {
+        logStepEvent("Submitting form data...");
         setIsSubmitting(true);
+        
+        // Phase 5: Frontend State Cleansing - Reset at beginning
+        setEmailAvailable(null);
+        setIsCheckingEmail(false);
+
         try {
+            // STEP 1: Pre-flight Email Check (Check-Then-Act Pattern)
+            const trimmedEmail = formData.email.trim();
+            
+            // Defensive: Only check if email actually has content
+            if (trimmedEmail !== "") {
+                const { data: existingUser, error: checkError } = await supabase
+                    .from("gaming_profiles")
+                    .select("id")
+                    .ilike("email", trimmedEmail.toLowerCase())
+                    .maybeSingle();
+
+                if (checkError) {
+                    console.error("Pre-flight check error:", checkError);
+                }
+
+                if (existingUser && existingUser.id) {
+                    logStepEvent("Duplicate email detected during pre-flight", { email: trimmedEmail });
+                    setEmailAvailable(false);
+                    toast({
+                        title: "Email already in use",
+                        description: "This email is already associated with a gaming profile. Please use another email or log in.",
+                        variant: "destructive",
+                    });
+                    setStep(2);
+                    setIsSubmitting(false);
+                    return;
+                }
+            }
+
             const profileData = {
                 gamr_tag: formData.gamrTag.toLowerCase(),
                 first_name: formData.firstName,
@@ -345,35 +564,65 @@ const ClaimGamrTag = () => {
                 play_styles: formData.playStyles,
             };
 
-            const { error } = await supabase.from("gaming_profiles").insert(profileData);
+            // Phase 4: Safe Upsert Strategy
+            const { data: createdProfile, error } = await supabase
+                .from("gaming_profiles")
+                .upsert(profileData, { onConflict: 'email' })
+                .select()
+                .maybeSingle();
 
             if (error) {
+                logStepEvent("Submission failed", { error });
                 // Handle PostgREST Schema Cache desync (Error when columns are missing)
                 if (error.code === "PGRST204" || error.message.includes("Could not find the") || error.message.includes("schema cache")) {
                     console.error("Schema cache error encountered. Retrying insert without array/new fields:", error);
                     
-                    // Fallback: Remove the new un-cached fields and retry
+                    // Fallback: Remove the new un-cached fields and retry with upsert
                     const { gamer_archetypes, play_styles, phone_number, ...fallbackData } = profileData;
-                    const fallbackResponse = await supabase.from("gaming_profiles").insert(fallbackData);
+                    const fallbackResponse = await supabase
+                        .from("gaming_profiles")
+                        .upsert(fallbackData, { onConflict: 'email' })
+                        .select()
+                        .maybeSingle();
                     
                     if (fallbackResponse.error) {
+                        logStepEvent("Fallback submission failed", { error: fallbackResponse.error });
                         // If it fails again, throw error as usual
                         throw fallbackResponse.error;
                     }
                     
+                    logStepEvent("Fallback submission succeeded", { data: fallbackResponse.data });
+                    setSuccessProfile(fallbackResponse.data);
                     // Fallback succeeded
                     setStep(5);
                     return;
                 }
 
-                if (error.code === "23505") {
-                    toast({
-                        title: "Tag already claimed",
-                        description:
-                            "This GamrTag or email is already in use. Please go back and choose another.",
-                        variant: "destructive",
-                    });
+                // Phase 5: Status-Code Specific Conflict Handling (409 Only)
+                if (error.status === 409 || error.code === "23505") {
+                    const isEmailConflict = error.message.includes("gaming_profiles_email_key") || JSON.stringify(error).toLowerCase().includes("email");
+                    
+                    if (isEmailConflict) {
+                        setEmailAvailable(false);
+                        logStepEvent("Email conflict detected on submission (409)", { email: formData.email });
+                        toast({
+                            title: "Email already in use",
+                            description: "This email is already registered. Please login or use another email.",
+                            variant: "destructive",
+                        });
+                        setStep(2);
+                        setTimeout(() => emailInputRef.current?.focus(), 100);
+                    } else {
+                        logStepEvent("Tag conflict detected on submission (409)", { tag: formData.gamrTag });
+                        toast({
+                            title: "Tag already claimed",
+                            description: "This GamrTag is already in use. Please go back to Step 1 and choose another.",
+                            variant: "destructive",
+                        });
+                        setStep(1);
+                    }
                 } else {
+                    logStepEvent("Unexpected submission error", { error });
                     toast({
                         title: "Something went wrong",
                         description: error.message,
@@ -383,8 +632,11 @@ const ClaimGamrTag = () => {
                 return;
             }
 
+            logStepEvent("Submission succeeded", { profile: createdProfile });
+            setSuccessProfile(createdProfile);
             setStep(5);
         } catch (err: any) {
+            logStepEvent("Unexpected async submission error", { error: err });
             toast({
                 title: "Something went wrong",
                 description: err?.message || "Please check your connection and try again.",
@@ -396,6 +648,7 @@ const ClaimGamrTag = () => {
     };
 
     const nextStep = () => {
+        logStepEvent("Transitioning to next step", { current: step, next: step + 1 });
         if (step === 4) {
             handleSubmit();
         } else {
@@ -403,7 +656,10 @@ const ClaimGamrTag = () => {
         }
     };
 
-    const prevStep = () => setStep((s) => Math.max(s - 1, 1));
+    const prevStep = () => {
+        logStepEvent("Transitioning to previous step", { current: step, prev: step - 1 });
+        setStep((s) => Math.max(s - 1, 1));
+    };
 
     const inputClasses =
         "bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none h-12 focus:border-white/40 focus:ring-0";
@@ -572,15 +828,39 @@ const ClaimGamrTag = () => {
                                 {/* Email */}
                                 <div className="space-y-3">
                                     <label className={labelClasses}>Email Address</label>
-                                    <Input
-                                        type="email"
-                                        value={formData.email}
-                                        onChange={(e) =>
-                                            setFormData((prev) => ({ ...prev, email: e.target.value }))
-                                        }
-                                        placeholder="you@example.com"
-                                        className={inputClasses}
-                                    />
+                                    <div className="relative">
+                                        <Input
+                                            ref={emailInputRef}
+                                            type="email"
+                                            value={formData.email}
+                                            onChange={(e) => {
+                                                const val = e.target.value;
+                                                setFormData((prev) => ({ ...prev, email: val }));
+                                                // Immediate State Purge (Reset-on-Change)
+                                                setEmailAvailable(null);
+                                                setIsCheckingEmail(false);
+                                                lastEmailCheckId.current++; // Invalidate pending checks
+                                            }}
+                                            placeholder="you@example.com"
+                                            className={inputClasses}
+                                        />
+                                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                                            {isCheckingEmail && (
+                                                <Loader2 className="h-5 w-5 animate-spin text-white/40" />
+                                            )}
+                                            {!isCheckingEmail && emailAvailable === true && (
+                                                <Check className="h-5 w-5 text-green-400" />
+                                            )}
+                                            {!isCheckingEmail && emailAvailable === false && (
+                                                <X className="h-5 w-5 text-red-400" />
+                                            )}
+                                        </div>
+                                    </div>
+                                    {emailAvailable === false && (
+                                        <p className="text-xs text-red-500 mt-1 max-w-sm">
+                                            This email is already registered. Please log in or use another email.
+                                        </p>
+                                    )}
                                 </div>
 
                                 {/* Phone Number */}
@@ -923,116 +1203,125 @@ const ClaimGamrTag = () => {
 
                     {/* ==================== STEP 5: CONFIRMATION ==================== */}
                     {step === 5 && (
-                        <div className="space-y-10 animate-fade-in text-center">
+                        <ProfileErrorBoundary>
+                            <div className="space-y-10 animate-fade-in text-center">
                             <div className="space-y-6">
                                 <div className="mx-auto w-20 h-20 rounded-full border-2 border-white flex items-center justify-center">
                                     <Check className="h-10 w-10 text-white" />
                                 </div>
-                                <h1 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase leading-none">
-                                    Welcome,
-                                    <br />
-                                    <span className="text-white/60">@{formData.gamrTag}</span>
-                                </h1>
-                                <p className="text-white/50 text-base max-w-md mx-auto">
-                                    Your GamrTag has been claimed. You're now part of the future of African
-                                    gaming.
-                                </p>
-                            </div>
-
-                            {/* Profile Summary */}
-                            <div className="bg-white/5 border border-white/10 p-8 space-y-6 text-left">
-                                <h3 className="text-xs font-bold uppercase tracking-widest text-white/40">
-                                    Your Profile
-                                </h3>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-                                    <div>
-                                        <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
-                                            GamrTag
-                                        </p>
-                                        <p className="font-bold">@{formData.gamrTag}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
-                                            Name
-                                        </p>
-                                        <p className="font-bold">
-                                            {formData.firstName} {formData.lastName}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
-                                            Platform
-                                        </p>
-                                        <p className="font-bold">{formData.platform}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
-                                            Region
-                                        </p>
-                                        <p className="font-bold">{formData.gamingRegion}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
-                                            <MapPin className="h-3 w-3 inline mr-1" />
-                                            Location
-                                        </p>
-                                        <p className="font-bold">
-                                            {formData.city ? `${formData.city}, ` : ""}
-                                            {formData.country}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
-                                            Archetype
-                                        </p>
-                                        <p className="font-bold">
-                                            {formData.gamerArchetypes.length > 0
-                                                ? formData.gamerArchetypes.map(id => GAMER_ARCHETYPES.find(a => a.id === id)?.label || id).join(", ")
-                                                : "None"}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
-                                            Play Style
-                                        </p>
-                                        <p className="font-bold">
-                                            {formData.playStyles.length > 0
-                                                ? formData.playStyles.map(id => PLAY_STYLES.find(s => s.id === id)?.label || id).join(", ")
-                                                : "None"}
-                                        </p>
-                                    </div>
-                                    <div className="col-span-1 md:col-span-2">
-                                        <p className="text-white/40 text-xs uppercase tracking-wider mb-2">
-                                            Games
-                                        </p>
-                                        <div className="flex flex-wrap gap-2">
-                                            {formData.favoriteGames.map((game) => (
-                                                <Badge
-                                                    key={game}
-                                                    className="bg-white/10 text-white border-0 rounded-none px-3 py-1 text-xs"
-                                                >
-                                                    {game}
-                                                </Badge>
-                                            ))}
+                                    <h1 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase leading-none">
+                                        Welcome,
+                                        <br />
+                                        <span className="text-white/60">@{successProfile?.gamr_tag || formData.gamrTag}</span>
+                                    </h1>
+                                    <p className="text-white/50 text-base max-w-md mx-auto">
+                                        Your GamrTag has been claimed. You're now part of the future of African
+                                        gaming.
+                                    </p>
+                                </div>
+                                
+                                {/* Profile Summary */}
+                                <div className="bg-white/5 border border-white/10 p-8 space-y-6 text-left">
+                                    <h3 className="text-xs font-bold uppercase tracking-widest text-white/40">
+                                        Your Profile
+                                    </h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                                        <div>
+                                            <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
+                                                GamrTag
+                                            </p>
+                                            <p className="font-bold">@{successProfile?.gamr_tag || formData.gamrTag || "N/A"}</p>
                                         </div>
-                                    </div>
-                                    <div className="col-span-1 md:col-span-2">
-                                        <p className="text-white/40 text-xs uppercase tracking-wider mb-2">
-                                            Traits
-                                        </p>
-                                        <div className="flex flex-wrap gap-2">
-                                            {formData.personalityTraits.map((trait) => (
-                                                <Badge
-                                                    key={trait}
-                                                    className="bg-white/10 text-white border-0 rounded-none px-3 py-1 text-xs"
-                                                >
-                                                    {trait}
-                                                </Badge>
-                                            ))}
+                                        <div>
+                                            <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
+                                                Name
+                                            </p>
+                                            <p className="font-bold">
+                                                {successProfile?.first_name || formData.firstName} {successProfile?.last_name || formData.lastName}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
+                                                Email
+                                            </p>
+                                            <p className="font-bold">{successProfile?.email || formData.email || "N/A"}</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
+                                                Platform
+                                            </p>
+                                            <p className="font-bold">{successProfile?.platform || formData.platform || "N/A"}</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
+                                                Region
+                                            </p>
+                                            <p className="font-bold">{successProfile?.gaming_region || formData.gamingRegion || "N/A"}</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
+                                                <MapPin className="h-3 w-3 inline mr-1" />
+                                                Location
+                                            </p>
+                                            <p className="font-bold">
+                                                {successProfile?.city ? `${successProfile.city}, ` : (formData.city ? `${formData.city}, ` : "")}
+                                                {successProfile?.country || formData.country || "N/A"}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
+                                                Archetype
+                                            </p>
+                                            <p className="font-bold">
+                                                {((successProfile?.gamer_archetypes || formData.gamerArchetypes) || []).length > 0
+                                                    ? (successProfile?.gamer_archetypes || formData.gamerArchetypes).map((id: string) => GAMER_ARCHETYPES.find(a => a.id === id)?.label || id).join(", ")
+                                                    : "N/A"}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p className="text-white/40 text-xs uppercase tracking-wider mb-1">
+                                                Play Style
+                                            </p>
+                                            <p className="font-bold">
+                                                {((successProfile?.play_styles || formData.playStyles) || []).length > 0
+                                                    ? (successProfile?.play_styles || formData.playStyles).map((id: string) => PLAY_STYLES.find(s => s.id === id)?.label || id).join(", ")
+                                                    : "N/A"}
+                                            </p>
+                                        </div>
+                                        <div className="col-span-1 md:col-span-2">
+                                            <p className="text-white/40 text-xs uppercase tracking-wider mb-2">
+                                                Games
+                                            </p>
+                                            <div className="flex flex-wrap gap-2">
+                                                {(successProfile?.favorite_games || formData.favoriteGames || []).map((game: string) => (
+                                                    <Badge
+                                                        key={game}
+                                                        className="bg-white/10 text-white border-0 rounded-none px-3 py-1 text-xs"
+                                                    >
+                                                        {game}
+                                                    </Badge>
+                                                ))}
+                                                {(successProfile?.favorite_games || formData.favoriteGames || []).length === 0 && <span className="text-white/30 italic">None</span>}
+                                            </div>
+                                        </div>
+                                        <div className="col-span-1 md:col-span-2">
+                                            <p className="text-white/40 text-xs uppercase tracking-wider mb-2">
+                                                Traits
+                                            </p>
+                                            <div className="flex flex-wrap gap-2">
+                                                {(successProfile?.personality_traits || formData.personalityTraits || []).map((trait: string) => (
+                                                    <Badge
+                                                        key={trait}
+                                                        className="bg-white/10 text-white border-0 rounded-none px-3 py-1 text-xs"
+                                                    >
+                                                        {trait}
+                                                    </Badge>
+                                                ))}
+                                                {(successProfile?.personality_traits || formData.personalityTraits || []).length === 0 && <span className="text-white/30 italic">None</span>}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
                             <Button
                                 className="bg-white text-black hover:bg-white/90 rounded-none px-10 py-7 text-sm font-bold uppercase tracking-widest transition-all duration-300 w-full"
@@ -1041,6 +1330,7 @@ const ClaimGamrTag = () => {
                                 Return to Home
                             </Button>
                         </div>
+                        </ProfileErrorBoundary>
                     )}
 
                     {/* Navigation Buttons */}
@@ -1060,13 +1350,23 @@ const ClaimGamrTag = () => {
                             )}
                             <Button
                                 onClick={nextStep}
-                                disabled={!isStepValid() || isSubmitting}
+                                disabled={
+                                    !isStepValid() || 
+                                    isSubmitting || 
+                                    (step === 1 && isCheckingTag) || 
+                                    (step === 2 && isCheckingEmail)
+                                }
                                 className="bg-white text-black hover:bg-white/90 disabled:bg-white/20 disabled:text-white/40 rounded-none px-10 py-6 text-sm font-bold uppercase tracking-widest transition-all duration-300"
                             >
                                 {isSubmitting ? (
                                     <>
                                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                                         Submitting
+                                    </>
+                                ) : (step === 1 && isCheckingTag) || (step === 2 && isCheckingEmail) ? (
+                                    <>
+                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                        Checking
                                     </>
                                 ) : step === 4 ? (
                                     <>
