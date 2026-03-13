@@ -12,6 +12,8 @@ import InsightsIndex from "./pages/InsightsIndex";
 import InsightPost from "./pages/InsightPost";
 import InsightSearchPage from "./pages/InsightSearchPage";
 import AuthorProfile from "./pages/AuthorProfile";
+import RisingEsports from "./pages/RisingEsports";
+import InsightOS from "./pages/InsightOS";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +32,8 @@ const App = () => (
           <Route path="/insights/search" element={<InsightSearchPage />} />
           <Route path="/insights/:slug" element={<InsightPost />} />
           <Route path="/authors/:author" element={<AuthorProfile />} />
+          <Route path="/insights/stories/rising-esports" element={<RisingEsports />} />
+          <Route path="/insights/os" element={<InsightOS />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
