@@ -14,6 +14,12 @@ import InsightSearchPage from "./pages/InsightSearchPage";
 import AuthorProfile from "./pages/AuthorProfile";
 import RisingEsports from "./pages/RisingEsports";
 import InsightOS from "./pages/InsightOS";
+import IntelligenceHub from "./pages/intelligence/IntelligenceHub";
+import MapPage from "./pages/intelligence/MapPage";
+import DashboardPage from "./pages/intelligence/DashboardPage";
+import TimelinePage from "./pages/intelligence/TimelinePage";
+import CareersPage from "./pages/intelligence/CareersPage";
+import CommunityReportForm from "./pages/community/CommunityReportForm";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +40,12 @@ const App = () => (
           <Route path="/authors/:author" element={<AuthorProfile />} />
           <Route path="/insights/stories/rising-esports" element={<RisingEsports />} />
           <Route path="/insights/os" element={<InsightOS />} />
+          <Route path="/insights/intelligence" element={<IntelligenceHub />} />
+          <Route path="/insights/intelligence/map" element={<MapPage />} />
+          <Route path="/insights/intelligence/dashboard" element={<DashboardPage />} />
+          <Route path="/insights/intelligence/timeline" element={<TimelinePage />} />
+          <Route path="/insights/intelligence/careers" element={<CareersPage />} />
+          <Route path="/insights/community-report" element={<CommunityReportForm />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
