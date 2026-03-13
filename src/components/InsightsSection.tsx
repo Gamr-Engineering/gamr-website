@@ -28,7 +28,7 @@ const InsightsSection = () => {
                         className="bg-transparent border border-white text-white hover:bg-white hover:text-black rounded-none px-12 py-8 text-sm font-bold uppercase tracking-widest transition-all"
                         asChild
                     >
-                        <Link to="/blog">
+                        <Link to="/insights">
                             View All Insights
                         </Link>
                     </Button>
