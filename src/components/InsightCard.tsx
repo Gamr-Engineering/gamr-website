@@ -13,6 +13,8 @@ const InsightCard = ({ insight }: InsightCardProps) => {
   return (
     <Link
       to={`/blog/${id}`}
+      draggable={false}
+      onDragStart={(e) => e.preventDefault()}
       className="group flex-shrink-0 flex flex-col justify-between p-10 border border-white/10
                  hover:border-blue-500/40 hover:bg-blue-600 transition-all duration-500 cursor-pointer
                  w-[80vw] sm:w-[380px] md:w-[400px]

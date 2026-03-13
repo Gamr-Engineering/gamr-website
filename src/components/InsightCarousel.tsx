@@ -13,6 +13,7 @@ const InsightCarousel = ({ title, insights }: InsightCarouselProps) => {
   const [isDragging, setIsDragging] = useState(false);
   const dragStartX = useRef(0);
   const scrollStartLeft = useRef(0);
+  const hasDragged = useRef(false);
 
   const scrollBy = (offset: number) => {
     scrollRef.current?.scrollBy({ left: offset, behavior: "smooth" });
@@ -22,21 +23,34 @@ const InsightCarousel = ({ title, insights }: InsightCarouselProps) => {
   const onPointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
     if (!scrollRef.current) return;
     setIsDragging(true);
+    hasDragged.current = false;
     dragStartX.current = e.clientX;
     scrollStartLeft.current = scrollRef.current.scrollLeft;
-    scrollRef.current.setPointerCapture(e.pointerId);
+    // We intentionally removed setPointerCapture so native click events
+    // are not swallowed by retargeting the pointerup event to the container.
   }, []);
 
   const onPointerMove = useCallback(
     (e: React.PointerEvent<HTMLDivElement>) => {
       if (!isDragging || !scrollRef.current) return;
       const delta = dragStartX.current - e.clientX;
+      if (Math.abs(delta) > 5) {
+        hasDragged.current = true;
+      }
       scrollRef.current.scrollLeft = scrollStartLeft.current + delta;
     },
     [isDragging]
   );
 
   const onPointerUp = useCallback(() => setIsDragging(false), []);
+
+  const onClickCapture = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    // Prevent the click event from firing if the user was dragging the carousel
+    if (hasDragged.current) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, []);
 
   return (
     <div className="flex flex-col gap-4">
@@ -71,6 +85,7 @@ const InsightCarousel = ({ title, insights }: InsightCarouselProps) => {
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerUp}
+        onClickCapture={onClickCapture}
         className="flex gap-4 overflow-x-scroll pb-4 border-t border-white/10"
         style={{
           scrollSnapType: "x mandatory",
