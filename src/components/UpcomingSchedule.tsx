@@ -1,7 +1,34 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
+import fifaImg from "@/assets/gaming-hub.jpg";
+import managementImg from "@/assets/workshop.jpg";
+import streamingImg from "@/assets/training-studio.jpg";
 
 const UpcomingSchedule = () => {
+  const sessions = [
+    { 
+      title: "FIFA Pro Strategies", 
+      date: "Dec 20", 
+      time: "2:00 PM", 
+      category: "Gameplay", 
+      image: fifaImg 
+    },
+    { 
+      title: "Esports Management", 
+      date: "Dec 27", 
+      time: "4:00 PM", 
+      category: "Business", 
+      image: managementImg 
+    },
+    { 
+      title: "Streaming Basics", 
+      date: "Jan 03", 
+      time: "10:00 AM", 
+      category: "Content", 
+      image: streamingImg 
+    }
+  ];
+
   return (
     <section id="upcoming-schedule" className="py-24 bg-black text-white">
       <div className="container mx-auto px-6">
@@ -24,14 +51,18 @@ const UpcomingSchedule = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            { title: "FIFA Pro Strategies", date: "Dec 20", time: "2:00 PM", category: "Gameplay", image: "bg-zinc-900" },
-            { title: "Esports Management", date: "Dec 27", time: "4:00 PM", category: "Business", image: "bg-zinc-800" },
-            { title: "Streaming Basics", date: "Jan 03", time: "10:00 AM", category: "Content", image: "bg-zinc-900" }
-          ].map((session, index) => (
+          {sessions.map((session, index) => (
             <div key={index} className="group cursor-pointer">
-              <div className={`aspect-video rounded-none border border-white/10 ${session.image} mb-6 relative overflow-hidden`}>
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-white/5">
+              <div className="aspect-video rounded-none border border-white/10 mb-6 relative overflow-hidden bg-zinc-900">
+                <img 
+                  src={session.image} 
+                  alt={session.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800";
+                  }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
                   <ArrowRight className="w-8 h-8 text-white -rotate-45" />
                 </div>
               </div>
