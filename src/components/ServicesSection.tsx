@@ -40,7 +40,7 @@ const ServicesSection = () => {
                 asChild
               >
                 <Link to="/gamr-lab">
-                  Start Learning
+                  Learn More
                 </Link>
               </Button>
             </div>

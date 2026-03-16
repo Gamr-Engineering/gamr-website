@@ -32,7 +32,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/claim-gamrtag" element={<ClaimGamrTag />} />
-          <Route path="/gamr-lab" element={<GamrLab />} />
+          <Route path="/gamr-lab" element={<GamrLab />} /> {/* Roblox campaign closed - archive state */}
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/insights" element={<InsightsIndex />} />
           <Route path="/insights/search" element={<InsightSearchPage />} />

@@ -6,6 +6,8 @@ import RobloxFAQ from "@/components/RobloxFAQ";
 import GamrLabCarousel from "@/components/GamrLabCarousel";
 
 const GamrLab = () => {
+    const isApplicationClosed = true;
+
     return (
         <div className="min-h-screen bg-black text-white font-sans selection:bg-blue-500/30">
             <Header />
@@ -26,12 +28,21 @@ const GamrLab = () => {
                         A 30-day, hardware-backed sprint at Gamr Lab turning African players into Roblox creators and earning digital entrepreneurs.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in delay-300">
-                        <Button
-                            className="bg-white text-black hover:bg-gray-200 rounded-none px-8 py-6 text-sm font-bold uppercase tracking-widest min-w-[200px]"
-                            asChild
-                        >
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfjUfZrHo1wfPIhrsFU5vDaNiN6MQkhKZmtEyH7xNSJVvWcbQ/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">Apply Now</a>
-                        </Button>
+                        {isApplicationClosed ? (
+                            <Button
+                                className="bg-gray-800 text-gray-400 cursor-not-allowed rounded-none px-8 py-6 text-sm font-bold uppercase tracking-widest min-w-[200px]"
+                                disabled
+                            >
+                                Applications Closed
+                            </Button>
+                        ) : (
+                            <Button
+                                className="bg-white text-black hover:bg-gray-200 rounded-none px-8 py-6 text-sm font-bold uppercase tracking-widest min-w-[200px]"
+                                asChild
+                            >
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfjUfZrHo1wfPIhrsFU5vDaNiN6MQkhKZmtEyH7xNSJVvWcbQ/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">Apply Now</a>
+                            </Button>
+                        )}
                         <Button
                             variant="outline"
                             className="bg-transparent border border-white text-white hover:bg-white hover:text-black rounded-none px-8 py-6 text-sm font-bold uppercase tracking-widest min-w-[200px]"
@@ -137,13 +148,22 @@ const GamrLab = () => {
                             </ul>
 
                             <div className="pt-8">
-                                <Button
-                                    className="bg-white text-black hover:bg-gray-200 rounded-none px-8 py-6 text-sm font-bold uppercase tracking-widest w-full sm:w-auto"
-                                    asChild
-                                >
-                                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfjUfZrHo1wfPIhrsFU5vDaNiN6MQkhKZmtEyH7xNSJVvWcbQ/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">Apply Now</a>
-                                </Button>
-                                <p className="text-gray-500 text-sm mt-4 uppercase tracking-widest">Spots are limited.</p>
+                                {isApplicationClosed ? (
+                                    <div className="bg-blue-500/10 border border-blue-500/20 p-6 rounded-none text-center sm:text-left">
+                                        <h4 className="text-xl font-bold uppercase tracking-tight mb-2">Applications for this cohort are now closed.</h4>
+                                        <p className="text-gray-400">Stay connected with Gamr for future creator programs and upcoming sprints.</p>
+                                    </div>
+                                ) : (
+                                    <>
+                                        <Button
+                                            className="bg-white text-black hover:bg-gray-200 rounded-none px-8 py-6 text-sm font-bold uppercase tracking-widest w-full sm:w-auto"
+                                            asChild
+                                        >
+                                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfjUfZrHo1wfPIhrsFU5vDaNiN6MQkhKZmtEyH7xNSJVvWcbQ/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">Apply Now</a>
+                                        </Button>
+                                        <p className="text-gray-500 text-sm mt-4 uppercase tracking-widest">Spots are limited.</p>
+                                    </>
+                                )}
                             </div>
                         </div>
 
@@ -219,13 +239,24 @@ const GamrLab = () => {
             {/* Ready to Build CTA */}
             <section className="py-20 bg-zinc-950/50 border-t border-white/5">
                 <div className="container mx-auto px-6 text-center">
-                    <h3 className="text-3xl font-bold uppercase tracking-tighter mb-8">Ready to Build?</h3>
-                    <Button
-                        className="bg-blue-600 text-white hover:bg-blue-700 rounded-none px-12 py-8 text-lg font-bold uppercase tracking-widest shadow-lg shadow-blue-900/20"
-                        asChild
-                    >
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfjUfZrHo1wfPIhrsFU5vDaNiN6MQkhKZmtEyH7xNSJVvWcbQ/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">Apply Now</a>
-                    </Button>
+                    <h3 className="text-3xl font-bold uppercase tracking-tighter mb-8">
+                        {isApplicationClosed ? "Cohort 1 Applications are Closed" : "Ready to Build?"}
+                    </h3>
+                    {isApplicationClosed ? (
+                        <Button
+                            className="bg-transparent border border-white text-white hover:bg-white hover:text-black rounded-none px-12 py-8 text-lg font-bold uppercase tracking-widest"
+                            asChild
+                        >
+                            <a href="/">Return to Homepage</a>
+                        </Button>
+                    ) : (
+                        <Button
+                            className="bg-blue-600 text-white hover:bg-blue-700 rounded-none px-12 py-8 text-lg font-bold uppercase tracking-widest shadow-lg shadow-blue-900/20"
+                            asChild
+                        >
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfjUfZrHo1wfPIhrsFU5vDaNiN6MQkhKZmtEyH7xNSJVvWcbQ/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">Apply Now</a>
+                        </Button>
+                    )}
                 </div>
             </section>
 
