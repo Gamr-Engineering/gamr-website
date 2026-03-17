@@ -22,7 +22,7 @@ const CampaignBanner = ({ campaign }: CampaignBannerProps) => {
   return (
     <div className={cn(
       "text-white py-2 px-4 transition-all duration-500 relative z-50",
-      isClosingSoon ? "bg-orange-600 animate-pulse" : isClosed ? "bg-zinc-800" : "bg-blue-600"
+      isClosingSoon ? "bg-orange-600 animate-pulse" : isClosed ? "bg-orange-600" : "bg-blue-600"
     )}>
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 text-xs md:text-sm font-bold uppercase tracking-widest">
         <div className="flex items-center gap-2">
