@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { ArrowRight, GraduationCap, Users } from "lucide-react";
 import gamrLabVideo from "@/assets/gamr-lab-video.mp4";
 import carven1 from "@/assets/carven/carven-1.jpg";
-import { robloxCampaignConfig } from "@/config/campaign";
+import { campaigns } from "@/data/campaigns";
+import { getCampaignStatus } from "@/utils/campaignStatus";
 
 const ServicesSection = () => {
   return (
@@ -41,7 +42,13 @@ const ServicesSection = () => {
                 asChild
               >
                 <Link to="/gamr-lab">
-                  {robloxCampaignConfig.isOpen ? "Start Learning" : "Learn More"}
+                  {(() => {
+                    const campaign = campaigns.find(c => c.id === "roblox-creator-pathway");
+                    const status = campaign ? getCampaignStatus(campaign).status : "CLOSED";
+                    return status === "OPEN" ? "Start Learning" : 
+                           status === "CLOSING_SOON" ? "Apply Before Deadline" : 
+                           "Learn More";
+                  })()}
                 </Link>
               </Button>
             </div>

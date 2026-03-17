@@ -1,17 +1,32 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, Calendar, Users, Code, Monitor, Trophy } from "lucide-react";
+import { ArrowRight, Check, Calendar, Users, Code, Monitor, Trophy, Clock, AlertTriangle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import RobloxFAQ from "@/components/RobloxFAQ";
+import { cn } from "@/lib/utils";
 import GamrLabCarousel from "@/components/GamrLabCarousel";
-import { robloxCampaignConfig } from "@/config/campaign";
+import { campaigns } from "@/data/campaigns";
+import { getCampaignStatus, formatRemainingTime } from "@/utils/campaignStatus";
 
 const GamrLab = () => {
-    const isApplicationClosed = !robloxCampaignConfig.isOpen;
+    const robloxCampaign = campaigns.find(c => c.id === "roblox-creator-pathway");
+    const statusInfo = robloxCampaign ? getCampaignStatus(robloxCampaign) : { status: "CLOSED" as const };
+    const { status, daysRemaining, hoursRemaining } = statusInfo;
+    
+    const isApplicationClosed = status === "CLOSED" || status === "UPCOMING";
+    const isClosingSoon = status === "CLOSING_SOON";
 
     return (
         <div className="min-h-screen bg-black text-white font-sans selection:bg-blue-500/30">
             <Header />
+
+            {isClosingSoon && (
+                <div className="bg-orange-600 text-white py-3 px-6 text-center animate-pulse sticky top-20 z-40 flex items-center justify-center gap-3 font-bold uppercase tracking-tighter text-sm md:text-base">
+                    <AlertTriangle className="w-5 h-5 md:w-6 h-6 shrink-0" />
+                    <span>Applications are closing soon! Ends in: {formatRemainingTime(daysRemaining, hoursRemaining)}</span>
+                    <Clock className="w-5 h-5 md:w-6 h-6 shrink-0" />
+                </div>
+            )}
 
             {/* Hero Section */}
             <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6 overflow-hidden">
@@ -34,14 +49,19 @@ const GamrLab = () => {
                                 className="bg-gray-800 text-gray-400 cursor-not-allowed rounded-none px-8 py-6 text-sm font-bold uppercase tracking-widest min-w-[200px]"
                                 disabled
                             >
-                                Applications Closed
+                                {status === "UPCOMING" ? "Applications Opening Soon" : "Applications Closed"}
                             </Button>
                         ) : (
                             <Button
-                                className="bg-white text-black hover:bg-gray-200 rounded-none px-8 py-6 text-sm font-bold uppercase tracking-widest min-w-[200px]"
+                                className={cn(
+                                    "rounded-none px-8 py-6 text-sm font-bold uppercase tracking-widest min-w-[200px]",
+                                    isClosingSoon ? "bg-orange-600 text-white hover:bg-orange-700 animate-bounce" : "bg-white text-black hover:bg-gray-200"
+                                )}
                                 asChild
                             >
-                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfjUfZrHo1wfPIhrsFU5vDaNiN6MQkhKZmtEyH7xNSJVvWcbQ/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">Apply Now</a>
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfjUfZrHo1wfPIhrsFU5vDaNiN6MQkhKZmtEyH7xNSJVvWcbQ/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">
+                                    {isClosingSoon ? "Apply Now - Hurry!" : "Apply Now"}
+                                </a>
                             </Button>
                         )}
                         <Button
