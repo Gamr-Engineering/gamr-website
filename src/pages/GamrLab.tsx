@@ -4,9 +4,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import RobloxFAQ from "@/components/RobloxFAQ";
 import GamrLabCarousel from "@/components/GamrLabCarousel";
+import { robloxCampaignConfig } from "@/config/campaign";
 
 const GamrLab = () => {
-    const isApplicationClosed = true;
+    const isApplicationClosed = !robloxCampaignConfig.isOpen;
 
     return (
         <div className="min-h-screen bg-black text-white font-sans selection:bg-blue-500/30">

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, GraduationCap, Users } from "lucide-react";
 import gamrLabVideo from "@/assets/gamr-lab-video.mp4";
 import carven1 from "@/assets/carven/carven-1.jpg";
+import { robloxCampaignConfig } from "@/config/campaign";
 
 const ServicesSection = () => {
   return (
@@ -40,7 +41,7 @@ const ServicesSection = () => {
                 asChild
               >
                 <Link to="/gamr-lab">
-                  Learn More
+                  {robloxCampaignConfig.isOpen ? "Start Learning" : "Learn More"}
                 </Link>
               </Button>
             </div>
