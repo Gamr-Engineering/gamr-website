@@ -18,7 +18,7 @@ const InsightPost = () => {
         initAnalytics();
         
         if (post) {
-            document.title = `${post.title} | Gamr Insights`;
+            document.title = post.metaTitle || `${post.title} | Gamr Insights`;
             trackView(`/insights/${post.slug}`);
             
             // Basic Meta Description
@@ -28,7 +28,18 @@ const InsightPost = () => {
                 metaDesc.setAttribute("name", "description");
                 document.head.appendChild(metaDesc);
             }
-            metaDesc.setAttribute("content", post.excerpt);
+            metaDesc.setAttribute("content", post.metaDescription || post.excerpt);
+
+            // Keywords
+            if (post.keywords && post.keywords.length > 0) {
+                let metaKeywords = document.querySelector("meta[name='keywords']");
+                if (!metaKeywords) {
+                    metaKeywords = document.createElement("meta");
+                    metaKeywords.setAttribute("name", "keywords");
+                    document.head.appendChild(metaKeywords);
+                }
+                metaKeywords.setAttribute("content", post.keywords.join(", "));
+            }
 
             // OpenGraph Title
             let ogTitle = document.querySelector("meta[property='og:title']");

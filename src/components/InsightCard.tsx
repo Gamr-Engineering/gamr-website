@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import type { Insight } from "@/data/insightsData";
 
 interface InsightCardProps {
@@ -7,14 +7,28 @@ interface InsightCardProps {
 }
 
 const InsightCard = ({ insight }: InsightCardProps) => {
+  const navigate = useNavigate();
   const { slug, title, category, excerpt, coverImage, author, tags } = insight;
   const categoryLabel = category === "case-study" ? "Case Study" : "Blog";
 
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (window.getSelection()?.toString()) return;
+    navigate(`/insights/${slug}`);
+  };
+
   return (
-    <Link
-      to={`/insights/${slug}`}
+    <div
+      onClick={handleClick}
+      role="link"
+      tabIndex={0}
       draggable={false}
       onDragStart={(e) => e.preventDefault()}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          navigate(`/insights/${slug}`);
+        }
+      }}
       className="group flex-shrink-0 flex flex-col justify-between p-10 border border-white/10
                  hover:border-blue-500/40 hover:bg-blue-600 transition-all duration-500 cursor-pointer
                  w-[80vw] sm:w-[380px] md:w-[400px]
@@ -60,7 +74,7 @@ const InsightCard = ({ insight }: InsightCardProps) => {
         Read Article
         <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-all duration-300" />
       </div>
-    </Link>
+    </div>
   );
 };
 

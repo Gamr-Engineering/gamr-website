@@ -13,10 +13,20 @@ export interface Insight {
   featured?: boolean;
   trendingScore?: number;
   content: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  keywords?: string[];
 }
 
+import { newCaseStudies } from "./insights/caseStudies";
+import { blogsPart1 } from "./insights/blogsPart1";
+import { blogsPart2 } from "./insights/blogsPart2";
+
 export const allInsights: Insight[] = [
-  // ─── Case Studies ─────────────────────────────────────────────────────────
+  ...newCaseStudies,
+  ...blogsPart1,
+  ...blogsPart2,
+  // ─── Existing Data ─────────────────────────────────────────────────────────
   {
     slug: "redefining-mobile-esports",
     title: "REDEFINING MOBILE ESPORTS IN NIGERIA",
