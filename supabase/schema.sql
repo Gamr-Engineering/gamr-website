@@ -48,3 +48,25 @@ CREATE POLICY "Allow public read for tag check" ON gaming_profiles
 CREATE INDEX idx_gaming_profiles_gamr_tag ON gaming_profiles (gamr_tag);
 CREATE INDEX idx_gaming_profiles_email ON gaming_profiles (email);
 CREATE INDEX idx_gaming_profiles_country ON gaming_profiles (country);
+
+-- =============================================
+-- GAMR Content Submissions Schema
+-- =============================================
+
+CREATE TABLE article_submissions (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  title TEXT NOT NULL,
+  category TEXT NOT NULL,
+  content TEXT NOT NULL,
+  status TEXT DEFAULT 'pending',
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- Enable Row Level Security
+ALTER TABLE article_submissions ENABLE ROW LEVEL SECURITY;
+
+-- Allow anonymous inserts (for the public submission form)
+CREATE POLICY "Allow anonymous insert for submissions" ON article_submissions
+  FOR INSERT WITH CHECK (true);
