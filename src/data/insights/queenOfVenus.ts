@@ -11,6 +11,7 @@ export const queenOfVenus: Insight = {
   coverImage: "/assets/insights/queen-of-venus-cover.jpg",
   author: authors["williams-falodun"],
   tags: ["Gaming Culture", "Community", "Women in Gaming"],
+  featured: true,
   metaTitle: "Queen of Venus – A Story of Identity, Consistency, and Gaming Culture in Africa | Gamr",
   metaDescription: "Explore the journey of Queen of Venus, a Nigerian gamer navigating identity, growth, and resilience in Africa’s evolving gaming ecosystem.",
   keywords: [

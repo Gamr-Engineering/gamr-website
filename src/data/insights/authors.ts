@@ -15,6 +15,7 @@ export const authors: Record<string, Author> = {
     name: "Williams Falodun",
     slug: "williams-falodun",
     bio: "Williams Falodun is a storyteller focused on African gaming culture, identity, and the evolving ecosystem shaping the next generation of creators.",
+    avatar: "/assets/authors/williams-falodun.png",
     social: {
       twitter: "https://twitter.com/williamsfalodun",
       linkedin: "https://linkedin.com/in/williamsfalodun"

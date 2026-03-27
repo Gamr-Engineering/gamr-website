@@ -99,7 +99,7 @@ const InsightCarousel = ({ title, insights }: InsightCarouselProps) => {
         <style>{`.insight-scroll::-webkit-scrollbar { display: none; }`}</style>
 
         {insights.map((insight) => (
-          <InsightCard key={insight.id} insight={insight} />
+          <InsightCard key={insight.slug} insight={insight} />
         ))}
       </div>
     </div>
