@@ -12,7 +12,7 @@ import RelatedArticles from "@/components/RelatedArticles";
 import InsightCard from "@/components/InsightCard";
 
 const InsightPost = () => {
-    const { allInsights } = useInsights();
+    const { allInsights, loading } = useInsights();
     const { slug } = useParams<{ slug: string }>();
     const post = slug ? allInsights.find((i) => i.slug === slug) : null;
 
@@ -92,6 +92,17 @@ const InsightPost = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [post]);
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="flex flex-col items-center gap-4 text-center">
+                    <div className="w-10 h-10 rounded-full border-4 border-blue-500 border-t-transparent animate-spin mx-auto" />
+                    <p className="text-gray-400 uppercase tracking-widest text-xs font-bold">Loading Article...</p>
+                </div>
+            </div>
+        );
+    }
 
     if (!post) {
         return <Navigate to="/insights" replace />;
