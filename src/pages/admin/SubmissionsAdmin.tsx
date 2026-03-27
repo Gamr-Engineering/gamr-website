@@ -241,12 +241,33 @@ const SubmissionsAdmin = () => {
                             {/* Read-only content area */}
                             <ScrollArea className="flex-grow p-8 md:p-12 overflow-y-auto bg-gray-950" style={{ maxHeight: 'calc(90vh - 250px)' }}>
                               <div className="max-w-3xl mx-auto prose prose-invert prose-blue prose-p:text-gray-300 prose-p:leading-relaxed prose-headings:uppercase prose-headings:tracking-tighter prose-a:text-blue-400">
-                                {sub.content.split('\n').map((line, i) => {
-                                  if (!line.trim()) return <br key={i} />;
+                                {sub.content.split('\n\n').map((block, i) => {
+                                  const line = block.trim();
+                                  if (!line) return <br key={i} />;
+                                  
+                                  // Handle injected markdown images
+                                  if (line.startsWith('![') && line.includes('](')) {
+                                    const match = line.match(/!\[(.*?)\]\((.*?)\)/);
+                                    if (match) {
+                                      return (
+                                        <div key={i} className="my-8 rounded-xl overflow-hidden border border-white/10 shadow-lg bg-black">
+                                          <img src={match[2]} alt={match[1]} className="w-full h-auto object-cover" />
+                                        </div>
+                                      );
+                                    }
+                                  }
+
+                                  // Handle injected HTML5 Media from MarkdownToolbar
+                                  if (line.startsWith('<video') || line.startsWith('<audio')) {
+                                    return <div key={i} className="my-6" dangerouslySetInnerHTML={{ __html: line }} />;
+                                  }
+
                                   if (line.startsWith('# ')) return <h1 key={i} className="text-3xl font-black mb-6 mt-8">{line.replace('# ', '')}</h1>;
                                   if (line.startsWith('## ')) return <h2 key={i} className="text-2xl font-black mb-4 mt-6">{line.replace('## ', '')}</h2>;
                                   if (line.startsWith('### ')) return <h3 key={i} className="text-xl font-bold mb-3 mt-5">{line.replace('### ', '')}</h3>;
-                                  return <p key={i} className="mb-4 text-lg text-gray-300 leading-relaxed font-medium">{line}</p>;
+                                  
+                                  const formatted = line.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-white">$1</strong>').replace(/\*(.*?)\*/g, '<em class="italic text-gray-400">$1</em>');
+                                  return <p key={i} className="mb-4 text-lg text-gray-300 leading-relaxed font-medium" dangerouslySetInnerHTML={{ __html: formatted }} />;
                                 })}
                               </div>
                             </ScrollArea>

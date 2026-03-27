@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
+import MarkdownToolbar from './MarkdownToolbar';
 
 const ContributorForm: React.FC = () => {
   const navigate = useNavigate();
@@ -22,6 +23,26 @@ const ContributorForm: React.FC = () => {
     category: '',
     content: '',
   });
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleInsertMarkdown = (text: string) => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const currentContent = formData.content;
+
+    const newContent = currentContent.substring(0, start) + text + currentContent.substring(end);
+    setFormData({ ...formData, content: newContent });
+
+    // Important: restore focus and selection programmatically after React render tick
+    setTimeout(() => {
+      textarea.focus();
+      textarea.setSelectionRange(start + text.length, start + text.length);
+    }, 0);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -135,17 +156,22 @@ const ContributorForm: React.FC = () => {
         </Select>
       </div>
 
-      <div className="space-y-3">
-        <Label htmlFor="content" className="text-xs uppercase tracking-widest text-gray-500 font-bold">Article Content</Label>
-        <Textarea 
-          id="content"
-          placeholder="Write your story here... (Markdown supported)"
-          required
-          rows={12}
-          value={formData.content}
-          onChange={(e) => setFormData({...formData, content: e.target.value})}
-          className="bg-black/40 border-white/10 rounded-2xl resize-none focus:ring-blue-500/50 p-6 leading-relaxed"
-        />
+      <div className="space-y-0">
+        <Label htmlFor="content" className="text-xs uppercase tracking-widest text-gray-500 font-bold mb-3 block">Article Content</Label>
+        <div className="flex flex-col">
+          <MarkdownToolbar onInsert={handleInsertMarkdown} />
+          <Textarea 
+            ref={textareaRef}
+            id="content"
+            placeholder="Write your story here... (Rich Media & Markdown Supported)"
+            required
+            rows={12}
+            value={formData.content}
+            onChange={(e) => setFormData({...formData, content: e.target.value})}
+            className="bg-black/40 border-white/10 rounded-b-2xl rounded-t-none border-t-0 resize-y focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 p-6 leading-relaxed m-0 text-white"
+            style={{ outline: 'none' }}
+          />
+        </div>
       </div>
 
       <div className="pt-6">
