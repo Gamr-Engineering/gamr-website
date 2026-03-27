@@ -195,7 +195,7 @@ const InsightPost = () => {
                                         const alt = match[1];
                                         const src = match[2];
                                         return (
-                                            <div key={index} className="my-14 overflow-hidden rounded-2xl border border-white/10 bg-gray-900 w-full aspect-[4/3] md:aspect-video shadow-2xl group">
+                                            <div key={index} className="my-14 overflow-hidden rounded-2xl border border-white/10 bg-gray-900 w-full aspect-[4/3] md:aspect-video shadow-2xl shadow-blue-500/10 group">
                                                 <img 
                                                     src={src} 
                                                     alt={alt} 
