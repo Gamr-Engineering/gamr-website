@@ -1,4 +1,5 @@
-import { Insight, authors } from "../insightsData";
+import { authors } from "./authors";
+import type { Insight } from "../insightsData";
 
 export const newCaseStudies: Insight[] = [
   {
