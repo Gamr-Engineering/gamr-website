@@ -137,6 +137,16 @@ const Header = () => {
                   </a>
                 </NavigationMenuLink>
               </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <a
+                    href="/insights/admin"
+                    className={cn(navigationMenuTriggerStyle(), "bg-transparent text-blue-400 hover:bg-blue-500/10 hover:text-blue-300 uppercase tracking-widest text-xs font-bold cursor-pointer")}
+                  >
+                    Admin
+                  </a>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
         </div>
@@ -197,6 +207,14 @@ const Header = () => {
               className="text-xl font-bold text-white uppercase tracking-widest py-4 border-b border-white/10"
             >
               Contact
+            </a>
+            
+            <a
+              href="/insights/admin"
+              onClick={() => setIsOpen(false)}
+              className="text-xl font-bold text-blue-400 uppercase tracking-widest py-4 border-b border-white/10"
+            >
+              Admin Dashboard
             </a>
 
             <div className="mt-8 mb-8">

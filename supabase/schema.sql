@@ -70,3 +70,11 @@ ALTER TABLE article_submissions ENABLE ROW LEVEL SECURITY;
 -- Allow anonymous inserts (for the public submission form)
 CREATE POLICY "Allow anonymous insert for submissions" ON article_submissions
   FOR INSERT WITH CHECK (true);
+
+-- Allow public read (for the admin dashboard)
+CREATE POLICY "Allow public select for admin dashboard" ON article_submissions
+  FOR SELECT USING (true);
+
+-- Allow public update (for approving/rejecting in the admin dashboard)
+CREATE POLICY "Allow public update for admin dashboard" ON article_submissions
+  FOR UPDATE USING (true);
