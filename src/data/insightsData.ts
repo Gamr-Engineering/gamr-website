@@ -21,8 +21,10 @@ export interface Insight {
 import { newCaseStudies } from "./insights/caseStudies";
 import { blogsPart1 } from "./insights/blogsPart1";
 import { blogsPart2 } from "./insights/blogsPart2";
+import { queenOfVenus } from "./insights/queenOfVenus";
 
 export const allInsights: Insight[] = [
+  queenOfVenus,
   ...newCaseStudies,
   ...blogsPart1,
   ...blogsPart2,

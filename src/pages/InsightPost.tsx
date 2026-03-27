@@ -169,19 +169,49 @@ const InsightPost = () => {
                     </div>
 
                     {/* ── Article body ───────────────────────────────────── */}
-                    <div className="mb-20 space-y-6">
+                    <div className="mb-20 space-y-8">
                         {post.content
                             .split("\n\n")
                             .map((paragraph, index) => {
                                 const trimmed = paragraph.trim();
                                 if (!trimmed) return null;
+
+                                // Handle Section Headers (Lines that are entirely bold)
+                                if (trimmed.startsWith("**") && trimmed.endsWith("**") && !trimmed.includes("\n")) {
+                                    return (
+                                        <h2 
+                                            key={index} 
+                                            className="text-2xl md:text-3xl font-bold text-white pt-8 pb-2 tracking-tight uppercase border-l-4 border-blue-600 pl-6"
+                                        >
+                                            {trimmed.replace(/\*\*/g, "")}
+                                        </h2>
+                                    );
+                                }
+
+                                // Handle Pacing (Short emphasized lines)
+                                if (trimmed.split(" ").length < 4 && trimmed.endsWith(".")) {
+                                    return (
+                                        <p 
+                                            key={index} 
+                                            className="text-2xl font-black text-white italic tracking-tighter opacity-90 py-2"
+                                        >
+                                            {trimmed}
+                                        </p>
+                                    );
+                                }
+
+                                // Simple formatting for bold, italic and links
+                                const formatted = trimmed
+                                    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-white">$1</strong>')
+                                    .replace(/\*(.*?)\*/g, '<em class="italic text-gray-200">$1</em>')
+                                    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-blue-400 hover:text-blue-300 underline underline-offset-4 transition-colors" target="_blank" rel="noopener noreferrer">$1</a>');
+
                                 return (
                                     <p
                                         key={index}
-                                        className="text-gray-300 leading-relaxed text-lg"
-                                    >
-                                        {trimmed}
-                                    </p>
+                                        className="text-gray-300 leading-relaxed text-lg md:text-xl font-medium"
+                                        dangerouslySetInnerHTML={{ __html: formatted }}
+                                    />
                                 );
                             })}
                     </div>
