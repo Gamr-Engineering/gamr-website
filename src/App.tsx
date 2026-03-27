@@ -21,6 +21,7 @@ import DashboardPage from "./pages/intelligence/DashboardPage";
 import TimelinePage from "./pages/intelligence/TimelinePage";
 import CareersPage from "./pages/intelligence/CareersPage";
 import CommunityReportForm from "./pages/community/CommunityReportForm";
+import SubmissionsAdmin from "./pages/admin/SubmissionsAdmin";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => (
           <Route path="/insights/search" element={<InsightSearchPage />} />
           <Route path="/insights/:slug" element={<InsightPost />} />
           <Route path="/insights/submit" element={<SubmitArticle />} />
+          <Route path="/insights/admin" element={<SubmissionsAdmin />} />
           <Route path="/insights/author/:slug" element={<AuthorProfile />} />
           <Route path="/insights/stories/rising-esports" element={<RisingEsports />} />
           <Route path="/insights/os" element={<InsightOS />} />
