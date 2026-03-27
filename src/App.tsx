@@ -39,7 +39,7 @@ const App = () => (
           <Route path="/insights/search" element={<InsightSearchPage />} />
           <Route path="/insights/:slug" element={<InsightPost />} />
           <Route path="/insights/submit" element={<SubmitArticle />} />
-          <Route path="/authors/:author" element={<AuthorProfile />} />
+          <Route path="/insights/author/:slug" element={<AuthorProfile />} />
           <Route path="/insights/stories/rising-esports" element={<RisingEsports />} />
           <Route path="/insights/os" element={<InsightOS />} />
           <Route path="/insights/intelligence" element={<IntelligenceHub />} />

@@ -9,6 +9,7 @@ import SocialShare from "@/components/SocialShare";
 import { initAnalytics, trackArticleScroll, trackView } from "@/utils/analytics";
 import { allInsights } from "@/data/insightsData";
 import RelatedArticles from "@/components/RelatedArticles";
+import InsightCard from "@/components/InsightCard";
 
 const InsightPost = () => {
     const { slug } = useParams<{ slug: string }>();
@@ -234,8 +235,42 @@ const InsightPost = () => {
                     
                     <SocialShare url={window.location.href} title={post.title} />
 
+                    {/* More from this Author */}
+                    {(() => {
+                        const authorArticles = allInsights.filter(i => i.author.slug === post.author.slug && i.slug !== post.slug).slice(0, 3);
+                        if (authorArticles.length > 0) {
+                            return (
+                                <div className="mt-20 border-t border-white/10 pt-16 mb-16">
+                                    <div className="flex items-center gap-4 mb-8">
+                                        <div className="h-4 w-1 bg-blue-600" />
+                                        <h3 className="text-xl md:text-2xl font-black uppercase tracking-widest">
+                                            More from {post.author.name.split(' ')[0]}
+                                        </h3>
+                                    </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        {authorArticles.map((story) => (
+                                            <InsightCard key={story.slug} insight={story} />
+                                        ))}
+                                    </div>
+                                    <div className="mt-8 text-center">
+                                        <Link 
+                                            to={`/insights/author/${post.author.slug}`}
+                                            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-blue-400 transition-colors"
+                                        >
+                                            View Author Profile
+                                            <ArrowRight className="w-4 h-4" />
+                                        </Link>
+                                    </div>
+                                </div>
+                            );
+                        }
+                        return null;
+                    })()}
+
                     {/* Related Articles (AI Recommendations) */}
-                    <RelatedArticles currentArticle={post} allInsights={allInsights} />
+                    <div className="mt-16 sm:mt-24 border-t border-white/10 pt-16">
+                        <RelatedArticles currentArticle={post} allInsights={allInsights} />
+                    </div>
                 </div>
             </main>
             <Footer />
