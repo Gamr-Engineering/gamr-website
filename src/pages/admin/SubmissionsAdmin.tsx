@@ -21,9 +21,22 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Eye, CheckCircle, XCircle, FileText, Star, Trash2, ArrowLeft } from "lucide-react";
+import { Loader2, Eye, CheckCircle, XCircle, FileText, Star, Trash2, ArrowLeft, Users, Send, Mail } from "lucide-react";
 import { toast } from "sonner";
 import { useInsights } from "@/context/InsightsContext";
+import MarkdownToolbar from "@/components/MarkdownToolbar";
+import { emailService } from "@/services/emailService";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+
+interface Subscriber {
+  id: string;
+  name: string;
+  email: string;
+  status: string;
+  subscribed_at: string;
+}
 
 interface Submission {
   id: string;
@@ -38,13 +51,33 @@ interface Submission {
   created_at: string;
 }
 
-type TabType = "pending" | "approved";
+type TabType = "pending" | "approved" | "subscribers";
 
 const SubmissionsAdmin = () => {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
+  const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<TabType>("pending");
-  const { refreshInsights } = useInsights(); // To refresh global context when changes are made
+  const [broadcastModalOpen, setBroadcastModalOpen] = useState(false);
+  const [broadcastLoading, setBroadcastLoading] = useState(false);
+  const [broadcastData, setBroadcastData] = useState({ subject: "", content: "" });
+  
+  const textareaRef = React.useRef<HTMLTextAreaElement>(null);
+  const { refreshInsights } = useInsights();
+
+  const fetchSubscribers = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("gamr_subscribers")
+        .select("*")
+        .order("subscribed_at", { ascending: false });
+
+      if (error) throw error;
+      setSubscribers(data || []);
+    } catch (error: any) {
+      console.error("Error fetching subscribers:", error);
+    }
+  };
 
   const fetchSubmissions = async () => {
     try {
@@ -56,9 +89,10 @@ const SubmissionsAdmin = () => {
 
       if (error) throw error;
       setSubmissions(data || []);
+      await fetchSubscribers();
     } catch (error: any) {
       console.error("Error fetching submissions:", error);
-      toast.error("Failed to load submissions.");
+      toast.error("Failed to load dashboard data.");
     } finally {
       setLoading(false);
     }
@@ -124,8 +158,69 @@ const SubmissionsAdmin = () => {
     }
   };
 
+  const handleInsertMarkdown = (text: string) => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const currentContent = broadcastData.content;
+
+    const newContent = currentContent.substring(0, start) + text + currentContent.substring(end);
+    setBroadcastData({ ...broadcastData, content: newContent });
+
+    setTimeout(() => {
+      textarea.focus();
+      textarea.setSelectionRange(start + text.length, start + text.length);
+    }, 0);
+  };
+
+  const handleSendBroadcast = async () => {
+    if (!broadcastData.subject || !broadcastData.content) {
+      toast.error("Please fill in both subject and content.");
+      return;
+    }
+
+    const activeEmails = subscribers
+      .filter(s => s.status === 'active')
+      .map(s => s.email);
+
+    if (activeEmails.length === 0) {
+      toast.error("No active subscribers to send to.");
+      return;
+    }
+
+    setBroadcastLoading(true);
+    try {
+      // For the broadcast HTML, we'll wrap the content in a container consistent with our branding
+      const styledHtml = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px; background-color: #030712; color: #ffffff; border-radius: 16px;">
+          <h2 style="color: #3b82f6; text-transform: uppercase;">Gamr Insights Update</h2>
+          <div style="color: #cbd5e1; line-height: 1.8; font-size: 16px;">
+            ${broadcastData.content.replace(/\n/g, '<br/>')}
+          </div>
+          <div style="margin-top: 40px; border-top: 1px solid #1f2937; padding-top: 20px; font-[12px] color: #64748b;">
+            Gamr Africa - Building the future of African Esports.
+          </div>
+        </div>
+      `;
+
+      await emailService.sendBroadcast(broadcastData.subject, styledHtml, activeEmails);
+      
+      toast.success(`Broadcast successfully sent to ${activeEmails.length} subscribers!`);
+      setBroadcastModalOpen(false);
+      setBroadcastData({ subject: "", content: "" });
+    } catch (error: any) {
+      console.error(error);
+      toast.error("Failed to execute broadcast batch.");
+    } finally {
+      setBroadcastLoading(false);
+    }
+  };
+
   const displayedSubmissions = submissions.filter(s => s.status === activeTab);
   const pendingCount = submissions.filter(s => s.status === "pending").length;
+  const activeSubscribersCount = subscribers.filter(s => s.status === 'active').length;
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
@@ -159,14 +254,114 @@ const SubmissionsAdmin = () => {
               >
                 Published
               </button>
+              <button
+                onClick={() => setActiveTab("subscribers")}
+                className={`flex-1 md:flex-none px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-md transition-all flex justify-center items-center gap-2 ${
+                  activeTab === "subscribers" ? "bg-purple-600 text-white shadow-lg" : "text-gray-400 hover:text-white"
+                }`}
+              >
+                <Users className="w-3.5 h-3.5" />
+                Subscribers
+              </button>
             </div>
           </div>
 
-          {loading ? (
-            <div className="flex items-center justify-center py-20">
-              <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
-            </div>
-          ) : displayedSubmissions.length === 0 ? (
+          {activeTab === "subscribers" ? (
+             <div className="space-y-6">
+                <div className="flex justify-between items-center bg-gray-900/30 p-8 rounded-2xl border border-white/5">
+                   <div>
+                      <h2 className="text-2xl font-black uppercase tracking-tighter text-white">Your Audience</h2>
+                      <p className="text-gray-400">Total active subscribers: <span className="text-purple-400 font-bold">{activeSubscribersCount}</span></p>
+                   </div>
+                   
+                   <Dialog open={broadcastModalOpen} onOpenChange={setBroadcastModalOpen}>
+                      <DialogTrigger asChild>
+                         <Button className="bg-purple-600 hover:bg-purple-700 text-white h-12 px-8 uppercase tracking-widest font-black text-xs rounded-xl shadow-lg shadow-purple-900/20">
+                            <Send className="w-4 h-4 mr-2" />
+                            Launch Broadcast
+                         </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-3xl bg-gray-950 border-white/10 text-white p-0 overflow-hidden shadow-2xl">
+                         <div className="p-8 border-b border-white/10 bg-black">
+                            <DialogTitle className="text-2xl font-black uppercase tracking-tighter text-white flex items-center gap-3">
+                               <Mail className="w-6 h-6 text-purple-500" />
+                               Compose Global Broadcast
+                            </DialogTitle>
+                            <p className="text-gray-500 mt-2 text-sm uppercase tracking-widest font-bold">Sending to {activeSubscribersCount} active subscribers</p>
+                         </div>
+                         
+                         <div className="p-8 space-y-6">
+                            <div className="space-y-2">
+                               <Label className="text-xs uppercase tracking-widest text-gray-400 font-bold">Email Subject</Label>
+                               <Input 
+                                  placeholder="e.g. Weekly Roundup: The State of African Esports"
+                                  value={broadcastData.subject}
+                                  onChange={(e) => setBroadcastData({...broadcastData, subject: e.target.value})}
+                                  className="bg-black/40 border-white/10 h-12 rounded-xl focus:ring-purple-500/50"
+                               />
+                            </div>
+                            
+                            <div className="space-y-0">
+                               <Label className="text-xs uppercase tracking-widest text-gray-400 font-bold mb-2 block">Message Body</Label>
+                               <MarkdownToolbar onInsert={handleInsertMarkdown} />
+                               <Textarea 
+                                  ref={textareaRef}
+                                  rows={10}
+                                  value={broadcastData.content}
+                                  onChange={(e) => setBroadcastData({...broadcastData, content: e.target.value})}
+                                  placeholder="What do you want to tell your audience today?"
+                                  className="bg-black/40 border-white/10 rounded-b-xl rounded-t-none border-t-0 p-5 focus:ring-0 focus-visible:ring-0 leading-relaxed"
+                               />
+                            </div>
+                         </div>
+                         
+                         <div className="p-6 bg-black border-t border-white/10 flex justify-end">
+                            <Button 
+                               onClick={handleSendBroadcast}
+                               disabled={broadcastLoading}
+                               className="bg-purple-600 hover:bg-purple-700 text-white h-12 px-10 uppercase tracking-widest font-black text-xs rounded-xl"
+                            >
+                               {broadcastLoading ? <Loader2 className="w-4 h-4 animate-spin text-white" /> : "Blast to Audience"}
+                            </Button>
+                         </div>
+                      </DialogContent>
+                   </Dialog>
+                </div>
+                
+                <div className="rounded-xl border border-white/10 overflow-hidden bg-gray-900/50">
+                  <Table>
+                    <TableHeader className="bg-black/50">
+                      <TableRow className="border-white/10 hover:bg-transparent">
+                        <TableHead className="text-gray-400 font-bold uppercase tracking-widest text-xs h-14">Full Name</TableHead>
+                        <TableHead className="text-gray-400 font-bold uppercase tracking-widest text-xs">Email Address</TableHead>
+                        <TableHead className="text-gray-400 font-bold uppercase tracking-widest text-xs">Status</TableHead>
+                        <TableHead className="text-right text-gray-400 font-bold uppercase tracking-widest text-xs">Joined</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {subscribers.map((sub) => (
+                        <TableRow key={sub.id} className="border-white/10 hover:bg-white/5 transition-colors">
+                          <TableCell className="text-white font-bold py-5">{sub.name}</TableCell>
+                          <TableCell className="text-gray-400 py-5">{sub.email}</TableCell>
+                          <TableCell className="py-5">
+                            <Badge className="bg-purple-500/10 text-purple-400 border-purple-500/20 uppercase tracking-widest text-[9px] rounded-sm">{sub.status}</Badge>
+                          </TableCell>
+                          <TableCell className="text-right text-gray-500 text-xs py-5">
+                            {format(new Date(sub.subscribed_at), "MMM d, yyyy")}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+             </div>
+          ) : (
+          <>
+            {loading ? (
+              <div className="flex items-center justify-center py-20">
+                <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+              </div>
+            ) : displayedSubmissions.length === 0 ? (
             <div className="text-center py-20 border border-white/5 border-dashed rounded-2xl bg-gray-900/20">
               <FileText className="w-12 h-12 text-gray-600 mx-auto mb-4" />
               <h3 className="text-xl font-bold uppercase tracking-widest text-gray-400">
@@ -346,6 +541,8 @@ const SubmissionsAdmin = () => {
                 </TableBody>
               </Table>
             </div>
+          )}
+          </>
           )}
         </div>
       </main>
