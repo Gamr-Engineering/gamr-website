@@ -1,0 +1,11 @@
+node_modules
+dist
+.env
+.DS_Store
+*.log
+playwright-report
+test-results
+build_output.txt
+build_output_v2.txt
+/tmp
+.gemini
