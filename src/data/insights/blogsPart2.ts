@@ -1,4 +1,4 @@
-import { Insight } from "../insightsData";
+import { Insight, authors } from "../insightsData";
 
 export const blogsPart2: Insight[] = [
   {
@@ -9,7 +9,7 @@ export const blogsPart2: Insight[] = [
     date: "Apr 02, 2026",
     readTime: "6 min read",
     coverImage: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?q=80&w=2070&auto=format&fit=crop",
-    author: "Emmanuel Oyalabu",
+    author: authors["emmanuel-oyalabu"],
     tags: ["Game Dev", "Infrastructure"],
     metaTitle: "Designing Games for Low-Bandwidth Environments | Gamr",
     metaDescription: "The engineering strategies developers use to optimize games for low-bandwidth and high-packet-loss mobile environments in Africa.",
@@ -31,7 +31,7 @@ Publishers who master this form of digital minimalism—achieving hyper-engaging
     date: "Apr 03, 2026",
     readTime: "5 min read",
     coverImage: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop",
-    author: "Gamr Editorial",
+    author: authors["gamr-editorial"],
     tags: ["Tournaments", "African Tech"],
     metaTitle: "How BracketPro.gg Is Automating Tournaments | Gamr",
     metaDescription: "An inside look at Gamr's BracketPro.gg software and how it is automating the logistical workload of esports tournaments.",
@@ -53,7 +53,7 @@ This automation is the secret sauce to scaling grassroots competition. It empowe
     date: "Apr 04, 2026",
     readTime: "7 min read",
     coverImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop",
-    author: "Gamr Editorial",
+    author: authors["gamr-editorial"],
     tags: ["Tournaments", "Esports"],
     metaTitle: "The Science of Fair Matchmaking | Gamr Insights",
     metaDescription: "A deep dive into the complex algorithms behind skill-based matchmaking (SBMM) and how it drives player retention in competitive esports.",
@@ -75,7 +75,7 @@ In the African ecosystem, matchmaking algorithms must also factor in connection 
     date: "Apr 05, 2026",
     readTime: "6 min read",
     coverImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2071&auto=format&fit=crop",
-    author: "Oladapo Dosekun",
+    author: authors["oladapo-dosekun"],
     tags: ["Community", "Hardware"],
     metaTitle: "Behind the Scenes of Tournament Operations | Gamr",
     metaDescription: "Exploring the high-pressure world of live esports tournament operations and the logistics required to execute flawless events.",
@@ -97,7 +97,7 @@ Executing this in Africa adds another layer of complexity, demanding extreme con
     date: "Apr 06, 2026",
     readTime: "5 min read",
     coverImage: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?q=80&w=2070&auto=format&fit=crop",
-    author: "Gamr Editorial",
+    author: authors["gamr-editorial"],
     tags: ["Community", "Esports"],
     metaTitle: "From Gamer to Shoutcaster: Elevating Esports | Gamr",
     metaDescription: "An exploration of the unique skills and training necessary to transition from playing games to becoming a professional esports shoutcaster.",
@@ -119,7 +119,7 @@ In Africa, local casters have the added responsibility of synthesizing global es
     date: "Apr 07, 2026",
     readTime: "7 min read",
     coverImage: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop",
-    author: "Gamr Editorial",
+    author: authors["gamr-editorial"],
     tags: ["Esports", "African Tech"],
     metaTitle: "How to Become a Pro Gamer in Africa | Gamr Insights",
     metaDescription: "A realistic and practical guide for aspiring players on how to navigate the demanding path to becoming a professional esports athlete in Africa.",
@@ -141,7 +141,7 @@ Finally, there is the portfolio. A modern pro is an influencer. Aspiring athlete
     date: "Apr 08, 2026",
     readTime: "6 min read",
     coverImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop",
-    author: "Emmanuel Oyalabu",
+    author: authors["emmanuel-oyalabu"],
     tags: ["Community", "Gaming Culture"],
     metaTitle: "The Rise of African Gaming Communities | Gamr",
     metaDescription: "An in-depth look at how informal digital spaces like Discord and WhatsApp established the social fabric of African gaming communities.",

@@ -1,4 +1,4 @@
-import { Insight } from "../insightsData";
+import { Insight, authors } from "../insightsData";
 
 export const queenOfVenus: Insight = {
   title: "Queen of Venus",
@@ -8,7 +8,7 @@ export const queenOfVenus: Insight = {
   date: "Mar 27, 2026",
   readTime: "6 min read",
   coverImage: "/assets/insights/queen-of-venus-cover.jpg",
-  author: "Williams Falodun",
+  author: authors["williams-falodun"],
   tags: ["Gaming Culture", "Community", "Women in Gaming"],
   metaTitle: "Queen of Venus – A Story of Identity, Consistency, and Gaming Culture in Africa | Gamr",
   metaDescription: "Explore the journey of Queen of Venus, a Nigerian gamer navigating identity, growth, and resilience in Africa’s evolving gaming ecosystem.",

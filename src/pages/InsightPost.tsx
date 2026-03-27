@@ -129,9 +129,9 @@ const InsightPost = () => {
                                 <Clock className="h-3 w-3" />
                                 {post.readTime}
                             </span>
-                            <Link to={`/authors/${encodeURIComponent(post.author)}`} className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-blue-400 transition-colors font-medium">
+                            <Link to={`/insights/author/${post.author.slug}`} className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-blue-400 transition-colors font-medium">
                                 <User className="h-3 w-3" />
-                                {post.author}
+                                {post.author.name}
                             </Link>
                         </div>
 
