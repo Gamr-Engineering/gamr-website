@@ -181,11 +181,30 @@ const InsightPost = () => {
                                     return (
                                         <h2 
                                             key={index} 
-                                            className="text-2xl md:text-3xl font-bold text-white pt-8 pb-2 tracking-tight uppercase border-l-4 border-blue-600 pl-6"
+                                            className="text-2xl md:text-3xl font-bold text-white pt-10 pb-4 tracking-tight uppercase border-l-4 border-blue-600 pl-6"
                                         >
                                             {trimmed.replace(/\*\*/g, "")}
                                         </h2>
                                     );
+                                }
+
+                                // Handle Inline Images
+                                if (trimmed.startsWith("![") && trimmed.endsWith(")")) {
+                                    const match = trimmed.match(/!\[(.*?)\]\((.*?)\)/);
+                                    if (match) {
+                                        const alt = match[1];
+                                        const src = match[2];
+                                        return (
+                                            <div key={index} className="my-14 overflow-hidden rounded-2xl border border-white/10 bg-gray-900 w-full aspect-[4/3] md:aspect-video shadow-2xl group">
+                                                <img 
+                                                    src={src} 
+                                                    alt={alt} 
+                                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                                                    loading="lazy" 
+                                                />
+                                            </div>
+                                        );
+                                    }
                                 }
 
                                 // Handle Pacing (Short emphasized lines)

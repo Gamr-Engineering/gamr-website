@@ -7,7 +7,7 @@ export const queenOfVenus: Insight = {
   excerpt: "A deeply human story about consistency, identity, and what it really means to stay in the game long before recognition arrives.",
   date: "Mar 27, 2026",
   readTime: "6 min read",
-  coverImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop",
+  coverImage: "/assets/insights/queen-of-venus-cover.jpg",
   author: "Williams Falodun",
   tags: ["Gaming Culture", "Community", "Women in Gaming"],
   metaTitle: "Queen of Venus – A Story of Identity, Consistency, and Gaming Culture in Africa | Gamr",
@@ -44,6 +44,8 @@ It sounds small, but it wasn’t. Games ended, and so did the connection. No con
 Then came *Call of Duty*.
 
 Not just as a game, but as a shift. Something more social. More alive. A space where conversations didn’t have to end when the match did. Where people stayed. Where identity could stretch beyond a username.
+
+![Queen of Venus gaming journey](/assets/insights/queen-of-venus-inline.jpg)
 
 Ironically, that identity, *Queen of Venus* was never something she overthought.
 
@@ -127,7 +129,7 @@ Still playing.
 Still building.
 Still becoming.
 
-If you want to follow Queen of Venus and see her journey unfold, she’s on [Instagram](https://www.instagram.com/queen_of_venus_) and [TikTok](https://www.tiktok.com/@queen_of_venus_).
+If you want to follow Queen of Venus and see her journey unfold, she’s on [Instagram](https://www.instagram.com/queenofvenus01/) and [TikTok](https://www.tiktok.com/@queenofvenus01).
 
-And if you’re finding your own place in gaming whether as a player, creator, or builder there’s space for you too. Join our [Discord](https://discord.gg/gamrafrica), because the best parts of gaming have never really been about the game. They’ve always been about the people you meet along the way.`
+And if you’re finding your own place in gaming whether as a player, creator, or builder there’s space for you too. Join our [Discord](https://discord.com/invite/X4P4WWD89), because the best parts of gaming have never really been about the game. They’ve always been about the people you meet along the way.`
 };
