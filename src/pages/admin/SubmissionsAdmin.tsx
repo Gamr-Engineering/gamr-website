@@ -21,7 +21,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Eye, CheckCircle, XCircle, FileText, Star, Trash2, ArrowLeft, Users, Send, Mail } from "lucide-react";
+import { Loader2, Eye, CheckCircle, XCircle, FileText, Star, Trash2, ArrowLeft, Users, Send, Mail, Search } from "lucide-react";
 import { toast } from "sonner";
 import { useInsights } from "@/context/InsightsContext";
 import MarkdownToolbar from "@/components/MarkdownToolbar";
@@ -61,6 +61,7 @@ const SubmissionsAdmin = () => {
   const [broadcastModalOpen, setBroadcastModalOpen] = useState(false);
   const [broadcastLoading, setBroadcastLoading] = useState(false);
   const [broadcastData, setBroadcastData] = useState({ subject: "", content: "" });
+  const [subscriberSearch, setSubscriberSearch] = useState("");
   
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
   const { refreshInsights } = useInsights();
@@ -221,6 +222,11 @@ const SubmissionsAdmin = () => {
   const displayedSubmissions = submissions.filter(s => s.status === activeTab);
   const pendingCount = submissions.filter(s => s.status === "pending").length;
   const activeSubscribersCount = subscribers.filter(s => s.status === 'active').length;
+  
+  const filteredSubscribers = subscribers.filter(s => 
+    s.name.toLowerCase().includes(subscriberSearch.toLowerCase()) || 
+    s.email.toLowerCase().includes(subscriberSearch.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
@@ -327,6 +333,16 @@ const SubmissionsAdmin = () => {
                       </DialogContent>
                    </Dialog>
                 </div>
+
+                <div className="relative mb-6">
+                   <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                   <Input 
+                      placeholder="Search subscribers by name or email..."
+                      value={subscriberSearch}
+                      onChange={(e) => setSubscriberSearch(e.target.value)}
+                      className="bg-gray-900/50 border-white/10 h-12 pl-12 rounded-xl focus:ring-purple-500/50 w-full md:w-[400px]"
+                   />
+                </div>
                 
                 <div className="rounded-xl border border-white/10 overflow-hidden bg-gray-900/50">
                   <Table>
@@ -339,7 +355,7 @@ const SubmissionsAdmin = () => {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {subscribers.map((sub) => (
+                      {filteredSubscribers.map((sub) => (
                         <TableRow key={sub.id} className="border-white/10 hover:bg-white/5 transition-colors">
                           <TableCell className="text-white font-bold py-5">{sub.name}</TableCell>
                           <TableCell className="text-gray-400 py-5">{sub.email}</TableCell>
