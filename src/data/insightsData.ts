@@ -15,7 +15,10 @@ export interface Insight {
   content: string;
   metaTitle?: string;
   metaDescription?: string;
-  keywords?: string[];
+  keywords: string[];
+  views: number;
+  shares: number;
+  publishedAt: string; // ISO String
 }
 
 import { newCaseStudies } from "./insights/caseStudies";

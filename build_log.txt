@@ -1,0 +1,46 @@
+
+> vite_react_shadcn_ts@0.0.0 build
+> vite build
+
+vite v5.4.19 building for production...
+transforming...
+Browserslist: browsers data (caniuse-lite) is 9 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+✓ 3564 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                   4.25 kB │ gzip:   1.47 kB
+dist/assets/logitech-GsR5bKQH.png                17.31 kB
+dist/assets/spotify-BpZB1Uth.png                 30.50 kB
+dist/assets/techstars-CmQZ7ePg.png               38.95 kB
+dist/assets/carven-t0yzvZix.png                  49.69 kB
+dist/assets/google-DHAhdTPR.png                  58.58 kB
+dist/assets/ballantines-cs6GeI4h.png             58.65 kB
+dist/assets/creator-khalamanja-CyZUIcYh.jpg      60.48 kB
+dist/assets/lenovo-D50KmdLc.png                  62.62 kB
+dist/assets/nivea-DlodoYOP.png                   69.57 kB
+dist/assets/creator-stefkaly-CNqjaTSE.jpg        84.70 kB
+dist/assets/workshop-ozJJFjy0.jpg                85.34 kB
+dist/assets/about-gallery-1-DtTzBHkH.jpg         99.74 kB
+dist/assets/training-studio-Uxw6_2Oi.jpg        105.92 kB
+dist/assets/carven-1-8zl2_GFX.jpg               106.95 kB
+dist/assets/gaming-hub-Da6cAw3K.jpg             130.69 kB
+dist/assets/goldenpenny-B2SFVhzC.png            131.75 kB
+dist/assets/creator-bloodsport-DKGzB3WY.jpg     170.33 kB
+dist/assets/gamr-squad-C3PkoJdT.jpg             231.23 kB
+dist/assets/gamr-lab-3-O2GO-Fdc.jpg           2,829.33 kB
+dist/assets/gamr-lab-5-DA5VAp4s.jpg           2,844.91 kB
+dist/assets/gamr-lab-6-BKA-N8Gt.jpg           2,893.98 kB
+dist/assets/gamr-lab-1-pTtpWpII.jpg           3,136.00 kB
+dist/assets/gamr-lab-2-DyHNVkVu.jpg           3,519.89 kB
+dist/assets/gamr-lab-video-B1h9VKHF.mp4      15,483.01 kB
+dist/assets/gamr-intro-video-C5JuXf_y.mp4    17,188.47 kB
+dist/assets/index-DjRbR_iL.css                  161.43 kB │ gzip:  47.41 kB
+dist/assets/index-DDbema34.js                 2,044.94 kB │ gzip: 583.07 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 37.00s

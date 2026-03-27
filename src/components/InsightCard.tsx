@@ -8,7 +8,7 @@ interface InsightCardProps {
 
 const InsightCard = ({ insight }: InsightCardProps) => {
   const navigate = useNavigate();
-  const { slug, title, category, excerpt, coverImage, author, tags } = insight;
+  const { slug, title, category, excerpt, coverImage, author, tags, views, date } = insight;
   const categoryLabel = category === "case-study" ? "Case Study" : "Blog";
 
   const handleClick = (e: React.MouseEvent) => {
@@ -31,7 +31,7 @@ const InsightCard = ({ insight }: InsightCardProps) => {
       }}
       className="group flex-shrink-0 flex flex-col justify-between p-10 border border-white/10
                  hover:border-blue-500/40 hover:bg-blue-600 transition-all duration-500 cursor-pointer
-                 w-[80vw] sm:w-[380px] md:w-[400px]
+                 w-full h-full
                  scroll-snap-align-start"
       style={{ scrollSnapAlign: "start" }}
     >
@@ -45,11 +45,17 @@ const InsightCard = ({ insight }: InsightCardProps) => {
             />
         </div>
         <div className="flex justify-between items-center mb-4">
-            <span className="text-[10px] font-bold text-gray-500 group-hover:text-blue-200 uppercase tracking-widest transition-colors">
+            <span className="text-[10px] font-bold text-gray-500 group-hover:text-blue-200 uppercase tracking-widest transition-colors flex items-center gap-2">
             {categoryLabel}
+            {views > 0 && (
+              <>
+                <span className="w-1 h-1 bg-white/20 rounded-full" />
+                <span className="text-blue-400 group-hover:text-white">{views.toLocaleString()} views</span>
+              </>
+            )}
             </span>
             <span className="text-[10px] text-gray-400 group-hover:text-white uppercase tracking-widest transition-colors">
-            {author}
+            {date}
             </span>
         </div>
         

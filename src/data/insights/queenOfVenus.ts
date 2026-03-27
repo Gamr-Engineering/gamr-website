@@ -21,6 +21,9 @@ export const queenOfVenus: Insight = {
     "Gamr Africa stories",
     "gaming community Africa"
   ],
+  views: 2450,
+  shares: 1120,
+  publishedAt: "2026-03-27T12:00:00Z",
   content: `Most gaming conversations are obsessed with outcomes.
 
 Who’s winning.

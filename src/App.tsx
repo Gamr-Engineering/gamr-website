@@ -14,6 +14,7 @@ import InsightSearchPage from "./pages/InsightSearchPage";
 import AuthorProfile from "./pages/AuthorProfile";
 import RisingEsports from "./pages/RisingEsports";
 import InsightOS from "./pages/InsightOS";
+import SubmitArticle from "./pages/SubmitArticle";
 import IntelligenceHub from "./pages/intelligence/IntelligenceHub";
 import MapPage from "./pages/intelligence/MapPage";
 import DashboardPage from "./pages/intelligence/DashboardPage";
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/insights" element={<InsightsIndex />} />
           <Route path="/insights/search" element={<InsightSearchPage />} />
           <Route path="/insights/:slug" element={<InsightPost />} />
+          <Route path="/insights/submit" element={<SubmitArticle />} />
           <Route path="/authors/:author" element={<AuthorProfile />} />
           <Route path="/insights/stories/rising-esports" element={<RisingEsports />} />
           <Route path="/insights/os" element={<InsightOS />} />

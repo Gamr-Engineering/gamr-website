@@ -7,6 +7,8 @@ import InsightCard from "@/components/InsightCard";
 import NewsletterForm from "@/components/NewsletterForm";
 import InsightSearch from "@/components/InsightSearch";
 import { allInsights, Insight } from "@/data/insightsData";
+import TrendingSection from "@/components/TrendingSection";
+import { PlusCircle } from "lucide-react";
 
 type FilterTab = "all" | "case-study" | "blog";
 
@@ -102,6 +104,11 @@ const InsightsIndex = () => {
                         </div>
                     </Link>
 
+                    {/* New Trending Section (Horizontal Scroll) */}
+                    <div className="mb-20">
+                        <TrendingSection insights={allInsights} />
+                    </div>
+
                     {/* Main Layout: Grid + Sidebar */}
                     <div className="flex flex-col lg:flex-row gap-12">
                         
@@ -144,30 +151,22 @@ const InsightsIndex = () => {
                             )}
                         </div>
 
-                        {/* Right: Trending Sidebar */}
+                        {/* Right: Sidebar / CTA */}
                         <div className="lg:w-80 flex-shrink-0">
-                            <div className="bg-gray-900 border border-white/10 p-6 sticky top-32">
-                                <div className="flex items-center gap-2 mb-6">
-                                    <Flame className="h-5 w-5 text-orange-500" />
-                                    <h3 className="font-bold uppercase tracking-widest text-sm">Trending</h3>
-                                </div>
-                                <div className="flex items-col flex-col gap-6">
-                                    {trendingInsights.map((item, index) => (
-                                        <Link key={item.slug} to={`/insights/${item.slug}`} className="group flex gap-4">
-                                            <span className="text-2xl font-bold text-gray-700/50 group-hover:text-blue-500 transition-colors w-6">
-                                                {index + 1}
-                                            </span>
-                                            <div>
-                                                <h4 className="font-bold uppercase tracking-tight text-sm leading-tight group-hover:text-blue-400 transition-colors line-clamp-2 mb-1">
-                                                    {item.title}
-                                                </h4>
-                                                <span className="text-[10px] text-gray-500 uppercase tracking-widest">
-                                                    {item.readTime}
-                                                </span>
-                                            </div>
-                                        </Link>
-                                    ))}
-                                </div>
+                            <div className="bg-blue-600 p-8 sticky top-32 rounded-3xl overflow-hidden group">
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl group-hover:scale-150 transition-transform duration-500" />
+                                <PlusCircle className="h-10 w-10 text-white mb-6" />
+                                <h3 className="text-2xl font-black uppercase tracking-tighter leading-tight text-white mb-4">
+                                    Become a <br/>Contributor
+                                </h3>
+                                <p className="text-blue-100 text-sm mb-8 font-medium leading-relaxed">
+                                    Got a story about gaming culture, technology, or competition? Join our editorial network.
+                                </p>
+                                <Link to="/insights/submit">
+                                    <button className="w-full bg-white text-blue-600 font-bold py-4 rounded-xl hover:bg-gray-100 transition-colors uppercase tracking-widest text-xs">
+                                        Submit Article
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     </div>
