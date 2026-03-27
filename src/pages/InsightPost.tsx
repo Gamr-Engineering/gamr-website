@@ -7,11 +7,12 @@ import Footer from "@/components/Footer";
 import ReadingProgress from "@/components/ReadingProgress";
 import SocialShare from "@/components/SocialShare";
 import { initAnalytics, trackArticleScroll, trackView } from "@/utils/analytics";
-import { allInsights } from "@/data/insightsData";
+import { useInsights } from "@/context/InsightsContext";
 import RelatedArticles from "@/components/RelatedArticles";
 import InsightCard from "@/components/InsightCard";
 
 const InsightPost = () => {
+    const { allInsights } = useInsights();
     const { slug } = useParams<{ slug: string }>();
     const post = slug ? allInsights.find((i) => i.slug === slug) : null;
 

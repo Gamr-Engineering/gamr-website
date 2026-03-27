@@ -61,6 +61,8 @@ CREATE TABLE article_submissions (
   category TEXT NOT NULL,
   content TEXT NOT NULL,
   status TEXT DEFAULT 'pending',
+  featured BOOLEAN DEFAULT false,
+  slug TEXT UNIQUE,
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
@@ -78,3 +80,7 @@ CREATE POLICY "Allow public select for admin dashboard" ON article_submissions
 -- Allow public update (for approving/rejecting in the admin dashboard)
 CREATE POLICY "Allow public update for admin dashboard" ON article_submissions
   FOR UPDATE USING (true);
+
+-- Allow public delete (for removing submissions in the admin dashboard)
+CREATE POLICY "Allow public delete for admin dashboard" ON article_submissions
+  FOR DELETE USING (true);

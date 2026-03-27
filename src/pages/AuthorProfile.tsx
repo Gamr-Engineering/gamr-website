@@ -1,12 +1,13 @@
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { allInsights } from "@/data/insightsData";
+import { useInsights } from "@/context/InsightsContext";
 import { authors } from "@/data/insights/authors";
 import InsightCard from "@/components/InsightCard";
 import { ArrowLeft } from "lucide-react";
 
 const AuthorProfile = () => {
+    const { allInsights } = useInsights();
     const { slug } = useParams<{ slug: string }>();
     
     // Find author by slug, fallback to a 404 state if not found (or redirect)

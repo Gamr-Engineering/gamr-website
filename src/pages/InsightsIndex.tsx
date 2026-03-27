@@ -6,13 +6,15 @@ import Footer from "@/components/Footer";
 import InsightCard from "@/components/InsightCard";
 import NewsletterForm from "@/components/NewsletterForm";
 import InsightSearch from "@/components/InsightSearch";
-import { allInsights, Insight } from "@/data/insightsData";
+import { Insight } from "@/data/insightsData";
+import { useInsights } from "@/context/InsightsContext";
 import TrendingSection from "@/components/TrendingSection";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, Loader2 } from "lucide-react";
 
 type FilterTab = "all" | "case-study" | "blog";
 
 const InsightsIndex = () => {
+    const { allInsights, loading } = useInsights();
     const [activeTab, setActiveTab] = useState<FilterTab>("all");
     const [visibleCount, setVisibleCount] = useState<number>(6);
     const observerTarget = useRef<HTMLDivElement>(null);
@@ -55,6 +57,10 @@ const InsightsIndex = () => {
     useEffect(() => {
         setVisibleCount(6);
     }, [activeTab]);
+
+    if (loading || !allInsights.length) {
+        return <div className="min-h-screen bg-black flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-blue-500" /></div>;
+    }
 
     return (
         <div className="min-h-screen bg-black text-white selection:bg-blue-500/30">

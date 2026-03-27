@@ -1,10 +1,11 @@
 import React from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { allInsights } from "@/data/insightsData";
+import { useInsights } from "@/context/InsightsContext";
 import InsightCard from "@/components/InsightCard";
 import { Search, Filter, Cpu, Trophy, Zap } from "lucide-react";
 
 const InsightExplorer = () => {
+    const { allInsights } = useInsights();
     const [searchParams] = useSearchParams();
     const query = searchParams.get("q") || "";
     const categoryFilter = searchParams.get("category");

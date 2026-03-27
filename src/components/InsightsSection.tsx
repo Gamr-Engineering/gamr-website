@@ -3,9 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import InsightCarousel from "@/components/InsightCarousel";
 import AuthorSpotlight from "@/components/AuthorSpotlight";
-import { caseStudies, blogPosts, allInsights } from "@/data/insightsData";
+import { useInsights } from "@/context/InsightsContext";
 
 const InsightsSection = () => {
+    const { allInsights, caseStudies, blogPosts } = useInsights();
     const navigate = useNavigate();
     const featuredArticle = allInsights.find(i => i.featured) || allInsights[0];
 

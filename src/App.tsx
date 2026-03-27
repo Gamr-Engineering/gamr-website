@@ -22,38 +22,40 @@ import TimelinePage from "./pages/intelligence/TimelinePage";
 import CareersPage from "./pages/intelligence/CareersPage";
 import CommunityReportForm from "./pages/community/CommunityReportForm";
 import SubmissionsAdmin from "./pages/admin/SubmissionsAdmin";
+import { InsightsProvider } from "./context/InsightsContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/claim-gamrtag" element={<ClaimGamrTag />} />
-          <Route path="/gamr-lab" element={<GamrLab />} /> {/* Roblox campaign closed - archive state */}
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/insights" element={<InsightsIndex />} />
-          <Route path="/insights/search" element={<InsightSearchPage />} />
-          <Route path="/insights/:slug" element={<InsightPost />} />
-          <Route path="/insights/submit" element={<SubmitArticle />} />
-          <Route path="/insights/admin" element={<SubmissionsAdmin />} />
-          <Route path="/insights/author/:slug" element={<AuthorProfile />} />
-          <Route path="/insights/stories/rising-esports" element={<RisingEsports />} />
-          <Route path="/insights/os" element={<InsightOS />} />
-          <Route path="/insights/intelligence" element={<IntelligenceHub />} />
-          <Route path="/insights/intelligence/map" element={<MapPage />} />
-          <Route path="/insights/intelligence/dashboard" element={<DashboardPage />} />
-          <Route path="/insights/intelligence/timeline" element={<TimelinePage />} />
-          <Route path="/insights/intelligence/careers" element={<CareersPage />} />
-          <Route path="/insights/community-report" element={<CommunityReportForm />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <InsightsProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/claim-gamrtag" element={<ClaimGamrTag />} />
+            <Route path="/gamr-lab" element={<GamrLab />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/insights" element={<InsightsIndex />} />
+            <Route path="/insights/search" element={<InsightSearchPage />} />
+            <Route path="/insights/:slug" element={<InsightPost />} />
+            <Route path="/insights/submit" element={<SubmitArticle />} />
+            <Route path="/insights/admin" element={<SubmissionsAdmin />} />
+            <Route path="/insights/author/:slug" element={<AuthorProfile />} />
+            <Route path="/insights/stories/rising-esports" element={<RisingEsports />} />
+            <Route path="/insights/os" element={<InsightOS />} />
+            <Route path="/insights/intelligence" element={<IntelligenceHub />} />
+            <Route path="/insights/intelligence/map" element={<MapPage />} />
+            <Route path="/insights/intelligence/dashboard" element={<DashboardPage />} />
+            <Route path="/insights/intelligence/timeline" element={<TimelinePage />} />
+            <Route path="/insights/intelligence/careers" element={<CareersPage />} />
+            <Route path="/insights/community-report" element={<CommunityReportForm />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </InsightsProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

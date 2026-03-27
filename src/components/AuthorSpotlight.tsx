@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { authors } from "@/data/insights/authors";
-import { allInsights } from "@/data/insightsData";
+import { useInsights } from "@/context/InsightsContext";
 import InsightCard from "@/components/InsightCard";
 import { useMemo } from "react";
 
@@ -10,6 +10,7 @@ interface AuthorSpotlightProps {
 }
 
 const AuthorSpotlight = ({ authorSlug = "williams-falodun" }: AuthorSpotlightProps) => {
+    const { allInsights } = useInsights();
     const author = authors[authorSlug];
 
     // Memoize the filtered stories so we don't recalculate on every render
