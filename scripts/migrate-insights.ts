@@ -1,61 +1,78 @@
-import fs from "fs";
-import path from "path";
+import { createClient } from "@supabase/supabase-js";
+import { allInsights } from "../src/data/insightsData";
+import * as fs from "fs";
+import * as path from "path";
 
-const insightsFile = path.join(process.cwd(), "src/data/insightsData.ts");
-let content = fs.readFileSync(insightsFile, "utf-8");
+// 1. Manually resolve .env and parse it, avoiding external `dotenv` dependency
+const envPath = path.resolve(process.cwd(), ".env");
+const envVars: Record<string, string> = {};
 
-// Update Interface
-content = content.replace(
-  /export interface Insight \{([\s\S]*?)\}/,
-  `export interface Insight {
-  slug: string;
-  title: string;
-  category: InsightCategory;
-  excerpt: string;
-  date: string;
-  readTime: string;
-  coverImage: string;
-  author: string;
-  tags: string[];
-  featured?: boolean;
-  trendingScore?: number;
-  content: string;
-}`
-);
+if (fs.existsSync(envPath)) {
+  const envFile = fs.readFileSync(envPath, "utf-8");
+  envFile.split("\n").forEach(line => {
+    // Basic .env parser regex
+    const match = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
+    if (match) {
+      envVars[match[1]] = match[2];
+    }
+  });
+}
 
-// Replace id: with slug:
-content = content.replace(/id:/g, "slug:");
+const supabaseUrl = envVars["VITE_SUPABASE_URL"];
+const supabaseKey = envVars["VITE_SUPABASE_ANON_KEY"];
 
-// Define dummy authors and tags to distribute
-const authors = ["Emmanuel Oyalabu", "Oladapo Dosekun", "Gamr Editorial"];
-const tagPool = ["Esports", "Gaming Culture", "Mobile Gaming", "Infrastructure", "African Tech", "Tournaments", "Community", "Game Dev"];
-const images = [
-  "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2071&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop"
-];
+if (!supabaseUrl || !supabaseKey) {
+  console.error("Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY in .env");
+  process.exit(1);
+}
 
-let itemIndex = 0;
+// 2. Init Supabase client
+const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Add new fields to each object. We'll look for `content: \`` and append before it closes, or before `content:`
-// Actually, it's easier to find `readTime: "...",` and add the fields after it.
-content = content.replace(/readTime:\s*"[^"]*",/g, (match) => {
-  const author = authors[itemIndex % authors.length];
-  const tagsStr = JSON.stringify([tagPool[itemIndex % tagPool.length], tagPool[(itemIndex + 1) % tagPool.length]]);
-  const image = images[itemIndex % images.length];
-  const featured = itemIndex === 0 ? "featured: true," : "";
-  const trending = `trendingScore: ${Math.floor(Math.random() * 100)},`;
+// 3. Define the async migration runner
+async function runMigration() {
+  console.log(`Starting migration of ${allInsights.length} static insights to Supabase...`);
   
-  itemIndex++;
-  
-  return `${match}
-    coverImage: "${image}",
-    author: "${author}",
-    tags: ${tagsStr},
-    ${featured}
-    ${trending}`;
-});
+  let successCount = 0;
+  let errorCount = 0;
 
-fs.writeFileSync(insightsFile, content, "utf-8");
-console.log("Successfully migrated insightsData.ts");
+  for (const insight of allInsights) {
+    const payload = {
+      name: insight.author.name,
+      email: "editorial@gamr.africa",  // Default email since original author objects don't store it
+      title: insight.title,
+      category: insight.category,
+      content: insight.content,
+      status: "approved",
+      featured: insight.featured === true,
+      slug: insight.slug,
+      excerpt: insight.excerpt || "",
+      cover_image: insight.coverImage || "",
+      read_time: String(insight.readTime) || "",
+      tags: insight.tags || [],
+      author_slug: insight.author.slug,
+      created_at: new Date(insight.publishedAt || new Date()).toISOString(),
+    };
+
+    // Use .upsert() so this script is idempotent. It looks for conflict on "slug".
+    const { error } = await supabase
+      .from("article_submissions")
+      .upsert(payload, { onConflict: "slug" });
+    
+    if (error) {
+      console.error(`❌ Failed to migrate [${insight.slug}]:`, error.message);
+      errorCount++;
+    } else {
+      console.log(`✅ Successfully migrated [${insight.slug}]`);
+      successCount++;
+    }
+  }
+  
+  console.log("\n--------------------------------");
+  console.log("Migration Complete!");
+  console.log(`Successfully imported: ${successCount}`);
+  if (errorCount > 0) console.log(`Failed imports: ${errorCount}`);
+  console.log("--------------------------------\n");
+}
+
+runMigration();

@@ -1,14 +1,15 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { allInsights as staticInsights, Insight, Author } from "@/data/insightsData";
+import { Insight, Author } from "@/data/insightsData";
+import { authors } from "@/data/insights/authors";
 
-// Temporary generic author fallback for dynamic articles
+// Temporary generic author fallback for external community submissions
 const genericExternalAuthor: Author = {
   name: "Community Contributor",
   avatar: "/assets/authors/akins-ebenezer.png", // Fallback to an existing generic asset
   slug: "community",
   bio: "A guest contributor from the Gamr Africa ecosystem.",
-  socials: {
+  social: {
     twitter: "https://twitter.com/gamrafrica",
   }
 };
@@ -22,9 +23,9 @@ interface InsightsContextType {
 }
 
 const InsightsContext = createContext<InsightsContextType>({
-  allInsights: staticInsights,
-  caseStudies: staticInsights.filter(i => i.category === "case-study"),
-  blogPosts: staticInsights.filter(i => i.category === "blog"),
+  allInsights: [],
+  caseStudies: [],
+  blogPosts: [],
   loading: true,
   refreshInsights: async () => {},
 });
@@ -32,7 +33,7 @@ const InsightsContext = createContext<InsightsContextType>({
 export const useInsights = () => useContext(InsightsContext);
 
 export const InsightsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [mergedInsights, setMergedInsights] = useState<Insight[]>(staticInsights);
+  const [allInsights, setAllInsights] = useState<Insight[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchInsights = async () => {
@@ -41,54 +42,56 @@ export const InsightsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       const { data, error } = await supabase
         .from("article_submissions")
         .select("*")
-        .eq("status", "approved");
+        .eq("status", "approved")
+        .order("created_at", { ascending: false });
 
       if (error) {
-        console.error("Error loading dynamic insights:", error);
+        console.error("Error loading insights:", error);
         return;
       }
 
-      if (data && data.length > 0) {
-        const dynamicInsights: Insight[] = data.map((sub: any) => ({
-          title: sub.title,
-          slug: sub.slug,
-          excerpt: sub.content.substring(0, 150) + "...", // Auto-generate excerpt
-          category: sub.category === 'case-study' ? 'case-study' : 'blog',
-          date: new Date(sub.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
-          readTime: Math.max(1, Math.ceil(sub.content.split(" ").length / 200)) + " min read", // Calculate dynamic read time ~200 WPM
-          coverImage: "/lovable-uploads/eb289bd7-d3eb-41db-829d-ee1ec80242af.png", // Generic fallback image for now
-          author: {
+      if (data) {
+        const parsedInsights: Insight[] = data.map((sub: any) => {
+          // Resolve author via slug if it exists in local registry, otherwise fall back to generic community author
+          const registryAuthor = sub.author_slug ? authors[sub.author_slug] : undefined;
+          const author: Author = registryAuthor || {
             ...genericExternalAuthor,
-            name: sub.name, // Use the real submitting name
-          },
-          tags: ["Community", sub.category === 'case-study' ? "Case Study" : "Editorial"],
-          content: sub.content,
-          featured: sub.featured === true,
-          views: 0,
-          shares: 0,
-          publishedAt: sub.created_at,
-          keywords: ["gamr", "community", sub.category]
-        }));
+            name: sub.name,
+          };
 
-        // Replace any static 'featured' flags if a dynamic one has taken over
-        const hasDynamicFeatured = dynamicInsights.some(i => i.featured);
+          return {
+            title: sub.title,
+            slug: sub.slug,
+            excerpt: sub.excerpt || (sub.content.substring(0, 150) + "..."),
+            category: sub.category === 'case-study' ? 'case-study' : 'blog',
+            date: new Date(sub.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+            readTime: sub.read_time || (Math.max(1, Math.ceil(sub.content.split(" ").length / 200)) + " min read"),
+            coverImage: sub.cover_image || "/lovable-uploads/eb289bd7-d3eb-41db-829d-ee1ec80242af.png",
+            author,
+            tags: sub.tags?.length > 0 ? sub.tags : ["Community", sub.category === 'case-study' ? "Case Study" : "Editorial"],
+            content: sub.content,
+            featured: sub.featured === true,
+            views: 0,
+            shares: 0,
+            publishedAt: sub.created_at,
+            keywords: ["gamr", "community", sub.category]
+          };
+        });
+
+        // Ensure ONLY ONE featured article exists at a time (most recently featured wins)
+        // Sort by created_at DESC already happened via SQL.
+        // Wait! Let's just find the very first featured article and unflag the rest.
+        let foundFeatured = false;
         
-        const finalMerged = [...dynamicInsights, ...staticInsights];
-        
-        if (hasDynamicFeatured) {
-          // Unflag static ones if a dynamic article is taking the spotlight
-          setMergedInsights(finalMerged.map(i => {
-            // Only keep exactly one featured article (the newest dynamic one)
-            if (i.featured && !dynamicInsights.includes(i)) {
-              return { ...i, featured: false };
-            }
-            return i;
-          }));
-        } else {
-          setMergedInsights(finalMerged);
+        for (const i of parsedInsights) {
+          if (i.featured && !foundFeatured) {
+            foundFeatured = true;
+          } else if (i.featured && foundFeatured) {
+            i.featured = false;
+          }
         }
-      } else {
-        setMergedInsights(staticInsights);
+
+        setAllInsights(parsedInsights);
       }
     } catch (err) {
       console.error(err);
@@ -102,9 +105,9 @@ export const InsightsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, []);
 
   const value = {
-    allInsights: mergedInsights,
-    caseStudies: mergedInsights.filter(i => i.category === "case-study"),
-    blogPosts: mergedInsights.filter(i => i.category === "blog"),
+    allInsights,
+    caseStudies: allInsights.filter(i => i.category === "case-study"),
+    blogPosts: allInsights.filter(i => i.category === "blog"),
     loading,
     refreshInsights: fetchInsights
   };
