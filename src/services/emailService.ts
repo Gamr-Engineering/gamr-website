@@ -63,7 +63,7 @@ export const emailService = {
     try {
       // Build the batch payload
       const payload = activeSubscribers.map(email => ({
-        from: "Gamr Insights <editorial@gamr.africa>",
+        from: "Gamr Insights <onboarding@resend.dev>",
         to: [email],
         subject: subject,
         html: htmlContent
