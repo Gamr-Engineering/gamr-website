@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
@@ -11,18 +11,14 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+
 
 import TopBar from "@/components/TopBar";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [openMobileSection, setOpenMobileSection] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,6 +29,10 @@ const Header = () => {
   }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const toggleMobileSection = (section: string) => {
+    setOpenMobileSection((prev) => (prev === section ? null : section));
+  };
 
   const navigationData = [
     {
@@ -84,11 +84,12 @@ const Header = () => {
 
   // ... inside Header component
   return (
-    <header className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      scrolled || isOpen ? "bg-black/80 backdrop-blur-md pb-2" : "bg-transparent pb-4"
-    )}>
-      <TopBar />
+    <>
+      <header className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        scrolled || isOpen ? "bg-black/80 backdrop-blur-md pb-2" : "bg-transparent pb-4"
+      )}>
+        <TopBar />
       <nav className="container mx-auto px-6 flex items-center justify-between pt-2">
         <div className="flex-shrink-0 z-50">
           <a href="/" className="flex items-center">
@@ -170,36 +171,50 @@ const Header = () => {
         >
           {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
+      </nav>
+    </header>
 
-        {/* Mobile Navigation Overlay */}
+    {/* Mobile Navigation Overlay */}
         <div className={cn(
           "fixed inset-0 bg-black z-40 flex flex-col pt-24 px-6 overflow-y-auto transition-transform duration-300 ease-in-out md:hidden",
           isOpen ? "translate-x-0" : "translate-x-full"
         )}>
           <div className="w-full max-w-sm mx-auto flex flex-col grow">
-            <Accordion type="single" collapsible className="w-full border-white/20">
+            <div className="w-full border-t border-white/20 pointer-events-auto">
               {navigationData.map((section) => (
-                <AccordionItem key={section.title} value={section.title} className="border-b border-white/10">
-                  <AccordionTrigger className="text-xl font-bold text-white uppercase tracking-widest hover:no-underline py-4">
-                    {section.title}
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div className="flex flex-col space-y-4 pb-4 pl-4 border-l border-white/10 ml-2">
-                      {section.items.map((item) => (
-                        <a
-                          key={item.title}
-                          href={item.href}
-                          onClick={() => setIsOpen(false)}
-                          className="text-gray-400 hover:text-white uppercase tracking-wider text-sm transition-colors"
-                        >
-                          {item.title}
-                        </a>
-                      ))}
+                <div key={section.title} className="border-b border-white/10">
+                  <button
+                    onClick={() => toggleMobileSection(section.title)}
+                    className="flex w-full items-center justify-between py-4 text-left group pointer-events-auto"
+                  >
+                    <span className="text-xl font-bold text-white uppercase tracking-widest group-hover:no-underline">
+                      {section.title}
+                    </span>
+                    <ChevronDown
+                      className={`h-5 w-5 text-white transition-transform duration-300 ${
+                        openMobileSection === section.title ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  {openMobileSection === section.title && (
+                    <div className="relative z-50 overflow-visible">
+                      <div className="flex flex-col space-y-4 pb-4 pl-4 border-l border-white/10 ml-2 overflow-visible max-h-[500px] opacity-100 transition-all duration-300 ease-in-out pointer-events-auto">
+                        {section.items.map((item) => (
+                          <a
+                            key={item.title}
+                            href={item.href}
+                            onClick={() => setIsOpen(false)}
+                            className="text-gray-400 hover:text-white uppercase tracking-wider text-sm transition-colors pointer-events-auto"
+                          >
+                            {item.title}
+                          </a>
+                        ))}
+                      </div>
                     </div>
-                  </AccordionContent>
-                </AccordionItem>
+                  )}
+                </div>
               ))}
-            </Accordion>
+            </div>
 
             <a
               href="#contact"
@@ -229,8 +244,8 @@ const Header = () => {
             </div>
           </div>
         </div>
-      </nav>
-    </header>
+
+      </>
   );
 };
 
