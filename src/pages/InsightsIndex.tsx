@@ -178,7 +178,7 @@ const InsightsIndex = () => {
                     </div>
 
                     {/* Newsletter Container */}
-                    <NewsletterForm />
+                    <NewsletterForm source="insights" tags={["insights_index"]} />
                 </div>
             </main>
             <Footer />

@@ -4,7 +4,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { emailService } from "@/services/emailService";
 import { toast } from "sonner";
 
-const NewsletterForm = () => {
+interface NewsletterFormProps {
+  source?: string;
+  tags?: string[];
+}
+
+const NewsletterForm = ({ source = "general", tags = [] }: NewsletterFormProps) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -19,7 +24,13 @@ const NewsletterForm = () => {
       // 1. Insert into Supabase
       const { error: dbError } = await supabase
         .from('gamr_subscribers')
-        .insert([{ name, email, status: 'active' }]);
+        .insert([{ 
+          name, 
+          email, 
+          status: 'active',
+          source,
+          tags
+        }]);
 
       if (dbError) {
         if (dbError.code === '23505') { // Unique constraint violation
@@ -42,7 +53,7 @@ const NewsletterForm = () => {
       
       // Track success
       if (typeof window !== "undefined" && (window as any).trackEvent) {
-        (window as any).trackEvent("newsletter_signup", { source: "insights" });
+        (window as any).trackEvent("newsletter_signup", { source });
       }
       
       // Reset after 5 seconds

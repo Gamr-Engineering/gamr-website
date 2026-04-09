@@ -35,6 +35,8 @@ interface Subscriber {
   name: string;
   email: string;
   status: string;
+  source: string;
+  tags: string[];
   subscribed_at: string;
 }
 
@@ -350,6 +352,8 @@ const SubmissionsAdmin = () => {
                       <TableRow className="border-white/10 hover:bg-transparent">
                         <TableHead className="text-gray-400 font-bold uppercase tracking-widest text-xs h-14">Full Name</TableHead>
                         <TableHead className="text-gray-400 font-bold uppercase tracking-widest text-xs">Email Address</TableHead>
+                        <TableHead className="text-gray-400 font-bold uppercase tracking-widest text-xs">Source</TableHead>
+                        <TableHead className="text-gray-400 font-bold uppercase tracking-widest text-xs">Tags</TableHead>
                         <TableHead className="text-gray-400 font-bold uppercase tracking-widest text-xs">Status</TableHead>
                         <TableHead className="text-right text-gray-400 font-bold uppercase tracking-widest text-xs">Joined</TableHead>
                       </TableRow>
@@ -359,6 +363,20 @@ const SubmissionsAdmin = () => {
                         <TableRow key={sub.id} className="border-white/10 hover:bg-white/5 transition-colors">
                           <TableCell className="text-white font-bold py-5">{sub.name}</TableCell>
                           <TableCell className="text-gray-400 py-5">{sub.email}</TableCell>
+                          <TableCell className="py-5">
+                            <Badge className="bg-blue-500/10 text-blue-400 border-blue-500/20 uppercase tracking-widest text-[9px] rounded-sm">{sub.source || 'direct'}</Badge>
+                          </TableCell>
+                          <TableCell className="py-5">
+                            <div className="flex flex-wrap gap-1">
+                              {sub.tags && sub.tags.length > 0 ? (
+                                sub.tags.map((tag, i) => (
+                                  <Badge key={i} className="bg-gray-800 text-gray-400 border-white/5 uppercase tracking-widest text-[8px] rounded-sm px-1.5">{tag}</Badge>
+                                ))
+                              ) : (
+                                <span className="text-gray-600 text-[10px]">—</span>
+                              )}
+                            </div>
+                          </TableCell>
                           <TableCell className="py-5">
                             <Badge className="bg-purple-500/10 text-purple-400 border-purple-500/20 uppercase tracking-widest text-[9px] rounded-sm">{sub.status}</Badge>
                           </TableCell>
