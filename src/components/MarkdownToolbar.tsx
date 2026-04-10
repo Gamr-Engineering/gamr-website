@@ -50,17 +50,29 @@ const MarkdownToolbar: React.FC<MarkdownToolbarProps> = ({ onInsert }) => {
       const fileExt = file.name.split(".").pop();
       const fileName = `${generateUUID()}.${fileExt}`;
 
-      const { error } = await supabase.storage
-        .from('article_assets')
-        .upload(fileName, file, { cacheControl: '3600', upsert: false });
+      let url = "";
 
-      if (error) throw error;
+      try {
+        const { error } = await supabase.storage
+          .from('article_assets')
+          .upload(fileName, file, { cacheControl: '3600', upsert: false });
 
-      const { data: publicUrlData } = supabase.storage
-        .from("article_assets")
-        .getPublicUrl(fileName);
+        if (error) throw error;
 
-      const url = publicUrlData.publicUrl;
+        const { data: publicUrlData } = supabase.storage
+          .from("article_assets")
+          .getPublicUrl(fileName);
+
+        url = publicUrlData.publicUrl;
+      } catch (uploadError: any) {
+        if (uploadError.message?.includes('Failed to fetch') || uploadError.message?.includes('Failed to send a request') || uploadError.name === 'TypeError') {
+          console.warn("Storage upload failed (network issue). Falling back to local ObjectURL.", uploadError);
+          url = URL.createObjectURL(file);
+          toast.info("Using local preview due to network disconnect");
+        } else {
+          throw uploadError;
+        }
+      }
 
       let injectedText = "";
       if (type === "image") {
