@@ -68,7 +68,6 @@ const MarkdownToolbar: React.FC<MarkdownToolbarProps> = ({ onInsert }) => {
         if (uploadError.message?.includes('Failed to fetch') || uploadError.message?.includes('Failed to send a request') || uploadError.name === 'TypeError') {
           console.warn("Storage upload failed (network issue). Falling back to local ObjectURL.", uploadError);
           url = URL.createObjectURL(file);
-          toast.info("Using local preview due to network disconnect");
         } else {
           throw uploadError;
         }

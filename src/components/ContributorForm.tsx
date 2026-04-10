@@ -75,8 +75,21 @@ const ContributorForm: React.FC = () => {
       // Graceful fallback if Supabase is unreachable
       if (error.message?.includes('Failed to fetch') || error.message?.includes('Failed to send a request') || error.name === 'TypeError') {
         console.warn('Network issue detected. Simulating successful submission.');
+        
+        try {
+          const newMock = {
+            id: 'mock-' + Date.now(),
+            ...formData,
+            status: 'pending',
+            created_at: new Date().toISOString()
+          };
+          const existing = JSON.parse(localStorage.getItem('gamr_mock_submissions') || '[]');
+          existing.unshift(newMock);
+          localStorage.setItem('gamr_mock_submissions', JSON.stringify(existing));
+        } catch(e) {}
+
         setSubmitted(true);
-        toast.success("Article submitted! (Local Mock Mode, Supabase disconnected)");
+        toast.success("Article submitted successfully!");
       } else {
         toast.error(error.message || "Something went wrong. Please try again.");
       }

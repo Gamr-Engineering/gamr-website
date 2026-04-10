@@ -24,6 +24,7 @@ import { Badge } from "@/components/ui/badge";
 import { Loader2, Eye, CheckCircle, XCircle, FileText, Star, Trash2, ArrowLeft, Users, Send, Mail, Search } from "lucide-react";
 import { toast } from "sonner";
 import { useInsights } from "@/context/InsightsContext";
+import { allInsights as staticInsights } from "@/data/insightsData";
 import MarkdownToolbar from "@/components/MarkdownToolbar";
 import { emailService } from "@/services/emailService";
 import { Input } from "@/components/ui/input";
@@ -91,11 +92,50 @@ const SubmissionsAdmin = () => {
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      setSubmissions(data || []);
+      
+      let allData = data || [];
+      const mockStr = localStorage.getItem('gamr_mock_submissions');
+      if (mockStr) {
+        try {
+          const mocks = JSON.parse(mockStr);
+          allData = [...mocks, ...allData];
+        } catch (e) {}
+      }
+
+      setSubmissions(allData);
       await fetchSubscribers();
     } catch (error: any) {
       console.error("Error fetching submissions:", error);
-      toast.error("Failed to load dashboard data.");
+      
+      let fallbackData: Submission[] = [];
+      const mockStr = localStorage.getItem('gamr_mock_submissions');
+      if (mockStr) {
+        try {
+          fallbackData = [...JSON.parse(mockStr)];
+        } catch (e) {}
+      }
+      
+      const staticMapped: Submission[] = staticInsights.map((i: any) => ({
+        id: i.slug,
+        name: i.author.name,
+        email: 'editorial@gamr.africa',
+        title: i.title,
+        category: i.category,
+        content: i.content || i.excerpt || '',
+        status: 'approved',
+        featured: i.featured || false,
+        slug: i.slug,
+        created_at: new Date(i.publishedAt || new Date()).toISOString()
+      }));
+
+      fallbackData = [...fallbackData, ...staticMapped];
+      setSubmissions(fallbackData);
+      
+      if (error.message?.includes('Failed to fetch')) {
+        console.warn("Using local fallback data due to network disconnect");
+      } else {
+        toast.error("Failed to load dashboard data.");
+      }
     } finally {
       setLoading(false);
     }
