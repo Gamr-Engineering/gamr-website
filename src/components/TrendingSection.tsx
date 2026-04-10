@@ -54,12 +54,12 @@ const TrendingSection: React.FC<TrendingSectionProps> = ({ insights }) => {
                 <img 
                   src={article.coverImage} 
                   alt={article.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-80"
+                  className="absolute inset-0 w-full h-full object-cover object-[center_15%] transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-80"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
                 
-                <div className="absolute top-4 left-4">
-                  <div className="px-3 py-1 bg-orange-500 text-black text-[10px] font-black uppercase rounded-full shadow-lg">
+                <div className="absolute top-4 left-4 z-20">
+                  <div className="px-3 py-1 bg-orange-500/90 backdrop-blur-sm text-black text-[10px] font-black uppercase rounded-full shadow-lg border border-white/20">
                     HOT #{index + 1}
                   </div>
                 </div>

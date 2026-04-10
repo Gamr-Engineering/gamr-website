@@ -22,6 +22,24 @@ interface InsightsContextType {
   refreshInsights: () => Promise<void>;
 }
 
+const stripMarkdown = (md: string) => {
+  if (!md) return "";
+  return md
+    .replace(/!\[.*?\]\(.*?\)/g, '') // Remove images
+    .replace(/\[.*?\]\(.*?\)/g, '') // Remove links entirely to avoid messy text
+    .replace(/[#*`_~|>]/g, '') // Remove symbols
+    .replace(/<\/?[^>]+(>|$)/g, "") // Strip HTML tags
+    .trim();
+};
+
+const extractFirstImage = (md: string) => {
+  if (!md) return null;
+  const match = md.match(/!\[.*?\]\((.*?)\)/);
+  if (match) return match[1];
+  const imgMatch = md.match(/<img.*?src=["'](.*?)["'].*?>/);
+  return imgMatch ? imgMatch[1] : null;
+};
+
 const InsightsContext = createContext<InsightsContextType>({
   allInsights: [],
   caseStudies: [],
@@ -46,7 +64,7 @@ export const InsightsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         .order("created_at", { ascending: false });
 
       if (error) {
-        console.error("Error loading insights from Supabase, falling back to static data:", error);
+        console.warn("Notice: Unable to reach Supabase. Safely falling back to local static insights.", error.message || error);
         // We already initialized with staticInsights, so just stop loading
         setLoading(false);
         return;
@@ -64,11 +82,11 @@ export const InsightsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           return {
             title: sub.title,
             slug: sub.slug,
-            excerpt: sub.excerpt || (sub.content.substring(0, 150) + "..."),
+            excerpt: sub.excerpt || (stripMarkdown(sub.content).substring(0, 150) + "..."),
             category: sub.category === 'case-study' ? 'case-study' : 'blog',
             date: new Date(sub.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
             readTime: sub.read_time || (Math.max(1, Math.ceil(sub.content.split(" ").length / 200)) + " min read"),
-            coverImage: sub.cover_image || "/lovable-uploads/eb289bd7-d3eb-41db-829d-ee1ec80242af.png",
+            coverImage: sub.cover_image || extractFirstImage(sub.content) || "/assets/insights/queen-of-venus-cover.jpg",
             author,
             tags: sub.tags?.length > 0 ? sub.tags : ["Community", sub.category === 'case-study' ? "Case Study" : "Editorial"],
             content: sub.content,

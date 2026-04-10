@@ -101,7 +101,7 @@ const InsightsIndex = () => {
                             <img 
                                 src={featuredArticle.coverImage} 
                                 alt={featuredArticle.title}
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                                className="w-full h-full object-cover object-[center_20%] transition-transform duration-700 group-hover:scale-105" 
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
                         </div>

@@ -40,12 +40,12 @@ const InsightCard = ({ insight }: InsightCardProps) => {
         <img
           src={coverImage}
           alt={title}
-          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+          className="w-full h-full object-cover object-[center_25%] group-hover:scale-105 transition-transform duration-700"
           loading="lazy"
         />
-        {/* Category badge overlaid on image */}
-        <div className="absolute top-3 left-3">
-          <span className="text-[9px] font-black text-white bg-blue-600 px-2.5 py-1 uppercase tracking-widest">
+        {/* High-visibility category badge — works on light or dark images */}
+        <div className="absolute top-3 left-3 z-20">
+          <span className="text-[9px] font-black text-white bg-black/60 backdrop-blur-md border border-white/20 px-2.5 py-1 uppercase tracking-widest shadow-xl">
             {categoryLabel}
           </span>
         </div>

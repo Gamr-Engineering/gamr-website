@@ -173,7 +173,7 @@ const InsightPost = () => {
                         <img 
                             src={post.coverImage} 
                             alt={post.title} 
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-cover object-[center_20%]"
                             loading="lazy"
                         />
                     </div>
@@ -209,7 +209,7 @@ const InsightPost = () => {
                                                 <img 
                                                     src={src} 
                                                     alt={alt} 
-                                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                                                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" 
                                                     loading="lazy" 
                                                 />
                                             </div>

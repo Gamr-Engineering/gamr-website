@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Upload, CheckCircle, AlertCircle, Loader2, ArrowLeft } from 'lucide-react';
+import { Send, Upload, CheckCircle, AlertCircle, Loader2, ArrowLeft, Image as ImageIcon, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -24,7 +24,46 @@ const ContributorForm: React.FC = () => {
     content: '',
   });
 
+  const [coverImageUrl, setCoverImageUrl] = useState('');
+  const [uploadingCover, setUploadingCover] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingCover(true);
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Math.random()}.${fileExt}`;
+    const filePath = `${fileName}`;
+
+    try {
+      const { error: uploadError } = await supabase.storage
+        .from('article_assets')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data } = supabase.storage
+        .from('article_assets')
+        .getPublicUrl(filePath);
+
+      setCoverImageUrl(data.publicUrl);
+      toast.success("Cover image uploaded successfully!");
+    } catch (uploadError: any) {
+      if (uploadError.message?.includes('Failed to fetch') || uploadError.message?.includes('Failed to send a request') || uploadError.name === 'TypeError') {
+        console.warn("Storage upload failed (network issue). Falling back to local ObjectURL.", uploadError);
+        setCoverImageUrl(URL.createObjectURL(file));
+        toast.success("Cover image uploaded successfully!");
+      } else {
+        toast.error('Failed to upload cover image. Please try again.');
+        console.error(uploadError);
+      }
+    } finally {
+      setUploadingCover(false);
+    }
+  };
 
   const handleInsertMarkdown = (text: string) => {
     const textarea = textareaRef.current;
@@ -61,6 +100,7 @@ const ContributorForm: React.FC = () => {
         .insert([
           { 
             ...formData, 
+            cover_image: coverImageUrl || null,
             status: 'pending',
             created_at: new Date().toISOString()
           }
@@ -80,6 +120,7 @@ const ContributorForm: React.FC = () => {
           const newMock = {
             id: 'mock-' + Date.now(),
             ...formData,
+            cover_image: coverImageUrl || null,
             status: 'pending',
             created_at: new Date().toISOString()
           };
@@ -174,6 +215,42 @@ const ContributorForm: React.FC = () => {
             <SelectItem value="news">News / Update</SelectItem>
           </SelectContent>
         </Select>
+      </div>
+
+      <div className="space-y-3">
+        <Label className="text-xs uppercase tracking-widest text-gray-500 font-bold block mb-2">Dedicated Cover Image (Optional)</Label>
+        <input 
+          type="file" 
+          accept="image/*" 
+          className="hidden" 
+          ref={fileInputRef} 
+          onChange={handleCoverUpload} 
+        />
+        {coverImageUrl ? (
+          <div className="relative group rounded-xl overflow-hidden border border-white/10 w-full h-48 bg-black/40">
+            <img src={coverImageUrl} alt="Cover Preview" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+               <Button type="button" variant="ghost" onClick={() => setCoverImageUrl("")} className="text-red-400 hover:text-red-300 hover:bg-white/10">
+                 <X className="w-5 h-5 mr-2" /> Remove Image
+               </Button>
+            </div>
+          </div>
+        ) : (
+          <Button 
+            type="button" 
+            variant="outline" 
+            onClick={() => fileInputRef.current?.click()} 
+            disabled={uploadingCover}
+            className="w-full h-14 bg-black/40 border-white/10 hover:bg-white/5 text-gray-400 border-dashed rounded-xl"
+          >
+            {uploadingCover ? (
+              <Loader2 className="w-5 h-5 animate-spin mr-2" />
+            ) : (
+              <ImageIcon className="w-5 h-5 mr-2" />
+            )}
+            {uploadingCover ? "Uploading..." : "Upload Cover Image (Recommended)"}
+          </Button>
+        )}
       </div>
 
       <div className="space-y-0">
