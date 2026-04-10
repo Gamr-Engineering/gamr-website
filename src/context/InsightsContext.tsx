@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Insight, Author } from "@/data/insightsData";
+import { allInsights as staticInsights, Insight, Author } from "@/data/insightsData";
 import { authors } from "@/data/insights/authors";
 
 // Temporary generic author fallback for external community submissions
@@ -33,7 +33,7 @@ const InsightsContext = createContext<InsightsContextType>({
 export const useInsights = () => useContext(InsightsContext);
 
 export const InsightsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [allInsights, setAllInsights] = useState<Insight[]>([]);
+  const [allInsights, setAllInsights] = useState<Insight[]>(staticInsights);
   const [loading, setLoading] = useState(true);
 
   const fetchInsights = async () => {
@@ -46,11 +46,13 @@ export const InsightsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         .order("created_at", { ascending: false });
 
       if (error) {
-        console.error("Error loading insights:", error);
+        console.error("Error loading insights from Supabase, falling back to static data:", error);
+        // We already initialized with staticInsights, so just stop loading
+        setLoading(false);
         return;
       }
 
-      if (data) {
+      if (data && data.length > 0) {
         const parsedInsights: Insight[] = data.map((sub: any) => {
           // Resolve author via slug if it exists in local registry, otherwise fall back to generic community author
           const registryAuthor = sub.author_slug ? authors[sub.author_slug] : undefined;
@@ -79,8 +81,6 @@ export const InsightsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         });
 
         // Ensure ONLY ONE featured article exists at a time (most recently featured wins)
-        // Sort by created_at DESC already happened via SQL.
-        // Wait! Let's just find the very first featured article and unflag the rest.
         let foundFeatured = false;
         
         for (const i of parsedInsights) {
@@ -92,9 +92,11 @@ export const InsightsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         }
 
         setAllInsights(parsedInsights);
+      } else if (data && data.length === 0) {
+        console.log("No approved insights found in database, using static fallback.");
       }
     } catch (err) {
-      console.error(err);
+      console.error("Critical error fetching insights:", err);
     } finally {
       setLoading(false);
     }

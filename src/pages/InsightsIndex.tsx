@@ -58,8 +58,20 @@ const InsightsIndex = () => {
         setVisibleCount(6);
     }, [activeTab]);
 
-    if (loading || !allInsights.length) {
+    if (loading) {
         return <div className="min-h-screen bg-black flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-blue-500" /></div>;
+    }
+
+    if (!allInsights.length) {
+        return (
+            <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 text-center">
+                <h2 className="text-2xl font-bold uppercase tracking-tighter mb-4">No Insights Found</h2>
+                <p className="text-gray-400 mb-8">It seems we don't have any articles shared yet. Keep an eye out!</p>
+                <Link to="/">
+                    <button className="bg-blue-600 px-8 py-3 rounded-xl font-bold uppercase tracking-widest text-xs">Back to Home</button>
+                </Link>
+            </div>
+        );
     }
 
     return (
