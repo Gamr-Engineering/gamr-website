@@ -14,11 +14,13 @@ import {
 
 
 import TopBar from "@/components/TopBar";
+import { useAuth } from "@/context/AuthContext";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openMobileSection, setOpenMobileSection] = useState<string | null>(null);
+  const { user, isAdmin, signOut } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -138,16 +140,28 @@ const Header = () => {
                   </a>
                 </NavigationMenuLink>
               </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink asChild>
-                  <a
-                    href="/insights/admin"
-                    className={cn(navigationMenuTriggerStyle(), "bg-transparent text-blue-400 hover:bg-blue-500/10 hover:text-blue-300 uppercase tracking-widest text-xs font-bold cursor-pointer")}
+              {isAdmin && (
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild>
+                    <a
+                      href="/insights/admin"
+                      className={cn(navigationMenuTriggerStyle(), "bg-transparent text-blue-400 hover:bg-blue-500/10 hover:text-blue-300 uppercase tracking-widest text-xs font-bold cursor-pointer")}
+                    >
+                      Admin
+                    </a>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              )}
+              {user && (
+                <NavigationMenuItem>
+                  <button
+                    onClick={() => signOut()}
+                    className={cn(navigationMenuTriggerStyle(), "bg-transparent text-gray-500 hover:text-white uppercase tracking-widest text-[10px] font-bold cursor-pointer")}
                   >
-                    Admin
-                  </a>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
+                    Log Out
+                  </button>
+                </NavigationMenuItem>
+              )}
             </NavigationMenuList>
           </NavigationMenu>
         </div>
@@ -224,13 +238,27 @@ const Header = () => {
               Contact
             </a>
             
-            <a
-              href="/insights/admin"
-              onClick={() => setIsOpen(false)}
-              className="text-xl font-bold text-blue-400 uppercase tracking-widest py-4 border-b border-white/10"
-            >
-              Admin Dashboard
-            </a>
+            {isAdmin && (
+              <a
+                href="/insights/admin"
+                onClick={() => setIsOpen(false)}
+                className="text-xl font-bold text-blue-400 uppercase tracking-widest py-4 border-b border-white/10"
+              >
+                Admin Dashboard
+              </a>
+            )}
+
+            {user && (
+               <button
+                onClick={() => {
+                  signOut();
+                  setIsOpen(false);
+                }}
+                className="text-left text-xl font-bold text-gray-500 uppercase tracking-widest py-4 border-b border-white/10"
+              >
+                Log Out
+              </button>
+            )}
 
             <div className="mt-8 mb-8">
               <Button

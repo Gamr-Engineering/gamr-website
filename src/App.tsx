@@ -22,14 +22,18 @@ import TimelinePage from "./pages/intelligence/TimelinePage";
 import CareersPage from "./pages/intelligence/CareersPage";
 import CommunityReportForm from "./pages/community/CommunityReportForm";
 import SubmissionsAdmin from "./pages/admin/SubmissionsAdmin";
+import Login from "./pages/Login";
 import { InsightsProvider } from "./context/InsightsContext";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <InsightsProvider>
+      <AuthProvider>
+        <InsightsProvider>
         <Toaster />
         <Sonner />
         <BrowserRouter>
@@ -42,7 +46,15 @@ const App = () => (
             <Route path="/insights/search" element={<InsightSearchPage />} />
             <Route path="/insights/:slug" element={<InsightPost />} />
             <Route path="/insights/submit" element={<SubmitArticle />} />
-            <Route path="/insights/admin" element={<SubmissionsAdmin />} />
+            <Route 
+              path="/insights/admin" 
+              element={
+                <ProtectedRoute>
+                  <SubmissionsAdmin />
+                </ProtectedRoute>
+              } 
+            />
+            <Route path="/login" element={<Login />} />
             <Route path="/insights/author/:slug" element={<AuthorProfile />} />
             <Route path="/insights/stories/rising-esports" element={<RisingEsports />} />
             <Route path="/insights/os" element={<InsightOS />} />
@@ -55,7 +67,8 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
-      </InsightsProvider>
+        </InsightsProvider>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

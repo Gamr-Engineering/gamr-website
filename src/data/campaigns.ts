@@ -18,7 +18,7 @@ export const campaigns: Campaign[] = [
     startDate: "2026-02-01",
     endDate: "2026-03-10", // Set to past to keep CLOSED
     closingSoonDays: 7,
-    bannerEnabled: true,
+    bannerEnabled: false,
     applicationUrl: "/gamr-lab",
     description: "A 30-day, hardware-backed sprint at Gamr Lab turning African players into Roblox creators."
   }
