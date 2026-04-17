@@ -8,29 +8,53 @@ import { Loader2, ShieldCheck, Mail } from "lucide-react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [sent, setSent] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false); // Toggle for first-time password setup
   const navigate = useNavigate();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/insights/admin";
+  const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || "olamide.michael@gamr.africa";
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: {
-        emailRedirectTo: window.location.origin + from,
-      },
-    });
+    if (isSignUp) {
+      if (email !== ADMIN_EMAIL) {
+        toast.error("Account creation is restricted to the administrator.");
+        setLoading(false);
+        return;
+      }
+      
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
 
-    if (error) {
-      toast.error(error.message);
+      if (error) {
+        toast.error(error.message);
+      } else {
+        toast.success("Account created successfully!");
+        setIsSignUp(false);
+      }
     } else {
-      setSent(true);
-      toast.success("Magic link sent! Check your email.");
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        if (error.message.includes("Invalid login credentials")) {
+            toast.error("Invalid email or password. If this is your first time, use 'First-time setup'.");
+        } else {
+            toast.error(error.message);
+        }
+      } else {
+        toast.success("Access granted. Welcome back!");
+        navigate(from);
+      }
     }
     setLoading(false);
   };
@@ -44,56 +68,65 @@ const Login = () => {
           <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-6 shadow-2xl shadow-blue-500/20">
             <ShieldCheck className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl font-black uppercase tracking-tighter mb-2">Admin Gate</h1>
-          <p className="text-gray-400 text-sm font-medium">Identify yourself to access the command center.</p>
+          <h1 className="text-3xl font-black uppercase tracking-tighter mb-2">
+            {isSignUp ? "Account Setup" : "Admin Gate"}
+          </h1>
+          <p className="text-gray-400 text-sm font-medium">
+            {isSignUp ? "Create a secure password for your admin account." : "Identify yourself to access the command center."}
+          </p>
         </div>
 
-        {!sent ? (
-          <form onSubmit={handleLogin} className="space-y-6">
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Work Email</label>
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                <Input
-                  type="email"
-                  placeholder="admin@gamr.africa"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="bg-black/50 border-white/10 h-14 pl-12 rounded-xl focus:ring-blue-500 focus:border-blue-500 text-white"
-                  required
-                />
-              </div>
+        <form onSubmit={handleLogin} className="space-y-5">
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Work Email</label>
+            <div className="relative">
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+              <Input
+                type="email"
+                placeholder="olamide.michael@gamr.africa"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-black/50 border-white/10 h-14 pl-12 rounded-xl focus:ring-blue-500 focus:border-blue-500 text-white"
+                required
+              />
             </div>
-
-            <Button
-              type="submit"
-              disabled={loading}
-              className="w-full h-14 bg-blue-600 hover:bg-blue-500 text-white font-black uppercase tracking-widest text-xs rounded-xl transition-all"
-            >
-              {loading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : "Send Magic Link"}
-            </Button>
-          </form>
-        ) : (
-          <div className="text-center py-6">
-            <div className="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Mail className="w-6 h-6 text-green-500" />
-            </div>
-            <h3 className="text-lg font-bold mb-2">Link Sent!</h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-8">
-              We've sent a magic login link to <br/>
-              <span className="text-white font-bold">{email}</span>
-            </p>
-            <Button 
-                variant="ghost" 
-                onClick={() => setSent(false)}
-                className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-white"
-            >
-                Use another email
-            </Button>
           </div>
-        )}
 
-        <div className="mt-12 pt-8 border-t border-white/5 text-center">
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Password</label>
+            <div className="relative">
+              <ShieldCheck className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+              <Input
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="bg-black/50 border-white/10 h-14 pl-12 rounded-xl focus:ring-blue-500 focus:border-blue-500 text-white"
+                required
+              />
+            </div>
+          </div>
+
+          <Button
+            type="submit"
+            disabled={loading}
+            className="w-full h-14 bg-blue-600 hover:bg-blue-500 text-white font-black uppercase tracking-widest text-xs rounded-xl transition-all mt-4"
+          >
+            {loading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : (isSignUp ? "Initialize Account" : "Access Admin")}
+          </Button>
+
+          <div className="text-center pt-2">
+            <button
+                type="button"
+                onClick={() => setIsSignUp(!isSignUp)}
+                className="text-[10px] text-gray-400 hover:text-white uppercase tracking-widest font-bold"
+            >
+                {isSignUp ? "Return to Login" : "First-time setup? Click here"}
+            </button>
+          </div>
+        </form>
+
+        <div className="mt-10 pt-8 border-t border-white/5 text-center">
           <button 
             onClick={() => navigate("/insights")}
             className="text-[10px] font-bold uppercase tracking-widest text-gray-600 hover:text-blue-400 transition-colors"
