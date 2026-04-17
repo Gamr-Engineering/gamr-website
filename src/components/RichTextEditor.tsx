@@ -60,7 +60,11 @@ import {
   Minus,
   Paperclip,
   Loader2,
-  FileText
+  FileText,
+  Eraser,
+  PaintBucket,
+  Omega,
+  ChevronDown
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { 
@@ -120,6 +124,9 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ content, onChange, plac
   const [uploading, setUploading] = useState<"image" | "video" | "audio" | "attachment" | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [activeUploadType, setActiveUploadType] = useState<"image" | "video" | "audio" | "attachment">("image");
+  
+  const QUICK_COLORS = ['#ffffff', '#9ca3af', '#3b82f6', '#ef4444', '#eab308'];
+  const SPECIAL_CHARS = ['€', '£', '¥', '©', '™', '®', '§', '¶', '°', '±', '×', '÷', 'µ', 'Ω', '∑', '∞', '≈', '≠', '≤', '≥', '→', '←', '↑', '↓', '↔', '✓', '✗', '★', '☆'];
   
   const editor = useEditor({
     extensions: [
@@ -436,18 +443,77 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ content, onChange, plac
 
             <div className="flex flex-col items-center shrink-0 border-r border-white/10 pr-2">
               <div className="flex items-center gap-0.5">
-                <Button variant="ghost" size="sm" onClick={() => editor.chain().focus().toggleBulletList().run()} className={`w-7 h-7 p-0 ${editor.isActive('bulletList') ? 'text-blue-500 bg-white/10' : 'text-gray-400'}`}><List className="w-3.5 h-3.5" /></Button>
-                <Button variant="ghost" size="sm" onClick={() => editor.chain().focus().toggleOrderedList().run()} className={`w-7 h-7 p-0 ${editor.isActive('orderedList') ? 'text-blue-500 bg-white/10' : 'text-gray-400'}`}><ListOrdered className="w-3.5 h-3.5" /></Button>
-                <Button variant="ghost" size="sm" onClick={() => editor.chain().focus().toggleTaskList().run()} className={`w-7 h-7 p-0 ${editor.isActive('taskList') ? 'text-blue-500 bg-white/10' : 'text-gray-400'}`}><CheckSquare className="w-3.5 h-3.5" /></Button>
+                <Button variant="ghost" size="sm" title="Bullet List" onClick={() => editor.chain().focus().toggleBulletList().run()} className={`w-7 h-7 p-0 ${editor.isActive('bulletList') ? 'text-blue-500 bg-white/10' : 'text-gray-400'}`}><List className="w-3.5 h-3.5" /></Button>
+                <Button variant="ghost" size="sm" title="Numbered List" onClick={() => editor.chain().focus().toggleOrderedList().run()} className={`w-7 h-7 p-0 ${editor.isActive('orderedList') ? 'text-blue-500 bg-white/10' : 'text-gray-400'}`}><ListOrdered className="w-3.5 h-3.5" /></Button>
+                <Button variant="ghost" size="sm" title="Task List" onClick={() => editor.chain().focus().toggleTaskList().run()} className={`w-7 h-7 p-0 ${editor.isActive('taskList') ? 'text-blue-500 bg-white/10' : 'text-gray-400'}`}><CheckSquare className="w-3.5 h-3.5" /></Button>
               </div>
               <span className="text-[8px] uppercase font-bold text-gray-600 tracking-tight mt-0.5">Lists</span>
             </div>
 
+            {/* NEW: COLORS & HIGHLIGHTS */}
+            <div className="flex flex-col items-center shrink-0 border-r border-white/10 pr-2 flex-grow">
+              <div className="flex items-center gap-2">
+                <div className="flex items-center bg-white/5 rounded p-0.5 border border-white/5 gap-0.5">
+                    {/* Text Color Native Picker inside Button wrapper */}
+                    <div className="relative group">
+                      <Button variant="ghost" size="sm" title="Text Color Picker" className="w-8 h-7 p-0 text-gray-400 hover:text-white flex flex-col items-center justify-center relative overflow-hidden">
+                        <Type className="w-3.5 h-3.5" />
+                        <div className="w-4 h-1 rounded-full mt-0.5" style={{ backgroundColor: editor.getAttributes('textStyle').color || '#ffffff' }} />
+                        <input type="color" title="Text Color" className="absolute inset-0 opacity-0 w-full h-full cursor-pointer" onChange={(e) => editor.chain().focus().setColor(e.target.value).run()} value={editor.getAttributes('textStyle').color || '#ffffff'} />
+                      </Button>
+                    </div>
+                    {/* Highlight Native Picker */}
+                    <div className="relative group">
+                      <Button variant="ghost" size="sm" title="Highlight Color" className="w-8 h-7 p-0 text-gray-400 hover:text-white flex flex-col items-center justify-center relative overflow-hidden">
+                        <PaintBucket className="w-3.5 h-3.5" />
+                        <div className="w-4 h-1 rounded-full mt-0.5" style={{ backgroundColor: editor.getAttributes('highlight').color || 'transparent' }} />
+                        <input type="color" title="Highlight Color" className="absolute inset-0 opacity-0 w-full h-full cursor-pointer" onChange={(e) => editor.chain().focus().setHighlight({ color: e.target.value }).run()} value={editor.getAttributes('highlight').color || '#ffff00'} />
+                      </Button>
+                    </div>
+                    <Separator orientation="vertical" className="h-4 bg-white/10 mx-0.5" />
+                    <Button variant="ghost" size="sm" title="Remove All Formatting" onClick={() => editor.chain().focus().clearNodes().unsetAllMarks().run()} className="w-7 h-7 p-0 text-red-400 hover:text-red-300 hover:bg-red-500/10"><Eraser className="w-3.5 h-3.5" /></Button>
+                </div>
+                
+                <Separator orientation="vertical" className="h-4 bg-white/10" />
+                
+                {/* Quick Swatches */}
+                <div className="flex items-center gap-1.5" title="Quick Color Swatches">
+                  {QUICK_COLORS.map((c) => (
+                    <button key={c} onClick={() => editor.chain().focus().setColor(c).run()} className="w-4 h-4 rounded-full border border-white/20 shadow-xl hover:scale-110 active:scale-95 transition-transform" style={{ backgroundColor: c }} />
+                  ))}
+                </div>
+              </div>
+              <span className="text-[8px] uppercase font-bold text-gray-600 tracking-tight mt-0.5">Colors & Highlights</span>
+            </div>
+
+            {/* NEW: MORE OBJECTS */}
             <div className="flex flex-col items-center shrink-0 border-r border-white/10 pr-2">
-              <div className="flex items-center gap-1">
-                 <Button variant="ghost" size="sm" onClick={() => editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()} className="h-7 gap-1 bg-white/5 text-[9px] text-gray-400 font-bold px-2 border border-white/5"><TableIcon className="w-3 h-3" /> Table</Button>
-                 <Button variant="ghost" size="sm" onClick={() => editor.chain().focus().setHorizontalRule().run()} className="w-7 h-7 p-0 text-gray-400 hover:text-white"><Minus className="w-3.5 h-3.5" /></Button>
-                 <Button variant="ghost" size="sm" onClick={() => editor.chain().focus().toggleBlockquote().run()} className={`w-7 h-7 p-0 ${editor.isActive('blockquote') ? 'text-blue-500 bg-white/10' : 'text-gray-400'}`}><Quote className="w-3.5 h-3.5" /></Button>
+              <div className="flex items-center gap-0.5">
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button variant="ghost" size="sm" title="Insert Special Character" className="w-7 h-7 p-0 text-gray-400 hover:text-white"><Omega className="w-3.5 h-3.5" /></Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-64 p-3 bg-gray-900 border border-white/10 shadow-2xl backdrop-blur-xl rounded-xl">
+                    <h4 className="text-[10px] uppercase text-gray-400 tracking-widest font-bold mb-3">Special Characters</h4>
+                    <div className="grid grid-cols-7 gap-1">
+                      {SPECIAL_CHARS.map((char, index) => (
+                         <button key={index} onClick={() => editor.chain().focus().insertContent(char).run()} className="w-8 h-8 flex items-center justify-center text-white bg-white/5 hover:bg-blue-500/20 hover:text-blue-400 rounded transition-colors text-sm font-semibold border border-white/5">
+                           {char}
+                         </button>
+                      ))}
+                    </div>
+                  </PopoverContent>
+                </Popover>
+                
+                <Button variant="ghost" size="sm" title="Insert Page Break (Line)" onClick={() => editor.chain().focus().setHorizontalRule().run()} className="w-7 h-7 p-0 text-gray-400 hover:text-white"><Minus className="w-3.5 h-3.5" /></Button>
+              </div>
+              <span className="text-[8px] uppercase font-bold text-gray-600 tracking-tight mt-0.5">More Objects</span>
+            </div>
+
+            <div className="flex flex-col items-center shrink-0 border-r border-white/10 pr-2">
+              <div className="flex items-center gap-0.5">
+                 <Button variant="ghost" size="sm" title="Insert Table" onClick={() => editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()} className="h-7 gap-1 bg-white/5 text-[9px] text-gray-400 font-bold px-2 border border-white/5 hover:bg-white/10"><TableIcon className="w-3 h-3" /> Table</Button>
+                 <Button variant="ghost" size="sm" title="Blockquote" onClick={() => editor.chain().focus().toggleBlockquote().run()} className={`w-7 h-7 p-0 ${editor.isActive('blockquote') ? 'text-blue-500 bg-white/10' : 'text-gray-400'} hover:text-white hover:bg-white/5`}><Quote className="w-3.5 h-3.5" /></Button>
               </div>
               <span className="text-[8px] uppercase font-bold text-gray-600 tracking-tight mt-0.5">Structure</span>
             </div>
@@ -492,10 +558,22 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ content, onChange, plac
           height: 0;
           font-style: italic;
         }
-        .tiptap { outline: none !important; }
+        .tiptap { outline: none !important; color: #e2e8f0; font-size: 1.125rem; line-height: 1.75; }
+        
+        /* Headers Bug Fixes */
+        .tiptap h1 { font-size: 2.25rem; font-weight: 800; color: white; margin-top: 2rem; margin-bottom: 1rem; line-height: 1.2; text-transform: uppercase; letter-spacing: -0.02em; }
+        .tiptap h2 { font-size: 1.75rem; font-weight: 700; color: white; margin-top: 1.75rem; margin-bottom: 0.75rem; line-height: 1.3; }
+        .tiptap h3 { font-size: 1.35rem; font-weight: 700; color: #f1f5f9; margin-top: 1.5rem; margin-bottom: 0.5rem; line-height: 1.4; }
+        
+        /* Paragraph Spacing Bug Fix */
+        .tiptap p { margin-bottom: 1rem; min-height: 1.5rem; }
+        
+        /* Lists */
         .tiptap ul, .tiptap ol { padding: 0 1.2rem; margin: 1.5rem 0; }
         .tiptap ul { list-style-type: disc; }
         .tiptap ol { list-style-type: decimal; }
+        
+        /* Blockquote */
         .tiptap blockquote {
           border-left: 4px solid #3b82f6;
           padding: 0.5rem 1.5rem;
