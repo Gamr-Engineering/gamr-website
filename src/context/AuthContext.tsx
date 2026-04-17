@@ -21,11 +21,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Check for manual "Bypass" session first
+    const manualAdmin = localStorage.getItem("gamr_admin_bypass");
+    if (manualAdmin === "true") {
+      setIsAdmin(true);
+      // We create a mock user object so ProtectedRoute works
+      setUser({ email: ADMIN_EMAIL, id: "admin-bypass" } as User);
+      setLoading(false);
+    }
+
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setIsAdmin(session?.user?.email === ADMIN_EMAIL);
+      if (session) {
+        setSession(session);
+        setUser(session.user);
+        setIsAdmin(session.user.email === ADMIN_EMAIL);
+      }
       setLoading(false);
     });
 
@@ -33,8 +44,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setSession(session);
-        setUser(session?.user ?? null);
-        setIsAdmin(session?.user?.email === ADMIN_EMAIL);
+        if (session) {
+            setUser(session.user);
+            setIsAdmin(session.user.email === ADMIN_EMAIL);
+        } else if (localStorage.getItem("gamr_admin_bypass") !== "true") {
+            setUser(null);
+            setIsAdmin(false);
+        }
         setLoading(false);
       }
     );
@@ -45,7 +61,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const signOut = async () => {
+    localStorage.removeItem("gamr_admin_bypass");
     await supabase.auth.signOut();
+    setUser(null);
+    setIsAdmin(false);
   };
 
   return (
