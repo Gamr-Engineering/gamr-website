@@ -16,7 +16,7 @@ const AuthorSpotlight = ({ authorSlug = "williams-falodun" }: AuthorSpotlightPro
     // Memoize the filtered stories so we don't recalculate on every render
     const authorStories = useMemo(() => {
         return allInsights.filter((story) => story.author.slug === author.slug);
-    }, [author.slug]);
+    }, [author.slug, allInsights]);
 
     if (!author) return null;
 

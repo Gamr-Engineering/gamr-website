@@ -14,7 +14,13 @@ import InsightCard from "@/components/InsightCard";
 const InsightPost = () => {
     const { allInsights, loading } = useInsights();
     const { slug } = useParams<{ slug: string }>();
-    const post = slug ? allInsights.find((i) => i.slug === slug) : null;
+    const post = slug 
+        ? allInsights.find((i) => 
+            i.slug === slug || 
+            encodeURIComponent(i.slug) === encodeURIComponent(slug) ||
+            i.slug === decodeURIComponent(slug)
+          ) 
+        : null;
 
     // ── SEO & Analytics ───────────────────────────────────────────────────
     useEffect(() => {
@@ -179,70 +185,108 @@ const InsightPost = () => {
                     </div>
 
                     {/* ── Article body ───────────────────────────────────── */}
-                    <div className="mb-20 space-y-8">
-                        {post.content
-                            .split("\n\n")
-                            .map((paragraph, index) => {
-                                const trimmed = paragraph.trim();
-                                if (!trimmed) return null;
+                    <div className="mb-20">
+                        {/* Detect HTML content (from TipTap rich text editor) vs markdown (static articles) */}
+                        {/<[a-z][\s\S]*>/i.test(post.content) ? (
+                            /* ── HTML renderer (TipTap / Rich Text submissions) ─── */
+                            <>
+                                <style>{`
+                                    .article-html-content h1 { font-size: 2rem; font-weight: 800; color: white; margin-top: 2.5rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: -0.02em; border-left: 4px solid #2563eb; padding-left: 1.5rem; }
+                                    .article-html-content h2 { font-size: 1.5rem; font-weight: 700; color: white; margin-top: 2rem; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: -0.02em; border-left: 4px solid #2563eb; padding-left: 1.5rem; }
+                                    .article-html-content h3 { font-size: 1.25rem; font-weight: 700; color: white; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+                                    .article-html-content p { color: #d1d5db; line-height: 1.8; font-size: 1.125rem; margin-bottom: 1.25rem; font-weight: 500; }
+                                    .article-html-content strong { color: white; font-weight: 700; }
+                                    .article-html-content em { color: #e5e7eb; font-style: italic; }
+                                    .article-html-content a { color: #60a5fa; text-decoration: underline; text-underline-offset: 4px; }
+                                    .article-html-content a:hover { color: #93c5fd; }
+                                    .article-html-content ul, .article-html-content ol { color: #d1d5db; padding-left: 1.5rem; margin-bottom: 1.25rem; line-height: 1.8; font-size: 1.125rem; }
+                                    .article-html-content ul { list-style-type: disc; }
+                                    .article-html-content ol { list-style-type: decimal; }
+                                    .article-html-content li { margin-bottom: 0.5rem; }
+                                    .article-html-content blockquote { border-left: 4px solid #3b82f6; padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(59,130,246,0.05); color: #9ca3af; font-style: italic; }
+                                    .article-html-content img { width: 100%; border-radius: 0.75rem; margin: 2rem 0; border: 1px solid rgba(255,255,255,0.1); }
+                                    .article-html-content video, .article-html-content audio { width: 100%; margin: 1.5rem 0; border-radius: 0.75rem; }
+                                    .article-html-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+                                    .article-html-content th, .article-html-content td { border: 1px solid rgba(255,255,255,0.1); padding: 0.75rem 1rem; text-align: left; color: #d1d5db; }
+                                    .article-html-content th { background: rgba(255,255,255,0.05); color: white; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.1em; }
+                                    .article-html-content code { background: rgba(255,255,255,0.1); padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.875em; color: #f472b6; }
+                                    .article-html-content pre { background: rgba(0,0,0,0.5); padding: 1.5rem; border-radius: 0.75rem; overflow-x: auto; margin: 1.5rem 0; border: 1px solid rgba(255,255,255,0.1); }
+                                    .article-html-content pre code { background: transparent; padding: 0; color: #d1d5db; }
+                                    .article-html-content hr { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 2rem 0; }
+                                `}</style>
+                                <div
+                                    className="article-html-content"
+                                    dangerouslySetInnerHTML={{ __html: post.content }}
+                                />
+                            </>
+                        ) : (
+                            /* ── Markdown renderer (static articles) ──────────── */
+                            <div className="space-y-8">
+                                {post.content
+                                    .split("\n\n")
+                                    .map((paragraph, index) => {
+                                        const trimmed = paragraph.trim();
+                                        if (!trimmed) return null;
 
-                                // Handle Section Headers (Lines that are entirely bold)
-                                if (trimmed.startsWith("**") && trimmed.endsWith("**") && !trimmed.includes("\n")) {
-                                    return (
-                                        <h2 
-                                            key={index} 
-                                            className="text-2xl md:text-3xl font-bold text-white pt-10 pb-4 tracking-tight uppercase border-l-4 border-blue-600 pl-6"
-                                        >
-                                            {trimmed.replace(/\*\*/g, "")}
-                                        </h2>
-                                    );
-                                }
+                                        // Handle Section Headers (Lines that are entirely bold)
+                                        if (trimmed.startsWith("**") && trimmed.endsWith("**") && !trimmed.includes("\n")) {
+                                            return (
+                                                <h2 
+                                                    key={index} 
+                                                    className="text-2xl md:text-3xl font-bold text-white pt-10 pb-4 tracking-tight uppercase border-l-4 border-blue-600 pl-6"
+                                                >
+                                                    {trimmed.replace(/\*\*/g, "")}
+                                                </h2>
+                                            );
+                                        }
 
-                                // Handle Inline Images
-                                if (trimmed.startsWith("![") && trimmed.endsWith(")")) {
-                                    const match = trimmed.match(/!\[(.*?)\]\((.*?)\)/);
-                                    if (match) {
-                                        const alt = match[1];
-                                        const src = match[2];
+                                        // Handle Inline Images
+                                        if (trimmed.startsWith("![") && trimmed.endsWith(")")) {
+                                            const match = trimmed.match(/!\[(.*?)\]\((.*?)\)/);
+                                            if (match) {
+                                                const alt = match[1];
+                                                const src = match[2];
+                                                return (
+                                                    <div key={index} className="my-14 overflow-hidden rounded-2xl border border-white/10 bg-gray-900 w-full aspect-[4/3] md:aspect-video shadow-2xl shadow-blue-500/10 group">
+                                                        <img 
+                                                            src={src} 
+                                                            alt={alt} 
+                                                            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" 
+                                                            loading="lazy" 
+                                                        />
+                                                    </div>
+                                                );
+                                            }
+                                        }
+
+                                        // Handle Pacing (Short emphasized lines)
+                                        if (trimmed.split(" ").length < 4 && trimmed.endsWith(".")) {
+                                            return (
+                                                <p 
+                                                    key={index} 
+                                                    className="text-2xl font-black text-white italic tracking-tighter opacity-90 py-2"
+                                                >
+                                                    {trimmed}
+                                                </p>
+                                            );
+                                        }
+
+                                        // Simple formatting for bold, italic and links
+                                        const formatted = trimmed
+                                            .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-white">$1</strong>')
+                                            .replace(/\*(.*?)\*/g, '<em class="italic text-gray-200">$1</em>')
+                                            .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-blue-400 hover:text-blue-300 underline underline-offset-4 transition-colors" target="_blank" rel="noopener noreferrer">$1</a>');
+
                                         return (
-                                            <div key={index} className="my-14 overflow-hidden rounded-2xl border border-white/10 bg-gray-900 w-full aspect-[4/3] md:aspect-video shadow-2xl shadow-blue-500/10 group">
-                                                <img 
-                                                    src={src} 
-                                                    alt={alt} 
-                                                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" 
-                                                    loading="lazy" 
-                                                />
-                                            </div>
+                                            <p
+                                                key={index}
+                                                className="text-gray-300 leading-relaxed text-lg md:text-xl font-medium"
+                                                dangerouslySetInnerHTML={{ __html: formatted }}
+                                            />
                                         );
-                                    }
-                                }
-
-                                // Handle Pacing (Short emphasized lines)
-                                if (trimmed.split(" ").length < 4 && trimmed.endsWith(".")) {
-                                    return (
-                                        <p 
-                                            key={index} 
-                                            className="text-2xl font-black text-white italic tracking-tighter opacity-90 py-2"
-                                        >
-                                            {trimmed}
-                                        </p>
-                                    );
-                                }
-
-                                // Simple formatting for bold, italic and links
-                                const formatted = trimmed
-                                    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-white">$1</strong>')
-                                    .replace(/\*(.*?)\*/g, '<em class="italic text-gray-200">$1</em>')
-                                    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-blue-400 hover:text-blue-300 underline underline-offset-4 transition-colors" target="_blank" rel="noopener noreferrer">$1</a>');
-
-                                return (
-                                    <p
-                                        key={index}
-                                        className="text-gray-300 leading-relaxed text-lg md:text-xl font-medium"
-                                        dangerouslySetInnerHTML={{ __html: formatted }}
-                                    />
-                                );
-                            })}
+                                    })}
+                            </div>
+                        )}
                     </div>
                     
                     <SocialShare url={window.location.href} title={post.title} />

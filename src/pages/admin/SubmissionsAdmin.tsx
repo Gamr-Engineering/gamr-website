@@ -275,19 +275,19 @@ const SubmissionsAdmin = () => {
       <Header />
       
       <main className="flex-grow pt-32 pb-20">
-        <div className="container mx-auto px-6 max-w-7xl">
+        <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-white/10 pb-8 gap-6">
             <div>
-              <span className="text-blue-500 font-bold uppercase tracking-widest text-sm mb-2 block">CMS Dashboard</span>
-              <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-2">Editorial Control</h1>
+              <span className="text-blue-500 font-bold uppercase tracking-widest text-xs sm:text-sm mb-2 block">CMS Dashboard</span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter mb-2">Editorial Control</h1>
               <p className="text-gray-400">Manage community submissions and live platform content.</p>
             </div>
             
             {/* Custom Tabs */}
-            <div className="flex bg-gray-900/50 p-1 rounded-lg border border-white/10 w-full md:w-auto">
+            <div className="flex bg-gray-900/50 p-1 rounded-lg border border-white/10 w-full md:w-auto overflow-x-auto no-scrollbar">
               <button
                 onClick={() => setActiveTab("pending")}
-                className={`flex-1 md:flex-none px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-md transition-all flex justify-center items-center gap-2 ${
+                className={`flex-1 md:flex-none px-3 sm:px-6 py-2 sm:py-2.5 text-[10px] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest rounded-md transition-all flex justify-center items-center gap-1.5 whitespace-nowrap ${
                   activeTab === "pending" ? "bg-blue-600 text-white shadow-lg" : "text-gray-400 hover:text-white"
                 }`}
               >
@@ -296,7 +296,7 @@ const SubmissionsAdmin = () => {
               </button>
               <button
                 onClick={() => setActiveTab("approved")}
-                className={`flex-1 md:flex-none px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-md transition-all ${
+                className={`flex-1 md:flex-none px-3 sm:px-6 py-2 sm:py-2.5 text-[10px] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest rounded-md transition-all whitespace-nowrap ${
                   activeTab === "approved" ? "bg-white text-black shadow-lg" : "text-gray-400 hover:text-white"
                 }`}
               >
@@ -304,11 +304,11 @@ const SubmissionsAdmin = () => {
               </button>
               <button
                 onClick={() => setActiveTab("subscribers")}
-                className={`flex-1 md:flex-none px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-md transition-all flex justify-center items-center gap-2 ${
+                className={`flex-1 md:flex-none px-3 sm:px-6 py-2 sm:py-2.5 text-[10px] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest rounded-md transition-all flex justify-center items-center gap-1.5 whitespace-nowrap ${
                   activeTab === "subscribers" ? "bg-purple-600 text-white shadow-lg" : "text-gray-400 hover:text-white"
                 }`}
               >
-                <Users className="w-3.5 h-3.5" />
+                <Users className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 Subscribers
               </button>
             </div>
@@ -316,7 +316,7 @@ const SubmissionsAdmin = () => {
 
           {activeTab === "subscribers" ? (
              <div className="space-y-6">
-                <div className="flex justify-between items-center bg-gray-900/30 p-8 rounded-2xl border border-white/5">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 bg-gray-900/30 p-4 sm:p-8 rounded-2xl border border-white/5">
                    <div>
                       <h2 className="text-2xl font-black uppercase tracking-tighter text-white">Your Audience</h2>
                       <p className="text-gray-400">Total active subscribers: <span className="text-purple-400 font-bold">{activeSubscribersCount}</span></p>
@@ -324,7 +324,7 @@ const SubmissionsAdmin = () => {
                    
                    <Dialog open={broadcastModalOpen} onOpenChange={setBroadcastModalOpen}>
                       <DialogTrigger asChild>
-                         <Button className="bg-purple-600 hover:bg-purple-700 text-white h-12 px-8 uppercase tracking-widest font-black text-xs rounded-xl shadow-lg shadow-purple-900/20">
+                         <Button className="bg-purple-600 hover:bg-purple-700 text-white h-10 sm:h-12 px-4 sm:px-8 uppercase tracking-widest font-black text-[10px] sm:text-xs rounded-xl shadow-lg shadow-purple-900/20 w-full sm:w-auto">
                             <Send className="w-4 h-4 mr-2" />
                             Launch Broadcast
                          </Button>
@@ -386,7 +386,7 @@ const SubmissionsAdmin = () => {
                    />
                 </div>
                 
-                <div className="rounded-xl border border-white/10 overflow-hidden bg-gray-900/50">
+                <div className="rounded-xl border border-white/10 overflow-x-auto bg-gray-900/50">
                   <Table>
                     <TableHeader className="bg-black/50">
                       <TableRow className="border-white/10 hover:bg-transparent">
@@ -446,7 +446,7 @@ const SubmissionsAdmin = () => {
               </p>
             </div>
           ) : (
-            <div className="rounded-xl border border-white/10 overflow-hidden bg-gray-900/50 backdrop-blur-sm">
+            <div className="rounded-xl border border-white/10 overflow-x-auto bg-gray-900/50 backdrop-blur-sm">
               <Table>
                 <TableHeader className="bg-black/50">
                   <TableRow className="border-white/10 hover:bg-transparent">
