@@ -267,7 +267,17 @@ const ClaimGamrTag = () => {
 
             if (error) {
                 console.error("Tag check error:", error);
-                setTagAvailable(null);
+                if (error.code === "PGRST204" || error.message?.includes("Could not find the") || error.message?.includes("schema cache")) {
+                    // Graceful degrade: assume available and let handleSubmit handle the schema fallback
+                    setTagAvailable(true);
+                } else {
+                    setTagAvailable(null);
+                    toast({
+                        title: "Availability Check Failed",
+                        description: "Could not verify tag. Please try again later.",
+                        variant: "destructive",
+                    });
+                }
             } else {
                 const isAvailable = data === null;
                 setTagAvailable(isAvailable);
@@ -324,7 +334,11 @@ const ClaimGamrTag = () => {
 
             if (error) {
                 console.error("Email check error:", error);
-                setEmailAvailable(null);
+                if (error.code === "PGRST204" || error.message?.includes("Could not find the") || error.message?.includes("schema cache")) {
+                    setEmailAvailable(true);
+                } else {
+                    setEmailAvailable(null);
+                }
             } else {
                 // Strict Boolean Parsing: exists is true if data is NOT null
                 const exists = data !== null;
