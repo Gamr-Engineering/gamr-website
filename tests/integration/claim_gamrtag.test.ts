@@ -32,8 +32,8 @@ async function runTest() {
         gamer_archetype: "Competitor",
         play_style: "Casual",
         personality_traits: ["Team Player", "Strategist"],
-        gamer_archetypes: ["competitor", "socializer"],
-        play_styles: ["casual", "streamer"]
+        gamer_archetypes: ["competitor"],
+        play_styles: ["casual"]
     };
 
     console.log(`Attempting to insert profile with GamrTag: ${testProfile.gamr_tag}...`);

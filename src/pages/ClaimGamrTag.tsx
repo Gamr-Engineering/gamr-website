@@ -15,6 +15,20 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+} from "@/components/ui/command";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import {
     ArrowLeft,
     ArrowRight,
     Check,
@@ -25,9 +39,11 @@ import {
     Trophy,
     Sparkles,
     MapPin,
+    ChevronsUpDown,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { ALL_COUNTRIES } from "@/data/countries";
 
 const TOTAL_STEPS = 5;
 const SESSION_STORAGE_KEY = "gamr_onboarding_form_data";
@@ -66,26 +82,7 @@ const REGIONS = [
     "Global",
 ];
 
-const COUNTRIES = [
-    "Nigeria",
-    "South Africa",
-    "Kenya",
-    "Ghana",
-    "Egypt",
-    "Morocco",
-    "Tanzania",
-    "Ethiopia",
-    "Cameroon",
-    "Senegal",
-    "Rwanda",
-    "Uganda",
-    "Algeria",
-    "Tunisia",
-    "Côte d'Ivoire",
-    "Mozambique",
-    "Zimbabwe",
-    "Other",
-];
+const COUNTRIES = ALL_COUNTRIES;
 
 const GAMER_ARCHETYPES = [
     { id: "competitor", label: "Competitor", desc: "Lives for the win. Ranked modes are home." },
@@ -179,6 +176,7 @@ const ClaimGamrTag = () => {
     const emailInputRef = useRef<HTMLInputElement>(null);
     const [isOtherSelected, setIsOtherSelected] = useState(false);
     const [customGameInput, setCustomGameInput] = useState("");
+    const [countrySearchOpen, setCountrySearchOpen] = useState(false);
     const [formData, setFormData] = useState<FormData>({
         gamrTag: "",
         firstName: "",
@@ -218,6 +216,11 @@ const ClaimGamrTag = () => {
     useEffect(() => {
         sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(formData));
     }, [formData]);
+
+    // Phase 5: Scroll to top on step change to prevent skipping sections
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }, [step]);
 
     // Logger Utility
     const logStepEvent = useCallback((event: string, details?: any) => {
@@ -436,37 +439,17 @@ const ClaimGamrTag = () => {
     };
 
     const toggleArchetype = (archetype: string) => {
-        setFormData((prev) => {
-            if (prev.gamerArchetypes.includes(archetype)) {
-                return { ...prev, gamerArchetypes: prev.gamerArchetypes.filter((a) => a !== archetype) };
-            }
-            if (prev.gamerArchetypes.length >= 2) {
-                toast({
-                    title: "Limit Reached",
-                    description: "You can only select up to 2 archetypes.",
-                    variant: "destructive",
-                });
-                return prev;
-            }
-            return { ...prev, gamerArchetypes: [...prev.gamerArchetypes, archetype] };
-        });
+        setFormData((prev) => ({
+            ...prev,
+            gamerArchetypes: prev.gamerArchetypes.includes(archetype) ? [] : [archetype]
+        }));
     };
 
     const togglePlayStyle = (playStyle: string) => {
-        setFormData((prev) => {
-            if (prev.playStyles.includes(playStyle)) {
-                return { ...prev, playStyles: prev.playStyles.filter((s) => s !== playStyle) };
-            }
-            if (prev.playStyles.length >= 2) {
-                toast({
-                    title: "Limit Reached",
-                    description: "You can only select up to 2 play styles.",
-                    variant: "destructive",
-                });
-                return prev;
-            }
-            return { ...prev, playStyles: [...prev.playStyles, playStyle] };
-        });
+        setFormData((prev) => ({
+            ...prev,
+            playStyles: prev.playStyles.includes(playStyle) ? [] : [playStyle]
+        }));
     };
 
     const isStepValid = () => {
@@ -922,23 +905,60 @@ const ClaimGamrTag = () => {
                                     </div>
                                     <div className="space-y-3">
                                         <label className={labelClasses}>Country</label>
-                                        <Select
-                                            value={formData.country}
-                                            onValueChange={(val) =>
-                                                setFormData((prev) => ({ ...prev, country: val }))
-                                            }
-                                        >
-                                            <SelectTrigger className={selectTriggerClasses}>
-                                                <SelectValue placeholder="Select" />
-                                            </SelectTrigger>
-                                            <SelectContent className={selectContentClasses}>
-                                                {COUNTRIES.map((c) => (
-                                                    <SelectItem key={c} value={c} className={selectItemClasses}>
-                                                        {c}
-                                                    </SelectItem>
-                                                ))}
-                                            </SelectContent>
-                                        </Select>
+                                        <Popover open={countrySearchOpen} onOpenChange={setCountrySearchOpen}>
+                                            <PopoverTrigger asChild>
+                                                <Button
+                                                    variant="outline"
+                                                    role="combobox"
+                                                    aria-expanded={countrySearchOpen}
+                                                    className={cn(
+                                                        "w-full justify-between bg-white/5 border-white/10 text-white rounded-none h-12 focus:ring-0 focus:border-white/40 font-normal hover:bg-white/10 hover:text-white",
+                                                        !formData.country && "text-white/20"
+                                                    )}
+                                                >
+                                                    {formData.country
+                                                        ? COUNTRIES.find((c) => c === formData.country)
+                                                        : "Select country..."}
+                                                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                                </Button>
+                                            </PopoverTrigger>
+                                            <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0 bg-black border-white/10 rounded-none">
+                                                <Command className="bg-transparent text-white">
+                                                    <CommandInput 
+                                                        placeholder="Search country..." 
+                                                        className="h-12 border-none focus:ring-0 bg-transparent text-white placeholder:text-white/20"
+                                                    />
+                                                    <CommandList className="max-h-[300px] overflow-y-auto custom-scrollbar">
+                                                        <CommandEmpty className="py-6 text-center text-sm text-white/40">No country found.</CommandEmpty>
+                                                        <CommandGroup>
+                                                            {COUNTRIES.map((c) => (
+                                                                <CommandItem
+                                                                    key={c}
+                                                                    value={c}
+                                                                    onSelect={(currentValue) => {
+                                                                        // cmdk converts values to lowercase for internal matching, 
+                                                                        // but we want the original casing. 
+                                                                        // Since our COUNTRIES list is unique, we find the match.
+                                                                        const selected = COUNTRIES.find(country => country.toLowerCase() === currentValue.toLowerCase()) || currentValue;
+                                                                        setFormData((prev) => ({ ...prev, country: selected }));
+                                                                        setCountrySearchOpen(false);
+                                                                    }}
+                                                                    className="text-white hover:bg-white/10 aria-selected:bg-white/10 rounded-none cursor-pointer py-3"
+                                                                >
+                                                                    <Check
+                                                                        className={cn(
+                                                                            "mr-2 h-4 w-4",
+                                                                            formData.country === c ? "opacity-100" : "opacity-0"
+                                                                        )}
+                                                                    />
+                                                                    {c}
+                                                                </CommandItem>
+                                                            ))}
+                                                        </CommandGroup>
+                                                    </CommandList>
+                                                </Command>
+                                            </PopoverContent>
+                                        </Popover>
                                     </div>
                                 </div>
 
@@ -1106,9 +1126,8 @@ const ClaimGamrTag = () => {
                             <div className="space-y-4">
                                 <div>
                                     <label className={labelClasses}>
-                                        Gamer Archetype ({formData.gamerArchetypes.length}/2)
+                                        Choose your gamer archetype
                                     </label>
-                                    <p className="text-white/30 text-xs mt-1">Select up to 2 archetypes</p>
                                 </div>
                                 <div className="grid grid-cols-2 gap-3">
                                     {GAMER_ARCHETYPES.map((arch) => {
@@ -1149,9 +1168,8 @@ const ClaimGamrTag = () => {
                             <div className="space-y-4">
                                 <div>
                                     <label className={labelClasses}>
-                                        Play Style ({formData.playStyles.length}/2)
+                                        Choose your play style
                                     </label>
-                                    <p className="text-white/30 text-xs mt-1">Select up to 2 play styles</p>
                                 </div>
                                 <div className="grid grid-cols-2 gap-3">
                                     {PLAY_STYLES.map((style) => {
@@ -1191,7 +1209,7 @@ const ClaimGamrTag = () => {
                             {/* Personality Traits */}
                             <div className="space-y-4">
                                 <label className={labelClasses}>
-                                    Personality Traits ({formData.personalityTraits.length}/4)
+                                    Personality Traits
                                 </label>
                                 <div className="flex flex-wrap gap-2">
                                     {PERSONALITY_TRAITS.map((trait) => {
