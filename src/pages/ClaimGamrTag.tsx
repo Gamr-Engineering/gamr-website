@@ -146,23 +146,23 @@ class ProfileErrorBoundary extends Component<{ children: ReactNode }, { hasError
     }
 }
 
-interface FormData {
-    gamrTag: string;
-    firstName: string;
-    lastName: string;
-    displayName: string;
-    email: string;
-    phoneNumber: string;
-    bio: string;
-    city: string;
-    country: string;
-    favoriteGames: string[];
-    platform: string;
-    gamingRegion: string;
-    gamerArchetypes: string[];
-    playStyles: string[];
-    personalityTraits: string[];
-}
+const INITIAL_FORM_DATA: FormData = {
+    gamrTag: "",
+    firstName: "",
+    lastName: "",
+    displayName: "",
+    email: "",
+    phoneNumber: "",
+    bio: "",
+    city: "",
+    country: "",
+    favoriteGames: [],
+    platform: "",
+    gamingRegion: "",
+    gamerArchetypes: [],
+    playStyles: [],
+    personalityTraits: [],
+};
 
 const ClaimGamrTag = () => {
     const [step, setStep] = useState(1);
@@ -177,23 +177,7 @@ const ClaimGamrTag = () => {
     const [isOtherSelected, setIsOtherSelected] = useState(false);
     const [customGameInput, setCustomGameInput] = useState("");
     const [countrySearchOpen, setCountrySearchOpen] = useState(false);
-    const [formData, setFormData] = useState<FormData>({
-        gamrTag: "",
-        firstName: "",
-        lastName: "",
-        displayName: "",
-        email: "",
-        phoneNumber: "",
-        bio: "",
-        city: "",
-        country: "",
-        favoriteGames: [],
-        platform: "",
-        gamingRegion: "",
-        gamerArchetypes: [],
-        playStyles: [],
-        personalityTraits: [],
-    });
+    const [formData, setFormData] = useState<FormData>(INITIAL_FORM_DATA);
 
     const { toast } = useToast();
     const navigate = useNavigate();
@@ -630,7 +614,11 @@ const ClaimGamrTag = () => {
             }
 
             logStepEvent("Submission succeeded", { profile: createdProfile });
+            
+            // Phase 5: Cleanup - Clear persistence once successfully claimed
+            sessionStorage.removeItem(SESSION_STORAGE_KEY);
             setSuccessProfile(createdProfile);
+            setFormData(INITIAL_FORM_DATA);
             setStep(5);
         } catch (err: any) {
             logStepEvent("Unexpected async submission error", { error: err });
