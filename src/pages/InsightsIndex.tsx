@@ -18,6 +18,37 @@ const InsightsIndex = () => {
     const [activeTab, setActiveTab] = useState<FilterTab>("all");
     const [visibleCount, setVisibleCount] = useState<number>(6);
     const observerTarget = useRef<HTMLDivElement>(null);
+    const heroRef = useRef<HTMLDivElement>(null);
+
+    // Triple-Lock Scroll Restoration
+    useEffect(() => {
+        if ('scrollRestoration' in window.history) {
+            window.history.scrollRestoration = 'manual';
+        }
+        
+        // Immediate scroll
+        window.scrollTo(0, 0);
+        
+        // Focus the header to hijack viewport
+        if (heroRef.current) {
+            heroRef.current.focus();
+        }
+
+        // Extended polling for 1 second
+        let count = 0;
+        const interval = setInterval(() => {
+            window.scrollTo(0, 0);
+            count++;
+            if (count > 20) clearInterval(interval);
+        }, 50);
+
+        return () => {
+            if ('scrollRestoration' in window.history) {
+                window.history.scrollRestoration = 'auto';
+            }
+            clearInterval(interval);
+        };
+    }, []);
 
     // Derive data
     const featuredArticle = allInsights.find(i => i.featured) || allInsights[0];
@@ -81,7 +112,11 @@ const InsightsIndex = () => {
                 <div className="container mx-auto px-6">
                     
                     {/* Header Text */}
-                    <div className="flex flex-col gap-6 mb-12 animate-fade-in">
+                    <div 
+                        ref={heroRef}
+                        tabIndex={-1}
+                        className="flex flex-col gap-6 mb-12 animate-fade-in outline-none"
+                    >
                         <span className="text-blue-500 font-bold uppercase tracking-widest text-sm">Gamr Media</span>
                         <h1 className="text-5xl md:text-8xl font-bold tracking-tighter leading-none uppercase">
                             Insights.

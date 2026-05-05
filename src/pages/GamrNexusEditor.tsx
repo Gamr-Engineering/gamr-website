@@ -84,10 +84,12 @@ const GamrNexusEditor: React.FC<GamrNexusEditorProps> = ({
       FontSize, LineHeight, Indent,
     ],
     content: externalContent || '',
+    autofocus: false,
     editorProps: {
       attributes: {
         class: 'nx-editor-content',
         spellcheck: 'true',
+        tabindex: '-1',
       },
     },
     onUpdate: ({ editor }) => {
@@ -122,12 +124,20 @@ const GamrNexusEditor: React.FC<GamrNexusEditorProps> = ({
     },
   });
 
-  // Load from localStorage on mount
+  // Load from localStorage on mount and ensure no scroll-hijack
   useEffect(() => {
     if (editor) {
       const saved = localStorage.getItem('nx-editor-content');
       if (saved && saved !== '<p></p>') {
-        editor.commands.setContent(saved);
+        editor.commands.setContent(saved, { emitUpdate: false });
+      }
+      // Force a blur on mount to prevent any auto-scroll to the editor
+      if (embedded) {
+        editor.commands.blur();
+      }
+      // Force a blur on mount to prevent any auto-scroll to the editor
+      if (embedded) {
+        editor.commands.blur();
       }
     }
   }, [editor]);
