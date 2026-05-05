@@ -9,14 +9,13 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
-import RichTextEditor from './RichTextEditor';
-import { Eye, Edit3 } from 'lucide-react';
+import GamrNexusEditor from '@/pages/GamrNexusEditor';
+
 
 const ContributorForm: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [isPreview, setIsPreview] = useState(false);
   
   const [formData, setFormData] = useState(() => {
     // Initial state from localStorage if available
@@ -169,7 +168,7 @@ const ContributorForm: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8 max-w-3xl mx-auto bg-gray-900/50 p-8 md:p-12 rounded-3xl border border-white/5 backdrop-blur-xl">
+    <form onSubmit={handleSubmit} className="space-y-8 max-w-7xl mx-auto bg-gray-900/50 p-8 md:p-12 rounded-3xl border border-white/5 backdrop-blur-xl">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-3">
           <Label htmlFor="name" className="text-xs uppercase tracking-widest text-gray-500 font-bold">Full Name</Label>
@@ -261,73 +260,13 @@ const ContributorForm: React.FC = () => {
       <div className="space-y-4">
         <div className="flex items-center justify-between mb-2">
           <Label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Article Content</Label>
-          <div className="flex bg-black/40 p-1 rounded-lg border border-white/10">
-            <button
-              type="button"
-              onClick={() => setIsPreview(false)}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider transition-all ${!isPreview ? 'bg-blue-600 text-white' : 'text-gray-500 hover:text-gray-300'}`}
-            >
-              <Edit3 className="w-3.5 h-3.5" />
-              Edit
-            </button>
-            <button
-              type="button"
-              onClick={() => setIsPreview(true)}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider transition-all ${isPreview ? 'bg-blue-600 text-white' : 'text-gray-500 hover:text-gray-300'}`}
-            >
-              <Eye className="w-3.5 h-3.5" />
-              Preview
-            </button>
-          </div>
         </div>
-
-        {isPreview ? (
-          <div className="bg-black/40 border border-white/10 rounded-2xl p-6 md:p-12 min-h-[500px] prose prose-invert max-w-none shadow-2xl relative overflow-hidden">
-            {/* Glossy overlay */}
-            <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-blue-500/5 rounded-full blur-[100px] -z-10" />
-            
-            {formData.title && (
-              <h1 className="text-4xl md:text-5xl font-black mb-8 text-white uppercase tracking-tight leading-[0.9]">
-                {formData.title}
-              </h1>
-            )}
-            
-            {coverImageUrl && (
-              <div className="mb-12 rounded-3xl overflow-hidden shadow-2xl border border-white/10">
-                <img src={coverImageUrl} alt="Preview" className="w-full h-[400px] object-cover" />
-              </div>
-            )}
-            
-            <div 
-              dangerouslySetInnerHTML={{ __html: formData.content }} 
-              className="text-gray-300 leading-relaxed text-lg preview-content" 
-            />
-            
-            {!formData.content && (
-              <div className="flex flex-col items-center justify-center py-20 text-gray-600 italic">
-                <Edit3 className="w-12 h-12 mb-4 opacity-20" />
-                <p>No content to preview yet. Start writing in the editor!</p>
-              </div>
-            )}
-
-            <style dangerouslySetInnerHTML={{ __html: `
-              .preview-content iframe { width: 100%; border-radius: 1.5rem; margin: 2.5rem 0; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); }
-              .preview-content video { width: 100%; border-radius: 1.5rem; margin: 2.5rem 0; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); }
-              .preview-content audio { width: 100%; margin: 1.5rem 0; }
-              .preview-content blockquote { border-left: 4px solid #3b82f6; padding: 1rem 1.5rem; background: rgba(59, 130, 246, 0.05); border-radius: 0 1rem 1rem 0; font-style: italic; color: #94a3b8; margin: 2.5rem 0; }
-              .preview-content ul, .preview-content ol { padding-left: 1.5rem; margin: 1.5rem 0; }
-              .preview-content h1, .preview-content h2 { color: #fff; font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; margin-top: 3rem; }
-            `}} />
-          </div>
-        ) : (
-          <div className="flex flex-col">
-            <RichTextEditor 
-              content={formData.content} 
-              onChange={handleEditorChange} 
-              placeholder="Write your story here... (Word-like Rich Text Editing)"
-            />
-          </div>
-        )}
+        <GamrNexusEditor
+          content={formData.content}
+          onChange={handleEditorChange}
+          placeholder="Write your story here... (Word-like Rich Text · NEXUS MODE)"
+          embedded={true}
+        />
       </div>
 
       <div className="pt-6">

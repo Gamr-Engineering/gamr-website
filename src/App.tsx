@@ -15,6 +15,7 @@ import AuthorProfile from "./pages/AuthorProfile";
 import RisingEsports from "./pages/RisingEsports";
 import InsightOS from "./pages/InsightOS";
 import SubmitArticle from "./pages/SubmitArticle";
+import GamrNexusEditor from "./pages/GamrNexusEditor";
 import IntelligenceHub from "./pages/intelligence/IntelligenceHub";
 import MapPage from "./pages/intelligence/MapPage";
 import DashboardPage from "./pages/intelligence/DashboardPage";
