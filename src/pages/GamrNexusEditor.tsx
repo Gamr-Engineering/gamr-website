@@ -1,6 +1,8 @@
 import '@/components/nexus-editor/nexus-editor.css';
 import '@/components/nexus-editor/nexus-editor-body.css';
-import React, { useEffect, useCallback, useRef } from 'react';
+import '@/components/nexus-editor/mobile/nexus-mobile.css';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { FontFamily } from '@tiptap/extension-font-family';
@@ -38,6 +40,7 @@ import { AIRibbon, DataRibbon, ReviewRibbon, FlowRibbon, PublishRibbon } from '@
 import { LeftSidebar } from '@/components/nexus-editor/LeftSidebar';
 import { RightSidebar } from '@/components/nexus-editor/RightSidebar';
 import { StatusBar } from '@/components/nexus-editor/StatusBar';
+import { MobileLayout } from '@/components/nexus-editor/mobile/MobileLayout';
 
 interface GamrNexusEditorProps {
   content?: string;
@@ -60,6 +63,9 @@ const GamrNexusEditor: React.FC<GamrNexusEditorProps> = ({
 
   const autoSaveTimer = useRef<NodeJS.Timeout | null>(null);
   const lastContent = useRef<string>('');
+
+  // ═══ MOBILE DETECTION ═══
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const editor = useEditor({
     extensions: [
@@ -101,23 +107,17 @@ const GamrNexusEditor: React.FC<GamrNexusEditorProps> = ({
       const paragraphs = text.split(/\n\n+/).filter(p => p.trim()).length || (text.trim() ? 1 : 0);
       const readingTime = Math.max(1, Math.ceil(words / 200));
       updateDocStats({ words, chars, lines, sentences, paragraphs, readingTime });
-      // Notify parent
       if (externalOnChange) externalOnChange(editor.getHTML());
-      // Persist to localStorage
       try { localStorage.setItem('nx-editor-content', editor.getHTML()); } catch {}
     },
     onSelectionUpdate: ({ editor }) => {
       const { from } = editor.state.selection;
-      const resolved = editor.state.doc.resolve(from);
-      // Approximate line/col
       let line = 1, col = 1;
       const text = editor.state.doc.textBetween(0, from, '\n');
       const textLines = text.split('\n');
       line = textLines.length;
       col = (textLines[textLines.length - 1]?.length || 0) + 1;
       setCursorPosition(line, col);
-
-      // Update current font/size from selection
       const attrs = editor.getAttributes('textStyle');
       if (attrs.fontFamily) setCurrentFont(attrs.fontFamily);
       if (attrs.fontSize) setCurrentSize(parseInt(attrs.fontSize));
@@ -131,11 +131,6 @@ const GamrNexusEditor: React.FC<GamrNexusEditorProps> = ({
       if (saved && saved !== '<p></p>') {
         editor.commands.setContent(saved, { emitUpdate: false });
       }
-      // Force a blur on mount to prevent any auto-scroll to the editor
-      if (embedded) {
-        editor.commands.blur();
-      }
-      // Force a blur on mount to prevent any auto-scroll to the editor
       if (embedded) {
         editor.commands.blur();
       }
@@ -150,7 +145,6 @@ const GamrNexusEditor: React.FC<GamrNexusEditorProps> = ({
         if (html !== lastContent.current) {
           lastContent.current = html;
           setAutoSaveStatus('saving');
-          // Simulate API call
           setTimeout(() => {
             setAutoSaveStatus('saved');
             setLastSavedAt(new Date());
@@ -208,6 +202,12 @@ const GamrNexusEditor: React.FC<GamrNexusEditorProps> = ({
 
   if (!editor) return null;
 
+  // ═══ MOBILE LAYOUT ═══
+  if (isMobile) {
+    return <MobileLayout editor={editor} embedded={embedded} />;
+  }
+
+  // ═══ DESKTOP LAYOUT (unchanged) ═══
   return (
     <div className={`nx-editor-shell ${isFocusMode ? 'nx-focus-mode' : ''} ${isMinimized ? 'nx-minimized' : ''} ${embedded ? 'nx-embedded' : ''}`}>
       {!embedded && <TitleBar />}

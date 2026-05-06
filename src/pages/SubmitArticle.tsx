@@ -4,10 +4,12 @@ import { ArrowLeft, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ContributorForm from '@/components/ContributorForm';
 import { motion } from 'framer-motion';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 const SubmitArticle = () => {
   const navigate = useNavigate();
   const heroRef = React.useRef<HTMLDivElement>(null);
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   React.useLayoutEffect(() => {
     if ('scrollRestoration' in window.history) {
@@ -40,7 +42,7 @@ const SubmitArticle = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black pt-28 pb-20 overflow-x-hidden">
+    <div className={`min-h-screen bg-black ${isMobile ? 'pt-16 pb-10' : 'pt-28 pb-20'} overflow-x-hidden`}>
       <div className="container mx-auto px-6 relative">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[120px] -z-10" />
