@@ -8,22 +8,36 @@ interface PageHeroProps {
   body: string;
   primaryCTA?: { text: string; href: string; external?: boolean };
   secondaryCTA?: { text: string; href: string; external?: boolean };
+  backgroundImage?: string;
 }
 
-const PageHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA }: PageHeroProps) => {
+const PageHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgroundImage }: PageHeroProps) => {
   return (
-    <section className="relative min-h-[80vh] flex items-end pb-24 md:pb-32 bg-black overflow-hidden">
-      {/* Atmospheric background */}
+    <section className="relative min-h-[80vh] flex items-end pt-32 pb-24 md:pb-32 bg-black overflow-hidden">
+      {/* Background Image/Atmosphere */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/15 via-black to-black" />
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
-            backgroundSize: "48px 48px",
-          }}
-        />
+        {backgroundImage ? (
+          <>
+            <img 
+              src={backgroundImage} 
+              alt={headline}
+              className="w-full h-full object-cover opacity-60"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+          </>
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/15 via-black to-black" />
+            <div
+              className="absolute inset-0 opacity-[0.03]"
+              style={{
+                backgroundImage:
+                  "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+                backgroundSize: "48px 48px",
+              }}
+            />
+          </>
+        )}
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
@@ -32,11 +46,11 @@ const PageHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA }: PageHer
             {eyebrow}
           </span>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-none uppercase">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-none uppercase text-white">
             {headline}
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-400 leading-relaxed max-w-2xl">
+          <p className="text-xl md:text-2xl text-gray-200 leading-relaxed max-w-2xl">
             {body}
           </p>
 

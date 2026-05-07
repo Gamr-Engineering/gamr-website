@@ -37,7 +37,7 @@ const ClosingCTA = ({
           </h2>
 
           {body && (
-            <p className="text-xl text-gray-400 leading-relaxed max-w-xl mx-auto">
+            <p className="text-xl text-gray-300 leading-relaxed max-w-xl mx-auto">
               {body}
             </p>
           )}
