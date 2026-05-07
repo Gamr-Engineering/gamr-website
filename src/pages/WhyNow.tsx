@@ -3,6 +3,12 @@ import PageHero from "@/components/PageHero";
 import ContentSection from "@/components/ContentSection";
 import ClosingCTA from "@/components/ClosingCTA";
 
+import whynowVibe from "@/assets/whynow-vibe.jpg";
+import whynowNeed from "@/assets/whynow-need.jpg";
+import whynowOpportunity from "@/assets/whynow-opportunity.jpg";
+import whynowTransition from "@/assets/whynow-transition.jpg";
+import whynowGap from "@/assets/whynow-gap.jpg";
+
 const WhyNow = () => {
   return (
     <ContentPage
@@ -13,6 +19,7 @@ const WhyNow = () => {
         eyebrow="Why Now"
         headline="AFRICA'S GAMING MOMENT HAS ARRIVED."
         body="The world is paying attention to African music, fashion, film, sport, and technology. Gaming is next. With a young population, rising smartphone access, expanding digital payments, creator culture, and global demand for new audiences, Africa is positioned to become one of the most important gaming markets of the next decade."
+        backgroundImage={whynowVibe}
         primaryCTA={{
           text: "Explore the Opportunity",
           href: "/gaming",
@@ -27,22 +34,26 @@ const WhyNow = () => {
         heading="THE AUDIENCE IS ALREADY HERE"
         body="Africa's gaming audience is massive, mobile-first, social, and ambitious. Young people are already competing, streaming, building communities, designing worlds, and organizing tournaments — often without formal infrastructure. Gamr is building for the audience that already exists."
         variant="darker"
+        image={whynowOpportunity}
       />
 
       <ContentSection
-        heading="CULTURE IS MOVING FASTER THAN INFRASTRUCTURE"
+        heading="THE DIGITAL TRANSITION"
         body="Players are ready. Creators are ready. Brands are ready. But the ecosystem still needs better systems for discovery, competition, monetization, education, and trust. That gap is the opportunity."
+        image={whynowTransition}
       />
 
       <ContentSection
-        heading="GAMING IS MORE THAN ENTERTAINMENT"
+        heading="WHAT WE NEED"
         body="Gaming now sits at the intersection of media, technology, education, commerce, sports, and youth development. It creates careers in content, design, events, production, community management, software, marketing, and storytelling."
         variant="darker"
+        image={whynowNeed}
       />
 
       <ContentSection
-        heading="THE NEXT GLOBAL GAMING MARKET"
+        heading="INFRASTRUCTURE GAP"
         body="Africa will not simply consume gaming culture. Africa will shape it. The next wave of stories, teams, creators, studios, and competitive communities can come from this continent — if the right infrastructure is built now."
+        image={whynowGap}
       />
 
       <ClosingCTA

@@ -3,6 +3,11 @@ import PageHero from "@/components/PageHero";
 import ContentSection from "@/components/ContentSection";
 import ClosingCTA from "@/components/ClosingCTA";
 
+import missionHero from "@/assets/mission-hero.jpg";
+import missionWhy from "@/assets/mission-why.jpg";
+import missionBuild from "@/assets/mission-build.jpg";
+import missionServe from "@/assets/mission-serve.jpg";
+
 const Mission = () => {
   return (
     <ContentPage
@@ -13,6 +18,7 @@ const Mission = () => {
         eyebrow="Our Mission"
         headline="CONNECTING GAMERS, CREATORS AND BRANDS THROUGH PLAY."
         body="Gamr's mission is to connect Africa's gaming ecosystem through experiences, technology, and opportunities that help people play, compete, create, learn, and earn. We are building the bridge between grassroots gaming culture and the global digital economy."
+        backgroundImage={missionHero}
         primaryCTA={{
           text: "Join the Community",
           href: "https://discord.gg/qV9e4ErZN2",
@@ -28,17 +34,20 @@ const Mission = () => {
         heading="WHY WE EXIST"
         body="Across Africa, millions of gamers are already gathering in Discord servers, WhatsApp groups, gaming cafés, universities, homes, and live events. The talent is here. The passion is here. What has been missing is coordinated infrastructure. Gamr organizes the chaos into a trusted ecosystem."
         variant="darker"
+        image={missionWhy}
       />
 
       <ContentSection
         heading="WHAT WE BUILD"
         body="We build tournaments, gaming hubs, creator programs, education pathways, community events, digital identities, content platforms, and brand experiences that serve the gaming generation. From casual players to professional competitors, our mission is to create access."
+        image={missionBuild}
       />
 
       <ContentSection
         heading="WHO WE SERVE"
         body="We serve gamers looking for community, creators looking for platforms, developers looking for opportunities, brands looking for culture, and partners looking to participate in Africa's next major entertainment economy."
         variant="darker"
+        image={missionServe}
       />
 
       <ClosingCTA
