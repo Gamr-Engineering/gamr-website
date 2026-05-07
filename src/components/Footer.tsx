@@ -15,44 +15,44 @@ const Footer = () => {
     {
       title: "Company",
       links: [
-        { name: "Vision", href: "#vision" },
-        { name: "Mission", href: "#mission" },
-        { name: "Why Now", href: "#why-now" },
-        { name: "Team", href: "#team" },
+        { name: "Vision", href: "/vision" },
+        { name: "Mission", href: "/mission" },
+        { name: "Why Now", href: "/why-now" },
+        { name: "Team", href: "/team" },
       ],
     },
     {
       title: "Ecosystem",
       links: [
-        { name: "GamrTag", href: "/claim-gamrtag" },
-        { name: "Studios", href: "#gamr-studios" },
-        { name: "Carven", href: "#carven" },
-        { name: "Bracket", href: "#bracket" },
+        { name: "GamrTag", href: "/gamrtag" },
+        { name: "Studios", href: "/studios" },
+        { name: "Carven", href: "/carven" },
+        { name: "Bracket", href: "/bracket" },
       ],
     },
     {
       title: "Talent",
       links: [
-        { name: "Gamers", href: "#gamers" },
-        { name: "Creators", href: "#creators" },
-        { name: "Developers", href: "#developers" },
+        { name: "Gamers", href: "/gamers" },
+        { name: "Creators", href: "/creators" },
+        { name: "Developers", href: "/developers" },
       ],
     },
     {
       title: "Industry",
       links: [
-        { name: "Education", href: "#education" },
-        { name: "Esports", href: "#esports" },
-        { name: "Gaming", href: "#gaming" },
-        { name: "Youth Development", href: "#youth-development" },
+        { name: "Education", href: "/education" },
+        { name: "Esports", href: "/esports" },
+        { name: "Gaming", href: "/gaming" },
+        { name: "Youth Development", href: "/youth-development" },
       ],
     },
     {
       title: "Resources",
       links: [
-        { name: "Case Studies", href: "#case-studies" },
-        { name: "Assets", href: "#assets" },
-        { name: "Blog", href: "#blog" },
+        { name: "Case Studies", href: "/case-studies" },
+        { name: "Assets", href: "/assets" },
+        { name: "Blog", href: "/insights" },
       ],
     },
   ];
@@ -89,12 +89,12 @@ const Footer = () => {
                 <ul className="space-y-2">
                   {section.links.map((link) => (
                     <li key={link.name}>
-                      <a
-                        href={link.href}
+                      <Link
+                        to={link.href}
                         className="text-gray-400 hover:text-white text-xs uppercase tracking-wider transition-colors"
                       >
                         {link.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -40,44 +41,44 @@ const Header = () => {
     {
       title: "Company",
       items: [
-        { title: "Vision", href: "#vision" },
-        { title: "Mission", href: "#mission" },
-        { title: "Why Now", href: "#why-now" },
-        { title: "Team", href: "#team" },
+        { title: "Vision", href: "/vision" },
+        { title: "Mission", href: "/mission" },
+        { title: "Why Now", href: "/why-now" },
+        { title: "Team", href: "/team" },
       ],
     },
     {
       title: "Ecosystem",
       items: [
-        { title: "GamrTag", href: "#gamrtag" },
-        { title: "Studios", href: "#gamr-studios" },
-        { title: "Carven", href: "#carven" },
-        { title: "Bracket", href: "#bracket" },
+        { title: "GamrTag", href: "/gamrtag" },
+        { title: "Studios", href: "/studios" },
+        { title: "Carven", href: "/carven" },
+        { title: "Bracket", href: "/bracket" },
       ],
     },
     {
       title: "Talent",
       items: [
-        { title: "Gamers", href: "#gamers" },
-        { title: "Creators", href: "#creators" },
-        { title: "Developers", href: "#developers" },
+        { title: "Gamers", href: "/gamers" },
+        { title: "Creators", href: "/creators" },
+        { title: "Developers", href: "/developers" },
       ],
     },
     {
       title: "Industry",
       items: [
-        { title: "Education", href: "#education" },
-        { title: "Esports", href: "#esports" },
-        { title: "Gaming", href: "#gaming" },
-        { title: "Youth Development", href: "#youth-development" },
+        { title: "Education", href: "/education" },
+        { title: "Esports", href: "/esports" },
+        { title: "Gaming", href: "/gaming" },
+        { title: "Youth Development", href: "/youth-development" },
       ],
     },
     {
       title: "Resources",
       items: [
-        { title: "Case Studies", href: "#case-studies" },
-        { title: "Assets", href: "#assets" },
-        { title: "Blog", href: "#blog" },
+        { title: "Case Studies", href: "/case-studies" },
+        { title: "Assets", href: "/assets" },
+        { title: "Blog", href: "/insights" },
       ],
     },
   ];
@@ -117,12 +118,12 @@ const Header = () => {
                       {section.items.map((item) => (
                         <li key={item.title}>
                           <NavigationMenuLink asChild>
-                            <a
-                              href={item.href}
+                            <Link
+                              to={item.href}
                               className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-white/10 hover:text-white focus:bg-accent focus:text-accent-foreground text-gray-300"
                             >
                               <div className="text-sm font-medium leading-none text-white uppercase tracking-wider">{item.title}</div>
-                            </a>
+                            </Link>
                           </NavigationMenuLink>
                         </li>
                       ))}
@@ -132,12 +133,12 @@ const Header = () => {
               ))}
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
-                  <a
-                    href="#contact"
+                  <Link
+                    to="/contact"
                     className={cn(navigationMenuTriggerStyle(), "bg-transparent text-white hover:bg-white/10 hover:text-white uppercase tracking-widest text-xs font-bold cursor-pointer")}
                   >
                     Contact
-                  </a>
+                  </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               {isAdmin && (
@@ -214,14 +215,14 @@ const Header = () => {
                     <div className="relative z-50 overflow-visible">
                       <div className="flex flex-col space-y-4 pb-4 pl-4 border-l border-white/10 ml-2 overflow-visible max-h-[500px] opacity-100 transition-all duration-300 ease-in-out pointer-events-auto">
                         {section.items.map((item) => (
-                          <a
+                          <Link
                             key={item.title}
-                            href={item.href}
+                            to={item.href}
                             onClick={() => setIsOpen(false)}
                             className="text-gray-400 hover:text-white uppercase tracking-wider text-sm transition-colors pointer-events-auto"
                           >
                             {item.title}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -230,13 +231,13 @@ const Header = () => {
               ))}
             </div>
 
-            <a
-              href="#contact"
+            <Link
+              to="/contact"
               onClick={() => setIsOpen(false)}
               className="text-xl font-bold text-white uppercase tracking-widest py-4 border-b border-white/10"
             >
               Contact
-            </a>
+            </Link>
             
             {isAdmin && (
               <a

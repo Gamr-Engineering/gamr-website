@@ -1,0 +1,55 @@
+import ContentPage from "@/components/ContentPage";
+import PageHero from "@/components/PageHero";
+import ContentSection from "@/components/ContentSection";
+import ClosingCTA from "@/components/ClosingCTA";
+
+const Mission = () => {
+  return (
+    <ContentPage
+      title="Gamr Mission | Connecting Gamers, Creators and Brands"
+      description="Gamr's mission is to connect gamers, creators, developers, and brands through thrilling experiences and seamless technology."
+    >
+      <PageHero
+        eyebrow="Our Mission"
+        headline="CONNECTING GAMERS, CREATORS AND BRANDS THROUGH PLAY."
+        body="Gamr's mission is to connect Africa's gaming ecosystem through experiences, technology, and opportunities that help people play, compete, create, learn, and earn. We are building the bridge between grassroots gaming culture and the global digital economy."
+        primaryCTA={{
+          text: "Join the Community",
+          href: "https://discord.gg/qV9e4ErZN2",
+          external: true,
+        }}
+        secondaryCTA={{
+          text: "Partner With Gamr",
+          href: "/contact",
+        }}
+      />
+
+      <ContentSection
+        heading="WHY WE EXIST"
+        body="Across Africa, millions of gamers are already gathering in Discord servers, WhatsApp groups, gaming cafés, universities, homes, and live events. The talent is here. The passion is here. What has been missing is coordinated infrastructure. Gamr organizes the chaos into a trusted ecosystem."
+        variant="darker"
+      />
+
+      <ContentSection
+        heading="WHAT WE BUILD"
+        body="We build tournaments, gaming hubs, creator programs, education pathways, community events, digital identities, content platforms, and brand experiences that serve the gaming generation. From casual players to professional competitors, our mission is to create access."
+      />
+
+      <ContentSection
+        heading="WHO WE SERVE"
+        body="We serve gamers looking for community, creators looking for platforms, developers looking for opportunities, brands looking for culture, and partners looking to participate in Africa's next major entertainment economy."
+        variant="darker"
+      />
+
+      <ClosingCTA
+        heading="PLAY HAS POWER."
+        body="Together, we can turn gaming into a real engine for culture, jobs, creativity, and connection."
+        ctaText="Start With Gamr"
+        ctaHref="https://discord.gg/qV9e4ErZN2"
+        ctaExternal
+      />
+    </ContentPage>
+  );
+};
+
+export default Mission;

@@ -24,6 +24,24 @@ import CareersPage from "./pages/intelligence/CareersPage";
 import CommunityReportForm from "./pages/community/CommunityReportForm";
 import SubmissionsAdmin from "./pages/admin/SubmissionsAdmin";
 import Login from "./pages/Login";
+import Vision from "./pages/Vision";
+import Mission from "./pages/Mission";
+import WhyNow from "./pages/WhyNow";
+import Team from "./pages/Team";
+import GamrTag from "./pages/GamrTag";
+import Studios from "./pages/Studios";
+import Carven from "./pages/Carven";
+import Bracket from "./pages/Bracket";
+import Gamers from "./pages/Gamers";
+import Creators from "./pages/Creators";
+import Developers from "./pages/Developers";
+import Education from "./pages/Education";
+import Esports from "./pages/Esports";
+import Gaming from "./pages/Gaming";
+import YouthDevelopment from "./pages/YouthDevelopment";
+import CaseStudies from "./pages/CaseStudies";
+import Assets from "./pages/Assets";
+import Contact from "./pages/Contact";
 import { InsightsProvider } from "./context/InsightsContext";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -65,6 +83,30 @@ const App = () => (
             <Route path="/insights/intelligence/timeline" element={<TimelinePage />} />
             <Route path="/insights/intelligence/careers" element={<CareersPage />} />
             <Route path="/insights/community-report" element={<CommunityReportForm />} />
+            {/* Company */}
+            <Route path="/vision" element={<Vision />} />
+            <Route path="/mission" element={<Mission />} />
+            <Route path="/why-now" element={<WhyNow />} />
+            <Route path="/team" element={<Team />} />
+            {/* Ecosystem */}
+            <Route path="/gamrtag" element={<GamrTag />} />
+            <Route path="/studios" element={<Studios />} />
+            <Route path="/carven" element={<Carven />} />
+            <Route path="/bracket" element={<Bracket />} />
+            {/* Talent */}
+            <Route path="/gamers" element={<Gamers />} />
+            <Route path="/creators" element={<Creators />} />
+            <Route path="/developers" element={<Developers />} />
+            {/* Industry */}
+            <Route path="/education" element={<Education />} />
+            <Route path="/esports" element={<Esports />} />
+            <Route path="/gaming" element={<Gaming />} />
+            <Route path="/youth-development" element={<YouthDevelopment />} />
+            {/* Resources */}
+            <Route path="/case-studies" element={<CaseStudies />} />
+            <Route path="/assets" element={<Assets />} />
+            {/* Contact */}
+            <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
