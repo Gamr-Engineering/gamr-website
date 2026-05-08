@@ -30,8 +30,8 @@ const ServicesSection = () => {
               <GraduationCap className="h-5 w-5" />
               <span className="text-sm font-bold uppercase tracking-widest">Education</span>
             </div>
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter leading-none uppercase">
-              Gamr Studios
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter leading-none">
+              gam<span className="text-red-600">r</span>studi<span className="relative inline-flex items-center justify-center">o<span className="absolute w-[20%] h-[20%] bg-red-600 rounded-full top-[55%] left-[50%] -translate-x-1/2 -translate-y-1/2"></span></span>s
             </h2>
             <p className="text-xl text-gray-300 max-w-lg leading-relaxed">
               Forging the next generation of creative technologists. Intensive training in game design, digital fashion, and spatial computing.

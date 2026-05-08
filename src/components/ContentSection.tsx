@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 interface ContentSectionProps {
-  heading: string;
+  heading: React.ReactNode;
   body?: string;
   bullets?: string[];
   /** Optional sub-sections with title + bullet list (e.g. Team categories) */
@@ -32,7 +32,7 @@ const ContentSection = ({
       <div className="container mx-auto px-6">
         <div className={cn("grid grid-cols-1 gap-12 items-center", image ? "lg:grid-cols-2" : "max-w-4xl")}>
           <div className="space-y-8">
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter leading-none uppercase">
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter leading-none">
               {heading}
             </h2>
 
@@ -74,7 +74,7 @@ const ContentSection = ({
             <div className="relative aspect-video lg:aspect-square overflow-hidden border border-white/10">
               <img 
                 src={image} 
-                alt={heading}
+                alt={typeof heading === "string" ? heading : "Content image"}
                 className="w-full h-full object-cover transition-all duration-700"
               />
             </div>

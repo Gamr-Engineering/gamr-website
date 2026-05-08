@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 interface PageHeroProps {
-  eyebrow: string;
-  headline: string;
+  eyebrow: React.ReactNode;
+  headline: React.ReactNode;
   body: string;
   primaryCTA?: { text: string; href: string; external?: boolean };
   secondaryCTA?: { text: string; href: string; external?: boolean };
@@ -20,7 +20,7 @@ const PageHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgroun
           <>
             <img 
               src={backgroundImage} 
-              alt={headline}
+              alt={typeof headline === "string" ? headline : (typeof eyebrow === "string" ? eyebrow : "Hero image")}
               className="w-full h-full object-cover opacity-60"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
@@ -42,11 +42,11 @@ const PageHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgroun
 
       <div className="relative z-10 container mx-auto px-6">
         <div className="max-w-3xl space-y-8 animate-fade-in">
-          <span className="text-white font-bold uppercase tracking-widest text-sm">
+          <span className="text-white font-bold tracking-widest text-sm">
             {eyebrow}
           </span>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-none uppercase text-white">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-none text-white">
             {headline}
           </h1>
 

@@ -11,7 +11,11 @@ const Assets = () => {
     >
       <PageHero
         eyebrow="Brand Assets"
-        headline="GAMR MEDIA AND BRAND RESOURCES."
+        headline={
+          <>
+            GAM<span className="text-red-600">R</span> MEDIA AND BRAND RESOURCES.
+          </>
+        }
         body="Find approved Gamr logos, brand materials, company descriptions, product information, and media resources for press, partners, sponsors, and collaborators."
         primaryCTA={{
           text: "Download Assets",
