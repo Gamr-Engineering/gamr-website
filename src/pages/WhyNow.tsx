@@ -7,7 +7,7 @@ import whynowVibe from "@/assets/whynow-vibe.jpg";
 import whynowNeed from "@/assets/whynow-need.jpg";
 import whynowOpportunity from "@/assets/whynow-opportunity.jpg";
 import whynowTransition from "@/assets/whynow-transition.jpg";
-import whynowGap from "@/assets/whynow-gap.jpg";
+import whynowQueue from "@/assets/whynow-queue.jpg";
 
 const WhyNow = () => {
   return (
@@ -34,7 +34,7 @@ const WhyNow = () => {
         heading="THE AUDIENCE IS ALREADY HERE"
         body="Africa's gaming audience is massive, mobile-first, social, and ambitious. Young people are already competing, streaming, building communities, designing worlds, and organizing tournaments — often without formal infrastructure. Gamr is building for the audience that already exists."
         variant="darker"
-        image={whynowOpportunity}
+        image={whynowQueue}
       />
 
       <ContentSection
@@ -47,13 +47,13 @@ const WhyNow = () => {
         heading="WHAT WE NEED"
         body="Gaming now sits at the intersection of media, technology, education, commerce, sports, and youth development. It creates careers in content, design, events, production, community management, software, marketing, and storytelling."
         variant="darker"
-        image={whynowNeed}
+        image={whynowOpportunity}
       />
 
       <ContentSection
         heading="INFRASTRUCTURE GAP"
         body="Africa will not simply consume gaming culture. Africa will shape it. The next wave of stories, teams, creators, studios, and competitive communities can come from this continent — if the right infrastructure is built now."
-        image={whynowGap}
+        image={whynowNeed}
       />
 
       <ClosingCTA

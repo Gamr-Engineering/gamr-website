@@ -2,6 +2,10 @@ import ContentPage from "@/components/ContentPage";
 import PageHero from "@/components/PageHero";
 import ContentSection from "@/components/ContentSection";
 import ClosingCTA from "@/components/ClosingCTA";
+import PartnersSection from "@/components/PartnersSection";
+import teamHero from "@/assets/team-hero.jpg";
+import teamLeadership from "@/assets/team-leadership.jpg";
+import teamCulture from "@/assets/team-culture.jpg";
 
 const Team = () => {
   return (
@@ -13,6 +17,7 @@ const Team = () => {
         eyebrow="The Squad"
         headline="BUILT BY GAMERS. DESIGNED FOR AFRICA."
         body="Gamr is powered by a team of operators, technologists, creatives, community builders, and lifelong gamers united by one mission: to build the future of play across Africa."
+        backgroundImage={teamHero}
         primaryCTA={{
           text: "Meet the Squad",
           href: "#team-categories",
@@ -24,20 +29,16 @@ const Team = () => {
       />
 
       <ContentSection
-        heading="WHO WE ARE"
+        heading="LEADERSHIP"
         body="We are builders at the intersection of gaming, culture, technology, education, and live experiences. Our team understands the energy of grassroots gaming and the discipline required to build scalable infrastructure. We are not just observing the ecosystem. We are part of it."
         variant="darker"
+        image={teamLeadership}
       />
 
       <ContentSection
-        heading="WHAT DRIVES US"
-        body="We believe African gamers deserve world-class platforms, trusted tournaments, premium spaces, creator opportunities, and clear pathways into the global gaming economy. Every product we build starts with the community."
-      />
-
-      <ContentSection
-        heading="OUR CULTURE"
+        heading="TEAM CULTURE"
         body="We move fast, play seriously, think globally, and stay rooted in the realities of African gamers. We believe in experimentation, ownership, collaboration, and building with the community — not above it."
-        variant="darker"
+        image={teamCulture}
       />
 
       {/* Team Categories */}
@@ -93,6 +94,15 @@ const Team = () => {
           </div>
         </div>
       </section>
+      
+      <div id="advisors-partners" className="pt-24 border-t border-white/5">
+        <div className="container mx-auto px-6 mb-8">
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tighter leading-none uppercase text-white">
+            ADVISORS & PARTNERS
+          </h2>
+        </div>
+        <PartnersSection />
+      </div>
 
       <ClosingCTA
         heading="WANT TO BUILD THE FUTURE OF PLAY?"
