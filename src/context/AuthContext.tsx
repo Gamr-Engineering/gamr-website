@@ -12,7 +12,8 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || "admin@gamr.africa";
+// SECURITY FIX: Removed environment variable dependency for admin check
+const ADMIN_EMAIL = "olamide.michael@gamr.africa";
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -21,15 +22,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check for manual "Bypass" session first
-    const manualAdmin = localStorage.getItem("gamr_admin_bypass");
-    if (manualAdmin === "true") {
-      setIsAdmin(true);
-      // We create a mock user object so ProtectedRoute works
-      setUser({ email: ADMIN_EMAIL, id: "admin-bypass" } as User);
-      setLoading(false);
-    }
-
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
@@ -47,7 +39,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (session) {
             setUser(session.user);
             setIsAdmin(session.user.email === ADMIN_EMAIL);
-        } else if (localStorage.getItem("gamr_admin_bypass") !== "true") {
+        } else {
             setUser(null);
             setIsAdmin(false);
         }
@@ -61,7 +53,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const signOut = async () => {
-    localStorage.removeItem("gamr_admin_bypass");
     await supabase.auth.signOut();
     setUser(null);
     setIsAdmin(false);

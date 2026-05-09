@@ -15,23 +15,15 @@ const Login = () => {
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/insights/admin";
-  const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || "olamide.michael@gamr.africa";
+  // SECURITY FIX: Removed environment variable dependency for admin check.
+  const ADMIN_EMAIL = "olamide.michael@gamr.africa";
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    const MASTER_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || "GamrAdmin2026!";
-
-    // 20+ Years Experience Bypass: If Supabase email confirmation is a hurdle, 
-    // we use a direct environment-level master password for the admin account.
-    if (email === ADMIN_EMAIL && password === MASTER_PASSWORD) {
-      localStorage.setItem("gamr_admin_bypass", "true");
-      toast.success("Master Access Granted.");
-      // Force a reload to refresh AuthContext
-      window.location.href = from;
-      return;
-    }
+    // SECURITY FIX: Removed insecure frontend master password bypass.
+    // All authentication must route through Supabase.
 
     if (isSignUp) {
       // ... existing signup logic ...

@@ -40,10 +40,37 @@ ALTER TABLE gaming_profiles ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow anonymous insert" ON gaming_profiles
   FOR INSERT WITH CHECK (true);
 
--- Allow public reads (for tag uniqueness checks)
-CREATE POLICY "Allow public read for tag check" ON gaming_profiles
-  FOR SELECT USING (true);
+-- Create secure RPC function for checking gamr_tag availability
+CREATE OR REPLACE FUNCTION check_gamr_tag_available(tag_to_check text)
+RETURNS boolean
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+BEGIN
+  RETURN NOT EXISTS (
+    SELECT 1 FROM gaming_profiles WHERE gamr_tag = tag_to_check
+  );
+END;
+$$;
 
+-- Create secure RPC function for checking email availability
+CREATE OR REPLACE FUNCTION check_email_available(email_to_check text, exclude_id uuid DEFAULT NULL)
+RETURNS boolean
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+BEGIN
+  IF exclude_id IS NOT NULL THEN
+    RETURN NOT EXISTS (
+      SELECT 1 FROM gaming_profiles WHERE email ILIKE email_to_check AND id != exclude_id
+    );
+  ELSE
+    RETURN NOT EXISTS (
+      SELECT 1 FROM gaming_profiles WHERE email ILIKE email_to_check
+    );
+  END IF;
+END;
+$$;
 -- Indexes
 CREATE INDEX idx_gaming_profiles_gamr_tag ON gaming_profiles (gamr_tag);
 CREATE INDEX idx_gaming_profiles_email ON gaming_profiles (email);
@@ -73,14 +100,18 @@ ALTER TABLE article_submissions ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow anonymous insert for submissions" ON article_submissions
   FOR INSERT WITH CHECK (true);
 
--- Allow public read (for the admin dashboard)
-CREATE POLICY "Allow public select for admin dashboard" ON article_submissions
-  FOR SELECT USING (true);
+-- Allow authenticated read (for the admin dashboard)
+CREATE POLICY "Allow authenticated read for admin dashboard" ON article_submissions
+  FOR SELECT USING (auth.uid() IS NOT NULL);
 
--- Allow public update (for approving/rejecting in the admin dashboard)
-CREATE POLICY "Allow public update for admin dashboard" ON article_submissions
-  FOR UPDATE USING (true);
+-- Allow public read for approved articles
+CREATE POLICY "Allow public read for approved articles" ON article_submissions
+  FOR SELECT USING (status = 'approved');
 
--- Allow public delete (for removing submissions in the admin dashboard)
-CREATE POLICY "Allow public delete for admin dashboard" ON article_submissions
-  FOR DELETE USING (true);
+-- Allow authenticated update (for approving/rejecting in the admin dashboard)
+CREATE POLICY "Allow authenticated update for admin dashboard" ON article_submissions
+  FOR UPDATE USING (auth.uid() IS NOT NULL);
+
+-- Allow authenticated delete (for removing submissions in the admin dashboard)
+CREATE POLICY "Allow authenticated delete for admin dashboard" ON article_submissions
+  FOR DELETE USING (auth.uid() IS NOT NULL);

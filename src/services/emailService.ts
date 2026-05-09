@@ -1,9 +1,11 @@
 export const emailService = {
   sendWelcome: async (name: string, email: string) => {
-    const RESEND_API_KEY = import.meta.env.VITE_RESEND_API_KEY;
+    // SECURITY FIX: Removed to prevent exposing API key in frontend bundle. 
+    // Real email dispatch must be moved to a secure backend endpoint.
+    const RESEND_API_KEY = undefined;
     
     if (!RESEND_API_KEY) {
-      console.warn("⚠️ VITE_RESEND_API_KEY is missing. Mocking welcome email pipeline.");
+      console.warn("⚠️ Email service running in mock mode. Backend endpoint required for real dispatch.");
       console.log(`[EMAIL DISPATCHER -> ${email}]: Welcome to Gamr Insights, ${name}!`);
       return { success: true, mocked: true };
     }
@@ -50,12 +52,14 @@ export const emailService = {
   },
 
   sendBroadcast: async (subject: string, htmlContent: string, activeSubscribers: string[]) => {
-    const RESEND_API_KEY = import.meta.env.VITE_RESEND_API_KEY;
+    // SECURITY FIX: Removed to prevent exposing API key in frontend bundle. 
+    // Real email dispatch must be moved to a secure backend endpoint.
+    const RESEND_API_KEY = undefined;
 
     if (!activeSubscribers || activeSubscribers.length === 0) return { success: true, count: 0 };
 
     if (!RESEND_API_KEY) {
-      console.warn(`⚠️ VITE_RESEND_API_KEY missing. Mocking broadcast to ${activeSubscribers.length} users.`);
+      console.warn(`⚠️ Email service running in mock mode. Mocking broadcast to ${activeSubscribers.length} users.`);
       console.log(`[BROADCAST DISPATCHER]: "${subject}" sent to ${activeSubscribers.join(", ")}`);
       return { success: true, mocked: true };
     }

@@ -2,6 +2,12 @@ import ContentPage from "@/components/ContentPage";
 import PageHero from "@/components/PageHero";
 import ContentSection from "@/components/ContentSection";
 import ClosingCTA from "@/components/ClosingCTA";
+import carvenHero from "@/assets/carven-hero.jpg";
+import carvenSpace from "@/assets/carven-space.jpg";
+import carvenFeatures from "@/assets/carven-features.jpg";
+import carvenCommunity from "@/assets/carven-community.jpg";
+import carvenBrands from "@/assets/carven-brands.jpg";
+import carvenLogo from "@/assets/carven-logo.png";
 
 const Carven = () => {
   return (
@@ -10,9 +16,16 @@ const Carven = () => {
       description="Visit Carven Gaming Hub by Gamr — a premium gaming, lifestyle, esports, and creative sanctuary at Landmark Center, Victoria Island, Lagos."
     >
       <PageHero
-        eyebrow="Carven Gaming Hub"
+        eyebrow={
+          <img 
+            src={carvenLogo} 
+            alt="Carven" 
+            className="h-12 md:h-16 w-auto object-contain" 
+          />
+        }
         headline="WHERE COMPETITION MEETS CULTURE."
         body="Carven is Africa's premium gaming, lifestyle, and creative sanctuary — built for players, creators, teams, brands, and communities who want to experience gaming at the highest level. Located at Landmark Center, Victoria Island, Lagos."
+        backgroundImage={carvenHero}
         primaryCTA={{
           text: "Visit Carven",
           href: "https://maps.app.goo.gl/XjkHsMv46uG2LsJA7",
@@ -28,6 +41,7 @@ const Carven = () => {
         heading="A NEW KIND OF GAMING SPACE"
         body="Carven is more than a gaming hub. It is a physical home for esports, content creation, community events, private sessions, brand activations, and premium entertainment."
         variant="darker"
+        image={carvenSpace}
       />
 
       <ContentSection
@@ -41,17 +55,20 @@ const Carven = () => {
           "Community events and private bookings",
           "VIP gaming experiences",
         ]}
+        image={carvenFeatures}
       />
 
       <ContentSection
         heading="BUILT FOR THE COMMUNITY"
         body="From casual matches to competitive tournaments, Carven gives gamers a reliable place to gather, compete, watch, create, and connect."
         variant="darker"
+        image={carvenCommunity}
       />
 
       <ContentSection
         heading="BUILT FOR BRANDS"
         body="Carven gives brands a direct gateway into gaming culture through activations, launches, watch parties, tournaments, creator sessions, and youth-focused experiences."
+        image={carvenBrands}
       />
 
       <ClosingCTA

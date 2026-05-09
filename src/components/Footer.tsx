@@ -1,8 +1,10 @@
 import { Instagram, Youtube, Linkedin } from "lucide-react";
 import { RiTwitterXFill, RiTiktokFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const Footer = () => {
+  const { toast } = useToast();
   const socialLinks = [
     { icon: Linkedin, href: "https://www.linkedin.com/company/gamr/" },
     { icon: RiTiktokFill, href: "https://www.tiktok.com/@gamrhq?_t=ZS-90oV0Er3uPk&_r=1" },
@@ -27,7 +29,7 @@ const Footer = () => {
         { name: "GamrTag", href: "/gamrtag" },
         { name: "Studios", href: "/studios" },
         { name: "Carven", href: "/carven" },
-        { name: "Bracket", href: "/bracket" },
+        { name: "Bracket", href: "/bracket", comingSoon: true },
       ],
     },
     {
@@ -89,12 +91,25 @@ const Footer = () => {
                 <ul className="space-y-2">
                   {section.links.map((link) => (
                     <li key={link.name}>
-                      <Link
-                        to={link.href}
-                        className="text-gray-400 hover:text-white text-xs uppercase tracking-wider transition-colors"
-                      >
-                        {link.name}
-                      </Link>
+                      {("comingSoon" in link && link.comingSoon) ? (
+                        <button
+                          onClick={() => toast({
+                            title: "Coming Soon",
+                            description: "Gamr Bracket is currently in development.",
+                          })}
+                          className="text-gray-400 hover:text-white text-xs uppercase tracking-wider transition-colors text-left flex items-center gap-2"
+                        >
+                          {link.name}
+                          <span className="text-[8px] bg-blue-500 text-white px-1 py-0.5 rounded-full">SOON</span>
+                        </button>
+                      ) : (
+                        <Link
+                          to={link.href}
+                          className="text-gray-400 hover:text-white text-xs uppercase tracking-wider transition-colors"
+                        >
+                          {link.name}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>

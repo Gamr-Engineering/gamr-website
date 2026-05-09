@@ -43,15 +43,6 @@ const Hero = () => {
                 Join Community
               </a>
             </Button>
-            <Button
-              className="bg-white border-2 border-white text-black hover:bg-transparent hover:text-white rounded-none px-10 py-7 text-sm font-bold uppercase tracking-widest transition-all duration-300"
-              asChild
-            >
-              <Link to="/claim-gamrtag">
-                Claim GamrTag
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
           </div>
         </div>
       </div>

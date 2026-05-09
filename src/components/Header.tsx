@@ -16,12 +16,14 @@ import {
 
 import TopBar from "@/components/TopBar";
 import { useAuth } from "@/context/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openMobileSection, setOpenMobileSection] = useState<string | null>(null);
   const { user, isAdmin, signOut } = useAuth();
+  const { toast } = useToast();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,7 +55,7 @@ const Header = () => {
         { title: "GamrTag", href: "/gamrtag" },
         { title: "Studios", href: "/studios" },
         { title: "Carven", href: "/carven" },
-        { title: "Bracket", href: "/bracket" },
+        { title: "Bracket", href: "/bracket", comingSoon: true },
       ],
     },
     {
@@ -118,12 +120,27 @@ const Header = () => {
                       {section.items.map((item) => (
                         <li key={item.title}>
                           <NavigationMenuLink asChild>
-                            <Link
-                              to={item.href}
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-white/10 hover:text-white focus:bg-accent focus:text-accent-foreground text-gray-300"
-                            >
-                              <div className="text-sm font-medium leading-none text-white uppercase tracking-wider">{item.title}</div>
-                            </Link>
+                            {("comingSoon" in item && item.comingSoon) ? (
+                              <button
+                                onClick={() => toast({
+                                  title: "Coming Soon",
+                                  description: "Gamr Bracket is currently in development. Stay tuned!",
+                                })}
+                                className="block w-full text-left select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-white/10 hover:text-white focus:bg-accent focus:text-accent-foreground text-gray-300"
+                              >
+                                <div className="text-sm font-medium leading-none text-white uppercase tracking-wider">
+                                  {item.title}
+                                  <span className="ml-2 text-[10px] bg-blue-500 text-white px-1.5 py-0.5 rounded-full">SOON</span>
+                                </div>
+                              </button>
+                            ) : (
+                              <Link
+                                to={item.href}
+                                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-white/10 hover:text-white focus:bg-accent focus:text-accent-foreground text-gray-300"
+                              >
+                                <div className="text-sm font-medium leading-none text-white uppercase tracking-wider">{item.title}</div>
+                              </Link>
+                            )}
                           </NavigationMenuLink>
                         </li>
                       ))}
@@ -215,14 +232,31 @@ const Header = () => {
                     <div className="relative z-50 overflow-visible">
                       <div className="flex flex-col space-y-4 pb-4 pl-4 border-l border-white/10 ml-2 overflow-visible max-h-[500px] opacity-100 transition-all duration-300 ease-in-out pointer-events-auto">
                         {section.items.map((item) => (
-                          <Link
-                            key={item.title}
-                            to={item.href}
-                            onClick={() => setIsOpen(false)}
-                            className="text-gray-400 hover:text-white uppercase tracking-wider text-sm transition-colors pointer-events-auto"
-                          >
-                            {item.title}
-                          </Link>
+                          ("comingSoon" in item && item.comingSoon) ? (
+                            <button
+                              key={item.title}
+                              onClick={() => {
+                                toast({
+                                  title: "Coming Soon",
+                                  description: "Gamr Bracket is currently in development.",
+                                });
+                                setIsOpen(false);
+                              }}
+                              className="text-gray-400 hover:text-white uppercase tracking-wider text-sm transition-colors text-left flex items-center gap-2"
+                            >
+                              {item.title}
+                              <span className="text-[10px] bg-blue-500 text-white px-1.5 py-0.5 rounded-full">SOON</span>
+                            </button>
+                          ) : (
+                            <Link
+                              key={item.title}
+                              to={item.href}
+                              onClick={() => setIsOpen(false)}
+                              className="text-gray-400 hover:text-white uppercase tracking-wider text-sm transition-colors pointer-events-auto"
+                            >
+                              {item.title}
+                            </Link>
+                          )
                         ))}
                       </div>
                     </div>

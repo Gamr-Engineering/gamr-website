@@ -28,8 +28,8 @@ const GamrTag = () => {
         body="Your GamrTag is more than a username. It is your identity across tournaments, events, community experiences, creator programs, leaderboards, rewards, and future Gamr products. Claim your name. Build your reputation. Be known across the ecosystem."
         backgroundImage={gamrtagHero}
         primaryCTA={{
-          text: "Claim Your GamrTag",
-          href: "/claim-gamrtag",
+          text: "Join Waitlist",
+          href: "https://discord.gg/qV9e4ErZN2",
         }}
       />
 
@@ -63,8 +63,8 @@ const GamrTag = () => {
 
       <ClosingCTA
         heading="CLAIM YOUR NAME BEFORE SOMEONE ELSE DOES."
-        ctaText="Claim GamrTag"
-        ctaHref="/claim-gamrtag"
+        ctaText="Join Waitlist"
+        ctaHref="https://discord.gg/qV9e4ErZN2"
       />
     </ContentPage>
   );

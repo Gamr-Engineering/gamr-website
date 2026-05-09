@@ -2,8 +2,10 @@ import ContentPage from "@/components/ContentPage";
 import PageHero from "@/components/PageHero";
 import ContentSection from "@/components/ContentSection";
 import ClosingCTA from "@/components/ClosingCTA";
+import { useToast } from "@/hooks/use-toast";
 
 const Esports = () => {
+  const { toast } = useToast();
   return (
     <ContentPage
       title="Esports in Africa | Gamr Competitive Gaming Ecosystem"
@@ -15,7 +17,10 @@ const Esports = () => {
         body="Gamr is helping African esports move from fragmented competitions to trusted, scalable, world-class competitive experiences. From grassroots tournaments to major events, we are building the systems that let players compete with confidence."
         primaryCTA={{
           text: "Run a Tournament",
-          href: "/bracket",
+          onClick: () => toast({
+            title: "Coming Soon",
+            description: "Tournament infrastructure (Gamr Bracket) is currently in development.",
+          }),
         }}
         secondaryCTA={{
           text: "Sponsor Esports",

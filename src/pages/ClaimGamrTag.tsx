@@ -211,31 +211,6 @@ const ClaimGamrTag = () => {
         console.log(`[ONBOARDING_FLOW] Step ${step}: ${event}`, details || "");
     }, [step]);
 
-    // Schema Check on Mount
-    useEffect(() => {
-        const verifySchema = async () => {
-            logStepEvent("Checking database schema...");
-            try {
-                const { data, error } = await supabase.from("gaming_profiles").select("*").limit(1);
-                if (error) throw error;
-                
-                if (data && data.length >= 0) {
-                    const columns = Object.keys(data[0] || {});
-                    const required = ["phone_number", "gamer_archetypes", "play_styles", "email", "display_name"];
-                    const missing = required.filter(col => !columns.includes(col));
-                    
-                    if (missing.length > 0) {
-                        console.warn(`[SCHEMA_SECURITY] MISSING COLUMNS: ${missing.join(", ")}. Please run the consolidated migration.`);
-                    } else {
-                        console.log("[SCHEMA_SECURITY] Schema verification passed.");
-                    }
-                }
-            } catch (err) {
-                console.error("[SCHEMA_SECURITY] Failed to verify schema:", err);
-            }
-        };
-        verifySchema();
-    }, [logStepEvent]);
 
     // Debounced tag uniqueness check
     const checkTagAvailability = useCallback(async (tag: string) => {
@@ -246,15 +221,12 @@ const ClaimGamrTag = () => {
         setIsCheckingTag(true);
         logStepEvent("Checking tag availability...", { tag });
         try {
-            const { data, error } = await supabase
-                .from("gaming_profiles")
-                .select("gamr_tag")
-                .eq("gamr_tag", tag.toLowerCase())
-                .maybeSingle();
+            const { data: isAvailable, error } = await supabase
+                .rpc("check_gamr_tag_available", { tag_to_check: tag.toLowerCase() });
 
             if (error) {
                 console.error("Tag check error:", error);
-                if (error.code === "PGRST204" || error.message?.includes("Could not find the") || error.message?.includes("schema cache")) {
+                if (error.code === "PGRST204" || error.message?.includes("Could not find the") || error.message?.includes("schema cache") || error.message?.includes("function")) {
                     // Graceful degrade: assume available and let handleSubmit handle the schema fallback
                     setTagAvailable(true);
                 } else {
@@ -266,7 +238,6 @@ const ClaimGamrTag = () => {
                     });
                 }
             } else {
-                const isAvailable = data === null;
                 setTagAvailable(isAvailable);
                 logStepEvent("Tag availability result", { tag, isAvailable });
             }
@@ -302,17 +273,13 @@ const ClaimGamrTag = () => {
 
             logStepEvent("Checking email availability...", { email: trimmed, requestId });
 
-            let query = supabase
-                .from("gaming_profiles")
-                .select("id")
-                .ilike("email", trimmed.toLowerCase());
-
-            // Identity-Aware: Ignore current user's own record if they are re-validating
+            const rpcParams: any = { email_to_check: trimmed.toLowerCase() };
             if (successProfile?.id) {
-                query = query.neq("id", successProfile.id);
+                rpcParams.exclude_id = successProfile.id;
             }
 
-            const { data, error } = await query.maybeSingle();
+            const { data: isAvailable, error } = await supabase
+                .rpc("check_email_available", rpcParams);
 
             // Ignore responses from outdated requests (Race condition protection)
             if (requestId !== lastEmailCheckId.current) {
@@ -321,15 +288,12 @@ const ClaimGamrTag = () => {
 
             if (error) {
                 console.error("Email check error:", error);
-                if (error.code === "PGRST204" || error.message?.includes("Could not find the") || error.message?.includes("schema cache")) {
+                if (error.code === "PGRST204" || error.message?.includes("Could not find the") || error.message?.includes("schema cache") || error.message?.includes("function")) {
                     setEmailAvailable(true);
                 } else {
                     setEmailAvailable(null);
                 }
             } else {
-                // Strict Boolean Parsing: exists is true if data is NOT null
-                const exists = data !== null;
-                const isAvailable = !exists;
                 setEmailAvailable(isAvailable);
                 logStepEvent("Email availability result", { email: trimmed, isAvailable });
             }
@@ -499,17 +463,14 @@ const ClaimGamrTag = () => {
             
             // Defensive: Only check if email actually has content
             if (trimmedEmail !== "") {
-                const { data: existingUser, error: checkError } = await supabase
-                    .from("gaming_profiles")
-                    .select("id")
-                    .ilike("email", trimmedEmail.toLowerCase())
-                    .maybeSingle();
+                const { data: isAvailable, error: checkError } = await supabase
+                    .rpc("check_email_available", { email_to_check: trimmedEmail.toLowerCase() });
 
                 if (checkError) {
                     console.error("Pre-flight check error:", checkError);
                 }
 
-                if (existingUser && existingUser.id) {
+                if (isAvailable === false) {
                     logStepEvent("Duplicate email detected during pre-flight", { email: trimmedEmail });
                     setEmailAvailable(false);
                     toast({

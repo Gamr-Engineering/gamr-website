@@ -5,6 +5,7 @@ import gamrLabVideo from "@/assets/gamr-lab-video.mp4";
 import carven1 from "@/assets/carven/carven-1.jpg";
 import { campaigns } from "@/data/campaigns";
 import { getCampaignStatus } from "@/utils/campaignStatus";
+import carvenLogo from "@/assets/carven-logo.png";
 
 const ServicesSection = () => {
   return (
@@ -77,9 +78,11 @@ const ServicesSection = () => {
               <Users className="h-5 w-5" />
               <span className="text-sm font-bold uppercase tracking-widest">Community</span>
             </div>
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter leading-none uppercase">
-              Carven<br />Gaming Hub
-            </h2>
+            <img 
+              src={carvenLogo} 
+              alt="Carven" 
+              className="h-20 md:h-32 w-auto object-contain mb-4 -ml-2" 
+            />
             <p className="text-xl text-gray-300 leading-relaxed">
               Africa's premium gaming, lifestyle, and creative sanctuary. <br />
               Where competition meets culture.

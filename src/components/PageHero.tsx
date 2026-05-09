@@ -6,8 +6,8 @@ interface PageHeroProps {
   eyebrow: React.ReactNode;
   headline: React.ReactNode;
   body: string;
-  primaryCTA?: { text: string; href: string; external?: boolean };
-  secondaryCTA?: { text: string; href: string; external?: boolean };
+  primaryCTA?: { text: string; href?: string; external?: boolean; onClick?: () => void };
+  secondaryCTA?: { text: string; href?: string; external?: boolean; onClick?: () => void };
   backgroundImage?: string;
 }
 
@@ -59,32 +59,45 @@ const PageHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgroun
               {primaryCTA && (
                 <Button
                   className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-black rounded-none px-10 py-7 text-sm font-bold uppercase tracking-widest transition-all duration-300"
-                  asChild
+                  asChild={!!primaryCTA.href}
+                  onClick={primaryCTA.onClick}
                 >
-                  {primaryCTA.external ? (
-                    <a href={primaryCTA.href} target="_blank" rel="noopener noreferrer">
-                      {primaryCTA.text}
-                    </a>
+                  {primaryCTA.href ? (
+                    primaryCTA.external ? (
+                      <a href={primaryCTA.href} target="_blank" rel="noopener noreferrer">
+                        {primaryCTA.text}
+                      </a>
+                    ) : (
+                      <Link to={primaryCTA.href}>{primaryCTA.text}</Link>
+                    )
                   ) : (
-                    <Link to={primaryCTA.href}>{primaryCTA.text}</Link>
+                    <span>{primaryCTA.text}</span>
                   )}
                 </Button>
               )}
               {secondaryCTA && (
                 <Button
                   className="bg-white border-2 border-white text-black hover:bg-transparent hover:text-white rounded-none px-10 py-7 text-sm font-bold uppercase tracking-widest transition-all duration-300"
-                  asChild
+                  asChild={!!secondaryCTA.href}
+                  onClick={secondaryCTA.onClick}
                 >
-                  {secondaryCTA.external ? (
-                    <a href={secondaryCTA.href} target="_blank" rel="noopener noreferrer">
-                      {secondaryCTA.text}
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </a>
+                  {secondaryCTA.href ? (
+                    secondaryCTA.external ? (
+                      <a href={secondaryCTA.href} target="_blank" rel="noopener noreferrer">
+                        {secondaryCTA.text}
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </a>
+                    ) : (
+                      <Link to={secondaryCTA.href}>
+                        {secondaryCTA.text}
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    )
                   ) : (
-                    <Link to={secondaryCTA.href}>
+                    <span className="flex items-center">
                       {secondaryCTA.text}
                       <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
+                    </span>
                   )}
                 </Button>
               )}
