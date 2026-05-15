@@ -3,6 +3,11 @@ import PageHero from "@/components/PageHero";
 import ContentSection from "@/components/ContentSection";
 import ClosingCTA from "@/components/ClosingCTA";
 
+import gamersHero from "@/assets/gamers-hero.jpg";
+import gamersCommunity from "@/assets/gamers-community.jpg";
+import gamersFeatures from "@/assets/gamers-features.jpg";
+import gamersPathway from "@/assets/gamers-pathway.jpg";
+
 const Gamers = () => {
   return (
     <ContentPage
@@ -13,6 +18,7 @@ const Gamers = () => {
         eyebrow="For Gamers"
         headline="COMPETE. CONNECT. LEVEL UP."
         body="Gamr gives African gamers access to tournaments, communities, events, training, content, rewards, and opportunities across the gaming ecosystem. Whether you play for fun or compete for glory, there is a place for you here."
+        backgroundImage={gamersHero}
         primaryCTA={{
           text: "Join the Community",
           href: "https://discord.gg/qV9e4ErZN2",
@@ -28,6 +34,7 @@ const Gamers = () => {
         heading="YOUR HOME IN AFRICAN GAMING"
         body="Find players, join competitions, attend events, learn new skills, and become part of a growing network of gamers across the continent."
         variant="darker"
+        image={gamersCommunity}
       />
 
       <ContentSection
@@ -41,12 +48,14 @@ const Gamers = () => {
           "Creator and career pathways",
           "Opportunities to connect with brands and teams",
         ]}
+        image={gamersFeatures}
       />
 
       <ContentSection
         heading="FROM CASUAL TO COMPETITIVE"
         body="Not every gamer starts as a professional. Gamr creates pathways for casual players to discover communities, sharpen their skills, join tournaments, and grow into competitive opportunities."
         variant="darker"
+        image={gamersPathway}
       />
 
       <ClosingCTA
