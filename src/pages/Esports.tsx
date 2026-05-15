@@ -1,7 +1,7 @@
 import ContentPage from "@/components/ContentPage";
-import PageHero from "@/components/PageHero";
-import ContentSection from "@/components/ContentSection";
-import ClosingCTA from "@/components/ClosingCTA";
+import IndustryHero from "@/components/industry/IndustryHero";
+import IndustrySection from "@/components/industry/IndustrySection";
+import IndustryCTA from "@/components/industry/IndustryCTA";
 import { useToast } from "@/hooks/use-toast";
 
 const Esports = () => {
@@ -11,7 +11,7 @@ const Esports = () => {
       title="Esports in Africa | Gamr Competitive Gaming Ecosystem"
       description="Gamr is professionalizing esports in Africa through tournaments, infrastructure, communities, events, talent development, and trusted competition systems."
     >
-      <PageHero
+      <IndustryHero
         eyebrow="Esports"
         headline="BUILDING THE COMPETITIVE FUTURE OF AFRICAN GAMING."
         body="Gamr is helping African esports move from fragmented competitions to trusted, scalable, world-class competitive experiences. From grassroots tournaments to major events, we are building the systems that let players compete with confidence."
@@ -26,15 +26,21 @@ const Esports = () => {
           text: "Sponsor Esports",
           href: "/contact",
         }}
+        stats={[
+          { value: "50+", label: "Tournaments" },
+          { value: "10K+", label: "Competitors" },
+          { value: "20+", label: "Game Titles" },
+          { value: "5", label: "Countries" },
+        ]}
       />
 
-      <ContentSection
+      <IndustrySection
         heading="COMPETITION NEEDS TRUST"
         body="Players need fair brackets, clear rules, reliable communication, transparent prize structures, and organizers who understand the community. Gamr brings structure to competitive gaming."
         variant="darker"
       />
 
-      <ContentSection
+      <IndustrySection
         heading="WHAT WE POWER"
         bullets={[
           "Tournaments and leagues",
@@ -48,18 +54,18 @@ const Esports = () => {
         ]}
       />
 
-      <ContentSection
+      <IndustrySection
         heading="FROM GRASSROOTS TO MAIN STAGE"
         body="African esports will grow by connecting everyday players to bigger stages. Gamr creates pathways from local competition to national and continental visibility."
         variant="darker"
       />
 
-      <ContentSection
+      <IndustrySection
         heading="FOR BRANDS AND PARTNERS"
         body="Esports gives brands a direct connection to youth culture, digital communities, and high-engagement entertainment. Gamr helps partners enter the space credibly."
       />
 
-      <ClosingCTA
+      <IndustryCTA
         heading="LET'S BUILD THE NEXT ARENA."
         ctaText="Partner With Gamr Esports"
         ctaHref="/contact"

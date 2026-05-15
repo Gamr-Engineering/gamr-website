@@ -1,7 +1,7 @@
 import ContentPage from "@/components/ContentPage";
-import PageHero from "@/components/PageHero";
-import ContentSection from "@/components/ContentSection";
-import ClosingCTA from "@/components/ClosingCTA";
+import EcosystemHero from "@/components/ecosystem/EcosystemHero";
+import EcosystemSection from "@/components/ecosystem/EcosystemSection";
+import EcosystemCTA from "@/components/ecosystem/EcosystemCTA";
 
 import gamrtagHero from "@/assets/gamrtag-hero.jpg";
 import gamrtagIdentity from "@/assets/gamrtag-identity.jpg";
@@ -14,7 +14,7 @@ const GamrTag = () => {
       title="GamrTag | Your Identity Across the Gamr Ecosystem"
       description="Claim your GamrTag — your unique gaming identity across Gamr tournaments, events, communities, creator programs, and digital experiences."
     >
-      <PageHero
+      <EcosystemHero
         eyebrow={
           <>
             gam<span className="text-red-600">r</span>tag
@@ -33,20 +33,20 @@ const GamrTag = () => {
         }}
       />
 
-      <ContentSection
+      <EcosystemSection
         heading="YOUR DIGITAL IDENTITY"
         body="As Gamr grows, your GamrTag becomes your passport into competitions, sessions, hubs, creator programs, rewards, and community access. It helps us connect your activity, achievements, and opportunities in one place."
         variant="darker"
         image={gamrtagIdentity}
       />
 
-      <ContentSection
+      <EcosystemSection
         heading="UNIVERSAL ACCESS"
         body="Whether you play casually, compete professionally, create content, attend events, or join training programs, your GamrTag gives you a consistent identity inside the Gamr world."
         image={gamrtagAccess}
       />
 
-      <ContentSection
+      <EcosystemSection
         heading="THE REWARDS"
         body="Unlock more as you play. Your GamrTag tracks your achievements and opens doors to exclusive perks, partner rewards, and community opportunities across the entire continent."
         bullets={[
@@ -61,7 +61,7 @@ const GamrTag = () => {
         image={gamrtagRewards}
       />
 
-      <ClosingCTA
+      <EcosystemCTA
         heading="CLAIM YOUR NAME BEFORE SOMEONE ELSE DOES."
         ctaText="Join Waitlist"
         ctaHref="https://discord.gg/qV9e4ErZN2"

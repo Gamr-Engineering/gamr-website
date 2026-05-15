@@ -1,18 +1,24 @@
 import ContentPage from "@/components/ContentPage";
-import PageHero from "@/components/PageHero";
-import ContentSection from "@/components/ContentSection";
-import ClosingCTA from "@/components/ClosingCTA";
+import TalentHero from "@/components/talent/TalentHero";
+import TalentSection from "@/components/talent/TalentSection";
+import TalentCTA from "@/components/talent/TalentCTA";
+
+import developersHero from "@/assets/developers-hero.jpg";
+import developersBuilders from "@/assets/developers-builders.jpg";
+import developersAudience from "@/assets/developers-audience.jpg";
+import developersSupport from "@/assets/developers-support.jpg";
 
 const Developers = () => {
   return (
     <ContentPage
-      title="Gamr for Developers | Build Games and Digital Worlds from Africa"
-      description="Gamr supports African game developers, Roblox builders, technical creators, and digital world designers through training, infrastructure, and publishing pathways."
+      title="African Game Developers | Build with Gamr Studios"
+      description="Gamr supports developers, technical creators, Roblox builders, designers, and digital world makers with training, infrastructure, mentorship, and opportunities to publish."
     >
-      <PageHero
+      <TalentHero
         eyebrow="For Developers"
         headline="BUILD THE WORLDS AFRICA WILL PLAY IN."
         body="Gamr supports developers, technical creators, Roblox builders, designers, and digital world makers with training, infrastructure, mentorship, and opportunities to publish."
+        backgroundImage={developersHero}
         primaryCTA={{
           text: "Explore Gamr Studios",
           href: "/studios",
@@ -23,13 +29,14 @@ const Developers = () => {
         }}
       />
 
-      <ContentSection
+      <TalentSection
         heading="AFRICA NEEDS MORE BUILDERS"
         body="The future of gaming will not only be decided by who plays. It will be shaped by who builds. Gamr is helping African developers create games, virtual experiences, interactive stories, and new digital economies."
         variant="darker"
+        image={developersBuilders}
       />
 
-      <ContentSection
+      <TalentSection
         heading="WHO THIS IS FOR"
         bullets={[
           "Game developers",
@@ -41,9 +48,10 @@ const Developers = () => {
           "Students and early-stage creators",
           "Indie studios and creative teams",
         ]}
+        image={developersAudience}
       />
 
-      <ContentSection
+      <TalentSection
         heading="HOW GAMR SUPPORTS DEVELOPERS"
         bullets={[
           "Training programs",
@@ -55,12 +63,13 @@ const Developers = () => {
           "Revenue and monetization education",
         ]}
         variant="darker"
+        image={developersSupport}
       />
 
-      <ClosingCTA
-        heading="STOP WAITING FOR THE FUTURE. BUILD IT."
-        ctaText="Join Gamr Studios"
-        ctaHref="/studios"
+      <TalentCTA
+        heading="THE NEXT GREAT GAME COULD COME FROM AFRICA."
+        ctaText="Start Building"
+        ctaHref="/gamr-lab"
       />
     </ContentPage>
   );

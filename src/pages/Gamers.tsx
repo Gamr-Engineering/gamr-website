@@ -1,7 +1,7 @@
 import ContentPage from "@/components/ContentPage";
-import PageHero from "@/components/PageHero";
-import ContentSection from "@/components/ContentSection";
-import ClosingCTA from "@/components/ClosingCTA";
+import TalentHero from "@/components/talent/TalentHero";
+import TalentSection from "@/components/talent/TalentSection";
+import TalentCTA from "@/components/talent/TalentCTA";
 
 import gamersHero from "@/assets/gamers-hero.jpg";
 import gamersCommunity from "@/assets/gamers-community.jpg";
@@ -11,13 +11,13 @@ import gamersPathway from "@/assets/gamers-pathway.jpg";
 const Gamers = () => {
   return (
     <ContentPage
-      title="Gamr for Gamers | Compete, Connect and Grow"
-      description="Gamr helps African gamers compete in tournaments, join communities, access events, claim identities, and grow within the gaming ecosystem."
+      title="African Gamers | Compete, Create and Connect with Gamr"
+      description="Gamr empowers African gamers through tournaments, community experiences, creator pathways, digital identity, and competitive infrastructure."
     >
-      <PageHero
+      <TalentHero
         eyebrow="For Gamers"
-        headline="COMPETE. CONNECT. LEVEL UP."
-        body="Gamr gives African gamers access to tournaments, communities, events, training, content, rewards, and opportunities across the gaming ecosystem. Whether you play for fun or compete for glory, there is a place for you here."
+        headline="THIS IS YOUR ERA."
+        body="Whether you play casually, compete seriously, or dream of going pro — Gamr is building the infrastructure to support your journey. Tournaments, community, creator tools, digital identity, and real opportunities."
         backgroundImage={gamersHero}
         primaryCTA={{
           text: "Join the Community",
@@ -25,41 +25,41 @@ const Gamers = () => {
           external: true,
         }}
         secondaryCTA={{
-          text: "Claim GamrTag",
+          text: "Claim Your GamrTag",
           href: "/claim-gamrtag",
         }}
       />
 
-      <ContentSection
-        heading="YOUR HOME IN AFRICAN GAMING"
-        body="Find players, join competitions, attend events, learn new skills, and become part of a growing network of gamers across the continent."
+      <TalentSection
+        heading="BUILT FOR THE COMMUNITY"
+        body="From Discord servers to gaming cafés, from watch parties to national tournaments — Gamr brings African gamers together with structure, energy, and purpose."
         variant="darker"
         image={gamersCommunity}
       />
 
-      <ContentSection
-        heading="WHAT GAMERS GET"
+      <TalentSection
+        heading="WHAT YOU GET"
         bullets={[
-          "Access to tournaments and events",
-          "Community spaces and gaming sessions",
-          "GamrTag identity",
-          "Leaderboards and recognition",
-          "Workshops and training",
-          "Creator and career pathways",
-          "Opportunities to connect with brands and teams",
+          "Competitive tournaments with structure and trust",
+          "Your own GamrTag — a digital identity across the ecosystem",
+          "Community events and experiences",
+          "Access to Carven Gaming Hub",
+          "Creator and content pathways",
+          "Visibility and recognition",
+          "Rewards, perks, and growth",
         ]}
         image={gamersFeatures}
       />
 
-      <ContentSection
-        heading="FROM CASUAL TO COMPETITIVE"
-        body="Not every gamer starts as a professional. Gamr creates pathways for casual players to discover communities, sharpen their skills, join tournaments, and grow into competitive opportunities."
+      <TalentSection
+        heading="YOUR PATHWAY"
+        body="Whether you want to compete, create, build, or just belong — Gamr creates real pathways for African gamers. From your first match to your biggest stage."
         variant="darker"
         image={gamersPathway}
       />
 
-      <ClosingCTA
-        heading="THIS IS YOUR ARENA."
+      <TalentCTA
+        heading="YOUR GAME. YOUR COMMUNITY. YOUR FUTURE."
         ctaText="Join Gamr"
         ctaHref="https://discord.gg/qV9e4ErZN2"
         ctaExternal

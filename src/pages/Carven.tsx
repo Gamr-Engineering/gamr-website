@@ -1,7 +1,7 @@
 import ContentPage from "@/components/ContentPage";
-import PageHero from "@/components/PageHero";
-import ContentSection from "@/components/ContentSection";
-import ClosingCTA from "@/components/ClosingCTA";
+import EcosystemHero from "@/components/ecosystem/EcosystemHero";
+import EcosystemSection from "@/components/ecosystem/EcosystemSection";
+import EcosystemCTA from "@/components/ecosystem/EcosystemCTA";
 import carvenHero from "@/assets/carven-hero.jpg";
 import carvenSpace from "@/assets/carven-space.jpg";
 import carvenFeatures from "@/assets/carven-features.jpg";
@@ -15,12 +15,12 @@ const Carven = () => {
       title="Carven Gaming Hub | Premium Gaming and Culture Space in Lagos"
       description="Visit Carven Gaming Hub by Gamr — a premium gaming, lifestyle, esports, and creative sanctuary at Landmark Center, Victoria Island, Lagos."
     >
-      <PageHero
+      <EcosystemHero
         eyebrow={
           <img 
             src={carvenLogo} 
             alt="Carven" 
-            className="h-12 md:h-16 w-auto object-contain" 
+            className="h-8 md:h-10 w-auto object-contain" 
           />
         }
         headline="WHERE COMPETITION MEETS CULTURE."
@@ -37,14 +37,14 @@ const Carven = () => {
         }}
       />
 
-      <ContentSection
+      <EcosystemSection
         heading="A NEW KIND OF GAMING SPACE"
         body="Carven is more than a gaming hub. It is a physical home for esports, content creation, community events, private sessions, brand activations, and premium entertainment."
         variant="darker"
         image={carvenSpace}
       />
 
-      <ContentSection
+      <EcosystemSection
         heading="WHAT YOU'LL FIND AT CARVEN"
         bullets={[
           "Premium gaming stations",
@@ -58,20 +58,20 @@ const Carven = () => {
         image={carvenFeatures}
       />
 
-      <ContentSection
+      <EcosystemSection
         heading="BUILT FOR THE COMMUNITY"
         body="From casual matches to competitive tournaments, Carven gives gamers a reliable place to gather, compete, watch, create, and connect."
         variant="darker"
         image={carvenCommunity}
       />
 
-      <ContentSection
+      <EcosystemSection
         heading="BUILT FOR BRANDS"
         body="Carven gives brands a direct gateway into gaming culture through activations, launches, watch parties, tournaments, creator sessions, and youth-focused experiences."
         image={carvenBrands}
       />
 
-      <ClosingCTA
+      <EcosystemCTA
         heading="STEP INTO THE FUTURE OF GAMING CULTURE."
         ctaText="Get Directions"
         ctaHref="https://maps.app.goo.gl/XjkHsMv46uG2LsJA7"

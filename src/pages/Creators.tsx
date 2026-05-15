@@ -1,58 +1,67 @@
 import ContentPage from "@/components/ContentPage";
-import PageHero from "@/components/PageHero";
-import ContentSection from "@/components/ContentSection";
-import ClosingCTA from "@/components/ClosingCTA";
+import TalentHero from "@/components/talent/TalentHero";
+import TalentSection from "@/components/talent/TalentSection";
+import TalentCTA from "@/components/talent/TalentCTA";
+
+import creatorsHero from "@/assets/creators-hero.jpg";
+import creatorsStorytellers from "@/assets/creators-storytellers.jpg";
+import creatorsBenefits from "@/assets/creators-benefits.jpg";
+import creatorsVoices from "@/assets/creators-voices.jpg";
 
 const Creators = () => {
   return (
     <ContentPage
-      title="Gamr for Creators | Build Your Audience in Gaming Culture"
-      description="Gamr supports African gaming creators with visibility, community, content opportunities, events, campaigns, and brand partnerships."
+      title="African Gaming Creators | Build Your Audience with Gamr"
+      description="Gamr supports African gaming creators with visibility, community, collaboration, brand partnerships, and creator-first tools and experiences."
     >
-      <PageHero
+      <TalentHero
         eyebrow="For Creators"
-        headline="TURN YOUR PASSION INTO CULTURE."
-        body="Gamr helps African gaming creators grow their audience, access opportunities, collaborate with brands, tell better stories, and connect with the gaming community. You bring the voice. We help build the platform."
+        headline="YOUR VOICE. YOUR PLATFORM. YOUR COMMUNITY."
+        body="Gamr supports streamers, content creators, commentators, producers, designers, and storytellers building audiences around African gaming culture."
+        backgroundImage={creatorsHero}
         primaryCTA={{
-          text: "Apply to Join",
-          href: "https://forms.gle/6SCjP3D4Zn4qiWU17",
+          text: "Join the Creator Network",
+          href: "https://discord.gg/qV9e4ErZN2",
           external: true,
         }}
         secondaryCTA={{
-          text: "Explore Talent Network",
-          href: "/gamers",
+          text: "Explore Opportunities",
+          href: "/contact",
         }}
       />
 
-      <ContentSection
-        heading="THE NEXT GENERATION OF DIGITAL STORYTELLERS"
-        body="Gaming creators are shaping how Africa plays, watches, learns, laughs, competes, and connects. Gamr supports creators who are building communities around gaming culture."
+      <TalentSection
+        heading="AFRICA'S NEXT STORYTELLERS"
+        body="The most powerful voices in African gaming will not come from outside the continent. They will come from inside the community. Gamr helps creators grow audiences, build credibility, and find opportunities."
         variant="darker"
+        image={creatorsStorytellers}
       />
 
-      <ContentSection
+      <TalentSection
         heading="WHAT CREATORS GET"
         bullets={[
-          "Access to gaming events and activations",
-          "Brand campaign opportunities",
-          "Creator spotlights and storytelling",
-          "Community growth support",
-          "Collaboration with other creators",
-          "Access to Gamr spaces and experiences",
-          "Talent network visibility",
+          "Community exposure and amplification",
+          "Brand partnership opportunities",
+          "Event hosting and coverage roles",
+          "Content collaboration",
+          "Creator-first tools and resources",
+          "Access to Gamr platforms and audiences",
+          "Mentorship and support",
         ]}
+        image={creatorsBenefits}
       />
 
-      <ContentSection
-        heading="BUILT FOR AUTHENTIC VOICES"
-        body="We work with creators who understand gaming culture from the inside — streamers, commentators, storytellers, editors, community hosts, lifestyle creators, and competitive personalities."
+      <TalentSection
+        heading="MANY VOICES, ONE CULTURE"
+        body="Whether you stream on Twitch, post on TikTok, commentate tournaments, design fan art, or tell stories through video — if your work moves gaming culture forward, Gamr wants to support you."
         variant="darker"
+        image={creatorsVoices}
       />
 
-      <ClosingCTA
-        heading="READY TO TELL THE STORY OF AFRICAN GAMING?"
-        ctaText="Apply to Join"
-        ctaHref="https://forms.gle/6SCjP3D4Zn4qiWU17"
+      <TalentCTA
+        heading="THE CULTURE NEEDS YOUR VOICE."
+        ctaText="Join the Creator Network"
+        ctaHref="https://discord.gg/qV9e4ErZN2"
         ctaExternal
       />
     </ContentPage>
