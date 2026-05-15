@@ -8,6 +8,11 @@ import developersBuilders from "@/assets/developers-builders.jpg";
 import developersAudience from "@/assets/developers-audience.jpg";
 import developersSupport from "@/assets/developers-support.jpg";
 
+import developersHero from "@/assets/developers-hero.jpg";
+import developersBuilders from "@/assets/developers-builders.jpg";
+import developersAudience from "@/assets/developers-audience.jpg";
+import developersSupport from "@/assets/developers-support.jpg";
+
 const Developers = () => {
   return (
     <ContentPage
