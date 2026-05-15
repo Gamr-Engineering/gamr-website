@@ -67,64 +67,77 @@ const NewsletterForm = ({ source = "general", tags = [] }: NewsletterFormProps) 
   };
 
   return (
-    <div className="bg-blue-900/20 border border-blue-500/20 rounded-2xl p-8 md:p-12 mt-20 mb-12">
-      <div className="flex flex-col md:flex-row gap-8 items-center justify-between">
-        <div className="max-w-xl">
-          <h3 className="text-3xl font-bold uppercase tracking-tighter mb-4 text-white">
-            Stay Updated With Gamr Insights
+    <div className="bg-zinc-950 border border-white/5 rounded-sm p-10 md:p-20 mt-32 mb-12 relative overflow-hidden group shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+      {/* Decorative Glow */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/5 blur-[120px] rounded-full -mr-32 -mt-32 transition-transform duration-1000 group-hover:scale-110" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-600/5 blur-[100px] rounded-full -ml-32 -mb-32" />
+
+      <div className="flex flex-col lg:flex-row gap-16 items-center justify-between relative z-10">
+        <div className="max-w-2xl text-center lg:text-left">
+          <div className="flex items-center gap-4 mb-8 justify-center lg:justify-start">
+            <div className="h-px w-8 bg-blue-500" />
+            <span className="text-blue-400 font-bold uppercase tracking-[0.3em] text-[10px]">Newsletter</span>
+          </div>
+          <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-8 text-white leading-[0.9]">
+            STAY UPDATED <br/> WITH GAMR INSIGHTS.
           </h3>
-          <p className="text-gray-400">
-            Get the latest esports analysis, infrastructure case studies, and gaming culture trends delivered directly to your inbox.
+          <p className="text-xl text-gray-400 leading-relaxed font-light">
+            Get the latest esports analysis, infrastructure case studies, and gaming culture trends delivered directly to your inbox. No noise, just signal.
           </p>
         </div>
 
-        <div className="w-full md:w-auto flex-grow max-w-md">
-          <form onSubmit={handleSubmit} className="relative space-y-3">
+        <div className="w-full lg:max-w-md">
+          <form onSubmit={handleSubmit} className="relative">
             {status === "success" ? (
-              <div className="flex items-center gap-3 w-full bg-blue-500/10 border border-blue-500/30 text-blue-400 px-6 py-6 rounded-2xl font-bold uppercase tracking-widest text-xs transition-all animate-fade-in shadow-[0_0_30px_rgba(59,130,246,0.1)]">
-                <CheckCircle2 className="h-5 w-5" />
-                Welcome to the ecosystem! Check your inbox.
+              <div className="flex items-center gap-4 w-full bg-blue-500/10 border border-blue-500/30 text-white px-8 py-8 rounded-sm font-bold uppercase tracking-widest text-xs transition-all animate-fade-in">
+                <CheckCircle2 className="h-6 w-6 text-blue-500" />
+                Welcome to the ecosystem!
               </div>
             ) : (
-              <div className="flex flex-col gap-3 group">
-                <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Your Full Name"
-                    className="w-full bg-black/40 border border-white/10 px-12 py-4 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:bg-black/60 transition-all rounded-xl text-sm"
-                    required
-                    disabled={status === "loading"}
-                  />
-                </div>
-                <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email Address"
-                    className="w-full bg-black/40 border border-white/10 px-12 py-4 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:bg-black/60 transition-all rounded-xl text-sm"
-                    required
-                    disabled={status === "loading"}
-                  />
+              <div className="flex flex-col gap-4">
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="relative group/input">
+                    <User className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600 group-focus-within/input:text-blue-500 transition-colors" />
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="YOUR FULL NAME"
+                      className="w-full bg-white/[0.03] border border-white/10 px-14 py-5 text-white placeholder-gray-700 focus:outline-none focus:border-blue-500/50 focus:bg-white/[0.05] transition-all rounded-sm text-[10px] font-bold tracking-widest uppercase"
+                      required
+                      disabled={status === "loading"}
+                    />
+                  </div>
+                  <div className="relative group/input">
+                    <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600 group-focus-within/input:text-blue-500 transition-colors" />
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="EMAIL ADDRESS"
+                      className="w-full bg-white/[0.03] border border-white/10 px-14 py-5 text-white placeholder-gray-700 focus:outline-none focus:border-blue-500/50 focus:bg-white/[0.05] transition-all rounded-sm text-[10px] font-bold tracking-widest uppercase"
+                      required
+                      disabled={status === "loading"}
+                    />
+                  </div>
                 </div>
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="bg-blue-600 hover:bg-blue-500 text-white w-full py-4 font-black uppercase tracking-widest text-xs transition-all flex items-center justify-center rounded-xl gap-2 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-blue-900/20"
+                  className="bg-blue-600 hover:bg-blue-500 text-white w-full py-5 font-black uppercase tracking-[0.2em] text-[10px] transition-all flex items-center justify-center rounded-sm gap-3 hover:scale-[1.01] active:scale-[0.99] shadow-xl shadow-blue-900/20 mt-2"
                 >
                   {status === "loading" ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <Loader2 className="w-5 h-5 animate-spin" />
                   ) : (
                     <>
-                      Subscribe to Insights
+                      SUBSCRIBE TO INSIGHTS
                       <ArrowRight className="w-4 h-4" />
                     </>
                   )}
                 </button>
+                <p className="text-[9px] text-gray-600 text-center mt-4 tracking-widest uppercase font-bold">
+                  By subscribing, you agree to our privacy policy.
+                </p>
               </div>
             )}
           </form>

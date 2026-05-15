@@ -1,4 +1,23 @@
 import { cn } from "@/lib/utils";
+import { 
+  ArrowRight, 
+  Code2, 
+  Gamepad2, 
+  Users, 
+  Trophy, 
+  Cpu, 
+  ShieldCheck, 
+  Zap, 
+  Star, 
+  Target, 
+  Layers, 
+  Lightbulb,
+  Rocket,
+  Video,
+  Palette,
+  Headset,
+  Coins
+} from "lucide-react";
 
 interface TalentSectionProps {
   heading: React.ReactNode;
@@ -9,6 +28,24 @@ interface TalentSectionProps {
   className?: string;
   image?: string;
 }
+
+const getIcon = (text: string) => {
+  const t = text.toLowerCase();
+  if (t.includes("developer") || t.includes("code") || t.includes("script") || t.includes("build")) return Code2;
+  if (t.includes("gamer") || t.includes("play") || t.includes("match") || t.includes("tournament")) return Gamepad2;
+  if (t.includes("community") || t.includes("group") || t.includes("network") || t.includes("connection")) return Users;
+  if (t.includes("reward") || t.includes("trophy") || t.includes("prize") || t.includes("visibility")) return Trophy;
+  if (t.includes("tech") || t.includes("system") || t.includes("infrastructure") || t.includes("tool")) return Cpu;
+  if (t.includes("trust") || t.includes("identity") || t.includes("security")) return ShieldCheck;
+  if (t.includes("growth") || t.includes("future") || t.includes("opportunity") || t.includes("pathway")) return Rocket;
+  if (t.includes("voice") || t.includes("story") || t.includes("content") || t.includes("creator")) return Zap;
+  if (t.includes("education") || t.includes("training") || t.includes("learn") || t.includes("mentorship")) return Lightbulb;
+  if (t.includes("video") || t.includes("stream") || t.includes("hosting")) return Video;
+  if (t.includes("design") || t.includes("art") || t.includes("fashion")) return Palette;
+  if (t.includes("commentary") || t.includes("voice") || t.includes("shoutcast")) return Headset;
+  if (t.includes("revenue") || t.includes("earn") || t.includes("monetization") || t.includes("perk")) return Coins;
+  return Star;
+};
 
 const TalentSection = ({
   heading,
@@ -22,43 +59,59 @@ const TalentSection = ({
   return (
     <section
       className={cn(
-        "py-24 md:py-32 text-white",
+        "relative py-24 md:py-32 text-white overflow-hidden",
         variant === "dark" ? "bg-black" : "bg-zinc-950",
         className
       )}
     >
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 relative z-10">
         <div
           className={cn(
-            "grid grid-cols-1 gap-12 items-center",
-            image ? "lg:grid-cols-2" : "max-w-4xl"
+            "grid grid-cols-1 gap-16 items-start",
+            image ? "lg:grid-cols-2" : "max-w-5xl mx-auto"
           )}
         >
-          {/* Text with left amber border */}
-          <div className="border-l-4 border-amber-500/40 pl-8 space-y-8">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-none">
-              {heading}
-            </h2>
+          {/* Text Content */}
+          <div className="space-y-12">
+            <div className="space-y-6">
+              <div className="h-1 w-12 bg-amber-500/60 mb-8" />
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tighter leading-[0.9] uppercase">
+                {heading}
+              </h2>
+              {body && (
+                <p className="text-lg md:text-xl text-gray-400 font-light leading-relaxed max-w-xl">
+                  {body}
+                </p>
+              )}
+            </div>
 
-            {body && (
-              <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl">
-                {body}
-              </p>
-            )}
-
+            {/* Graphic Bullets */}
             {bullets && bullets.length > 0 && (
-              <ul className="space-y-4 pt-4">
-                {bullets.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="text-amber-500 mt-0.5 flex-shrink-0 font-bold">→</span>
-                    <span className="text-gray-200 text-lg leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className={cn(
+                "grid gap-4",
+                image ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1 md:grid-cols-3"
+              )}>
+                {bullets.map((item, i) => {
+                  const Icon = getIcon(item);
+                  return (
+                    <div 
+                      key={i} 
+                      className="group p-6 border border-white/5 bg-white/[0.02] hover:bg-amber-500/[0.03] hover:border-amber-500/20 transition-all duration-500 rounded-lg flex flex-col gap-4"
+                    >
+                      <div className="w-10 h-10 rounded-md bg-amber-500/10 flex items-center justify-center border border-amber-500/10 group-hover:bg-amber-500/20 transition-colors">
+                        <Icon className="h-5 w-5 text-amber-500" />
+                      </div>
+                      <span className="text-white font-bold uppercase tracking-tight text-sm leading-tight">
+                        {item}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
             )}
 
             {subsections && subsections.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
                 {subsections.map((sub, i) => (
                   <div
                     key={i}

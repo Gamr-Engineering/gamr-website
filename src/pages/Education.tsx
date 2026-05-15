@@ -9,12 +9,6 @@ import educationTeach from "@/assets/education-teach.jpg";
 import educationOutcomes from "@/assets/education-outcomes.jpg";
 import educationPartners from "@/assets/education-partners.jpg";
 
-import educationHero from "@/assets/education-hero.jpg";
-import educationEngine from "@/assets/education-engine.jpg";
-import educationTeach from "@/assets/education-teach.jpg";
-import educationOutcomes from "@/assets/education-outcomes.jpg";
-import educationPartners from "@/assets/education-partners.jpg";
-
 const Education = () => {
   return (
     <ContentPage

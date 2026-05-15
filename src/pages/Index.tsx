@@ -8,7 +8,6 @@ import EventsSection from "@/components/EventsSection";
 
 import UpcomingSchedule from "@/components/UpcomingSchedule";
 import CreatorFlier from "@/components/CreatorFlier";
-import InsightsSection from "@/components/InsightsSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -54,7 +53,6 @@ const Index = () => {
         <ServicesSection />
         <EventsSection />
 
-        <InsightsSection />
         <UpcomingSchedule />
         <PartnersSection />
         <CreatorFlier />
