@@ -25,6 +25,8 @@ interface ResourcesSectionProps {
   variant?: "dark" | "darker";
   className?: string;
   image?: string;
+  backgroundImage?: string;
+  imageFit?: "cover" | "contain";
   category?: string;
 }
 
@@ -53,6 +55,8 @@ const ResourcesSection = ({
   variant = "dark",
   className,
   image,
+  backgroundImage,
+  imageFit = "cover",
   category,
 }: ResourcesSectionProps) => {
   return (
@@ -63,6 +67,23 @@ const ResourcesSection = ({
         className
       )}
     >
+      {/* Background Image Layer */}
+      {backgroundImage && (
+        <div className="absolute inset-0 z-0">
+          <img
+            src={backgroundImage}
+            alt="Section background"
+            className={cn(
+              "w-full h-full opacity-30 transition-opacity duration-700",
+              imageFit === "cover" ? "object-cover" : "object-contain"
+            )}
+          />
+          <div className={cn(
+            "absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/80",
+            variant === "darker" && "from-zinc-950/90 via-zinc-950/50 to-zinc-950/90"
+          )} />
+        </div>
+      )}
       <div className="container mx-auto px-6 relative z-10">
         <div
           className={cn(

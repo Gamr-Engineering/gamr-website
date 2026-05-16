@@ -25,6 +25,12 @@ const Assets = () => {
           </>
         }
         body="Find approved Gamr logos, brand materials, company descriptions, product information, and media resources for press, partners, sponsors, and collaborators."
+        images={[
+          "/assets/assets-page/hero-1.jpg",
+          "/assets/assets-page/hero-2.jpg",
+          "/assets/assets-page/hero-3.jpg",
+          "/assets/assets-page/hero-4.jpg",
+        ]}
         primaryCTA={{
           text: "Download Assets",
           href: "#available-assets",
@@ -35,46 +41,21 @@ const Assets = () => {
         }}
       />
 
-      {/* About Gamr - Boilerplates — custom section with Resources styling */}
-      <section className="py-20 md:py-28 bg-zinc-950 text-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl space-y-10">
-            <span className="inline-block bg-violet-500/10 border border-violet-500/20 text-violet-300 rounded-full px-4 py-1.5 text-xs font-mono uppercase tracking-widest">
-              About
-            </span>
-
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tighter leading-none uppercase">
-              ABOUT GAMR
-            </h2>
-
-            <div className="space-y-6">
-              <div className="p-6 border border-white/10 rounded-lg bg-white/[0.02] hover:border-violet-500/20 transition-colors duration-300">
-                <h3 className="text-violet-400 font-mono font-bold uppercase tracking-widest text-xs mb-4">
-                  Short Boilerplate
-                </h3>
-                <p className="text-lg text-gray-300 leading-relaxed font-light">
-                  Gamr is the engine powering African esports. We are building the
-                  infrastructure, community, and technology to unlock the potential of
-                  Africa's gaming ecosystem.
-                </p>
-              </div>
-
-              <div className="p-6 border border-white/10 rounded-lg bg-white/[0.02] hover:border-violet-500/20 transition-colors duration-300">
-                <h3 className="text-violet-400 font-mono font-bold uppercase tracking-widest text-xs mb-4">
-                  Long Boilerplate
-                </h3>
-                <p className="text-lg text-gray-300 leading-relaxed font-light">
-                  Gamr is building Africa's premier gaming ecosystem across esports,
-                  creator development, gaming hubs, education, community, and digital
-                  infrastructure. Through tournaments, talent programs, physical spaces,
-                  content, and technology, Gamr connects gamers, creators, developers,
-                  brands, and partners shaping the future of play on the continent.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ResourcesSection
+        category="About"
+        heading="ABOUT GAMR"
+        backgroundImage="/assets/assets-page/about.jpg"
+        subsections={[
+          {
+            title: "Short Boilerplate",
+            description: "Gamr is the engine powering African esports. We are building the infrastructure, community, and technology to unlock the potential of Africa's gaming ecosystem."
+          },
+          {
+            title: "Long Boilerplate",
+            description: "Gamr is building Africa's premier gaming ecosystem across esports, creator development, gaming hubs, education, community, and digital infrastructure. Through tournaments, talent programs, physical spaces, content, and technology, Gamr connects gamers, creators, developers, brands, and partners shaping the future of play on the continent."
+          }
+        ]}
+      />
 
       <div id="available-assets">
         <ResourcesSection
@@ -91,19 +72,23 @@ const Assets = () => {
             "Contact information",
           ]}
           category="Downloads"
+          backgroundImage="/assets/assets-page/available.jpg"
+          variant="darker"
         />
       </div>
 
       <ResourcesSection
         heading="BRAND USAGE"
         body="Please use Gamr assets as provided and do not distort, recolor, or modify official brand materials without approval. For press, partnership, or campaign usage, contact our team for guidance."
-        variant="darker"
+        variant="dark"
         category="Guidelines"
+        backgroundImage="/assets/assets-page/usage.jpg"
       />
 
       {/* Media Highlights — The "Insights" transfer */}
-      <section className="py-24 md:py-32 bg-black text-white">
-        <div className="container mx-auto px-6">
+      <section className="py-24 md:py-32 bg-black text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-violet-900/10 via-black to-black opacity-50" />
+        <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
             <div className="space-y-6">
               <span className="inline-block bg-violet-500/10 border border-violet-500/20 text-violet-300 rounded-full px-4 py-1.5 text-xs font-mono uppercase tracking-widest">
@@ -134,35 +119,25 @@ const Assets = () => {
         </div>
       </section>
 
-      {/* Press Contact — custom section with Resources styling */}
-      <section className="py-20 md:py-28 bg-zinc-950 text-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl space-y-6">
-            <span className="inline-block bg-violet-500/10 border border-violet-500/20 text-violet-300 rounded-full px-4 py-1.5 text-xs font-mono uppercase tracking-widest">
-              Contact
-            </span>
-
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tighter leading-none uppercase">
-              PRESS CONTACT
-            </h2>
-            <p className="text-lg text-gray-400 leading-relaxed max-w-2xl font-light">
-              For media requests, interviews, brand approvals, or partnership
-              information, contact:
-            </p>
-            <a
-              href="mailto:hello@gamr.africa"
-              className="inline-block text-2xl md:text-3xl font-bold text-violet-400 hover:text-violet-300 transition-colors duration-300 uppercase tracking-tight"
-            >
-              hello@gamr.africa
-            </a>
-          </div>
-        </div>
-      </section>
+      <ResourcesSection
+        category="Contact"
+        heading="PRESS CONTACT"
+        body="For media requests, interviews, brand approvals, or partnership information, contact:"
+        backgroundImage="/assets/assets-page/contact.jpg"
+        variant="darker"
+        subsections={[
+          {
+            title: "Direct Email",
+            description: "hello@gamr.africa"
+          }
+        ]}
+      />
 
       <ResourcesCTA
         heading="NEED SOMETHING SPECIFIC?"
         ctaText="Contact Gamr"
         ctaHref="/contact"
+        backgroundImage="/assets/assets-page/cta.jpg"
       />
     </ContentPage>
   );

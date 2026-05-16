@@ -13,6 +13,7 @@ const YouthDevelopment = () => {
         eyebrow="Youth Development"
         headline="USING PLAY TO UNLOCK POTENTIAL."
         body="Gaming can be more than entertainment. It can teach teamwork, discipline, creativity, problem-solving, communication, leadership, and digital skills. Gamr uses gaming as a platform for youth development across Africa."
+        image="/assets/youth/hero.jpg"
         primaryCTA={{
           text: "Partner With Us",
           href: "/contact",
@@ -33,6 +34,8 @@ const YouthDevelopment = () => {
         heading="MEETING YOUNG PEOPLE WHERE THEY ARE"
         body="Young Africans are already deeply engaged with gaming and digital culture. Instead of treating gaming as a distraction, Gamr uses it as an entry point into learning, confidence, community, and opportunity."
         variant="darker"
+        image="/assets/youth/potential.jpg"
+        category="Potential"
       />
 
       <IndustrySection
@@ -48,23 +51,31 @@ const YouthDevelopment = () => {
           "Technical skills",
           "Entrepreneurship",
         ]}
+        image="/assets/youth/skills.jpg"
+        category="Skills"
       />
 
       <IndustrySection
         heading="PATHWAYS BEYOND PLAY"
         body="Through tournaments, workshops, creator programs, development sprints, and community experiences, Gamr helps young people discover career pathways in gaming, media, design, technology, and live entertainment."
         variant="darker"
+        image="/assets/youth/pathways.jpg"
+        category="Pathways"
       />
 
       <IndustrySection
         heading="FOR PARTNERS AND INSTITUTIONS"
         body="We collaborate with schools, brands, nonprofits, development organizations, and public institutions to create youth-focused gaming programs with real outcomes."
+        image="/assets/youth/partnership.jpg"
+        category="Partnership"
       />
 
       <IndustryCTA
         heading="PLAY CAN CHANGE FUTURES."
         ctaText="Build a Youth Program With Gamr"
         ctaHref="/contact"
+        image="/assets/youth/cta.jpg"
+        imageFit="contain"
       />
     </ContentPage>
   );

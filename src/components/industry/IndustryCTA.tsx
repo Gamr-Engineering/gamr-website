@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
 interface IndustryCTAProps {
   heading: string;
@@ -12,6 +13,8 @@ interface IndustryCTAProps {
   secondaryCtaHref?: string;
   secondaryCtaExternal?: boolean;
   image?: string;
+  imagePosition?: string;
+  imageFit?: "cover" | "contain";
 }
 
 const IndustryCTA = ({
@@ -24,6 +27,8 @@ const IndustryCTA = ({
   secondaryCtaHref,
   secondaryCtaExternal,
   image,
+  imagePosition = "object-center",
+  imageFit = "cover",
 }: IndustryCTAProps) => {
   return (
     <section className="relative py-32 md:py-40 bg-black text-white overflow-hidden">
@@ -34,7 +39,11 @@ const IndustryCTA = ({
             <img 
               src={image} 
               alt="Background" 
-              className="w-full h-full object-cover opacity-45"
+              className={cn(
+                "w-full h-full opacity-85 transition-opacity duration-700",
+                imageFit === "cover" ? "object-cover" : "object-contain",
+                imagePosition
+              )}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
           </>

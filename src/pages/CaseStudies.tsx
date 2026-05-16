@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import ContentPage from "@/components/ContentPage";
+import ResourcesHero from "@/components/resources/ResourcesHero";
+import ResourcesCTA from "@/components/resources/ResourcesCTA";
 import { useInsights } from "@/context/InsightsContext";
 import InsightCard from "@/components/InsightCard";
 import TrendingSection from "@/components/TrendingSection";
@@ -32,21 +34,23 @@ const CaseStudies = () => {
       title="Gamr Case Studies | African Gaming, Esports and Community Insights"
       description="Explore Gamr case studies on African esports, gaming communities, tournament infrastructure, shared gaming hubs, and the future of play."
     >
-      <div className="container mx-auto px-6 pt-12">
-        {/* Header Branding */}
-        <div className="flex flex-col gap-6 mb-16 animate-fade-in">
-          <div className="flex items-center gap-3">
-            <div className="h-1 w-8 bg-violet-500" />
-            <span className="text-violet-400 font-bold uppercase tracking-widest text-xs">Resources / Case Studies</span>
-          </div>
-          <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-[0.85] uppercase text-white drop-shadow-2xl">
+      <ResourcesHero
+        eyebrow="Case Studies"
+        headline={
+          <>
             SUCCESS <br/> STORIES.
-          </h1>
-          <p className="text-xl text-gray-300 max-w-2xl leading-relaxed font-light">
-            Documenting the strategies and systems shaping the future of play. Real data, real community impact, and lessons from the African gaming frontline.
-          </p>
-        </div>
+          </>
+        }
+        body="Documenting the strategies and systems shaping the future of play. Real data, real community impact, and lessons from the African gaming frontline."
+        backgroundImage="/assets/case-studies/hero.jpg"
+        imageFit="contain"
+        primaryCTA={{
+          text: "Contact Strategy Team",
+          href: "/contact",
+        }}
+      />
 
+      <div className="container mx-auto px-6 py-12">
         {/* Featured Case Study Hero */}
         {featuredCaseStudy && (
           <div className="mb-24">
@@ -106,30 +110,14 @@ const CaseStudies = () => {
           </div>
         </div>
 
-        {/* Knowledge CTA */}
-        <div className="mb-24 bg-zinc-950 p-12 md:p-20 border border-white/5 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-violet-600/5 blur-[120px] rounded-full" />
-          <div className="relative z-10 max-w-3xl">
-            <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-8 leading-[0.9] text-white">
-              BUILDING ON <br/> PROVEN INSIGHTS.
-            </h3>
-            <p className="text-xl text-gray-400 mb-10 font-light leading-relaxed">
-              Our case studies are designed to help brands and partners understand the nuances of the African gaming market. If you need a custom deep-dive or specific data, reach out to our strategy team.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link to="/contact">
-                <button className="bg-violet-600 text-white px-8 py-4 rounded-sm font-bold uppercase tracking-widest text-xs hover:bg-violet-500 transition-colors">
-                  Contact Strategy Team
-                </button>
-              </Link>
-              <Link to="/insights">
-                <button className="border border-white/10 text-white px-8 py-4 rounded-sm font-bold uppercase tracking-widest text-xs hover:bg-white/5 transition-colors">
-                  View All Insights
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
+        <ResourcesCTA
+          heading="BUILDING ON PROVEN INSIGHTS."
+          body="Our case studies are designed to help brands and partners understand the nuances of the African gaming market. If you need a custom deep-dive or specific data, reach out to our strategy team."
+          ctaText="Contact Strategy Team"
+          ctaHref="/contact"
+          backgroundImage="/assets/case-studies/cta.jpg"
+          imageFit="contain"
+        />
 
         <NewsletterForm source="case-studies" tags={["case_studies_page"]} />
       </div>
