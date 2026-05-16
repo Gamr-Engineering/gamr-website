@@ -50,13 +50,14 @@ const TalentHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgro
 
       <div className="relative z-10 container mx-auto px-6">
         <div className="max-w-3xl space-y-8">
-          {/* Eyebrow with amber underline */}
-          <div className="inline-block">
-            <span className="text-amber-400 font-bold tracking-widest text-sm uppercase">
-              {eyebrow}
-            </span>
-            <div className="h-0.5 w-12 bg-amber-500 mt-2" />
-          </div>
+          {eyebrow && (
+            <div className="inline-block">
+              <span className="text-amber-400 font-bold tracking-widest text-sm uppercase">
+                {eyebrow}
+              </span>
+              <div className="h-0.5 w-12 bg-amber-500 mt-2" />
+            </div>
+          )}
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-none text-white">
             {headline}

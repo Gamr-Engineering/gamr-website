@@ -49,10 +49,6 @@ const InsightsIndex = () => {
                         ref={heroRef}
                         className="flex flex-col gap-8 mb-20 animate-fade-in"
                     >
-                        <div className="flex items-center gap-4">
-                            <span className="text-blue-500 font-bold uppercase tracking-[0.3em] text-[10px]">Insights & Impact</span>
-                            <div className="h-px w-12 bg-white/10" />
-                        </div>
                         <h1 className="text-6xl md:text-9xl font-black tracking-tighter leading-[0.8] uppercase max-w-4xl">
                             BEYOND THE <br/> SCREEN.
                         </h1>

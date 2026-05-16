@@ -47,13 +47,14 @@ const CompanyHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgr
           </div>
 
           <div className="max-w-3xl space-y-8">
-            {/* Eyebrow with horizontal rule */}
-            <div className="flex items-center gap-6">
-              <span className="text-white/60 font-light tracking-[0.3em] text-xs uppercase">
-                {eyebrow}
-              </span>
-              <div className="h-px bg-white/20 flex-1 max-w-[120px]" />
-            </div>
+            {eyebrow && (
+              <div className="flex items-center gap-6">
+                <span className="text-white/60 font-light tracking-[0.3em] text-xs uppercase">
+                  {eyebrow}
+                </span>
+                <div className="h-px bg-white/20 flex-1 max-w-[120px]" />
+              </div>
+            )}
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] text-white">
               {headline}

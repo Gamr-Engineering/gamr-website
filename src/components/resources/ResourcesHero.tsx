@@ -57,12 +57,13 @@ const ResourcesHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, back
 
       <div className="relative z-10 container mx-auto px-6">
         <div className="max-w-3xl space-y-6">
-          {/* Breadcrumb-style hint */}
-          <div className="flex items-center gap-2 text-violet-400/60 text-xs font-mono uppercase tracking-widest">
-            <Link to="/" className="hover:text-violet-300 transition-colors">Gamr</Link>
-            <span>/</span>
-            <span className="text-violet-300">{typeof eyebrow === "string" ? eyebrow : "Resources"}</span>
-          </div>
+          {eyebrow && (
+            <div className="flex items-center gap-2 text-violet-400/60 text-xs font-mono uppercase tracking-widest">
+              <Link to="/" className="hover:text-violet-300 transition-colors">Gamr</Link>
+              <span>/</span>
+              <span className="text-violet-300">{eyebrow}</span>
+            </div>
+          )}
 
           <h1 className="text-4xl md:text-6xl font-bold tracking-tighter leading-none text-white uppercase">
             {headline}

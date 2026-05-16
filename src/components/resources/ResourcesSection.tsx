@@ -105,7 +105,7 @@ const ResourcesSection = ({
               </h2>
 
               {body && (
-                <p className="text-lg text-gray-400 font-light leading-relaxed max-w-xl">
+                <p className="text-lg text-gray-200 font-light leading-relaxed max-w-xl">
                   {body}
                 </p>
               )}
@@ -146,7 +146,7 @@ const ResourcesSection = ({
                     <h3 className="text-base font-bold uppercase tracking-tight mb-2 text-white">
                       {sub.title}
                     </h3>
-                    <p className="text-gray-400 leading-relaxed text-sm">{sub.description}</p>
+                    <p className="text-gray-300 leading-relaxed text-sm">{sub.description}</p>
                   </div>
                 ))}
               </div>

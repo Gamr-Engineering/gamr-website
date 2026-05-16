@@ -54,13 +54,14 @@ const IndustryHero = ({
 
       <div className="relative z-10 container mx-auto px-6 pb-16">
         <div className="max-w-4xl space-y-8">
-          {/* Eyebrow with teal accent */}
-          <div className="flex items-center gap-3">
-            <div className="w-2 h-2 bg-cyan-500 rounded-sm" />
-            <span className="text-cyan-400 font-mono font-bold tracking-widest text-xs uppercase">
-              {eyebrow}
-            </span>
-          </div>
+          {eyebrow && (
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 bg-cyan-500 rounded-sm" />
+              <span className="text-cyan-400 font-mono font-bold tracking-widest text-xs uppercase">
+                {eyebrow}
+              </span>
+            </div>
+          )}
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-none text-white">
             {headline}

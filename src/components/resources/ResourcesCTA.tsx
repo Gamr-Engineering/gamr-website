@@ -48,7 +48,7 @@ const ResourcesCTA = ({ heading, body, ctaText, ctaHref, ctaExternal, background
               href={ctaHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center text-violet-400 hover:text-violet-300 text-sm uppercase tracking-[0.15em] font-bold transition-colors duration-300 mt-4 group"
+              className="inline-flex items-center text-violet-200 hover:text-white text-sm uppercase tracking-[0.15em] font-bold transition-colors duration-300 mt-4 group"
             >
               {ctaText}
               <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
@@ -56,7 +56,7 @@ const ResourcesCTA = ({ heading, body, ctaText, ctaHref, ctaExternal, background
           ) : (
             <Link
               to={ctaHref}
-              className="inline-flex items-center text-violet-400 hover:text-violet-300 text-sm uppercase tracking-[0.15em] font-bold transition-colors duration-300 mt-4 group"
+              className="inline-flex items-center text-violet-200 hover:text-white text-sm uppercase tracking-[0.15em] font-bold transition-colors duration-300 mt-4 group"
             >
               {ctaText}
               <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />

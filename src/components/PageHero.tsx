@@ -44,9 +44,11 @@ const PageHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgroun
 
       <div className="relative z-10 container mx-auto px-6">
         <div className="max-w-3xl space-y-8 animate-fade-in">
-          <span className="text-white font-bold tracking-widest text-sm">
-            {eyebrow}
-          </span>
+          {eyebrow && (
+            <span className="text-white font-bold tracking-widest text-sm">
+              {eyebrow}
+            </span>
+          )}
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-none text-white">
             {headline}

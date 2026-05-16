@@ -45,12 +45,13 @@ const EcosystemHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, back
 
       <div className="relative z-10 container mx-auto px-6 text-center">
         <div className="max-w-4xl mx-auto space-y-8">
-          {/* Floating product badge */}
-          <div className="inline-flex items-center justify-center px-6 py-3 bg-white/[0.06] backdrop-blur-md border border-white/10 rounded-full mb-4">
-            <span className="text-white font-bold tracking-widest text-sm">
-              {eyebrow}
-            </span>
-          </div>
+          {eyebrow && (
+            <div className="inline-flex items-center justify-center px-6 py-3 bg-white/[0.06] backdrop-blur-md border border-white/10 rounded-full mb-4">
+              <span className="text-white font-bold tracking-widest text-sm">
+                {eyebrow}
+              </span>
+            </div>
+          )}
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-none text-white">
             {headline}
