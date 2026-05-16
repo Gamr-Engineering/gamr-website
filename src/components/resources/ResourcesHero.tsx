@@ -21,9 +21,9 @@ const ResourcesHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, back
             <img
               src={backgroundImage}
               alt={typeof headline === "string" ? headline : "Hero image"}
-              className="w-full h-full object-cover opacity-20"
+              className="w-full h-full object-cover opacity-80"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-violet-950/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
           </>
         ) : (
           <div className="absolute inset-0 bg-gradient-to-b from-violet-950/10 via-black to-black" />

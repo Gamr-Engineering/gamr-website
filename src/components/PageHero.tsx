@@ -21,9 +21,9 @@ const PageHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgroun
             <img 
               src={backgroundImage} 
               alt={typeof headline === "string" ? headline : (typeof eyebrow === "string" ? eyebrow : "Hero image")}
-              className="w-full h-full object-cover opacity-60"
+              className="w-full h-full object-cover opacity-85"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
           </>
         ) : (
           <>

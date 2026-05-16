@@ -9,22 +9,33 @@ interface IndustryHeroProps {
   primaryCTA?: { text: string; href?: string; external?: boolean; onClick?: () => void };
   secondaryCTA?: { text: string; href?: string; external?: boolean; onClick?: () => void };
   backgroundImage?: string;
+  image?: string; // Alias for backgroundImage
   stats?: { value: string; label: string }[];
 }
 
-const IndustryHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgroundImage, stats }: IndustryHeroProps) => {
+const IndustryHero = ({ 
+  eyebrow, 
+  headline, 
+  body, 
+  primaryCTA, 
+  secondaryCTA, 
+  backgroundImage, 
+  image,
+  stats 
+}: IndustryHeroProps) => {
+  const finalImage = image || backgroundImage;
   return (
     <section className="relative min-h-[70vh] flex flex-col justify-end pt-32 pb-0 bg-black overflow-hidden">
       {/* Grid-dot pattern background */}
       <div className="absolute inset-0 z-0">
-        {backgroundImage ? (
+        {finalImage ? (
           <>
             <img
-              src={backgroundImage}
+              src={finalImage}
               alt={typeof headline === "string" ? headline : "Hero image"}
-              className="w-full h-full object-cover opacity-30"
+              className="w-full h-full object-cover opacity-85"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/50" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
           </>
         ) : (
           <>

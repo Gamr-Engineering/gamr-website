@@ -20,7 +20,7 @@ const TalentHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgro
           <>
             {/* Diagonal image on the right */}
             <div
-              className="absolute inset-0 opacity-60"
+              className="absolute inset-0 opacity-90"
               style={{
                 clipPath: "polygon(35% 0, 100% 0, 100% 100%, 15% 100%)",
               }}
@@ -31,8 +31,8 @@ const TalentHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgro
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           </>
         ) : (
           <>

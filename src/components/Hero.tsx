@@ -9,7 +9,7 @@ const Hero = () => {
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
         <video
-          className="w-full h-full object-cover opacity-80"
+          className="w-full h-full object-cover opacity-90"
           autoPlay
           muted
           loop
@@ -17,7 +17,7 @@ const Hero = () => {
         >
           <source src={gamrIntroVideo} type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80" />
       </div>
 
       {/* Content */}

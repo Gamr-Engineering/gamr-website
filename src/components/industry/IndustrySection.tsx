@@ -26,6 +26,8 @@ interface IndustrySectionProps {
   variant?: "dark" | "darker";
   className?: string;
   image?: string;
+  category?: string;
+  imageFit?: "cover" | "contain";
 }
 
 const getIcon = (text: string) => {
@@ -54,6 +56,8 @@ const IndustrySection = ({
   variant = "dark",
   className,
   image,
+  category,
+  imageFit = "cover",
 }: IndustrySectionProps) => {
   return (
     <section
@@ -74,6 +78,11 @@ const IndustrySection = ({
             <div className="space-y-8">
               {/* Heading with teal top border */}
               <div className="border-t-2 border-cyan-500 pt-6 inline-block">
+                {category && (
+                  <span className="block text-cyan-400 font-mono font-bold tracking-widest text-[10px] uppercase mb-4">
+                    {category}
+                  </span>
+                )}
                 <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tighter leading-[0.9] uppercase">
                   {heading}
                 </h2>
@@ -134,11 +143,14 @@ const IndustrySection = ({
 
           {/* Image with structured border */}
           {image && (
-            <div className="relative border border-white/10 overflow-hidden">
+            <div className="relative border border-white/10 overflow-hidden bg-black/40">
               <img
                 src={image}
                 alt={typeof heading === "string" ? heading : "Content image"}
-                className="w-full h-full object-cover aspect-video lg:aspect-square transition-all duration-700"
+                className={cn(
+                  "w-full h-full transition-all duration-700",
+                  imageFit === "cover" ? "object-cover aspect-video lg:aspect-square" : "object-contain aspect-video lg:aspect-square p-4"
+                )}
               />
               {/* Teal accent corner */}
               <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-cyan-500" />

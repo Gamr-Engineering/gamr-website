@@ -21,11 +21,10 @@ const CompanyHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgr
             <img
               src={backgroundImage}
               alt={typeof headline === "string" ? headline : (typeof eyebrow === "string" ? eyebrow : "Hero image")}
-              className="w-full h-full object-cover opacity-40 scale-105"
-              style={{ animation: "companyZoom 20s ease-in-out infinite alternate" }}
+              className="w-full h-full object-cover opacity-85"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
           </>
         ) : (
           <>

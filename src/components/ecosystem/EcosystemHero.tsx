@@ -21,9 +21,9 @@ const EcosystemHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, back
             <img
               src={backgroundImage}
               alt={typeof headline === "string" ? headline : "Hero image"}
-              className="w-full h-full object-cover opacity-50 scale-110"
+              className="w-full h-full object-cover opacity-85"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/60" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
             {/* Vignette */}
             <div className="absolute inset-0" style={{
               background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.8) 100%)"

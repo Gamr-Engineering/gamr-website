@@ -7,6 +7,7 @@ import InsightCard from "@/components/InsightCard";
 import NewsletterForm from "@/components/NewsletterForm";
 import { useInsights } from "@/context/InsightsContext";
 import TrendingSection from "@/components/TrendingSection";
+import AuthorSpotlight from "@/components/AuthorSpotlight";
 
 type FilterTab = "all" | "case-study" | "blog";
 
@@ -114,6 +115,11 @@ const InsightsIndex = () => {
                     {/* Trending Insights Bar */}
                     <div className="mb-32">
                         <TrendingSection insights={allInsights} />
+                    </div>
+
+                    {/* Author Spotlight — Restored Omission */}
+                    <div className="mb-32">
+                        <AuthorSpotlight />
                     </div>
 
                     {/* Content Section */}

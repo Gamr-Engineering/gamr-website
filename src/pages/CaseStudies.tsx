@@ -4,6 +4,8 @@ import { useInsights } from "@/context/InsightsContext";
 import InsightCard from "@/components/InsightCard";
 import TrendingSection from "@/components/TrendingSection";
 import NewsletterForm from "@/components/NewsletterForm";
+import AuthorSpotlight from "@/components/AuthorSpotlight";
+import InsightCarousel from "@/components/InsightCarousel";
 import { ArrowRight, BookOpen, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -84,8 +86,13 @@ const CaseStudies = () => {
           <TrendingSection insights={allInsights} />
         </div>
 
-        {/* Main Feed */}
-        <div className="space-y-12 mb-24">
+        {/* Author Spotlight — Williams Falodun Section */}
+        <div className="mb-32">
+          <AuthorSpotlight />
+        </div>
+
+        {/* Main Feed — Carousel for "WOW" Factor */}
+        <div className="space-y-12 mb-32">
           <div className="flex items-center justify-between border-b border-white/10 pb-6">
             <h2 className="text-2xl font-black uppercase tracking-widest flex items-center gap-3 text-white">
               <BookOpen className="w-6 h-6 text-violet-500" />
@@ -94,22 +101,9 @@ const CaseStudies = () => {
             <span className="text-gray-500 font-mono text-[10px] uppercase tracking-widest">{caseStudyInsights.length} Stories</span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {visibleCaseStudies.map((item) => (
-              <InsightCard key={item.slug} insight={item} />
-            ))}
+          <div className="mb-12">
+            <InsightCarousel title="SUCCESS STORIES" insights={caseStudyInsights} />
           </div>
-
-          {hasMore && (
-            <div className="flex justify-center pt-12">
-              <button 
-                onClick={() => setVisibleCount(prev => prev + 6)}
-                className="px-12 py-4 border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] hover:bg-white hover:text-black transition-all"
-              >
-                Load More Studies
-              </button>
-            </div>
-          )}
         </div>
 
         {/* Knowledge CTA */}
