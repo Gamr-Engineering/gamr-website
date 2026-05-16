@@ -35,7 +35,6 @@ const CaseStudies = () => {
       description="Explore Gamr case studies on African esports, gaming communities, tournament infrastructure, shared gaming hubs, and the future of play."
     >
       <ResourcesHero
-        eyebrow="Case Studies"
         headline={
           <>
             SUCCESS <br/> STORIES.

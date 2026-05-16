@@ -15,7 +15,6 @@ const Creators = () => {
       description="Gamr supports African gaming creators with visibility, community, collaboration, brand partnerships, and creator-first tools and experiences."
     >
       <TalentHero
-        eyebrow="For Creators"
         headline="YOUR VOICE. YOUR PLATFORM. YOUR COMMUNITY."
         body="Gamr supports streamers, content creators, commentators, producers, designers, and storytellers building audiences around African gaming culture."
         backgroundImage={creatorsHero}

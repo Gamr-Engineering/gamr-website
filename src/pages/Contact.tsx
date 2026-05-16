@@ -101,9 +101,10 @@ const Contact = () => {
       description="Contact Gamr for partnerships, tournaments, brand activations, media requests, creator programs, education programs, and community inquiries."
     >
       <PageHero
-        eyebrow="Contact Gamr"
         headline="LET'S BUILD THE FUTURE OF PLAY TOGETHER."
         body="Whether you are a gamer, creator, brand, partner, investor, school, media platform, or community organizer, we would love to hear from you. Tell us what you are building, and let's explore how Gamr can help."
+        backgroundImage="/assets/contact-page/hero.jpg"
+        imageOpacity={0.85}
         primaryCTA={{
           text: "Send a Message",
           href: "#contact-form",
@@ -115,8 +116,8 @@ const Contact = () => {
         }}
       />
 
-      {/* Contact Categories */}
-      <section className="py-24 md:py-32 bg-zinc-950 text-white">
+      {/* Contact Categories — Cinematic Slab Implementation */}
+      <section className="py-24 md:py-32 bg-black text-white">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mb-16">
             <h2 className="text-4xl md:text-6xl font-bold tracking-tighter leading-none uppercase">
@@ -128,15 +129,18 @@ const Contact = () => {
             {CONTACT_CATEGORIES.map((category, i) => (
               <div
                 key={i}
-                className="group p-8 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] hover:border-blue-500/30 transition-all duration-500"
+                className="group p-10 border border-white/5 bg-white/[0.02] hover:bg-violet-500/[0.03] hover:border-violet-500/20 transition-all duration-500 rounded-3xl relative overflow-hidden"
               >
-                <category.icon className="w-8 h-8 text-blue-500 mb-5 group-hover:scale-110 transition-transform duration-300" />
-                <h3 className="text-lg font-bold uppercase tracking-tight mb-3">
-                  {category.title}
-                </h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  {category.description}
-                </p>
+                <div className="absolute inset-0 bg-gradient-to-br from-violet-500/0 via-transparent to-violet-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative z-10">
+                  <category.icon className="w-10 h-10 text-violet-500 mb-6 group-hover:scale-110 transition-transform duration-500" />
+                  <h3 className="text-xl font-bold uppercase tracking-tight mb-4 text-white">
+                    {category.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm leading-relaxed font-light">
+                    {category.description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>

@@ -13,7 +13,6 @@ const Esports = () => {
       description="Gamr is professionalizing esports in Africa through tournaments, infrastructure, communities, events, talent development, and trusted competition systems."
     >
       <IndustryHero
-        eyebrow="Esports"
         headline="BUILDING THE COMPETITIVE FUTURE OF AFRICAN GAMING."
         body="Gamr is helping African esports move from fragmented competitions to trusted, scalable, world-class competitive experiences. From grassroots tournaments to major events, we are building the systems that let players compete with confidence."
         image="/assets/esports/hero.jpg"

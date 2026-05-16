@@ -14,7 +14,6 @@ const Team = () => {
       description="Meet the team building Gamr — a collective of gamers, operators, technologists, storytellers, and ecosystem builders."
     >
       <CompanyHero
-        eyebrow="The Squad"
         headline="BUILT BY GAMERS. DESIGNED FOR AFRICA."
         body="Gamr is powered by a team of operators, technologists, creatives, community builders, and lifelong gamers united by one mission: to build the future of play across Africa."
         backgroundImage={teamHero}

@@ -10,7 +10,6 @@ const Gaming = () => {
       description="Gamr celebrates and supports African gaming culture across communities, events, content, technology, creators, and competitive play."
     >
       <IndustryHero
-        eyebrow="Gaming"
         headline="MORE THAN A GAME. A CULTURE."
         body="Gaming is where Africa's next generation competes, creates, connects, learns, and expresses identity. Gamr exists to support the full culture around play — from casual communities to professional opportunities."
         image="/assets/gaming/hero.jpg"

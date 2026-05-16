@@ -15,11 +15,6 @@ const Studios = () => {
       description="Gamr Studios trains African creators in game design, digital worlds, Roblox development, spatial computing, and interactive media."
     >
       <EcosystemHero
-        eyebrow={
-          <>
-            gam<span className="text-red-600">r</span>studi<span className="relative inline-flex items-center justify-center">o<span className="absolute w-[20%] h-[20%] bg-red-600 rounded-full top-[55%] left-[50%] -translate-x-1/2 -translate-y-1/2"></span></span>s
-          </>
-        }
         headline="FORGING THE NEXT GENERATION OF CREATIVE TECHNOLOGISTS."
         body="Gamr Studios is where African talent learns to build the future of interactive entertainment. Through hands-on programs, mentorship, production sprints, and real-world publishing pathways, we help players become builders."
         backgroundImage={studiosHero}

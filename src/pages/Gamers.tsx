@@ -15,7 +15,6 @@ const Gamers = () => {
       description="Gamr empowers African gamers through tournaments, community experiences, creator pathways, digital identity, and competitive infrastructure."
     >
       <TalentHero
-        eyebrow="For Gamers"
         headline="THIS IS YOUR ERA."
         body="Whether you play casually, compete seriously, or dream of going pro — Gamr is building the infrastructure to support your journey. Tournaments, community, creator tools, digital identity, and real opportunities."
         backgroundImage={gamersHero}

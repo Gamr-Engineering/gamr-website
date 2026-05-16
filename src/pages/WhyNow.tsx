@@ -16,7 +16,6 @@ const WhyNow = () => {
       description="Learn why Africa's gaming ecosystem is entering a defining growth moment across esports, creators, mobile gaming, youth culture, and digital infrastructure."
     >
       <CompanyHero
-        eyebrow="Why Now"
         headline="AFRICA'S GAMING MOMENT HAS ARRIVED."
         body="The world is paying attention to African music, fashion, film, sport, and technology. Gaming is next. With a young population, rising smartphone access, expanding digital payments, creator culture, and global demand for new audiences, Africa is positioned to become one of the most important gaming markets of the next decade."
         backgroundImage={whynowVibe}

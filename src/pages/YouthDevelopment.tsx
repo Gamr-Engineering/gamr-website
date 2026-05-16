@@ -10,7 +10,6 @@ const YouthDevelopment = () => {
       description="Gamr uses gaming, esports, and creative technology to develop skills, confidence, community, and opportunities for African youth."
     >
       <IndustryHero
-        eyebrow="Youth Development"
         headline="USING PLAY TO UNLOCK POTENTIAL."
         body="Gaming can be more than entertainment. It can teach teamwork, discipline, creativity, problem-solving, communication, leadership, and digital skills. Gamr uses gaming as a platform for youth development across Africa."
         image="/assets/youth/hero.jpg"

@@ -15,11 +15,6 @@ const GamrTag = () => {
       description="Claim your GamrTag — your unique gaming identity across Gamr tournaments, events, communities, creator programs, and digital experiences."
     >
       <EcosystemHero
-        eyebrow={
-          <>
-            gam<span className="text-red-600">r</span>tag
-          </>
-        }
         headline={
           <>
             YOUR IDENTITY ACROSS THE GAM<span className="text-red-600">R</span> ECOSYSTEM.

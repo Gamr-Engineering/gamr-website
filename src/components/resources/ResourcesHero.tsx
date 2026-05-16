@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 
 interface ResourcesHeroProps {
-  eyebrow: React.ReactNode;
+  eyebrow?: React.ReactNode;
   headline: React.ReactNode;
   body: string;
   primaryCTA?: { text: string; href?: string; external?: boolean; onClick?: () => void };

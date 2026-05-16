@@ -10,7 +10,6 @@ const Bracket = () => {
       description="Gamr Bracket helps organizers, players, and communities run trusted esports tournaments across Africa."
     >
       <EcosystemHero
-        eyebrow="Gamr Bracket"
         headline="TOURNAMENT INFRASTRUCTURE FOR AFRICAN ESPORTS."
         body="Gamr Bracket is designed to make competitive gaming easier to organize, manage, and scale. From grassroots competitions to major championships, we help communities run tournaments with structure, fairness, and trust."
         primaryCTA={{

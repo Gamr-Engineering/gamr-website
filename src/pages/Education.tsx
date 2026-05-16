@@ -10,7 +10,6 @@ const Education = () => {
       description="Gamr creates education pathways for African gamers, creators, and developers through practical training in esports, game design, content, and digital skills."
     >
       <IndustryHero
-        eyebrow="Education"
         headline="TEACHING THE SKILLS BEHIND THE FUTURE OF PLAY."
         body="Gaming is a gateway into some of the most important skills of the digital economy — design, storytelling, software, production, community, entrepreneurship, and media. Gamr creates learning pathways that turn interest into capability."
         image="/assets/education/hero.jpg"

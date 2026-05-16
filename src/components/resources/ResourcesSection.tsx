@@ -74,13 +74,13 @@ const ResourcesSection = ({
             src={backgroundImage}
             alt="Section background"
             className={cn(
-              "w-full h-full opacity-30 transition-opacity duration-700",
+              "w-full h-full opacity-85 transition-opacity duration-700",
               imageFit === "cover" ? "object-cover" : "object-contain"
             )}
           />
           <div className={cn(
-            "absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/80",
-            variant === "darker" && "from-zinc-950/90 via-zinc-950/50 to-zinc-950/90"
+            "absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60",
+            variant === "darker" && "from-zinc-950/70 via-zinc-950/40 to-zinc-950/70"
           )} />
         </div>
       )}

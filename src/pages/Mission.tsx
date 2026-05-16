@@ -15,7 +15,6 @@ const Mission = () => {
       description="Gamr's mission is to connect gamers, creators, developers, and brands through thrilling experiences and seamless technology."
     >
       <CompanyHero
-        eyebrow="Our Mission"
         headline="CONNECTING GAMERS, CREATORS AND BRANDS THROUGH PLAY."
         body="Gamr's mission is to connect Africa's gaming ecosystem through experiences, technology, and opportunities that help people play, compete, create, learn, and earn. We are building the bridge between grassroots gaming culture and the global digital economy."
         backgroundImage={missionHero}

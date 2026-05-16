@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 interface IndustryHeroProps {
-  eyebrow: React.ReactNode;
+  eyebrow?: React.ReactNode;
   headline: React.ReactNode;
   body: string;
   primaryCTA?: { text: string; href?: string; external?: boolean; onClick?: () => void };

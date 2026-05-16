@@ -15,7 +15,6 @@ const Developers = () => {
       description="Gamr supports developers, technical creators, Roblox builders, designers, and digital world makers with training, infrastructure, mentorship, and opportunities to publish."
     >
       <TalentHero
-        eyebrow="For Developers"
         headline="BUILD THE WORLDS AFRICA WILL PLAY IN."
         body="Gamr supports developers, technical creators, Roblox builders, designers, and digital world makers with training, infrastructure, mentorship, and opportunities to publish."
         backgroundImage={developersHero}

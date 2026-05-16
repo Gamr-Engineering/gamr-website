@@ -16,13 +16,6 @@ const Carven = () => {
       description="Visit Carven Gaming Hub by Gamr — a premium gaming, lifestyle, esports, and creative sanctuary at Landmark Center, Victoria Island, Lagos."
     >
       <EcosystemHero
-        eyebrow={
-          <img 
-            src={carvenLogo} 
-            alt="Carven" 
-            className="h-8 md:h-10 w-auto object-contain" 
-          />
-        }
         headline="WHERE COMPETITION MEETS CULTURE."
         body="Carven is Africa's premium gaming, lifestyle, and creative sanctuary — built for players, creators, teams, brands, and communities who want to experience gaming at the highest level. Located at Landmark Center, Victoria Island, Lagos."
         backgroundImage={carvenHero}

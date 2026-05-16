@@ -14,7 +14,6 @@ const Vision = () => {
       description="Discover Gamr's vision to unlock Africa's gaming potential through esports, technology, community, and creator infrastructure."
     >
       <CompanyHero
-        eyebrow="Our Vision"
         headline="BUILDING THE FUTURE OF PLAY IN AFRICA."
         body="Africa is home to one of the youngest, fastest-growing gaming audiences in the world. At Gamr, we see a future where African gamers are not just players, but competitors, creators, developers, storytellers, founders, and global cultural leaders. Our vision is to build the infrastructure that allows African gaming to scale beyond boundaries."
         backgroundImage={visionHero}

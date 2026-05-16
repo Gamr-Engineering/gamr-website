@@ -3,15 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 interface PageHeroProps {
-  eyebrow: React.ReactNode;
+  eyebrow?: React.ReactNode;
   headline: React.ReactNode;
   body: string;
   primaryCTA?: { text: string; href?: string; external?: boolean; onClick?: () => void };
   secondaryCTA?: { text: string; href?: string; external?: boolean; onClick?: () => void };
   backgroundImage?: string;
+  imageOpacity?: number;
 }
 
-const PageHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgroundImage }: PageHeroProps) => {
+const PageHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgroundImage, imageOpacity = 0.85 }: PageHeroProps) => {
   return (
     <section className="relative min-h-[80vh] flex items-end pt-32 pb-24 md:pb-32 bg-black overflow-hidden">
       {/* Background Image/Atmosphere */}
@@ -21,7 +22,8 @@ const PageHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgroun
             <img 
               src={backgroundImage} 
               alt={typeof headline === "string" ? headline : (typeof eyebrow === "string" ? eyebrow : "Hero image")}
-              className="w-full h-full object-cover opacity-85"
+              className="w-full h-full object-cover transition-opacity duration-700"
+              style={{ opacity: imageOpacity }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
           </>
