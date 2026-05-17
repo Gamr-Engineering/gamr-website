@@ -42,31 +42,44 @@ const InsightsIndex = () => {
         <div className="min-h-screen bg-black text-white selection:bg-blue-500/30 font-sans">
             <Header />
             <main className="pt-32 pb-32">
-                <div className="container mx-auto px-6">
-                    
-                    {/* Editorial Header */}
-                    <div 
-                        ref={heroRef}
-                        className="flex flex-col gap-8 mb-20 animate-fade-in"
-                    >
-                        <h1 className="text-6xl md:text-9xl font-black tracking-tighter leading-[0.8] uppercase max-w-4xl">
-                            BEYOND THE <br/> SCREEN.
-                        </h1>
-                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mt-4">
-                            <p className="text-xl text-gray-400 max-w-xl leading-relaxed font-light">
-                                Exploring the intersection of technology, culture, and competition. Our latest research, success stories, and deep dives.
-                            </p>
-                            <div className="relative group max-w-xs w-full">
-                                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 group-hover:text-blue-500 transition-colors" />
-                                <input 
-                                    type="text" 
-                                    placeholder="SEARCH ARTICLES..." 
-                                    className="w-full bg-white/[0.03] border border-white/10 py-4 pl-12 pr-4 rounded-sm text-[10px] font-bold tracking-widest focus:outline-none focus:border-blue-500/50 transition-all uppercase"
-                                />
+                {/* Editorial Header — Cinematic Transformation */}
+                <div className="relative -mt-32 mb-20 py-48 md:py-64 overflow-hidden border-b border-white/5">
+                    {/* Background Asset */}
+                    <div className="absolute inset-0 z-0">
+                        <img 
+                            src="/assets/insights/hero.jpg" 
+                            alt="Insights Hero"
+                            className="w-full h-full object-cover opacity-100 contrast-105 brightness-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                    </div>
+
+                    <div className="container mx-auto px-6 relative z-10">
+                        <div 
+                            ref={heroRef}
+                            className="flex flex-col gap-8 animate-fade-in"
+                        >
+                            <h1 className="text-6xl md:text-9xl font-black tracking-tighter leading-[0.8] uppercase max-w-4xl text-white drop-shadow-2xl">
+                                BEYOND THE <br/> SCREEN.
+                            </h1>
+                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mt-4">
+                                <p className="text-xl text-gray-200 max-w-xl leading-relaxed font-light drop-shadow-lg">
+                                    Exploring the intersection of technology, culture, and competition. Our latest research, success stories, and deep dives.
+                                </p>
+                                <div className="relative group max-w-xs w-full">
+                                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-colors" />
+                                    <input 
+                                        type="text" 
+                                        placeholder="SEARCH ARTICLES..." 
+                                        className="w-full bg-black/40 backdrop-blur-md border border-white/20 py-4 pl-12 pr-4 rounded-sm text-[10px] font-bold tracking-widest focus:outline-none focus:border-blue-500/50 transition-all uppercase text-white"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <div className="container mx-auto px-6">
                     {/* Featured Article — High End Presentation */}
                     {featuredArticle && (
                         <div className="mb-32 relative group">
