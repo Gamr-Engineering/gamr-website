@@ -43,18 +43,19 @@ const InsightsIndex = () => {
             <Header />
             <main className="pt-32 pb-32">
                 {/* Editorial Header — Cinematic Transformation */}
-                <div className="relative -mt-32 mb-20 py-48 md:py-64 overflow-hidden border-b border-white/5">
+                <div className="relative -mt-32 mb-20 flex flex-col justify-center min-h-[75vh] md:min-h-[85vh] pt-48 pb-32 md:pt-64 md:pb-48 overflow-hidden border-b border-white/5">
                     {/* Background Asset */}
                     <div className="absolute inset-0 z-0">
                         <img 
                             src="/assets/insights/hero.jpg" 
                             alt="Insights Hero"
-                            className="w-full h-full object-cover opacity-100 contrast-105 brightness-110"
+                            className="w-full h-full object-cover object-[center_25%] opacity-100 contrast-105 brightness-110 scale-100 hover:scale-105 transition-transform duration-[15000ms] ease-out"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/50" />
                     </div>
 
-                    <div className="container mx-auto px-6 relative z-10">
+                    <div className="container mx-auto px-6 relative z-10 mt-16 md:mt-32">
                         <div 
                             ref={heroRef}
                             className="flex flex-col gap-8 animate-fade-in"
@@ -85,17 +86,17 @@ const InsightsIndex = () => {
                         <div className="mb-32 relative group">
                             <Link 
                                 to={`/insights/${featuredArticle.slug}`}
-                                className="block relative aspect-[21/9] min-h-[500px] overflow-hidden rounded-sm border border-white/5"
+                                className="block relative w-full aspect-[3/4] sm:aspect-[16/9] lg:aspect-[21/9] min-h-[450px] md:min-h-[500px] overflow-hidden rounded-lg border border-white/5 group shadow-2xl"
                             >
                                 <img 
                                     src={featuredArticle.coverImage} 
                                     alt={featuredArticle.title}
-                                    className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-1000 scale-[1.02] group-hover:scale-100" 
+                                    className="w-full h-full object-cover object-[center_15%] sm:object-[center_20%] grayscale-[20%] group-hover:grayscale-0 transition-transform duration-[15000ms] ease-out scale-100 group-hover:scale-105" 
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 md:via-black/30 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-1000" />
                                 
-                                <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
-                                    <div className="max-w-3xl space-y-6">
+                                <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 md:p-16 flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8">
+                                    <div className="max-w-3xl space-y-4 md:space-y-6">
                                         <div className="flex items-center gap-3">
                                             <span className="bg-blue-600 text-white text-[9px] font-bold uppercase tracking-[0.2em] px-3 py-1 rounded-sm">
                                                 Featured Story
