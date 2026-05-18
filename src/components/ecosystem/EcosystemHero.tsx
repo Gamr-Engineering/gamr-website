@@ -67,8 +67,8 @@ const EcosystemHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, back
         )}
       </div>
 
-      <div className="relative z-10 container mx-auto px-6 text-center">
-        <div className="max-w-4xl mx-auto space-y-8">
+      <div className="relative z-10 container mx-auto px-6 text-left">
+        <div className="max-w-4xl space-y-8">
           {eyebrow && (
             <div className="inline-flex items-center justify-center px-6 py-3 bg-white/[0.06] backdrop-blur-md border border-white/10 rounded-full mb-4">
               <span className="text-white font-bold tracking-widest text-sm">
@@ -81,12 +81,12 @@ const EcosystemHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, back
             {headline}
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-2xl">
             {body}
           </p>
 
           {(primaryCTA || secondaryCTA) && (
-            <div className="pt-6 flex flex-wrap justify-center gap-4">
+            <div className="pt-6 flex flex-wrap justify-start gap-4">
               {primaryCTA && (
                 <Button
                   className="bg-red-600 border-2 border-red-600 text-white hover:bg-red-700 hover:border-red-700 rounded-full px-10 py-7 text-sm font-bold uppercase tracking-widest transition-all duration-300 shadow-lg shadow-red-900/20"
