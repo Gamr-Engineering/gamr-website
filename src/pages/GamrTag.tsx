@@ -20,7 +20,7 @@ const GamrTag = () => {
             YOUR IDENTITY ACROSS THE GAM<span className="text-red-600">R</span> ECOSYSTEM.
           </>
         }
-        body="Your GamrTag is more than a username. It is your identity across tournaments, events, community experiences, creator programs, leaderboards, rewards, and future Gamr products. Claim your name. Build your reputation. Be known across the ecosystem."
+        body="Your GamrTag is more than a username. It is your identity across tournaments, events, community experiences, creator programs, leaderboards, rewards, and all gaming-related activities. Claim your name. Build your reputation. Be known across the ecosystem."
         backgroundImage={gamrtagHero}
         primaryCTA={{
           text: "Join Waitlist",

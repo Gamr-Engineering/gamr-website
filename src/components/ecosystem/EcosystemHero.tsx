@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -9,11 +10,24 @@ interface EcosystemHeroProps {
   primaryCTA?: { text: string; href?: string; external?: boolean; onClick?: () => void };
   secondaryCTA?: { text: string; href?: string; external?: boolean; onClick?: () => void };
   backgroundImage?: string;
+  backgroundVideo?: string;
+  videoDelay?: number;
 }
 
-const EcosystemHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgroundImage }: EcosystemHeroProps) => {
+const EcosystemHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgroundImage, backgroundVideo, videoDelay = 1000 }: EcosystemHeroProps) => {
+  const [showVideo, setShowVideo] = useState(false);
+
+  useEffect(() => {
+    if (backgroundVideo) {
+      const timer = setTimeout(() => {
+        setShowVideo(true);
+      }, videoDelay);
+      return () => clearTimeout(timer);
+    }
+  }, [backgroundVideo, videoDelay]);
+
   return (
-    <section className="relative min-h-[80vh] flex items-center justify-center pt-32 pb-24 md:pb-32 bg-black overflow-hidden">
+    <section className="relative min-h-[80vh] flex items-center justify-center pt-32 pb-24 md:pb-32 bg-black overflow-hidden group">
       {/* Background with vignette */}
       <div className="absolute inset-0 z-0">
         {backgroundImage ? (
@@ -21,11 +35,21 @@ const EcosystemHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, back
             <img
               src={backgroundImage}
               alt={typeof headline === "string" ? headline : "Hero image"}
-              className="w-full h-full object-cover opacity-85"
+              className={`absolute inset-0 w-full h-full object-cover transition-all duration-[2000ms] ease-in-out ${backgroundVideo && showVideo ? 'opacity-0 scale-110' : 'opacity-85 scale-100 group-hover:scale-105'}`}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+            {backgroundVideo && (
+              <video
+                src={backgroundVideo}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className={`absolute inset-0 w-full h-full object-cover transition-all duration-[2000ms] ease-in-out ${showVideo ? 'opacity-85 scale-100' : 'opacity-0 scale-110'}`}
+              />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent pointer-events-none" />
             {/* Vignette */}
-            <div className="absolute inset-0" style={{
+            <div className="absolute inset-0 pointer-events-none" style={{
               background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.8) 100%)"
             }} />
           </>

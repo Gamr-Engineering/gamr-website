@@ -19,6 +19,8 @@ const Carven = () => {
         headline="WHERE COMPETITION MEETS CULTURE."
         body="Carven is Africa's premium gaming, lifestyle, and creative sanctuary — built for players, creators, teams, brands, and communities who want to experience gaming at the highest level. Located at Landmark Center, Victoria Island, Lagos."
         backgroundImage={carvenHero}
+        backgroundVideo="/assets/carven/carven_gaming_intro.mp4"
+        videoDelay={3000}
         primaryCTA={{
           text: "Visit Carven",
           href: "https://maps.app.goo.gl/XjkHsMv46uG2LsJA7",

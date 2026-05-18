@@ -18,6 +18,7 @@ const Studios = () => {
         headline="FORGING THE NEXT GENERATION OF CREATIVE TECHNOLOGISTS."
         body="Gamr Studios is where African talent learns to build the future of interactive entertainment. Through hands-on programs, mentorship, production sprints, and real-world publishing pathways, we help players become builders."
         backgroundImage={studiosHero}
+        backgroundVideo="/assets/education/gamr-lab-video.mp4"
         primaryCTA={{
           text: "Explore Programs",
           href: "/gamr-lab",
@@ -64,6 +65,7 @@ const Studios = () => {
           </>
         }
         body="With access to gaming-grade workstations, stable power, high-speed internet, mentorship, and a community of builders, Gamr Studios removes the barriers that often stop African creators from turning ideas into products."
+        image={studiosHero}
       />
 
       <EcosystemCTA
