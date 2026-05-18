@@ -10,6 +10,10 @@ import UpcomingSchedule from "@/components/UpcomingSchedule";
 import CreatorFlier from "@/components/CreatorFlier";
 import Footer from "@/components/Footer";
 
+const SectionSeparator = () => (
+  <div className="w-full h-16 md:h-20 bg-black shrink-0" />
+);
+
 const Index = () => {
   const heroRef = useRef<HTMLDivElement>(null);
 
@@ -45,18 +49,25 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-black">
       <Header />
-      <main>
+      <main className="flex flex-col gap-16 md:gap-20">
         <div ref={heroRef} tabIndex={-1} className="outline-none">
           <Hero />
         </div>
+        
         <AboutSection />
+        
         <ServicesSection />
+        
         <EventsSection />
 
         <UpcomingSchedule />
+        
         <PartnersSection />
+        
         <CreatorFlier />
       </main>
+      
+      <SectionSeparator />
       <div id="contact">
         <Footer />
       </div>

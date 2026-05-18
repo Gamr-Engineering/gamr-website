@@ -13,10 +13,10 @@ const EventsSection = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div className="space-y-8 animate-fade-in">
-            <span className="text-blue-500 font-bold uppercase tracking-widest text-sm">Main Event</span>
-            <h2 className="text-6xl md:text-9xl font-bold tracking-tighter leading-none uppercase">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="space-y-8 animate-fade-in pl-6 md:pl-12">
+            <span className="text-blue-500 font-bold uppercase tracking-widest text-sm block">Main Event</span>
+            <h2 className="text-6xl md:text-8xl xl:text-9xl font-bold tracking-tight leading-none uppercase">
               GAMR X<br />2026.
             </h2>
             <p className="text-xl text-gray-400 max-w-lg leading-relaxed">

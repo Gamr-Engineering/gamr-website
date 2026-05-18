@@ -30,7 +30,7 @@ const UpcomingSchedule = () => {
   ];
 
   return (
-    <section id="upcoming-schedule" className="py-24 bg-black text-white">
+    <section id="upcoming-schedule" className="bg-black text-white">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row gap-12 items-center mb-16">
           <div className="flex-1 animate-fade-in">

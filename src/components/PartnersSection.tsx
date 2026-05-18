@@ -22,7 +22,7 @@ const PartnersSection = () => {
   ];
 
   return (
-    <section id="partners" className="relative py-24 bg-black overflow-hidden">
+    <section id="partners" className="relative bg-black overflow-hidden">
       <div className="container mx-auto px-6 mb-12 text-center">
         <p className="text-sm font-bold tracking-widest text-gray-400 uppercase">
           Trusted by Industry Leaders
