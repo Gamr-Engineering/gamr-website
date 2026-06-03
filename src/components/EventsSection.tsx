@@ -1,7 +1,29 @@
-import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 const EventsSection = () => {
+  const { toast } = useToast();
+
+  const handleComingSoonClick = () => {
+    toast({
+      title: "GAMR X 2026",
+      description: (
+        <div className="mt-2 space-y-3 text-zinc-600 text-sm font-sans">
+          <p className="leading-relaxed">
+            The ultimate arena for African gaming is booting up! Get ready for the grandest esports showdown, explosive live stages, and ultimate community vibes.
+          </p>
+          <div className="flex items-center gap-2 text-[10px] font-bold text-zinc-800 bg-zinc-100 border border-zinc-200 px-3 py-1.5 uppercase tracking-widest w-fit rounded">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-zinc-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-zinc-600"></span>
+            </span>
+            STATUS: PREPARING STAGE & PRIZE POOL 🏆
+          </div>
+        </div>
+      ),
+    });
+  };
+
   return (
     <section id="esports" className="relative h-screen flex items-center bg-black text-white overflow-hidden">
       {/* Background Pattern / Subtle Visual */}
@@ -25,18 +47,16 @@ const EventsSection = () => {
 
             <div className="pt-8 flex flex-col sm:flex-row gap-4">
               <Button
-                className="bg-white text-black hover:bg-gray-200 rounded-none px-12 py-8 text-sm font-bold uppercase tracking-widest transition-all"
-                asChild
+                className="bg-white text-black hover:bg-gray-200 rounded-none px-12 py-8 text-sm font-bold uppercase tracking-widest transition-all cursor-pointer"
+                onClick={handleComingSoonClick}
               >
-                <a href="#" className="pointer-events-none">
-                  Coming Soon
-                </a>
+                Coming Soon
               </Button>
               <Button
                 className="bg-transparent border border-white text-white hover:bg-white hover:text-black rounded-none px-12 py-8 text-sm font-bold uppercase tracking-widest transition-all"
                 asChild
               >
-                <a href="#">
+                <a href="https://bit.ly/Sponsor-Gamr-X-2026" target="_blank" rel="noopener noreferrer">
                   Sponsor Event
                 </a>
               </Button>

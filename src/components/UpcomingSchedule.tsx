@@ -1,39 +1,32 @@
-import { Button } from "@/components/ui/button";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
-import fifaImg from "@/assets/gaming-hub.jpg";
-import managementImg from "@/assets/workshop.jpg";
-import streamingImg from "@/assets/training-studio.jpg";
+import { ArrowRight } from "lucide-react";
+import gameplayImg from "@/assets/session-gameplay.jpg";
+import businessImg from "@/assets/session-business.jpg";
+import contentImg from "@/assets/session-content.jpg";
 
 const UpcomingSchedule = () => {
   const sessions = [
     { 
       title: "FIFA Pro Strategies", 
-      date: "Dec 20", 
-      time: "2:00 PM", 
       category: "Gameplay", 
-      image: fifaImg 
+      image: gameplayImg 
     },
     { 
       title: "Esports Management", 
-      date: "Dec 27", 
-      time: "4:00 PM", 
       category: "Business", 
-      image: managementImg 
+      image: businessImg 
     },
     { 
       title: "Streaming Basics", 
-      date: "Jan 03", 
-      time: "10:00 AM", 
       category: "Content", 
-      image: streamingImg 
+      image: contentImg 
     }
   ];
 
   return (
     <section id="upcoming-schedule" className="bg-black text-white">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row gap-12 items-center mb-16">
-          <div className="flex-1 animate-fade-in">
+        <div className="mb-16">
+          <div className="max-w-xl animate-fade-in">
             <span className="text-blue-500 font-bold tracking-widest text-sm uppercase mb-4 block">Calendar</span>
             <h2 className="text-6xl md:text-7xl font-bold text-white mb-6 tracking-tighter uppercase leading-none">
               Upcoming <br />
@@ -42,11 +35,6 @@ const UpcomingSchedule = () => {
             <p className="text-xl text-gray-400 leading-relaxed max-w-md">
               Join our expert-led workshops and enhance your skills in gaming, streaming, and esports management.
             </p>
-          </div>
-          <div className="flex-none">
-            <Button className="bg-white text-black hover:bg-gray-200 rounded-none px-10 py-7 text-sm font-bold uppercase tracking-widest transition-all duration-300">
-              View Full Calendar
-            </Button>
           </div>
         </div>
 
@@ -66,19 +54,9 @@ const UpcomingSchedule = () => {
                   <ArrowRight className="w-8 h-8 text-white -rotate-45" />
                 </div>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <span className="text-xs font-bold text-blue-500 uppercase tracking-widest">{session.category}</span>
                 <h3 className="text-2xl font-bold text-white group-hover:text-gray-300 transition-colors uppercase tracking-tight">{session.title}</h3>
-                <div className="flex items-center gap-4 text-sm text-gray-400 font-medium uppercase tracking-wider">
-                  <div className="flex items-center gap-1.5">
-                    <Calendar className="w-4 h-4 text-white" />
-                    <span>{session.date}</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <Clock className="w-4 h-4 text-white" />
-                    <span>{session.time}</span>
-                  </div>
-                </div>
               </div>
             </div>
           ))}
