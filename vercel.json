@@ -1,9 +1,17 @@
 {
+  "cleanUrls": true,
   "rewrites": [
+    {
+      "source": "/samsung",
+      "destination": "/samsung.html"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
 }
-

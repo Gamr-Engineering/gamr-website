@@ -23,7 +23,7 @@ const CreatorFlier = () => {
   ];
 
   return (
-    <section id="creators" className="bg-black text-white py-32 overflow-hidden">
+    <section id="creators" className="bg-black text-white overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row gap-20 items-center justify-between">
           <div className="max-w-xl space-y-8 animate-fade-in">

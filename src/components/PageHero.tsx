@@ -67,8 +67,8 @@ const PageHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgroun
                   onClick={primaryCTA.onClick}
                 >
                   {primaryCTA.href ? (
-                    primaryCTA.external ? (
-                      <a href={primaryCTA.href} target="_blank" rel="noopener noreferrer">
+                    primaryCTA.external || primaryCTA.href.startsWith("#") ? (
+                      <a href={primaryCTA.href}>
                         {primaryCTA.text}
                       </a>
                     ) : (
@@ -86,8 +86,8 @@ const PageHero = ({ eyebrow, headline, body, primaryCTA, secondaryCTA, backgroun
                   onClick={secondaryCTA.onClick}
                 >
                   {secondaryCTA.href ? (
-                    secondaryCTA.external ? (
-                      <a href={secondaryCTA.href} target="_blank" rel="noopener noreferrer">
+                    secondaryCTA.external || secondaryCTA.href.startsWith("#") ? (
+                      <a href={secondaryCTA.href} className="flex items-center">
                         {secondaryCTA.text}
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </a>

@@ -61,6 +61,8 @@ const ServicesSection = () => {
         </div>
       </div>
 
+      <div className="w-full h-16 md:h-20 bg-black shrink-0" />
+
       {/* Carven Section - Photo Background */}
       <div id="carven" className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">

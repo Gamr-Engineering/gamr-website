@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import SamsungSpotlightBanner from "@/components/SamsungSpotlightBanner";
 import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
 import PartnersSection from "@/components/PartnersSection";
@@ -9,6 +10,10 @@ import EventsSection from "@/components/EventsSection";
 import UpcomingSchedule from "@/components/UpcomingSchedule";
 import CreatorFlier from "@/components/CreatorFlier";
 import Footer from "@/components/Footer";
+
+const SectionSeparator = () => (
+  <div className="w-full h-16 md:h-20 bg-black shrink-0" />
+);
 
 const Index = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -45,18 +50,27 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-black">
       <Header />
-      <main>
+      <main className="flex flex-col gap-16 md:gap-20">
         <div ref={heroRef} tabIndex={-1} className="outline-none">
           <Hero />
         </div>
+        
+        <SamsungSpotlightBanner />
+        
         <AboutSection />
+        
         <ServicesSection />
+        
         <EventsSection />
 
         <UpcomingSchedule />
+        
         <PartnersSection />
+        
         <CreatorFlier />
       </main>
+      
+      <SectionSeparator />
       <div id="contact">
         <Footer />
       </div>

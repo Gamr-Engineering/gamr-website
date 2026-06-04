@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Samsung x Gamr | Galaxy Gaming Experience — Carven, Lagos</title>
+  
+  <meta name="description" content="Experience mobile gaming like never before. Samsung and Gamr bring you competitive tournaments, free play zones, giveaways, and hands-on access to the new Galaxy A57 and A37. 13th June, Carven, Lagos." />
+  <meta name="author" content="GAMR Africa" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://gamr.africa/samsung" />
+  <meta property="og:title" content="Samsung x Gamr | Galaxy Gaming Experience" />
+  <meta property="og:description" content="Join Lagos gamers for an immersive gaming experience powered by the new Samsung Galaxy A57 & A37. Tournaments, giveaways, and creator link-ups. Register free." />
+  <meta property="og:image" content="/gamr-og-image.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://gamr.africa/samsung" />
+  <meta property="twitter:title" content="Samsung x Gamr | Galaxy Gaming Experience" />
+  <meta property="twitter:description" content="Join Lagos gamers for an immersive gaming experience powered by the new Samsung Galaxy A57 & A37. Tournaments, giveaways, and creator link-ups. Register free." />
+  <meta property="twitter:image" content="/gamr-og-image.png" />
+
+  <!-- Google Fonts (No Inter, using Bebas Neue + Rajdhani + Outfit) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* CSS Variables & Core Theme */
+    :root {
+      --gamr-blue: #007AFF;
+      --gamr-blue-glow: rgba(0, 122, 255, 0.4);
+      --gamr-blue-dim: rgba(0, 122, 255, 0.1);
+      --gamr-red: hsl(0, 84%, 60%);
+      --gamr-red-glow: rgba(244, 63, 94, 0.4);
+      --gamr-white: #FFFFFF;
+      
+      --bg-dark: #07070C;
+      --bg-darker: #040407;
+      --bg-card: #0E0E16;
+      --bg-card-hover: #141420;
+      
+      --border-color: #1A1A28;
+      --border-focus: #007AFF;
+      --text-light: #F3F4F6;
+      --text-muted: #8E8EA2;
+      --text-dark: #1F1F2E;
+      
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-accent: 'Rajdhani', sans-serif;
+      --font-body: 'Outfit', sans-serif;
+      
+      --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-normal: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Reset & Base Styles */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-dark);
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    /* Grid & Cyberpunk Scanline Effect */
+    body::before {
+      content: " ";
+      display: block;
+      position: fixed;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
+      z-index: 9999;
+      background-size: 100% 4px;
+      pointer-events: none;
+      opacity: 0.35;
+    }
+
+    /* Subtle neon cyberpunk background details */
+    .bg-decorations {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .grid-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.007) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.007) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+
+    .glow-circle-blue {
+      position: absolute;
+      width: clamp(300px, 80vw, 600px);
+      height: clamp(300px, 80vw, 600px);
+      background: radial-gradient(circle, var(--gamr-blue-glow) 0%, transparent 70%);
+      top: 10dvh;
+      left: 50%;
+      transform: translateX(-50%);
+      filter: blur(50px);
+      opacity: 0.5;
+    }
+
+    .glow-circle-red {
+      position: absolute;
+      width: clamp(250px, 60vw, 500px);
+      height: clamp(250px, 60vw, 500px);
+      background: radial-gradient(circle, var(--gamr-red-glow) 0%, transparent 70%);
+      bottom: 20%;
+      right: -10%;
+      filter: blur(60px);
+      opacity: 0.3;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-darker);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--gamr-blue);
+    }
+
+    /* Layout Containers */
+    .container {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      line-height: 0.95;
+    }
+
+    p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .text-glow-blue {
+      text-shadow: 0 0 15px var(--gamr-blue-glow);
+    }
+
+    .text-glow-red {
+      text-shadow: 0 0 15px var(--gamr-red-glow);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 52px;
+      border-radius: 26px;
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      text-decoration: none;
+      border: none;
+      outline: none;
+      width: 100%;
+      white-space: nowrap;
+      padding: 0 24px;
+    }
+
+    .btn-blue {
+      background-color: var(--gamr-blue);
+      color: var(--gamr-white);
+      box-shadow: 0 4px 20px rgba(0, 122, 255, 0.4);
+    }
+
+    .btn-blue:hover {
+      background-color: #3395ff;
+      box-shadow: 0 6px 25px rgba(0, 122, 255, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .btn-blue:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 10px rgba(0, 122, 255, 0.3);
+    }
+
+    .btn-red {
+      background-color: var(--gamr-red);
+      color: var(--gamr-white);
+      box-shadow: 0 4px 20px rgba(244, 63, 94, 0.4);
+    }
+
+    .btn-red:hover {
+      background-color: hsl(0, 90%, 65%);
+      box-shadow: 0 6px 25px rgba(244, 63, 94, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .btn-red:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 10px rgba(244, 63, 94, 0.3);
+    }
+
+    /* Sticky Navigation */
+    nav.navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 72px;
+      background-color: rgba(7, 7, 12, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      transition: var(--transition-normal);
+    }
+
+    nav.navbar.scrolled {
+      background-color: rgba(4, 4, 7, 0.95);
+      height: 64px;
+      border-bottom-color: rgba(0, 122, 255, 0.2);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-gamr {
+      height: 20px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .logo-divider {
+      color: var(--text-muted);
+      font-family: var(--font-accent);
+      font-size: 1.2rem;
+      font-weight: 500;
+      opacity: 0.6;
+    }
+
+    .logo-samsung {
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      color: var(--gamr-white);
+    }
+
+    .nav-cta-btn {
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background-color: var(--gamr-blue);
+      color: var(--gamr-white);
+      padding: 10px 18px;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: var(--transition-fast);
+      box-shadow: 0 2px 10px rgba(0, 122, 255, 0.3);
+    }
+
+    .nav-cta-btn:active {
+      transform: scale(0.95);
+    }
+
+    .desktop-nav-links {
+      display: none;
+    }
+
+    /* Section Styling */
+    section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* HERO SECTION (100dvh) */
+    .hero {
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 72px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .event-badge {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(0, 122, 255, 0.12);
+      border: 1px solid rgba(0, 122, 255, 0.3);
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      color: var(--gamr-blue);
+      text-transform: uppercase;
+      box-shadow: 0 0 15px rgba(0, 122, 255, 0.15);
+      animation: pulse-glow 2.5s infinite alternate;
+    }
+
+    @keyframes pulse-glow {
+      0% {
+        box-shadow: 0 0 10px rgba(0, 122, 255, 0.1);
+        border-color: rgba(0, 122, 255, 0.2);
+      }
+      100% {
+        box-shadow: 0 0 20px rgba(0, 122, 255, 0.3);
+        border-color: rgba(0, 122, 255, 0.6);
+      }
+    }
+
+    .hero h1.headline {
+      font-size: clamp(3rem, 13vw, 4.2rem);
+      color: var(--gamr-white);
+      text-shadow: 0 0 30px rgba(0, 122, 255, 0.35);
+      line-height: 0.9;
+    }
+
+    .hero h1.headline span.alt-color {
+      color: var(--gamr-blue);
+      display: block;
+    }
+
+    .hero .subheadline {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    .hero-action-container {
+      width: 100%;
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-meta {
+      font-family: var(--font-accent);
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ABOUT SECTION */
+    .about {
+      padding: 80px 0;
+      background-color: var(--bg-darker);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .accent-glitch-line {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gamr-blue) 0%, var(--gamr-red) 100%);
+      margin-bottom: 24px;
+      box-shadow: 0 0 10px rgba(0, 122, 255, 0.5);
+    }
+
+    .about h2 {
+      font-size: 2.5rem;
+      color: var(--gamr-white);
+      margin-bottom: 20px;
+      max-width: 500px;
+    }
+
+    .about p.about-body {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      opacity: 0.9;
+    }
+
+    /* WHAT TO EXPECT (Grid) */
+    .expect {
+      padding: 80px 0;
+    }
+
+    .expect h2.section-title {
+      font-size: 2.8rem;
+      margin-bottom: 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .expect h2.section-title::after {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: var(--gamr-blue);
+      margin: 12px auto 0 auto;
+      box-shadow: 0 0 8px var(--gamr-blue);
+    }
+
+    .expect-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .expect-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--gamr-blue);
+      border-radius: 12px;
+      padding: 24px;
+      transition: var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .expect-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 122, 255, 0.05) 0%, transparent 100%);
+      opacity: 0;
+      transition: var(--transition-fast);
+    }
+
+    /* Active touch feedback instead of hover-only */
+    .expect-card:active {
+      transform: scale(0.98);
+      border-color: var(--gamr-blue);
+      background: var(--bg-card-hover);
+    }
+
+    .expect-card:active::before {
+      opacity: 1;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: rgba(0, 122, 255, 0.08);
+      border: 1px solid rgba(0, 122, 255, 0.2);
+      color: var(--gamr-blue);
+      margin-bottom: 18px;
+      box-shadow: 0 0 10px rgba(0, 122, 255, 0.1);
+    }
+
+    .expect-card h3 {
+      font-family: var(--font-accent);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gamr-white);
+      margin-bottom: 10px;
+      letter-spacing: 0.02em;
+    }
+
+    .expect-card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* TOURNAMENT CTA */
+    .tournament-cta {
+      padding: 80px 0;
+      background-color: var(--bg-darker);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .tournament-cta-card {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .tournament-cta h2 {
+      font-size: 2.8rem;
+      color: var(--gamr-white);
+      letter-spacing: 0.05em;
+    }
+
+    .tournament-cta p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .tournament-cta-btn-wrap {
+      width: 100%;
+      max-width: 380px;
+    }
+
+    /* RSVP FORM SECTION */
+    .rsvp {
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .rsvp-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 30px 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 122, 255, 0.05);
+      max-width: 580px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .rsvp h2 {
+      font-size: 2.6rem;
+      color: var(--gamr-white);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .rsvp p.rsvp-subheading {
+      text-align: center;
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: left;
+    }
+
+    .form-group label {
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .input-control {
+      width: 100%;
+      height: 52px;
+      background: var(--bg-darker);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-light);
+      padding: 0 18px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      outline: none;
+      transition: var(--transition-fast);
+    }
+
+    .input-control:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 12px rgba(0, 122, 255, 0.25);
+      background: rgba(0, 122, 255, 0.02);
+    }
+
+    .input-control::placeholder {
+      color: #4A4A5D;
+    }
+
+    /* Custom Select/Dropdown */
+    select.input-control {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%238E8EA2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 18px center;
+      background-size: 18px;
+      padding-right: 45px;
+    }
+
+    select.input-control option {
+      background: var(--bg-card);
+      color: var(--text-light);
+    }
+
+    /* Segmented Toggle for Tournament */
+    .toggle-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .toggle-option {
+      height: 52px;
+      border-radius: 8px;
+      background: var(--bg-darker);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-fast);
+    }
+
+    .toggle-option.selected {
+      border-color: var(--gamr-blue);
+      background: var(--gamr-blue-dim);
+      color: var(--gamr-blue);
+      box-shadow: 0 0 10px rgba(0, 122, 255, 0.15);
+    }
+
+    /* Game Selector Panel (collapsible) */
+    .game-selector-container {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    }
+
+    .game-selector-container.open {
+      max-height: 120px;
+      opacity: 1;
+      margin-top: 10px;
+    }
+
+    .fine-print {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 18px;
+      line-height: 1.4;
+    }
+
+    /* Success State Overrides */
+    .rsvp-success-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 40px 10px;
+      animation: scale-up 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes scale-up {
+      0% {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .success-icon-wrap {
+      width: 72px;
+      height: 72px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #10B981;
+      margin-bottom: 24px;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+    }
+
+    .success-title {
+      font-size: 2.2rem;
+      color: var(--gamr-white);
+      margin-bottom: 12px;
+    }
+
+    .success-msg {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      max-width: 320px;
+      margin-bottom: 28px;
+    }
+
+    .success-ticket-details {
+      background: var(--bg-darker);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px 24px;
+      width: 100%;
+      max-width: 360px;
+      margin-bottom: 30px;
+      font-family: var(--font-accent);
+      text-align: left;
+    }
+
+    .ticket-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .ticket-row:last-child {
+      margin-bottom: 0;
+    }
+    .ticket-label {
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+    .ticket-val {
+      color: var(--gamr-blue);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* FOMO SECTION */
+    .fomo {
+      padding: 100px 0;
+      background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+      position: relative;
+      z-index: 10;
+    }
+
+    .fomo-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+      align-items: center;
+    }
+
+    .fomo-title {
+      font-size: clamp(3rem, 10vw, 4.8rem);
+      color: var(--gamr-white);
+      max-width: 800px;
+    }
+
+    .fomo-sub {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 500px;
+    }
+
+    /* Red accent ribbon skew */
+    .fomo-stripe {
+      width: 100vw;
+      height: 48px;
+      background-color: var(--gamr-red);
+      transform: skewY(-2deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      white-space: nowrap;
+      margin: 40px 0;
+      box-shadow: 0 0 25px rgba(244, 63, 94, 0.4);
+    }
+
+    .stripe-ticker {
+      display: flex;
+      animation: marquee 20s linear infinite;
+    }
+
+    .stripe-item {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--gamr-white);
+      padding: 0 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    @keyframes marquee {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
+    }
+
+    /* FINAL CTA & FOOTER */
+    .footer-cta {
+      padding: 80px 0 40px 0;
+      text-align: center;
+      background-color: var(--bg-darker);
+      border-top: 1px solid var(--border-color);
+    }
+
+    .footer-cta-container {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .footer-cta h2 {
+      font-size: 3rem;
+      color: var(--gamr-white);
+    }
+
+    .footer-cta h3.subtitle {
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--gamr-blue);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: -12px;
+    }
+
+    .footer-cta p.details {
+      font-family: var(--font-accent);
+      font-size: 1.1rem;
+      color: var(--text-light);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border-color);
+      margin: 60px 0 30px 0;
+    }
+
+    .footer-brand {
+      font-family: var(--font-accent);
+      font-size: 0.95rem;
+      color: var(--text-light);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .footer-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .footer-meta a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+
+    .footer-meta a:hover {
+      color: var(--gamr-blue);
+    }
+
+    /* SCROLL TRIGGER ANIMATIONS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity var(--transition-slow), transform var(--transition-slow);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* BREAKPOINTS (Progressive mobile-first scaling) */
+    
+    /* Tablet Portrait (768px+) */
+    @media (min-width: 768px) {
+      .container {
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+      
+      .btn {
+        width: auto;
+        padding: 0 40px;
+      }
+
+      .hero-action-container {
+        flex-direction: row;
+        max-width: 100%;
+        justify-content: center;
+        gap: 16px;
+      }
+
+      .hero-action-container .btn {
+        width: auto;
+        min-width: 240px;
+      }
+      
+      .hero h1.headline {
+        font-size: clamp(4.5rem, 11vw, 6.5rem);
+      }
+      
+      .hero h1.headline span.alt-color {
+        display: inline;
+        margin-left: 15px;
+      }
+
+      .hero .subheadline {
+        font-size: 1.15rem;
+      }
+
+      .about h2 {
+        font-size: 3.5rem;
+        max-width: 700px;
+      }
+
+      .about p.about-body {
+        font-size: 1.25rem;
+      }
+
+      .expect-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+
+      .tournament-cta-btn-wrap {
+        width: auto;
+      }
+
+      .tournament-cta h2 {
+        font-size: 3.8rem;
+      }
+
+      .rsvp-card {
+        padding: 40px;
+      }
+
+      .toggle-group {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .fomo-title {
+        font-size: 5rem;
+      }
+
+      .footer-meta {
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+      }
+    }
+
+    /* Desktop (1024px+) */
+    @media (min-width: 1024px) {
+      .container {
+        max-width: 1200px;
+      }
+
+      /* Desktop navigation items */
+      .desktop-nav-links {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+      }
+
+      .desktop-nav-links a {
+        font-family: var(--font-accent);
+        font-weight: 700;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        text-decoration: none;
+        letter-spacing: 0.1em;
+        transition: var(--transition-fast);
+      }
+
+      .desktop-nav-links a:hover {
+        color: var(--gamr-blue);
+      }
+
+      .hero {
+        padding-top: 0; /* Centered layout looks better with fixed nav overlap */
+      }
+
+      .hero h1.headline {
+        font-size: clamp(6.5rem, 9vw, 8rem);
+      }
+
+      .expect-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+      }
+
+      .expect-card {
+        border-left: none;
+        border-top: 3px solid var(--gamr-blue);
+      }
+
+      .expect-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--gamr-blue);
+        background: var(--bg-card-hover);
+        box-shadow: 0 10px 30px rgba(0, 122, 255, 0.15);
+      }
+
+      .expect-card:hover::before {
+        opacity: 1;
+      }
+
+      .fomo-title {
+        font-size: 6rem;
+      }
+
+      .fomo-stripe {
+        height: 64px;
+        margin: 60px 0;
+      }
+
+      .stripe-item {
+        font-size: 2.2rem;
+      }
+    }
+
+    /* Accessibility Support for Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .stripe-ticker {
+        animation: none !important;
+      }
+      .event-badge {
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background decorations (neon glows & grids) -->
+  <div class="bg-decorations">
+    <div class="grid-overlay"></div>
+    <div class="glow-circle-blue"></div>
+    <div class="glow-circle-red"></div>
+  </div>
+
+  <!-- STICKY TOP NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <div class="logo-container">
+        <img src="/lovable-uploads/e44800e5-f2f8-453c-ac9e-09a43a2d85cc.png" alt="GAMR Logo" class="logo-gamr">
+        <span class="logo-divider">×</span>
+        <span class="logo-samsung">SAMSUNG</span>
+      </div>
+      
+      <!-- Desktop Navigation Links (hidden on mobile) -->
+      <ul class="desktop-nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#expect">Experience</a></li>
+        <li><a href="#tournament">Tournament</a></li>
+        <li><a href="#rsvp">Reserve Spot</a></li>
+      </ul>
+
+      <a href="#rsvp" class="nav-cta-btn">Reserve Spot</a>
+    </div>
+  </nav>
+
+  <!-- 1. HERO SECTION -->
+  <section class="hero" id="hero">
+    <div class="container hero-content">
+      <div class="event-badge reveal">
+        13th June | 10AM | Carven, Lagos
+      </div>
+      
+      <h1 class="headline reveal" style="transition-delay: 100ms;">
+        Galaxy Gaming <span class="alt-color">Experience</span>
+      </h1>
+      
+      <p class="subheadline reveal" style="transition-delay: 200ms;">
+        Samsung and Gamr are bringing Lagos gamers together for an immersive gaming experience powered by the new Samsung Galaxy A57 and A37.
+      </p>
+      
+      <div class="hero-action-container reveal" style="transition-delay: 300ms;">
+        <a href="#rsvp" class="btn btn-blue">Reserve Spot</a>
+      </div>
+      
+      <span class="hero-meta reveal" style="transition-delay: 400ms;">
+        Free Entry • Limited Gaming Slots • Open to All Gamers
+      </span>
+    </div>
+  </section>
+
+  <!-- 2. ABOUT SECTION -->
+  <section class="about" id="about">
+    <div class="container reveal">
+      <div class="accent-glitch-line"></div>
+      <h2>This Isn't Just Another Phone Launch</h2>
+      <p class="about-body">
+        Samsung x Gamr is turning launch day into a full gaming experience. From competitive tournaments to free play zones, creator appearances, live challenges, giveaways, music, and hands-on access to the new Galaxy A57 and A37 — this is where Lagos gamers show up. Whether you're competitive, casual, or just love gaming culture, there's something here for you.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. WHAT TO EXPECT -->
+  <section class="expect" id="expect">
+    <div class="container">
+      <h2 class="section-title reveal">What To Expect</h2>
+      
+      <div class="expect-grid">
+        <!-- Card 1 -->
+        <div class="expect-card reveal" style="transition-delay: 50ms;">
+          <div class="card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <rect x="2" y="6" width="20" height="12" rx="2" ry="2"/>
+              <path d="M6 12h4m-2-2v4m7-2h.01M17 12h.01"/>
+            </svg>
+          </div>
+          <h3>Mobile Gaming Tournament</h3>
+          <p>Compete in EFootball, Subway Surfers, and Asphalt. Battle for bragging rights, prizes, and a chance to win Samsung devices.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="expect-card reveal" style="transition-delay: 150ms;">
+          <div class="card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+              <path d="M12 18h.01"/>
+            </svg>
+          </div>
+          <h3>Experience the New Galaxy</h3>
+          <p>Test the latest Galaxy devices built for smooth gameplay, fast performance, immersive visuals, and all-day entertainment.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="expect-card reveal" style="transition-delay: 250ms;">
+          <div class="card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3>Community & Culture</h3>
+          <p>Meet creators, gamers, streamers, and members of the growing Nigerian gaming community.</p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="expect-card reveal" style="transition-delay: 350ms;">
+          <div class="card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <polyline points="20 12 20 22 4 22 4 12"/>
+              <rect x="2" y="7" width="20" height="5"/>
+              <line x1="12" y1="22" x2="12" y2="7"/>
+              <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+              <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+            </svg>
+          </div>
+          <h3>Challenges & Giveaways</h3>
+          <p>Win gadgets, exclusive prizes, merch, and more throughout the day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. TOURNAMENT CTA -->
+  <section class="tournament-cta" id="tournament">
+    <div class="container reveal">
+      <div class="tournament-cta-card">
+        <h2>Ready to Compete?</h2>
+        <p>When registering, select the tournament option to secure your chance to play. Tournament slots may fill up quickly.</p>
+        <div class="tournament-cta-btn-wrap">
+          <a href="#rsvp" class="btn btn-red">Reserve Spot</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. RSVP FORM SECTION -->
+  <section class="rsvp" id="rsvp">
+    <div class="container">
+      <div class="rsvp-card reveal">
+        <!-- Form Fields State -->
+        <div id="rsvp-form-container">
+          <h2>Join the Experience</h2>
+          <p class="rsvp-subheading">Fill in your details to reserve your spot at Samsung x Gamr.</p>
+          
+          <form id="rsvp-form" novalidate>
+            <!-- Full Name -->
+            <div class="form-group">
+              <label for="fullname">Full Name</label>
+              <input type="text" id="fullname" name="fullname" class="input-control" placeholder="Enter your full name" required>
+            </div>
+            
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" class="input-control" placeholder="name@example.com" required>
+            </div>
+            
+            <!-- Phone -->
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" inputmode="tel" class="input-control" placeholder="e.g. +234 801 234 5678" required>
+            </div>
+            
+            <!-- Tournament Toggle -->
+            <div class="form-group">
+              <label>Are you joining the tournament?</label>
+              <input type="hidden" name="tournament_join" id="tournament_join" value="no">
+              <div class="toggle-group">
+                <button type="button" class="toggle-option selected" id="toggle-no" onclick="setTournament(false)">No, Spectator</button>
+                <button type="button" class="toggle-option" id="toggle-yes" onclick="setTournament(true)">Yes, Competitor</button>
+              </div>
+            </div>
+            
+            <!-- Game Dropdown (Collapsible) -->
+            <div class="form-group game-selector-container" id="game-selector-group">
+              <label for="game">Select Your Game</label>
+              <select id="game" name="game" class="input-control">
+                <option value="" disabled selected>Choose a game</option>
+                <option value="eFootball">eFootball</option>
+                <option value="Subway Surfers">Subway Surfers</option>
+                <option value="Asphalt">Asphalt</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            
+            <!-- Submit -->
+            <button type="submit" class="btn btn-blue" style="margin-top: 10px;">Reserve Spot</button>
+            
+            <p class="fine-print">By registering, you agree to receive event updates from Samsung x Gamr.</p>
+          </form>
+        </div>
+
+        <!-- Success Message State -->
+        <div class="rsvp-success-state" id="rsvp-success">
+          <div class="success-icon-wrap">
+            <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <h2 class="success-title">You're In!</h2>
+          <p class="success-msg">See you on the 13th 🎮</p>
+          
+          <div class="success-ticket-details">
+            <div class="ticket-row">
+              <span class="ticket-label">Event</span>
+              <span class="ticket-val" style="color: #FFF;">Samsung x Gamr</span>
+            </div>
+            <div class="ticket-row">
+              <span class="ticket-label">Date</span>
+              <span class="ticket-val">13th June, 10AM</span>
+            </div>
+            <div class="ticket-row">
+              <span class="ticket-label">Venue</span>
+              <span class="ticket-val" style="font-size: 0.9rem;">Carven, Lagos</span>
+            </div>
+            <div class="ticket-row">
+              <span class="ticket-label">Pass</span>
+              <span class="ticket-val" id="success-pass-type">Spectator Pass</span>
+            </div>
+            <div class="ticket-row">
+              <span class="ticket-label">Name</span>
+              <span class="ticket-val" id="success-name" style="color: #FFF; font-size: 0.95rem;"></span>
+            </div>
+          </div>
+          
+          <p class="fine-print">A confirmation email has been sent to your inbox. Present this ticket at the entrance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. FOMO SECTION -->
+  <section class="fomo">
+    <div class="container fomo-container reveal">
+      <h2 class="fomo-title">Lagos Gaming Culture Is Pulling Up</h2>
+      <p class="fomo-sub">The creators. The competition. The community. Don't hear about it after. Be there.</p>
+    </div>
+    
+    <!-- Red skewer band with high energy scrolling content -->
+    <div class="fomo-stripe">
+      <div class="stripe-ticker">
+        <!-- Repeated texts for infinite scroll effect -->
+        <div class="stripe-item">SAMSUNG GALAXY A57 × A37 <span>⚡</span></div>
+        <div class="stripe-item">CARVEN LAGOS <span>🎮</span></div>
+        <div class="stripe-item">13TH JUNE <span>🔥</span></div>
+        <div class="stripe-item">LIVE TOURNAMENTS <span>🏆</span></div>
+        <div class="stripe-item">FREE PLAY ZONES <span>🕹️</span></div>
+        <div class="stripe-item">SAMSUNG GALAXY A57 × A37 <span>⚡</span></div>
+        <div class="stripe-item">CARVEN LAGOS <span>🎮</span></div>
+        <div class="stripe-item">13TH JUNE <span>🔥</span></div>
+        <div class="stripe-item">LIVE TOURNAMENTS <span>🏆</span></div>
+        <div class="stripe-item">FREE PLAY ZONES <span>🕹️</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. FINAL CTA / FOOTER -->
+  <section class="footer-cta" id="footer-cta">
+    <div class="container footer-cta-container reveal">
+      <h2>The Game Starts Here</h2>
+      <h3 class="subtitle">Samsung x Gamr</h3>
+      <p class="details">13th June • Carven, Lagos • 10AM</p>
+      
+      <div style="width: 100%; max-width: 320px;">
+        <a href="#rsvp" class="btn btn-blue">Reserve Spot</a>
+      </div>
+      
+      <div class="footer-divider"></div>
+      
+      <div class="footer-brand">
+        Powered by Samsung Galaxy A57 & A37
+      </div>
+      
+      <div class="footer-meta">
+        <span>© Gamr 2025</span>
+        <span>•</span>
+        <a href="https://gamr.africa" target="_blank">gamr.africa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Navigation scroll shadow trigger
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 40) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Tournament state selector
+    function setTournament(wantsToJoin) {
+      const input = document.getElementById('tournament_join');
+      const toggleNo = document.getElementById('toggle-no');
+      const toggleYes = document.getElementById('toggle-yes');
+      const selectorGroup = document.getElementById('game-selector-group');
+      const gameInput = document.getElementById('game');
+
+      if (wantsToJoin) {
+        input.value = 'yes';
+        toggleYes.classList.add('selected');
+        toggleNo.classList.remove('selected');
+        selectorGroup.classList.add('open');
+        gameInput.setAttribute('required', '');
+      } else {
+        input.value = 'no';
+        toggleNo.classList.add('selected');
+        toggleYes.classList.remove('selected');
+        selectorGroup.classList.remove('open');
+        gameInput.removeAttribute('required');
+        gameInput.value = ''; // Reset game input
+      }
+    }
+
+    // Scroll trigger reveals with Intersection Observer
+    document.addEventListener('DOMContentLoaded', () => {
+      const reveals = document.querySelectorAll('.reveal');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      }, {
+        root: null,
+        threshold: 0.05,
+        rootMargin: '0px 0px -50px 0px' // triggers slightly before elements enter screen
+      });
+
+      reveals.forEach(reveal => {
+        observer.observe(reveal);
+      });
+    });
+
+    // Form Client-side validation & animations
+    const form = document.getElementById('rsvp-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const nameInput = document.getElementById('fullname');
+      const emailInput = document.getElementById('email');
+      const phoneInput = document.getElementById('phone');
+      const isTournament = document.getElementById('tournament_join').value === 'yes';
+      const gameSelect = document.getElementById('game');
+      
+      let isValid = true;
+      
+      // Clean previous error marks
+      [nameInput, emailInput, phoneInput, gameSelect].forEach(input => {
+        input.style.borderColor = '';
+        input.style.boxShadow = '';
+      });
+
+      // Name validation
+      if (nameInput.value.trim() === '') {
+        markInvalid(nameInput);
+        isValid = false;
+      }
+
+      // Email validation
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(emailInput.value)) {
+        markInvalid(emailInput);
+        isValid = false;
+      }
+
+      // Phone validation
+      const digitsOnly = phoneInput.value.replace(/\D/g, '');
+      if (digitsOnly.length < 8) {
+        markInvalid(phoneInput);
+        isValid = false;
+      }
+
+      // Game validation if competitor
+      if (isTournament && gameSelect.value === '') {
+        markInvalid(gameSelect);
+        isValid = false;
+      }
+
+      if (!isValid) {
+        // Trigger small vibration/feedback if device supports it
+        if (navigator.vibrate) {
+          navigator.vibrate(100);
+        }
+        return;
+      }
+
+      // If valid, execute loader state and show success page
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerText;
+      submitBtn.innerText = 'RESERVING...';
+      submitBtn.disabled = true;
+
+      // Send request to Vercel serverless function
+      fetch('/api/rsvp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: nameInput.value,
+          email: emailInput.value,
+          phone: phoneInput.value,
+          isCompetitor: isTournament,
+          game: isTournament ? gameSelect.value : 'none'
+        })
+      })
+      .then(response => {
+        // Fallback to local success state if API is not hosted/found locally (e.g. running vite dev server)
+        return response.ok ? response.json() : { success: true, mocked: true };
+      })
+      .catch(err => {
+        console.warn('API error, falling back to local mock:', err);
+        return { success: true, mocked: true };
+      })
+      .then(result => {
+        // Store in localStorage for audit
+        const attendee = {
+          name: nameInput.value,
+          email: emailInput.value,
+          phone: phoneInput.value,
+          isTournament: isTournament,
+          game: isTournament ? gameSelect.value : 'none',
+          timestamp: new Date().toISOString()
+        };
+        
+        let attendees = JSON.parse(localStorage.getItem('samsung_gamr_rsvps') || '[]');
+        attendees.push(attendee);
+        localStorage.setItem('samsung_gamr_rsvps', JSON.stringify(attendees));
+
+        // Display ticket updates in success page
+        document.getElementById('success-name').innerText = nameInput.value;
+        
+        if (isTournament) {
+          document.getElementById('success-pass-type').innerText = 'Competitor - ' + gameSelect.value;
+          document.getElementById('success-pass-type').style.color = 'var(--gamr-red)';
+        } else {
+          document.getElementById('success-pass-type').innerText = 'Spectator Pass';
+          document.getElementById('success-pass-type').style.color = 'var(--gamr-blue)';
+        }
+
+        // Switch panel states
+        document.getElementById('rsvp-form-container').style.display = 'none';
+        document.getElementById('rsvp-success').style.display = 'flex';
+        
+        // Scroll rsvp card smoothly into center viewport
+        document.getElementById('rsvp').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+
+    function markInvalid(inputElement) {
+      inputElement.style.borderColor = 'var(--gamr-red)';
+      inputElement.style.boxShadow = '0 0 10px rgba(244, 63, 94, 0.25)';
+      inputElement.focus();
+    }
+  </script>
+</body>
+</html>

@@ -3,11 +3,15 @@ import gamrSquadImage from "@/assets/gamr-squad.jpg";
 import aboutGallery1 from "@/assets/about-gallery-1.jpg";
 import aboutGallery2 from "@/assets/about-gallery-2.jpg";
 
+const SectionSeparator = () => (
+  <div className="w-full h-16 md:h-20 bg-black shrink-0" />
+);
+
 const AboutSection = () => {
   return (
     <section id="about" className="bg-black text-white">
       {/* Intro Block - Vision */}
-      <div id="vision" className="container mx-auto px-6 py-32">
+      <div id="vision" className="container mx-auto px-6">
         <div className="max-w-4xl space-y-8 animate-fade-in">
           <span className="text-blue-500 font-bold uppercase tracking-widest text-sm">Who We Are</span>
           <h2 className="text-5xl md:text-7xl font-bold tracking-tighter leading-none uppercase">
@@ -18,6 +22,8 @@ const AboutSection = () => {
           </p>
         </div>
       </div>
+
+      <SectionSeparator />
 
       {/* Immersive Image Block 1 - Mission */}
       <div id="mission" className="relative h-[80vh] w-full overflow-hidden">
@@ -37,8 +43,10 @@ const AboutSection = () => {
         </div>
       </div>
 
+      <SectionSeparator />
+
       {/* Statistics Block - Why Now */}
-      <div id="why-now" className="py-32 bg-zinc-950">
+      <div id="why-now" className="py-12 md:py-16 bg-zinc-950">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div>
@@ -56,6 +64,8 @@ const AboutSection = () => {
           </div>
         </div>
       </div>
+
+      <SectionSeparator />
 
       {/* Squad Block - Team */}
       <div id="team" className="relative h-screen w-full overflow-hidden flex items-center justify-center">
