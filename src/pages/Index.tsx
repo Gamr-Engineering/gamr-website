@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import SamsungSpotlightBanner from "@/components/SamsungSpotlightBanner";
 import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
 import PartnersSection from "@/components/PartnersSection";
@@ -54,8 +53,6 @@ const Index = () => {
         <div ref={heroRef} tabIndex={-1} className="outline-none">
           <Hero />
         </div>
-        
-        <SamsungSpotlightBanner />
         
         <AboutSection />
         
