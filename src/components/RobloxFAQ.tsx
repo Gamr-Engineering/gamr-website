@@ -8,7 +8,7 @@ import {
 const faqData = [
     {
         question: "What is the Roblox Builder Pathway?",
-        answer: "The Roblox Builder Pathway is a 30-day, hardware-backed program at Gamr Lab in Lagos that helps African gamers become Roblox creators. Selected builders get access to high-spec PCs, stable internet, mentorship, and a production-first curriculum to build and publish Afro-centric Roblox experiences."
+        answer: "Build Africa on Roblox — Summer Edition (Cohort 2) is a hardware-backed program at Gamr Lab in Lagos that helps African creators become Roblox developers. Selected builders get access to high-spec PCs, stable internet, mentorship, and a production-first curriculum to build and publish Afro-centric Roblox experiences."
     },
     {
         question: "Who is this program for?",
@@ -24,7 +24,7 @@ const faqData = [
     },
     {
         question: "Where and when does the program take place?",
-        answer: "The pilot runs physically at Gamr Lab, Lagos, Nigeria, with a mix of in-person sessions and supported independent work. Cohort 1 exact session days and times will be shared with accepted participants."
+        answer: "The program runs physically at Gamr Lab, Lagos, Nigeria, with a mix of in-person sessions and supported independent work. Cohort 2 exact session days and times will be shared with accepted participants."
     },
     {
         question: "What will I actually learn and build?",

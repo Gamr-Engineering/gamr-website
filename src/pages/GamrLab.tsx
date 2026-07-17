@@ -34,14 +34,14 @@ const GamrLab = () => {
                 <div className="container mx-auto relative z-10 max-w-5xl text-center">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest mb-6 animate-fade-in">
                         <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-                        Lagos Creator Pathway
+                        Summer Edition • Cohort 2
                     </div>
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-none mb-6 uppercase animate-fade-in delay-100">
                         Build Africa<br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">on Roblox</span>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600">on Roblox</span>
                     </h1>
                     <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in delay-200">
-                        A 30-day, hardware-backed sprint at Gamr Lab turning African players into Roblox creators and earning digital entrepreneurs.
+                        The second cohort of the “Build Africa on Roblox” program, focused on a Summer Edition that deepens Gamr’s presence on Roblox, re-engages alumni, and empowers a new wave of African creators.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in delay-300">
                         {isApplicationClosed ? (
@@ -89,7 +89,7 @@ const GamrLab = () => {
                         </div>
                         <div>
                             <p className="text-lg text-gray-400 leading-relaxed">
-                                The <span className="text-white font-bold">Roblox Builder Pathway (Lagos Pilot)</span> is a focused, 30-day "Build Africa on Roblox" program hosted at Gamr Lab. We provide high-spec hardware, stable power, and a production-first curriculum to help Nigerian and African builders go from players to professional Roblox creators — shipping Afro-centric worlds and unlocking real earning potential.
+                                The <span className="text-white font-bold">Build Africa on Roblox — Summer Edition (Cohort 2)</span> is a focused, hardware-backed program at Gamr Lab. We provide high-spec hardware, stable internet, and a production-first curriculum to help African builders go from players to professional Roblox creators — shipping Afro-centric worlds, growing our in-house Studios capacity, and unlocking real earning potential.
                             </p>
                         </div>
                     </div>
@@ -102,9 +102,9 @@ const GamrLab = () => {
                     <div className="text-center mb-16">
                         <h2 className="text-blue-500 font-bold uppercase tracking-widest text-sm mb-4">Who This Is For</h2>
                         <h3 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter">Built for Builders</h3>
-                        <p className="text-gray-400 mt-4">You don't need to be a pro yet, but you do need basic skills and a willingness to commit for 30 days.</p>
+                        <p className="text-gray-400 mt-4">Whether you are a Cohort 1 alum or a new high-signal Roblox creator, you just need basic skills and a willingness to commit to the build sprint.</p>
                     </div>
-
+ 
                     <div className="grid md:grid-cols-3 gap-8">
                         {[
                             {
@@ -124,12 +124,12 @@ const GamrLab = () => {
                             },
                             {
                                 icon: Users,
-                                title: "Serious Creators",
-                                desc: "Ready to build & publish on Roblox"
+                                title: "Cohort 1 Alumni & New Creators",
+                                desc: "Ready to re-engage, collaborate, and publish on Roblox"
                             }
                         ].map((item, idx) => (
-                            <div key={idx} className={`p-8 border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${idx === 3 ? 'md:col-span-3 max-w-xl mx-auto w-full text-center' : ''}`}>
-                                <item.icon className={`w-8 h-8 text-blue-500 mb-6 ${idx === 3 ? 'mx-auto' : ''}`} />
+                            <div key={idx} className={`p-8 border border-white/10 bg-white/5 hover:bg-white/10 transition-colors text-center ${idx === 3 ? 'md:col-span-3 max-w-xl mx-auto w-full' : ''}`}>
+                                <item.icon className="w-8 h-8 text-blue-500 mb-6 mx-auto" />
                                 <h4 className="text-xl font-bold uppercase tracking-tight mb-2">{item.title}</h4>
                                 <p className="text-gray-400">{item.desc}</p>
                             </div>
@@ -150,11 +150,11 @@ const GamrLab = () => {
 
                             <ul className="space-y-8">
                                 {[
-                                    { title: "Gamr Lab Access", desc: "~30 gaming-grade workstations and stable power in Lagos" },
-                                    { title: "30-Day Sprint", desc: "Roblox Studio, Luau scripting, monetization, analytics — a Luau-to-Income curriculum" },
-                                    { title: "Expert Mentorship", desc: "From a veteran Roblox builder and Gamr's technical team" },
-                                    { title: "Publish Real Games", desc: "Support to publish real games and UGC on Roblox" },
-                                    { title: "Revenue Path", desc: "Clear revenue-share path via Gamr Studios — DevEx + brand activations" }
+                                    { title: "Gamr Lab Access", desc: "Access to high-spec PCs, gaming-grade workstations, and stable internet in Lagos" },
+                                    { title: "Production-First Curriculum", desc: "Deep dive into Luau scripting, advanced world-building, Roblox monetization, and analytics" },
+                                    { title: "Mentorship & Alumni Network", desc: "Guidance from veteran Roblox developers, Gamr's technical team, and collaboration with Cohort 1 alumni" },
+                                    { title: "Publish & Monetize", desc: "Support to publish experiences, release UGC items, and set up repeatable Roblox production pipelines" },
+                                    { title: "Revenue Share & IP", desc: "Clear paths to revenue through Gamr Studios, including DevEx, brand partnerships, and scalable IP" }
                                 ].map((item, idx) => (
                                     <li key={idx} className="flex gap-4">
                                         <div className="mt-1 w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0">
@@ -192,7 +192,7 @@ const GamrLab = () => {
                             <h3 className="text-2xl font-bold uppercase tracking-tighter mb-8 text-center">Program Structure</h3>
                             <div className="space-y-12 relative before:absolute before:left-[15px] before:top-2 before:bottom-2 before:w-[1px] before:bg-white/10">
                                 {[
-                                    { phase: "Phase 1", title: "Launch & Selection", desc: "Open call, applications, shortlisting 10–20 serious builders." },
+                                    { phase: "Phase 1", title: "Launch & Selection", desc: "Open call, applications, and shortlisting ~40 high-signal Roblox creators." },
                                     { phase: "Phase 2", title: "Build Sprint", desc: "30 days of structured sessions: Studio, scripting, world-building, monetization. Each participant ships at least one prototype; cohort ships at least one live experience." },
                                     { phase: "Phase 3", title: "Monetize & Showcase", desc: "We support you to monetize your worlds, track performance, and develop brand-ready demos." }
                                 ].map((item, idx) => (
@@ -261,7 +261,7 @@ const GamrLab = () => {
             <section className="py-20 bg-zinc-950/50 border-t border-white/5">
                 <div className="container mx-auto px-6 text-center">
                     <h3 className="text-3xl font-bold uppercase tracking-tighter mb-8">
-                        {isApplicationClosed ? "Cohort 1 Applications are Closed" : "Ready to Build?"}
+                        {isApplicationClosed ? "Summer Edition Applications are Closed" : "Ready to Build?"}
                     </h3>
                     {isApplicationClosed ? (
                         <Button
