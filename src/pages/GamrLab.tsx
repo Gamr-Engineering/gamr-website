@@ -29,19 +29,23 @@ const GamrLab = () => {
             )}
 
             {/* Hero Section */}
-            <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6 overflow-hidden">
+            <section className="relative pt-32 pb-12 md:pt-48 md:pb-32 px-6 overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-black to-black z-0" />
                 <div className="container mx-auto relative z-10 max-w-5xl text-center">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest mb-6 animate-fade-in">
                         <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-                        Summer Edition • Cohort 2
+                        In partnership with LSETF
                     </div>
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-none mb-6 uppercase animate-fade-in delay-100">
                         Build Africa<br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600">on Roblox</span>
+                        <span className="text-blue-500">on Roblox</span>
+                        <span className="block text-xl md:text-2xl text-red-500 font-bold uppercase tracking-widest mt-4">Summer Edition</span>
                     </h1>
-                    <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in delay-200">
-                        The second cohort of the “Build Africa on Roblox” program, focused on a Summer Edition that deepens Gamr’s presence on Roblox, re-engages alumni, and empowers a new wave of African creators.
+                    <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-4 leading-relaxed animate-fade-in delay-200">
+                        A summer creator development program by Gamr Studios and Gamr Lab, helping young African builders learn, collaborate, and create real Roblox experiences inspired by Africa’s stories, cities, culture, and future.
+                    </p>
+                    <p className="text-sm md:text-base font-semibold text-white max-w-2xl mx-auto mb-10 uppercase tracking-[0.2em] animate-fade-in delay-200">
+                        Build skills. Build worlds. Build Africa on Roblox.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in delay-300">
                         {isApplicationClosed ? (
@@ -59,7 +63,7 @@ const GamrLab = () => {
                                 )}
                                 asChild
                             >
-                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfjUfZrHo1wfPIhrsFU5vDaNiN6MQkhKZmtEyH7xNSJVvWcbQ/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">
+                                <a href="https://forms.gle/j8GAMA9kg1PGQtQz6" target="_blank" rel="noopener noreferrer">
                                     {isClosingSoon ? "Apply Now - Hurry!" : "Apply Now"}
                                 </a>
                             </Button>
@@ -78,18 +82,31 @@ const GamrLab = () => {
             </section>
 
             {/* Program Overview */}
-            <section id="overview" className="py-20 bg-zinc-950/50">
+            <section id="overview" className="py-12 md:py-20 bg-zinc-950/50">
                 <div className="container mx-auto px-6">
-                    <div className="grid md:grid-cols-2 gap-12 items-center">
+                    <div className="grid md:grid-cols-2 gap-24 md:gap-16">
                         <div className="space-y-6">
                             <h2 className="text-blue-500 font-bold uppercase tracking-widest text-sm">Program Overview</h2>
-                            <h3 className="text-4xl md:text-5xl font-bold uppercase tracking-tighter leading-none">
-                                From Players to<br />Professionals
+                            <h3 className="text-3xl md:text-4xl font-bold uppercase tracking-tighter leading-tight">
+                                What this program is about
                             </h3>
+                            <p className="text-gray-400 leading-relaxed">
+                                Build Africa on Roblox — Summer Edition is designed to help African creators move from interest to execution. Through structured learning, mentorship, and project-based work, participants will develop the skills needed to build better Roblox experiences and understand how games, worlds, and digital IP can create real opportunities.
+                            </p>
+                            <p className="text-gray-400 leading-relaxed">
+                                Following the success and learnings from our first Roblox cohort, we are taking the next step: a sharper, more execution-driven summer program focused on learning, building, collaboration, and shipping real Roblox experiences.
+                            </p>
                         </div>
-                        <div>
-                            <p className="text-lg text-gray-400 leading-relaxed">
-                                The <span className="text-white font-bold">Build Africa on Roblox — Summer Edition (Cohort 2)</span> is a focused, hardware-backed program at Gamr Lab. We provide high-spec hardware, stable internet, and a production-first curriculum to help African builders go from players to professional Roblox creators — shipping Afro-centric worlds, growing our in-house Studios capacity, and unlocking real earning potential.
+                        <div className="space-y-6">
+                            <h2 className="text-blue-500 font-bold uppercase tracking-widest text-sm">Our Mission</h2>
+                            <h3 className="text-3xl md:text-4xl font-bold uppercase tracking-tighter leading-tight">
+                                Why LSETF & Gamr are doing this
+                            </h3>
+                            <p className="text-gray-400 leading-relaxed">
+                                Africa has one of the youngest and most creative populations in the world, but many young people still need access to the tools, structure, mentorship, and opportunities required to turn their creativity into real digital careers.
+                            </p>
+                            <p className="text-gray-400 leading-relaxed">
+                                Through this partnership, LSETF and Gamr are creating a practical pathway for young people to learn future-facing skills in game development, digital creation, collaboration, and entrepreneurship. Roblox is more than a gaming platform—it is a global creation ecosystem where young developers can build worlds, tell stories, create experiences, form teams, and earn from their work.
                             </p>
                         </div>
                     </div>
@@ -97,64 +114,70 @@ const GamrLab = () => {
             </section>
 
             {/* Who This Is For */}
-            <section className="py-20 border-y border-white/5">
+            <section className="pt-12 pb-24 md:py-20 border-y border-white/5">
                 <div className="container mx-auto px-6">
-                    <div className="text-center mb-16">
+                    <div className="text-left md:text-center mb-16 max-w-3xl md:max-w-none md:mx-auto">
                         <h2 className="text-blue-500 font-bold uppercase tracking-widest text-sm mb-4">Who This Is For</h2>
                         <h3 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter">Built for Builders</h3>
-                        <p className="text-gray-400 mt-4">Whether you are a Cohort 1 alum or a new high-signal Roblox creator, you just need basic skills and a willingness to commit to the build sprint.</p>
+                        <p className="text-gray-400 mt-4 text-base md:text-lg leading-relaxed">This program is designed for serious creators based in Lagos/Nigeria or active in the wider African gaming ecosystem.</p>
                     </div>
- 
-                    <div className="grid md:grid-cols-3 gap-8">
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {[
                             {
                                 icon: Code,
-                                title: "Scripters & Programmers",
-                                desc: "Interested in Luau and Roblox Studio"
-                            },
-                            {
-                                icon: Monitor,
-                                title: "3D / Environment Artists",
-                                desc: "World builders and visual creators"
+                                title: "Roblox Builders",
+                                desc: "You already build, experiment, or create on Roblox"
                             },
                             {
                                 icon: Trophy,
-                                title: "Game Designers",
-                                desc: "Systems thinkers and mechanics designers"
+                                title: "Aspiring Creators",
+                                desc: "Interested in scripting, game design, world-building, UI/UX, 3D environments, or storytelling"
+                            },
+                            {
+                                icon: Monitor,
+                                title: "Lagos & Africa Based",
+                                desc: "Based in Lagos/Nigeria or part of the African gaming and creator ecosystem"
                             },
                             {
                                 icon: Users,
-                                title: "Cohort 1 Alumni & New Creators",
-                                desc: "Ready to re-engage, collaborate, and publish on Roblox"
+                                title: "Committed Builders",
+                                desc: "Serious about working with other committed creators and taking Roblox from hobby to career pathway"
                             }
                         ].map((item, idx) => (
-                            <div key={idx} className={`p-8 border border-white/10 bg-white/5 hover:bg-white/10 transition-colors text-center ${idx === 3 ? 'md:col-span-3 max-w-xl mx-auto w-full' : ''}`}>
-                                <item.icon className="w-8 h-8 text-blue-500 mb-6 mx-auto" />
+                            <div key={idx} className="p-8 border border-white/10 bg-white/5 hover:bg-white/10 transition-colors text-left md:text-center flex flex-col items-start md:items-center">
+                                <item.icon className="w-8 h-8 text-blue-500 mb-6 md:mx-auto" />
                                 <h4 className="text-xl font-bold uppercase tracking-tight mb-2">{item.title}</h4>
-                                <p className="text-gray-400">{item.desc}</p>
+                                <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
                             </div>
                         ))}
+                    </div>
+
+                    <div className="mt-12 max-w-3xl mx-auto text-left md:text-center border border-white/10 bg-zinc-950 p-8">
+                        <p className="text-lg text-gray-300 leading-relaxed">
+                            <strong>You do not have to be a professional developer yet.</strong> But you do need to show intent. That could be through a Roblox profile, past project, portfolio, prototype, design work, or anything that proves you are genuinely interested in building.
+                        </p>
                     </div>
                 </div>
             </section>
 
             <GamrLabCarousel />
 
-            {/* What You Get */}
-            <section className="py-20 bg-black">
+            {/* What you can expect & What you will build */}
+            <section className="py-12 md:py-20 bg-black">
                 <div className="container mx-auto px-6">
-                    <div className="grid lg:grid-cols-2 gap-16">
+                    <div className="grid lg:grid-cols-2 gap-24 lg:gap-16">
                         <div className="space-y-8">
-                            <h2 className="text-blue-500 font-bold uppercase tracking-widest text-sm">What You Get</h2>
-                            <h3 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-8">Everything You Need</h3>
+                            <h2 className="text-blue-500 font-bold uppercase tracking-widest text-sm">Your Journey</h2>
+                            <h3 className="text-4xl md:text-5xl font-bold uppercase tracking-tighter mb-8">What you can expect</h3>
 
-                            <ul className="space-y-8">
+                            <ul className="space-y-6">
                                 {[
-                                    { title: "Gamr Lab Access", desc: "Access to high-spec PCs, gaming-grade workstations, and stable internet in Lagos" },
-                                    { title: "Production-First Curriculum", desc: "Deep dive into Luau scripting, advanced world-building, Roblox monetization, and analytics" },
-                                    { title: "Mentorship & Alumni Network", desc: "Guidance from veteran Roblox developers, Gamr's technical team, and collaboration with Cohort 1 alumni" },
-                                    { title: "Publish & Monetize", desc: "Support to publish experiences, release UGC items, and set up repeatable Roblox production pipelines" },
-                                    { title: "Revenue Share & IP", desc: "Clear paths to revenue through Gamr Studios, including DevEx, brand partnerships, and scalable IP" }
+                                    { title: "Practical Learning", desc: "Hands-on sessions on Roblox Studio, world-building, scripting, design, and experience creation." },
+                                    { title: "Clear Milestones", desc: "Structured weekly sprints, deliverables, and clear feedback loops." },
+                                    { title: "Studio Exposure", desc: "Learn directly from Gamr's technical team and see how a Roblox-focused studio thinks, builds, and ships." },
+                                    { title: "Collaboration", desc: "Partner with a community of serious, young African Roblox builders and creators." },
+                                    { title: "Future Pathways", desc: "Access future opportunities in Gamr Lab, Gamr Studios, partner networks, and the creator economy." }
                                 ].map((item, idx) => (
                                     <li key={idx} className="flex gap-4">
                                         <div className="mt-1 w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0">
@@ -167,115 +190,141 @@ const GamrLab = () => {
                                     </li>
                                 ))}
                             </ul>
-
-                            <div className="pt-8">
-                                {isApplicationClosed ? (
-                                    <div className="bg-blue-500/10 border border-blue-500/20 p-6 rounded-none text-center sm:text-left">
-                                        <h4 className="text-xl font-bold uppercase tracking-tight mb-2">Applications for this cohort are now closed.</h4>
-                                        <p className="text-gray-400">Stay connected with Gamr for future creator programs and upcoming sprints.</p>
-                                    </div>
-                                ) : (
-                                    <>
-                                        <Button
-                                            className="bg-white text-black hover:bg-gray-200 rounded-none px-8 py-6 text-sm font-bold uppercase tracking-widest w-full sm:w-auto"
-                                            asChild
-                                        >
-                                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfjUfZrHo1wfPIhrsFU5vDaNiN6MQkhKZmtEyH7xNSJVvWcbQ/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">Apply Now</a>
-                                        </Button>
-                                        <p className="text-gray-500 text-sm mt-4 uppercase tracking-widest">Spots are limited.</p>
-                                    </>
-                                )}
-                            </div>
                         </div>
 
-                        <div className="bg-zinc-900 border border-white/10 p-8 lg:p-12 self-start sticky top-24">
-                            <h3 className="text-2xl font-bold uppercase tracking-tighter mb-8 text-center">Program Structure</h3>
-                            <div className="space-y-12 relative before:absolute before:left-[15px] before:top-2 before:bottom-2 before:w-[1px] before:bg-white/10">
+                        <div className="space-y-8">
+                            <h2 className="text-blue-500 font-bold uppercase tracking-widest text-sm">The Deliverable</h2>
+                            <h3 className="text-4xl md:text-5xl font-bold uppercase tracking-tighter mb-8">What you will build</h3>
+                            <p className="text-gray-400 leading-relaxed">
+                                Participants will work toward creating Roblox experiences inspired by African creativity, culture, cities, communities, stories, and futures.
+                            </p>
+
+                            <div className="grid sm:grid-cols-2 gap-6 mt-6">
                                 {[
-                                    { phase: "Phase 1", title: "Launch & Selection", desc: "Open call, applications, and shortlisting ~40 high-signal Roblox creators." },
-                                    { phase: "Phase 2", title: "Build Sprint", desc: "30 days of structured sessions: Studio, scripting, world-building, monetization. Each participant ships at least one prototype; cohort ships at least one live experience." },
-                                    { phase: "Phase 3", title: "Monetize & Showcase", desc: "We support you to monetize your worlds, track performance, and develop brand-ready demos." }
+                                    { title: "African Worlds", desc: "African-inspired virtual worlds and settings" },
+                                    { title: "Lagos Themes", desc: "Detailed Lagos-themed interactive environments" },
+                                    { title: "Multiplayer", desc: "Social and multiplayer interactive experiences" },
+                                    { title: "Culture & Edu", desc: "Educational or cultural Roblox experiences" },
+                                    { title: "Mini-Games", desc: "Fast-paced mini-games and game mechanics" },
+                                    { title: "AI-Enhanced NPCs", desc: "Smart gameplay ideas with AI-driven NPCs" }
                                 ].map((item, idx) => (
-                                    <div key={idx} className="relative pl-12 group">
-                                        <div className="absolute left-0 top-1 w-8 h-8 rounded-full bg-black border border-white/20 text-white flex items-center justify-center text-xs font-bold group-hover:border-blue-500 group-hover:text-blue-500 transition-colors z-10">
-                                            {idx + 1}
-                                        </div>
-                                        <span className="text-blue-500 text-xs font-bold uppercase tracking-widest block mb-1">{item.phase}</span>
-                                        <h4 className="text-xl font-bold uppercase tracking-tight mb-2">{item.title}</h4>
-                                        <p className="text-gray-400 text-sm">{item.desc}</p>
+                                    <div key={idx} className="p-6 border border-white/5 bg-zinc-950 hover:border-blue-500/30 transition-colors">
+                                        <h4 className="font-bold text-white uppercase tracking-tight mb-2 text-sm">{item.title}</h4>
+                                        <p className="text-gray-400 text-xs">{item.desc}</p>
                                     </div>
                                 ))}
                             </div>
                         </div>
                     </div>
+
+                    {/* Apply Now — full-width, centered on PC, centered on mobile */}
+                    {!isApplicationClosed && (
+                        <div className="mt-12 text-center">
+                            <Button
+                                className="bg-white text-black hover:bg-gray-200 rounded-none px-8 py-6 text-sm font-bold uppercase tracking-widest w-full md:w-auto"
+                                asChild
+                            >
+                                <a href="https://forms.gle/j8GAMA9kg1PGQtQz6" target="_blank" rel="noopener noreferrer">Apply Now</a>
+                            </Button>
+                            <p className="text-gray-500 text-sm mt-4 uppercase tracking-widest">Spots are limited.</p>
+                        </div>
+                    )}
+                    {isApplicationClosed && (
+                        <div className="mt-12 bg-blue-500/10 border border-blue-500/20 p-6 rounded-none text-center">
+                            <h4 className="text-xl font-bold uppercase tracking-tight mb-2">Applications for this cohort are now closed.</h4>
+                            <p className="text-gray-400">Stay connected with Gamr for future creator programs and upcoming sprints.</p>
+                        </div>
+                    )}
                 </div>
             </section>
 
-            {/* Key Outcomes & Eligibility */}
-            <section className="py-20 bg-zinc-950/50">
-                <div className="container mx-auto px-6 max-w-4xl">
-                    <div className="grid md:grid-cols-2 gap-16">
-                        <div>
-                            <h2 className="text-blue-500 font-bold uppercase tracking-widest text-sm mb-6">Key Outcomes</h2>
-                            <ul className="space-y-4">
+            {/* Program Timeline & Application Details */}
+            <section className="py-12 md:py-20 bg-zinc-950/50">
+                <div className="container mx-auto px-6 max-w-5xl">
+                    <div className="grid md:grid-cols-2 gap-24 md:gap-16">
+                        {/* Left Side: Timeline & Details */}
+                        <div className="space-y-8">
+                            <div>
+                                <h2 className="text-blue-500 font-bold uppercase tracking-widest text-sm mb-4">Program Details</h2>
+                                <h3 className="text-4xl font-bold uppercase tracking-tighter mb-8">Timeline & Format</h3>
+                            </div>
+                            
+                            <div className="space-y-6">
                                 {[
-                                    "Publish your first (or next) live Roblox experience",
-                                    "Learn Luau and Roblox Studio in a production environment",
-                                    "Join a network of African Roblox creators and potential future studios",
-                                    "Get a path to earning via DevEx and brand activations"
+                                    { label: "Program", value: "Build Africa on Roblox — Summer Edition" },
+                                    { label: "Partners", value: "Gamr Studios & Gamr Lab in partnership with LSETF" },
+                                    { label: "Period", value: "Summer 2026" },
+                                    { label: "Format", value: "Structured hybrid learning, building, and project delivery" },
+                                    { label: "Schedule", value: "Exact dates and session details will be shared with selected applicants" }
                                 ].map((item, idx) => (
-                                    <li key={idx} className="flex gap-3">
-                                        <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 shrink-0" />
-                                        <span className="text-gray-300">{item}</span>
-                                    </li>
+                                    <div key={idx} className="border-b border-white/10 pb-4">
+                                        <span className="text-blue-500 text-xs font-bold uppercase tracking-widest block mb-1">{item.label}</span>
+                                        <p className="text-white text-lg font-medium">{item.value}</p>
+                                    </div>
                                 ))}
-                            </ul>
+                            </div>
+                            <p className="text-gray-400 text-sm leading-relaxed mt-6">
+                                Participants should expect a focused rhythm with learning sessions, assignments, build sprints, feedback, and project milestones.
+                            </p>
                         </div>
 
-                        <div>
-                            <h2 className="text-blue-500 font-bold uppercase tracking-widest text-sm mb-6">Basic Eligibility</h2>
-                            <ul className="space-y-4">
-                                {[
-                                    "Be at least 16 years old (parental consent required if under 18).",
-                                    "Have basic to intermediate experience with Roblox Studio and Lua scripting.",
-                                    "Provide a portfolio, published experience, or Roblox profile.",
-                                    "Commit to a structured build sprint and meet milestones.",
-                                    "Be open to feedback, collaboration, and community guidelines.",
-                                    "Demonstrate interest in building engaging, monetizable experiences."
-                                ].map((item, idx) => (
-                                    <li key={idx} className="flex gap-3">
-                                        <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 shrink-0" />
-                                        <span className="text-gray-300">{item}</span>
-                                    </li>
-                                ))}
-                            </ul>
+                        {/* Right Side: How to Apply */}
+                        <div className="space-y-8">
+                            <div>
+                                <h2 className="text-blue-500 font-bold uppercase tracking-widest text-sm mb-4">How To Apply</h2>
+                                <h3 className="text-4xl font-bold uppercase tracking-tighter mb-8">Application details</h3>
+                            </div>
+                            <p className="text-gray-400 leading-relaxed font-medium">
+                                Apply for Build Africa on Roblox — Summer Edition, delivered by Gamr Studios and Gamr Lab in partnership with LSETF.
+                            </p>
+                            <p className="text-gray-400 leading-relaxed text-sm">
+                                Spaces are limited. Applications will be reviewed on a rolling basis, and shortlisted candidates will be contacted with next steps. You’ll be asked to share details such as:
+                            </p>
+                            
+                            <div className="bg-zinc-900 border border-white/10 p-8 space-y-6">
+                                <h4 className="text-lg font-bold uppercase tracking-tight text-white">Required Fields</h4>
+                                <ul className="space-y-4">
+                                    {[
+                                        "Your Roblox username",
+                                        "Your past experience or portfolio",
+                                        "Any projects you have built or contributed to",
+                                        "Your availability",
+                                        "Your skills and interests",
+                                        "Why you want to join the program"
+                                    ].map((item, idx) => (
+                                        <li key={idx} className="flex items-center gap-3">
+                                            <div className="w-1.5 h-1.5 bg-blue-500 rounded-full shrink-0" />
+                                            <span className="text-gray-300 text-sm">{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </section>
 
             <RobloxFAQ />
 
             {/* Ready to Build CTA */}
-            <section className="py-20 bg-zinc-950/50 border-t border-white/5">
-                <div className="container mx-auto px-6 text-center">
-                    <h3 className="text-3xl font-bold uppercase tracking-tighter mb-8">
+            <section className="py-12 md:py-20 bg-zinc-950/50 border-t border-white/5">
+                <div className="container mx-auto px-6 text-left md:text-center">
+                    <h3 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter mb-8">
                         {isApplicationClosed ? "Summer Edition Applications are Closed" : "Ready to Build?"}
                     </h3>
                     {isApplicationClosed ? (
                         <Button
-                            className="bg-transparent border border-white text-white hover:bg-white hover:text-black rounded-none px-12 py-8 text-lg font-bold uppercase tracking-widest"
+                            className="bg-transparent border border-white text-white hover:bg-white hover:text-black rounded-none px-12 py-8 text-lg font-bold uppercase tracking-widest w-full md:w-auto"
                             asChild
                         >
                             <a href="/">Return to Homepage</a>
                         </Button>
                     ) : (
                         <Button
-                            className="bg-blue-600 text-white hover:bg-blue-700 rounded-none px-12 py-8 text-lg font-bold uppercase tracking-widest shadow-lg shadow-blue-900/20"
+                            className="bg-blue-600 text-white hover:bg-blue-700 rounded-none px-12 py-8 text-lg font-bold uppercase tracking-widest shadow-lg shadow-blue-900/20 w-full md:w-auto text-center"
                             asChild
                         >
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfjUfZrHo1wfPIhrsFU5vDaNiN6MQkhKZmtEyH7xNSJVvWcbQ/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">Apply Now</a>
+                            <a href="https://forms.gle/j8GAMA9kg1PGQtQz6" target="_blank" rel="noopener noreferrer">Apply Now</a>
                         </Button>
                     )}
                 </div>
