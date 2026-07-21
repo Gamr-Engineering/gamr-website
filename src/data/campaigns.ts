@@ -13,13 +13,13 @@ export interface Campaign {
 export const campaigns: Campaign[] = [
   {
     id: "roblox-creator-pathway",
-    title: "Lagos Creator Pathway: Build Africa on Roblox",
+    title: "Build Africa on Roblox — Summer Edition (Cohort 2)",
     shortTitle: "Build Africa on Roblox",
-    startDate: "2026-02-01",
-    endDate: "2026-03-10", // Set to past to keep CLOSED
+    startDate: "2026-07-17",
+    endDate: "2026-08-01",
     closingSoonDays: 7,
-    bannerEnabled: false,
+    bannerEnabled: true,
     applicationUrl: "/gamr-lab",
-    description: "A 30-day, hardware-backed sprint at Gamr Lab turning African players into Roblox creators."
+    description: "This initiative launches the second cohort of the “Build Africa on Roblox” program, focused on a Summer Edition that deepens Gamr’s presence on Roblox, re-engages alumni, attracts new African Roblox creators, and strengthens Gamr Lab as a year-round Roblox creation hub."
   }
 ];
