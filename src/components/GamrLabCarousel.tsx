@@ -45,16 +45,16 @@ export default function GamrLabCarousel() {
     }, [api])
 
     return (
-        <section className="py-20 bg-black overflow-hidden">
+        <section className="pt-6 pb-12 md:py-20 bg-black overflow-hidden">
             <div className="container mx-auto px-6">
-                <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                     <div>
                         <h2 className="text-blue-500 font-bold uppercase tracking-widest text-sm mb-2">The Lab</h2>
                         <h3 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter">
-                            Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">Pros</span>
+                            Built for <span className="text-blue-500">Pros</span>
                         </h3>
                     </div>
-                    <p className="text-gray-400 max-w-md text-sm md:text-base leading-relaxed hidden md:block text-right">
+                    <p className="text-gray-400 max-w-md text-sm md:text-base leading-relaxed hidden md:block text-left">
                         Train, build, and compete in a world-class facility equipped with high-performance hardware and stable power.
                     </p>
                 </div>

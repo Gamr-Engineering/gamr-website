@@ -7,20 +7,20 @@ import {
 
 const faqData = [
     {
-        question: "What is the Roblox Builder Pathway?",
-        answer: "Build Africa on Roblox — Summer Edition (Cohort 2) is a hardware-backed program at Gamr Lab in Lagos that helps African creators become Roblox developers. Selected builders get access to high-spec PCs, stable internet, mentorship, and a production-first curriculum to build and publish Afro-centric Roblox experiences."
+        question: "What is Build Africa on Roblox — Summer Edition?",
+        answer: "Build Africa on Roblox — Summer Edition (Cohort 2) is a creator development program delivered by Gamr Studios and Gamr Lab in partnership with LSETF. It is designed to help young African builders, developers, designers, and storytellers level up their Roblox skills, work on real projects, and build playable experiences inspired by Africa's cities, stories, culture, and future."
     },
     {
         question: "Who is this program for?",
-        answer: "It’s for serious, Africa-based creators who want to build on Roblox: scripters/programmers, 3D/environment artists, game designers, and technical creatives. You don’t need to be a pro already, but you must have basic skills, a portfolio or samples, and be ready to commit for 30 days of learning."
+        answer: "It’s for serious, Africa-based creators who want to build on Roblox: scripters/programmers, 3D/environment artists, game designers, and technical creatives. You don’t need to be a pro already, but you must have basic skills, a portfolio or samples, and be ready to commit to the learning sessions and sprints."
     },
     {
         question: "Do I need to pay to join?",
-        answer: "No, there is no tuition fee for this pilot cohort. However, selection is competitive and based on your application, portfolio, and availability."
+        answer: "No, there is no tuition fee for this program, thanks to the partnership with LSETF. However, selection is competitive and based on your application, portfolio, and availability."
     },
     {
         question: "Do I need my own laptop or PC?",
-        answer: "No. The program is hardware-backed. Accepted builders will have scheduled access to our gaming-grade workstations at Gamr Lab. If you have your own capable PC, that’s a plus and can supplement your lab time, but it’s not required."
+        answer: "No. The program is hardware-backed. Accepted builders will have scheduled access to gaming-grade workstations at Gamr Lab. If you have your own capable PC, that’s a plus and can supplement your lab time, but it’s not required."
     },
     {
         question: "Where and when does the program take place?",
@@ -36,7 +36,7 @@ const faqData = [
                     <li>World-building, level design, and systems design</li>
                     <li>Monetization (passes, items, events) and basic analytics</li>
                 </ul>
-                <p className="mt-2">By the end of the program, each participant will have contributed to at least one playable experience with a strong Lagos/African theme.</p>
+                <p className="mt-2">By the end of the program, each participant will have contributed to at least one playable experience with a strong African/Lagos theme.</p>
             </>
         )
     },
@@ -51,9 +51,9 @@ const faqData = [
                 We’re looking for:
                 <ul className="list-disc pl-5 mt-2 space-y-1">
                     <li>Demonstrated interest or experience in games, code, 3D, or design</li>
-                    <li>A basic portfolio</li>
-                    <li>A clear idea of the African/Lagos experience you want to build</li>
-                    <li>Realistic availability for the 30-day sprint</li>
+                    <li>A basic portfolio or past project proof</li>
+                    <li>A clear idea of the African experience you want to build</li>
+                    <li>Realistic availability for the program timeline</li>
                 </ul>
             </>
         )
@@ -66,9 +66,9 @@ const faqData = [
 
 const RobloxFAQ = () => {
     return (
-        <section className="py-20 bg-black border-t border-white/5">
+        <section className="py-12 md:py-20 bg-black border-t border-white/5">
             <div className="container mx-auto px-6 max-w-4xl">
-                <div className="text-center mb-16">
+                <div className="text-left md:text-center mb-16">
                     <h2 className="text-blue-500 font-bold uppercase tracking-widest text-sm mb-4">FAQ</h2>
                     <h3 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter">Got Questions?</h3>
                 </div>

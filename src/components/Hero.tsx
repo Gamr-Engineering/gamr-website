@@ -31,6 +31,14 @@ const Hero = () => {
 
           <div className="pt-8 flex flex-wrap gap-4">
             <Button
+              className="bg-blue-600 hover:bg-blue-700 text-white border-2 border-blue-600 rounded-none px-10 py-7 text-sm font-bold uppercase tracking-widest transition-all duration-300"
+              asChild
+            >
+              <a href="/gamr-lab">
+                Summer Program
+              </a>
+            </Button>
+            <Button
               className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-black rounded-none px-10 py-7 text-sm font-bold uppercase tracking-widest transition-all duration-300"
               asChild
             >
