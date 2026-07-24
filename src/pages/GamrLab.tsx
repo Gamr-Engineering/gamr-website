@@ -202,7 +202,6 @@ const GamrLab = () => {
                             <div className="grid sm:grid-cols-2 gap-6 mt-6">
                                 {[
                                     { title: "African Worlds", desc: "African-inspired virtual worlds and settings" },
-                                    { title: "Lagos Themes", desc: "Detailed Lagos-themed interactive environments" },
                                     { title: "Multiplayer", desc: "Social and multiplayer interactive experiences" },
                                     { title: "Culture & Edu", desc: "Educational or cultural Roblox experiences" },
                                     { title: "Mini-Games", desc: "Fast-paced mini-games and game mechanics" },
@@ -226,7 +225,9 @@ const GamrLab = () => {
                             >
                                 <a href="https://forms.gle/j8GAMA9kg1PGQtQz6" target="_blank" rel="noopener noreferrer">Apply Now</a>
                             </Button>
-                            <p className="text-gray-500 text-sm mt-4 uppercase tracking-widest">Spots are limited.</p>
+                            <p className="text-gray-400 text-xs md:text-sm mt-4 uppercase tracking-widest max-w-2xl mx-auto leading-relaxed">
+                                SPOTS ARE LIMITED. APPLICATIONS WILL BE REVIEWED ON A ROLLING BASIS, AND SHORTLISTED CANDIDATES WILL BE CONTACTED WITH NEXT STEPS.
+                            </p>
                         </div>
                     )}
                     {isApplicationClosed && (
@@ -235,72 +236,6 @@ const GamrLab = () => {
                             <p className="text-gray-400">Stay connected with Gamr for future creator programs and upcoming sprints.</p>
                         </div>
                     )}
-                </div>
-            </section>
-
-            {/* Program Timeline & Application Details */}
-            <section className="py-12 md:py-20 bg-zinc-950/50">
-                <div className="container mx-auto px-6 max-w-5xl">
-                    <div className="grid md:grid-cols-2 gap-24 md:gap-16">
-                        {/* Left Side: Timeline & Details */}
-                        <div className="space-y-8">
-                            <div>
-                                <h2 className="text-blue-500 font-bold uppercase tracking-widest text-sm mb-4">Program Details</h2>
-                                <h3 className="text-4xl font-bold uppercase tracking-tighter mb-8">Timeline & Format</h3>
-                            </div>
-                            
-                            <div className="space-y-6">
-                                {[
-                                    { label: "Program", value: "Build Africa on Roblox — Summer Edition" },
-                                    { label: "Partners", value: "Gamr Studios & Gamr Lab in partnership with LSETF" },
-                                    { label: "Period", value: "Summer 2026" },
-                                    { label: "Format", value: "Structured hybrid learning, building, and project delivery" },
-                                    { label: "Schedule", value: "Exact dates and session details will be shared with selected applicants" }
-                                ].map((item, idx) => (
-                                    <div key={idx} className="border-b border-white/10 pb-4">
-                                        <span className="text-blue-500 text-xs font-bold uppercase tracking-widest block mb-1">{item.label}</span>
-                                        <p className="text-white text-lg font-medium">{item.value}</p>
-                                    </div>
-                                ))}
-                            </div>
-                            <p className="text-gray-400 text-sm leading-relaxed mt-6">
-                                Participants should expect a focused rhythm with learning sessions, assignments, build sprints, feedback, and project milestones.
-                            </p>
-                        </div>
-
-                        {/* Right Side: How to Apply */}
-                        <div className="space-y-8">
-                            <div>
-                                <h2 className="text-blue-500 font-bold uppercase tracking-widest text-sm mb-4">How To Apply</h2>
-                                <h3 className="text-4xl font-bold uppercase tracking-tighter mb-8">Application details</h3>
-                            </div>
-                            <p className="text-gray-400 leading-relaxed font-medium">
-                                Apply for Build Africa on Roblox — Summer Edition, delivered by Gamr Studios and Gamr Lab in partnership with LSETF.
-                            </p>
-                            <p className="text-gray-400 leading-relaxed text-sm">
-                                Spaces are limited. Applications will be reviewed on a rolling basis, and shortlisted candidates will be contacted with next steps. You’ll be asked to share details such as:
-                            </p>
-                            
-                            <div className="bg-zinc-900 border border-white/10 p-8 space-y-6">
-                                <h4 className="text-lg font-bold uppercase tracking-tight text-white">Required Fields</h4>
-                                <ul className="space-y-4">
-                                    {[
-                                        "Your Roblox username",
-                                        "Your past experience or portfolio",
-                                        "Any projects you have built or contributed to",
-                                        "Your availability",
-                                        "Your skills and interests",
-                                        "Why you want to join the program"
-                                    ].map((item, idx) => (
-                                        <li key={idx} className="flex items-center gap-3">
-                                            <div className="w-1.5 h-1.5 bg-blue-500 rounded-full shrink-0" />
-                                            <span className="text-gray-300 text-sm">{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
 
