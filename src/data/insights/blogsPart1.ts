@@ -9,7 +9,7 @@ export const blogsPart1: Insight[] = [
     excerpt: "Examining how inconsistent power grids and internet routing heavily stymie the growth of digital athletes.",
     date: "Mar 25, 2026",
     readTime: "5 min read",
-    coverImage: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?q=80&w=2070&auto=format&fit=crop",
+    coverImage: "/assets/src-assets/about-gallery-3.jpg",
     author: authors["emmanuel-oyalabu"],
     tags: ["Infrastructure", "Hardware"],
     metaTitle: "The Infrastructure Problem in African Gaming | Gamr",
@@ -22,6 +22,8 @@ export const blogsPart1: Insight[] = [
 
 Power instability remains a critical issue in many sub-Saharan regions. A sudden grid failure mid-match doesn't just result in a lost game; in a tournament context, it compromises the integrity of the entire bracket. As a result, venues are forced to invest heavily in robust backup generators and uninterruptible power supplies (UPS), drastically increasing the capital expenditure required to host an event.
 
+![Gamr Event Operational Infrastructure](/assets/src-assets/about-gallery-4.jpg)
+
 Furthermore, internet routing on the continent is notoriously inefficient. An internet packet sent from Lagos to Johannesburg often routes through London or Lisbon before returning to Africa, adding artificial latency that ruins precise gameplay. 
 
 Resolving this requires systemic changes—changes that Gamr and its partners are actively driving by investing in local server infrastructure and specialized hubs. Until subsea cables and intra-continental data peering improve, physical gaming hubs with hardened, enterprise-grade infrastructure remain the only viable sanctuary for the professional African gamer.`
@@ -33,7 +35,7 @@ Resolving this requires systemic changes—changes that Gamr and its partners ar
     excerpt: "How the surge in digital entertainment is offering a highly scalable solution to Africa's unemployment crisis.",
     date: "Mar 26, 2026",
     readTime: "6 min read",
-    coverImage: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop",
+    coverImage: "/assets/youth/hero.jpg",
     author: authors["oladapo-dosekun"],
     tags: ["Community", "Esports"],
     metaTitle: "Gaming & Youth Unemployment in Africa | Gamr",
@@ -46,6 +48,8 @@ Resolving this requires systemic changes—changes that Gamr and its partners ar
 
 Gaming is no longer a leisure activity; it is a sprawling digital economy. For every player competing on stage, there are a dozen roles operating offstage. The industry is silently creating thousands of jobs in fields like live broadcast production, 3D graphics rendering, community management, social media marketing, and software engineering.
 
+![Youth Career Pathways & Training](/assets/src-assets/about-static-image.jpg)
+
 The brilliance of the esports ecosystem is that it requires very little traditional credentialing. A brilliant self-taught graphic designer in Nairobi can land a contract designing overlays for an international tournament without ever setting foot in a university. By fostering this ecosystem through training programs like Gamr Lab, the industry is not just creating entertainment—it is aggressively upskilling the youth and inserting them directly into the global digital economy.`
   },
   {
@@ -55,7 +59,7 @@ The brilliance of the esports ecosystem is that it requires very little traditio
     excerpt: "Why universities must rapidly pivot from viewing gaming as a distraction to recognizing it as an academic discipline.",
     date: "Mar 27, 2026",
     readTime: "5 min read",
-    coverImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop",
+    coverImage: "/assets/src-assets/gamrlab/gamr-lab-1.jpg",
     author: authors["gamr-editorial"],
     tags: ["Game Dev", "Community"],
     metaTitle: "The Future of Gaming Education in Africa | Gamr",
@@ -68,6 +72,8 @@ The brilliance of the esports ecosystem is that it requires very little traditio
 
 The future of gaming education in Africa requires a twofold approach: collegiate esports programs and game development curriculums. Universities that sponsor official esports teams immediately see a surge in STEM engagement, as the crossover between competitive gamers and computer science disciplines is massive.
 
+![Gamr Lab Developer Workstation](/assets/src-assets/gamrlab/gamr-lab-3.jpg)
+
 More importantly, higher education must begin offering specialized coursework in game design, interactive narrative, and esports management. Gamr Lab has been bridging this gap by offering intensive bootcamps, but sustainable growth requires academic institutions to step up. When African universities begin producing world-class Unity developers and Unreal Engine specialists, the continent will evolve from being merely a consumer of foreign games to a powerhouse creator of indigenous gaming giants.`
   },
   {
@@ -77,7 +83,7 @@ More importantly, higher education must begin offering specialized coursework in
     excerpt: "The data driving AAA game publishers to heavily subsidize their presence in the African market.",
     date: "Mar 28, 2026",
     readTime: "6 min read",
-    coverImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2071&auto=format&fit=crop",
+    coverImage: "/assets/esports/partners.jpg",
     author: authors["gamr-editorial"],
     tags: ["African Tech", "Esports"],
     metaTitle: "Why Global Studios Are Investing in Africa | Gamr",
@@ -90,6 +96,8 @@ More importantly, higher education must begin offering specialized coursework in
 
 Global growth in traditional markets like North America and Europe has plateaued. Conversely, Africa represents the last massive, untapped reservoir of digital consumers. With over 1.4 billion people and smartphone penetration rising exponentially, the continent offers publishers the user acquisition numbers they desperately need to satisfy their shareholders.
 
+![Youth Partnership Event](/assets/youth/partnership.jpg)
+
 Furthermore, the implementation of micro-transactions in free-to-play mobile titles bypassed the historic issues of piracy and required upfront capital. By investing in grassroots tournament organizers like Gamr, publishers are buying market share and brand loyalty cheaply before the market fully matures. It is a calculated, strategic land grab; the publishers know that the studio that captures the African gamer today will dominate the global charts tomorrow.`
   },
   {
@@ -99,7 +107,7 @@ Furthermore, the implementation of micro-transactions in free-to-play mobile tit
     excerpt: "The critical intersection of decentralized finance and competitive gaming across the continent.",
     date: "Mar 29, 2026",
     readTime: "5 min read",
-    coverImage: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?q=80&w=2070&auto=format&fit=crop",
+    coverImage: "/assets/src-assets/gamr-app-screen-2-new.jpg",
     author: authors["gamr-editorial"],
     tags: ["Fintech", "African Tech"],
     metaTitle: "Mobile Money Powering African Esports | Gamr",
@@ -112,6 +120,8 @@ Furthermore, the implementation of micro-transactions in free-to-play mobile tit
 
 The widespread adoption of mobile banking platforms like M-Pesa, MTN Mobile Money, and specialized fintech aggregators has completely revolutionized gaming monetization. It allows for seamless entry fee collections and instant, trustless prize pool payouts. Gamr's integration with these platforms ensures that a player in rural Kenya can win an online match and have the prize money sitting on their phone within seconds.
 
+![GamrTag Identity & Digital Payouts](/assets/src-assets/gamrtag-identity.jpg)
+
 This intersection of mobile gaming and mobile money is entirely unique to the African and Southeast Asian markets. It circumvents the traditional sluggishness of banking wire transfers and democratizes participation. Mobile money didn't just facilitate esports transactions; it practically willed the African esports economy into existence.`
   },
   {
@@ -121,7 +131,7 @@ This intersection of mobile gaming and mobile money is entirely unique to the Af
     excerpt: "Why the future of esports relies on blending digital platforms with physical community hubs.",
     date: "Mar 30, 2026",
     readTime: "6 min read",
-    coverImage: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop",
+    coverImage: "/assets/carven/carven-4.jpg",
     author: authors["emmanuel-oyalabu"],
     tags: ["Community", "Hardware"],
     metaTitle: "The Rise of Phygital Gaming Experiences | Gamr",
@@ -134,6 +144,8 @@ This intersection of mobile gaming and mobile money is entirely unique to the Af
 
 Online-only tournaments are scalable, but they lack the visceral excitement, community building, and local sponsorship opportunities of live events. Physical arcades are great for community, but are unscalable and limited by their geography. Gamr cracked the code by merging the two: leveraging powerful digital software (BracketPro) to manage and connect highly vibrant physical venues.
 
+![Carven VIP Gaming Setup](/assets/carven/carven-5.jpg)
+
 When gamers walk into a Carven hub, they aren't just logging onto a local LAN; they are stepping into physical nodes of a massive digital network. They can order food, socialize with peers, and physically interact with brand activations, all while their in-game achievements and tournament progress are beamed to a continent-wide digital leaderboard. This hybrid approach represents the absolute pinnacle of modern competitive entertainment.`
   },
   {
@@ -143,7 +155,7 @@ When gamers walk into a Carven hub, they aren't just logging onto a local LAN; t
     excerpt: "The multi-faceted approach necessary to turn a cultural movement into a scalable, GDP-impacting industry.",
     date: "Mar 31, 2026",
     readTime: "7 min read",
-    coverImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop",
+    coverImage: "/assets/youth/cta.jpg",
     author: authors["gamr-editorial"],
     tags: ["African Tech", "Fintech"],
     metaTitle: "Building Africa's First Esports Economy | Gamr",
@@ -156,6 +168,8 @@ When gamers walk into a Carven hub, they aren't just logging onto a local LAN; t
 
 The first step was consolidating the audience. You cannot sell sponsorships without verifiable viewership data. Platforms like Gamr focused heavily on aggregating the fragmented player base onto singular leaderboards and broadcast platforms. Once the data proved the audience existed, the second step was introducing capital via brand sponsorships and media rights.
 
+![Gamr Leadership Team](/assets/src-assets/team-leadership.jpg)
+
 We are now entering the third step: circular monetization. This means creating localized merchandising, ticket sales for stadium events like Gamr X, and in-game digital purchases that flow back into local studios rather than immediately leaving the continent. As these revenue streams mature, they create professional salaries, which in turn attract more top-tier talent. Africa is no longer just a demographic; it is a functioning esports economy.`
   },
   {
@@ -165,7 +179,7 @@ We are now entering the third step: circular monetization. This means creating l
     excerpt: "The technical necessity of regional data centers to ensure competitive parity on the global stage.",
     date: "Apr 01, 2026",
     readTime: "6 min read",
-    coverImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2071&auto=format&fit=crop",
+    coverImage: "/assets/src-assets/about-gallery-5.jpg",
     author: authors["oladapo-dosekun"],
     tags: ["Hardware", "African Tech"],
     metaTitle: "Why African Gamers Need Local Servers | Gamr",
@@ -177,6 +191,8 @@ We are now entering the third step: circular monetization. This means creating l
     content: `In any highly competitive digital arena, time is the most valuable currency. When an African player engages in a firefight with a European player on a London-based server, the European player operates roughly 100 milliseconds into the future. That delay is the difference between a headshot and a respawn screen.
 
 The lack of localized gaming servers is the single largest technical barrier preventing African teams from dominating international leaderboards. The 'ping tax' forces local players to adopt hyper-conservative, predictive playstyles just to survive, neutering their true mechanical potential.
+
+![Tournament Gamers Match Action](/assets/src-assets/about-gallery-6.jpg)
 
 The tide, however, is turning. With cloud giants like AWS and Microsoft Azure rapidly expanding their data center footprints in Cape Town, Lagos, and Cairo, game publishers have no excuse left. Gamr continues to heavily lobby these publishers and actively partners with regional ISPs to ensure optimized routing. When parity is finally achieved, and African athletes can compete at a sub-20ms latency, the global esports hierarchy will face a violent disruption.`
   }
